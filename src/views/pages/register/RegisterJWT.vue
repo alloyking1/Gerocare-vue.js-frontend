@@ -9,7 +9,7 @@
               icon="icon icon-user"
               icon-pack="feather"
               label-placeholder="Full Name"
-              v-model="userDetails.fname"
+              v-model="userDetails.first_name"
           class="w-full"/>
 
           <vs-input
@@ -17,7 +17,7 @@
               icon-no-border
               icon="icon icon-email"
               icon-pack="feather"
-              label-placeholder="Full Name"
+              label-placeholder="Email"
               v-model="userDetails.email"
           class="w-full"/>
 
@@ -53,9 +53,15 @@ export default{
   data() {
     return {
       userDetails:{
-        fname: "",
+        first_name: "",
         emal: "",
         password: "",
+        patient_full_name: "",
+        address: "",
+        patient_phone_num: "",
+        city: "",
+        state: "",
+        state: "",
         checkbox_remember_me: false,
       },
       error:""
