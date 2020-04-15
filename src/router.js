@@ -20,47 +20,48 @@ const router = new Router({
         return { x: 0, y: 0 }
     },
     routes: [
-
         {
-    // =============================================================================
-    // MAIN LAYOUT ROUTES
-    // =============================================================================
-            path: '',
-            component: () => import('./layouts/main/Main.vue'),
-            children: [
-              {
-                path: '/',
-                name: 'home',
-                component: () => import('./views/Home.vue')
-              },
-              {
-                path: '/page2',
-                name: 'page-2',
-                component: () => import('./views/Page2.vue')
-              },
-            ],
+          path: '',
+          component: () => import('./layouts/main/Main.vue'),
+          children: [
+            {
+              path: '/',
+              name: 'home',
+              component: () => import('./views/Home.vue')
+            },
+            {
+              path: '/page2',
+              name: 'page-2',
+              component: () => import('./views/Page2.vue')
+            },
+          ],
         },
 
         {
-            path: '',
-            component: () => import('@/layouts/full-page/FullPage.vue'),
-            children: [
-              {
-                path: '/pages/login',
-                name: 'page-login',
-                component: () => import('@/views/pages/Login.vue')
-              },
-              {
-                path: '/pages/register',
-                name: 'page-register',
-                component: () => import('@/views/pages/register/Register.vue'),
-              },
-              {
-                path: '/pages/error-404',
-                name: 'page-error-404',
-                component: () => import('@/views/pages/Error404.vue')
-              },
-            ]
+          path: '',
+          component: () => import('@/layouts/full-page/FullPage.vue'),
+          children: [
+            {
+              path: '/pages/login',
+              name: 'page-login',
+              component: () => import('@/views/pages/Login.vue')
+            },
+            {
+              path: '/pages/register',
+              name: 'page-register',
+              component: () => import('@/views/pages/register/Register.vue'),
+            },
+            {
+              path: '/pages/forgot-password',
+              name: 'page-forgot-password',
+              component: () => import('@/views/pages/ForgotPassword.vue'),
+            },
+            {
+              path: '/pages/error-404',
+              name: 'page-error-404',
+              component: () => import('@/views/pages/Error404.vue')
+            },
+          ]
         },
         // Redirect to 404 page, if no match found
         {

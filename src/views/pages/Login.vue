@@ -17,6 +17,7 @@
           <div class="vx-row no-gutter justify-center items-center">
 
             <div class="vx-col hidden lg:block lg:w-1/2">
+              <!-- <img src="@/assets/images/pages/login.png" alt="login" class="mx-auto"> -->
               <img src="@/assets/images/pages/login.png" alt="login" class="mx-auto">
             </div>
 
@@ -54,7 +55,7 @@
 
                     <div class="flex flex-wrap justify-between my-5">
                         <vs-checkbox v-model="user.checkbox_remember_me" class="mb-3">Remember Me</vs-checkbox>
-                        <router-link to="">Forgot Password?</router-link>
+                        <router-link to="/pages/forgot-password">Forgot Password?</router-link>
                     </div>
                     <vs-button  type="border" to="/pages/register">Register</vs-button>
                     <vs-button class="float-right" @click="validate">Login</vs-button>
