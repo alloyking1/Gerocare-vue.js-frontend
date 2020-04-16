@@ -1,6 +1,6 @@
 
 <template>
-    <div class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center">
+    <div class="h-screen flex w-full bg-img2 vx-row no-gutter items-center justify-center">
         <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/5 sm:m-0 m-4">
             <vx-card>
                 <div slot="no-body" class="">
@@ -247,5 +247,14 @@ export default {
 .login-img{
   width: 100%;
   height: auto;
+}
+
+.bg-img2{
+    /* background-image: url("../../assets/images/pages/green_bg.jpg"); */
+    /* background-color:linear-gradient(to bottom right, red, yellow); */
+    background-image: linear-gradient(to bottom right, #034013, #17c964);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 </style>
