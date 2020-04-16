@@ -3,10 +3,10 @@
     <div class="h-screen flex w-full bg-img">
         <div class="vx-col w-4/5 sm:w-4/5 md:w-3/5 lg:w-3/4 xl:w-3/5 mx-auto self-center">
             <vx-card>
-                <div slot="no-body" class="full-page-bg-color">
+                <div slot="no-body" class="">
                     <div class="vx-row">
                         <div class="vx-col hidden sm:hidden md:hidden lg:block lg:w-1/2 mx-auto self-center">
-                            <!-- <img src="@/assets/images/pages/forgot-password.png" alt="login" class="mx-auto"> -->
+                            <img src="@/assets/images/pages/forgot_password.png" alt="login" class="mx-auto login-img">
                         </div>
                         <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
                             <div class="p-8">
@@ -36,3 +36,10 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.login-img{
+  width: 50%;
+  /* height: auto; */
+}
+</style>

@@ -12,13 +12,14 @@
   <div class="h-screen flex w-full bg-img vx-row no-gutter items-center justify-center" id="page-login">
     <div class="vx-col sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/5 sm:m-0 m-4">
       <vx-card>
-        <div slot="no-body" class="full-page-bg-color">
+        <!-- <div slot="no-body" class="full-page-bg-color"> -->
+        <div slot="no-body" class="">
 
           <div class="vx-row no-gutter justify-center items-center">
 
             <div class="vx-col hidden lg:block lg:w-1/2">
               <!-- <img src="@/assets/images/pages/login.png" alt="login" class="mx-auto"> -->
-              <img src="@/assets/images/pages/login.png" alt="login" class="mx-auto">
+              <img src="@/assets/images/pages/undraw_sign_in.png" alt="login" class="mx-auto login-img">
             </div>
 
             <div class="vx-col sm:w-full md:w-full lg:w-1/2 d-theme-dark-bg">
@@ -150,5 +151,10 @@ export default{
     .bg-google { background-color: #4285F4 }
     .bg-github { background-color: #333 }
   }
+}
+
+.login-img{
+  width: 100%;
+  height: auto;
 }
 </style>
