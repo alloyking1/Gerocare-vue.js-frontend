@@ -23,16 +23,16 @@
                                       <div class="vx-row">
                                           <div class="vx-col md:w-1/2 w-full mt-5">
                                               <!-- <vs-input type="text" label="Full Name" v-model="user.fullName" class="w-full" label-placeholder="Full Name" @click="alert('hi')" /> -->
-                                              <vs-input name="email" type="email" icon-no-border icon="icon icon-user" v-model="user.fullName" icon-pack="feather" label-placeholder="Full Name" class="w-full"/>
+                                              <vs-input name="email" type="text" v-model="user.fullName" icon-pack="feather" label-placeholder="Full Name" class="w-full"/>
                                           </div>
                                           <div class="vx-col md:w-1/2 w-full mt-5">
-                                              <vs-input type="email" label="Email"  v-model="user.email" class="w-full" />
+                                              <vs-input type="email" label="Email"  v-model="user.email" class="w-full is-label-placeholder" label-placeholder="Email" />
                                           </div>
                                           <div class="vx-col md:w-1/2 w-full mt-5">
-                                              <vs-input type="password" label="Password"  v-model="user.password" class="w-full" />
+                                              <vs-input type="password" label="Password"  v-model="user.password" class="w-full" label-placeholder="Password" />
                                           </div>
                                           <div class="vx-col md:w-1/2 w-full mt-5">
-                                              <vs-input type="password" label="Confirm password"  v-model="user.passwordConfirm" class="w-full" />
+                                              <vs-input type="password" label="Confirm password"  v-model="user.passwordConfirm" class="w-full" label-placeholder="Confirm Password" />
                                           </div>
                                       </div>
                                   </tab-content>
@@ -40,70 +40,60 @@
                                   <!-- tab 2 content -->
                                   <tab-content title="Step 2" class="mb-5">
                                       <div class="vx-row">
-                                          <div class="vx-col md:w-1/2 w-full">
-                                              <vs-input type="text" label="Patient Name" v-model="user.patientName" class="w-full mt-4" />
+                                          <div class="vx-col md:w-1/2 w-full mt-5">
+                                              <vs-input type="text" label-placeholder="Patient Name" v-model="user.patientName" class="w-full" />
                                           </div>
-                                          <div class="vx-col md:w-1/2 w-full">
-                                              <vs-input type="number" label="Patient Tel" v-model="user.patientPhone" class="w-full mt-4" />
+                                          <div class="vx-col md:w-1/2 w-full mt-5">
+                                              <vs-input type="number" label-placeholder="Patient Tel" v-model="user.patientPhone" class="w-full" />
                                           </div>
-                                          <div class="vx-col md:w-1/2 w-full">
-                                              <vs-input type="text" v-model="user.patientAddress" label="Patient Address" class="w-full mt-4" />
+                                          <div class="vx-col md:w-1/2 w-full mt-5">
+                                              <vs-input type="text" v-model="user.patientAddress" label-placeholder="Patient Address" class="w-full" />
                                           </div>
-                                          <div class="vx-col md:w-1/2 w-full">
+                                          <div class="vx-col md:w-1/2 w-full mt-5">
                                               <!-- <vs-select v-model="user.city" class="w-full mt-4" label="Patient City">
                                                   <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item, index) in cityOptions" class="w-full mt-4" />
                                               </vs-select> -->
 
                                               <!-- <label for="">Patient City</label> -->
-                                              <select v-model="user.city" class="w-full mt-4 select-custom" label="Patient City" >
+                                              <select v-model="user.city" class="w-full mt-4 select-custom" label="Patient City">
+                                                <option value="" disabled selected hidden style="color:gray">Patient City</option>
                                                 <option class="w-full mt-4" v-for="(item, index) in cityOptions" :key="index" :value="item.value">{{item.text}}</option>
                                               </select>
-
-                                              
-                                              
+ 
                                           </div>
                                       </div>
                                   </tab-content>
 
                                   <!-- tab 3 content -->
                                   <tab-content title="Step 3" class="mb-5">
-                                      <div class="vx-row">
-                                          <div class="vx-col md:w-1/2 w-full">
+                                      <div class="vx-row mt-5">
+                                          <div class="vx-col md:w-1/2 w-full mt-5">
                                               <select v-model="user.state" class="w-full mt-4 select-custom" label="Patient City" >
+                                                <option value="" disabled selected hidden style="color:gray">State</option>
                                                 <option class="w-full mt-4" v-for="(item, index) in stateOptions" :key="index" :value="item.value">{{item.text}}</option>
                                               </select>
                                           </div>
 
-                                          <div class="vx-col md:w-1/2 w-full">
+                                          <div class="vx-col md:w-1/2 w-full mt-5">
                                               <select v-model="user.patientVisit" class="w-full mt-4 select-custom" label="Patient City" @change="visitCost">
+                                                <option value="" disabled selected hidden style="color:gray">Num of Visits</option>
                                                 <option class="w-full mt-4" v-for="(item, index) in patientVisitOptions" :key="index" :value="item.value">{{item.text}}</option>
                                               </select>
                                           </div>
-                                          <div class="vx-col md:w-1/2 w-full" @clicks="visitCost">
+                                          <div class="vx-col md:w-1/2 w-full mt-5" @clicks="visitCost">
                                               <select v-model="user.NumberOfMonths" class="w-full mt-4 select-custom" label="Patient City" @change="visitCost">
+                                                <option value="" disabled selected hidden style="color:gray">Num of Months</option>
                                                 <option class="w-full mt-4" v-for="(item, index) in patientMonthOptions" :key="index" :value="item.value">{{item.text}}</option>
                                               </select>
                                           </div>
-                                          <div class="vx-col md:w-1/2 w-full md:mt-8">
+                                          <div class="vx-col md:w-1/2 w-full md:mt-2">
                                               <div class="demo-alignment">
-                                                  <!-- <span>Requirements:</span>
-                                                  <div class="flex">
-                                                    <vs-checkbox>Staffing</vs-checkbox>
-                                                    <vs-checkbox>Catering</vs-checkbox>
-                                                  </div> -->
                                                   <div class="flex">
                                                     <small>{{this.user.patientVisit}} visit every month for {{this.user.NumberOfMonths}} months</small>
                                                     <vs-chip color="success">
                                                       <!-- <vs-avatar icon-pack="feather" icon="icon-mail" /> -->
-                                                      <span>N {{this.visitCostSum}}</span>
+                                                      <span class="amount-span">N {{this.visitCostSum}}</span>
                                                     </vs-chip>
-                                                  </div>
-                                                  <div class="flex">
-                                                    <!-- <vs-chip color="danger">
-                                                      <vs-avatar icon-pack="feather" icon="icon-slash" />
-                                                      <span>{{this.visitCostSum}}</span>
-                                                    </vs-chip> -->
-                                                    
                                                   </div>
                                               </div>
                                           </div>
@@ -201,18 +191,30 @@ export default {
       let cost = visits * 6500;
       let total = cost * months;
       let result = this.visitCostSum = total;
-      console.log(result);
+  
     },
 
     formSubmitted () {
-      createAccount(this.user)
-      .then(res => {
-        console.log(res);
-      })
-      .catch(err => {
-        console.error(err);
-      })
-      console.log(this.user);
+      if(!this.validate()){
+
+        createAccount(this.user)
+        .then(res => {
+          alert(res);
+        })
+        .catch(err => {
+          alert(err);
+        })
+        console.log(this.user);
+      };
+    },
+
+    validate(){
+      for(var val in this.user) {   
+        if(this.user[val] === ""){
+            alert('all fileds required')
+            return false;
+        }
+      }
     }
   },
   components: {
@@ -224,37 +226,45 @@ export default {
 </script>
 
 <style lang="scss">
-.register-tabs-container {
-  min-height: 517px;
+  .register-tabs-container {
+    min-height: 517px;
 
-  .con-tab {
-    padding-bottom: 23px;
+    .con-tab {
+      padding-bottom: 23px;
+    }
   }
-}
 
-.select-custom{
-  border-color: #dbdada;
-  padding: 5%;
-  border-radius: 5px;
-  margin-top: 22%!important;
-}
+  .select-custom{
+    border-color: #dbdada;
+    padding: 0.7rem;
+    border-radius: 5px;
+    // margin-top: 22%!important;
+  }
 
-.loginDiv{
-  text-align: center;
-  padding-bottom: 5%;
-}
+  .loginDiv{
+    text-align: center;
+    padding-bottom: 5%;
+  }
 
-.login-img{
-  width: 100%;
-  height: auto;
-}
+  .login-img{
+    width: 100%;
+    height: auto;
+  }
 
-.bg-img2{
-    /* background-image: url("../../assets/images/pages/green_bg.jpg"); */
-    /* background-color:linear-gradient(to bottom right, red, yellow); */
-    background-image: linear-gradient(to bottom right, #034013, #17c964);
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
+  .bg-img2{
+      /* background-image: url("../../assets/images/pages/green_bg.jpg"); */
+      /* background-color:linear-gradient(to bottom right, red, yellow); */
+      background-image: linear-gradient(to bottom right, #034013, #17c964);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  }
+
+  .amount-span{
+    width: 5.5rem;
+    text-align: center;
+    padding: .9rem;
+    padding-left: 1.1rem;
+    padding-right: 1.1rem;
+  }
 </style>

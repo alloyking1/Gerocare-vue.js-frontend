@@ -7,7 +7,7 @@ import httpClient from './httpClient';
  *
  */
 
-export async function forgetPassword(user_details) {
+export async function forgetPassword(email) {
     // const res = await httpClient.post('api/register',  user_details);
     const res = "ready to reset password";
     return res;

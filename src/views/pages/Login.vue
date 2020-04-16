@@ -133,7 +133,7 @@ export default{
     logIn(){
       login()
       .then(res => {
-        console.log(res);
+        alert(res);
       })
       .catch(err => {
         console.log('err');

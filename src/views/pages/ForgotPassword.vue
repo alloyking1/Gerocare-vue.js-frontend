@@ -15,9 +15,10 @@
                                     <p>Please enter your email address and we'll send you instructions on how to reset your password.</p>
                                 </div>
 
-                                <vs-input type="email" label-placeholder="Email" v-model="value1" class="w-full mb-8" />
+                                <span class="text-danger text-sm">{{ error }}</span>
+                                <vs-input type="email" label-placeholder="Email" v-model="email" class="w-full mb-8" />
                                 <vs-button type="border" to="/pages/login" class="px-4 w-full md:w-auto">Back To Login</vs-button>
-                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0">Recover Password</vs-button>
+                                <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0" @click="recover">Recover Password</vs-button>
                             </div>
                         </div>
                     </div>
@@ -28,10 +29,28 @@
 </template>
 
 <script>
+import {forgetPassword} from '../../api/forgetPassword.api'
+
 export default {
   data () {
     return {
-      value1: ''
+      email: '',
+      error:''
+    }
+  },
+
+  methods:{
+      recover(){
+        if(this.email === ""){
+            this.error = 'email field is required';
+            return false;
+        }
+
+        forgetPassword()
+        .then(res => {
+            alert(res);
+        });
+
     }
   }
 }
