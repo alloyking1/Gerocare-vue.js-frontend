@@ -107,7 +107,7 @@ export default{
       user:{
         email: "",
         password: "",
-        checkbox_remember_me: false,
+        // checkbox_remember_me: false,
       },
       error:{
         email:"",
@@ -131,12 +131,12 @@ export default{
     },
 
     logIn(){
-      login()
+      login(this.user)
       .then(res => {
-        alert(res);
+        console.log(res);
       })
       .catch(err => {
-        console.log('err');
+        console.log(err);
       })
     }
   }

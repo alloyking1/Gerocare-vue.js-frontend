@@ -1,13 +1,3 @@
-/*=========================================================================================
-  File Name: vue.config.js
-  Description: configuration file of vue
-  ----------------------------------------------------------------------------------------
-  Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
-  Author: Pixinvent
-  Author URL: http://www.themeforest.net/user/pixinvent
-==========================================================================================*/
-
-
 module.exports = {
   publicPath: '/',
   transpileDependencies: [
@@ -20,6 +10,12 @@ module.exports = {
         chunks: 'all'
       }
     }
+  },
+
+  devServer: {
+    // proxy: 'http://127.0.0.1:8000/api/v1/',
+    proxy: process.env.VUE_APP_BASE_URL,
   }
+  
 }
 

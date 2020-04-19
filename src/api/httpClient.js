@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 const httpsClient = axios.create({
-    baseUrl: process.env.VUE_APP_BASE_URL,
-    timeout: 20000, // indicates, 5000ms ie. 5 second
+    // baseUrl: 'https://api.coindesk.com/v1/bpi',
+    baseUrl: process.VUE_APP_MAIN_URL,
+    timeout: 50000, // indicates, 5000ms ie. 5 second
     headers: {
         "Content-Type": "application/json",
     }
