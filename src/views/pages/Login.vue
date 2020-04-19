@@ -117,8 +117,7 @@ export default{
   },
 
   methods:{
-    validate(){
-      for(var key in this.user) {   
+    validate(){   
         if(this.user.email === ""){
             this.error.email = 'email field is required';
             return false;
@@ -126,7 +125,6 @@ export default{
           this.error.password = 'password field is required';
             return false;
         }
-      }
       this.logIn();
     },
 

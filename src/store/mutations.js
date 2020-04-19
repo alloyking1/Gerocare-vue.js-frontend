@@ -118,7 +118,7 @@ const mutations = {
   //   // state.AppActiveUser = payload.user
   // },
   UPDATE_USER_INFO(state, payload) {
-    state.user.name = payload;
+    state.user = payload;
   },
 }
 

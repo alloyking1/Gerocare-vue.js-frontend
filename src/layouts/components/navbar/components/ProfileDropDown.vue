@@ -1,16 +1,17 @@
 <template>
-  <!-- <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.displayName"> -->
-  <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo">
+  <!-- <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo"> -->
+  <div class="the-navbar__user-meta flex items-center">
 
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{ activeUserInfo.name }}</p>
+      <p class="font-semibold">{{ activeUserInfo }}</p>
       <small>Available</small>
     </div>
 
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
 
       <div class="con-img ml-3">
-        <img v-if="activeUserInfo.photoURL" key="onlineImg" :src="activeUserInfo.photoURL" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
+        <!-- <img v-if="activeUserInfo.photoURL" key="onlineImg" :src="activeUserInfo.photoURL" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" /> -->
+        <img key="onlineImg" :src="profile_pix" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
       </div>
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
@@ -61,7 +62,7 @@ import {logOut} from '../../../../api/login.api'
 export default {
   data() {
     return {
-      user_name:''
+      profile_pix:'@/assets/images/portrait/small/avatar-s-11.jpg',
 
     }
   },
@@ -77,14 +78,19 @@ export default {
     logout() {
       logOut()
       .then(res => {
-        console.log(res);
+        console.log(res.response);
         localStorage.removeItem('key');
         location.reload();
         alert('logged out');
         this.$router.push('/pages/login');
       })
       .catch(err =>{
-        console.log(err)
+        console.log(err.message)
+        if(err.message === 'Request failed with status code 401'){
+          localStorage.removeItem('key');
+          this.$router.push('/pages/login');
+          // location.reload();
+        }
       });
     },
   }
