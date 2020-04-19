@@ -129,12 +129,12 @@ export default {
   data () {
     return {
       user:{
-        fullName: '',
+        name: '',
         email: '',
         password: '',
         passwordConfirm:'',
-        patientName: '',
-        patientAddress: '',
+        // patientName: '',
+        // patientAddress: '',
         patientPhone: '',
         city: '',
         state: '',

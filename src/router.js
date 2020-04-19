@@ -20,22 +20,22 @@ const router = new Router({
         return { x: 0, y: 0 }
     },
     routes: [
-        // {
-        //   path: '',
-        //   component: () => import('./layouts/main/Main.vue'),
-        //   children: [
-        //     {
-        //       path: '/',
-        //       name: 'home',
-        //       component: () => import('./views/Home.vue')
-        //     },
-        //     {
-        //       path: '/page2',
-        //       name: 'page-2',
-        //       component: () => import('./views/Page2.vue')
-        //     },
-        //   ],
-        // },
+        {
+          path: '',
+          component: () => import('./layouts/main/Main.vue'),
+          children: [
+            {
+              path: '/home',
+              name: 'home',
+              component: () => import('./views/Home.vue')
+            },
+            {
+              path: '/page2',
+              name: 'page-2',
+              component: () => import('./views/Page2.vue')
+            },
+          ],
+        },
 
         {
           path: '',

@@ -1,8 +1,9 @@
 <template>
-  <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.displayName">
+  <!-- <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.displayName"> -->
+  <div class="the-navbar__user-meta flex items-center">
 
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{ activeUserInfo.displayName }}</p>
+      <p class="font-semibold">{{ activeUserInfo.name }}</p>
       <small>Available</small>
     </div>
 
@@ -55,20 +56,36 @@
 </template>
 
 <script>
+import {logOut} from '../../../../api/login.api'
+
 export default {
   data() {
     return {
+      user_name:''
 
     }
   },
   computed: {
     activeUserInfo() {
-      return this.$store.state.AppActiveUser
+      // return this.$store.state.AppActiveUser
+      // return this.user_name = this.$store.state.user.name;
+      return this.$store.state.user;
     }
   },
+
   methods: {
     logout() {
-        this.$router.push('/pages/login').catch(() => {})
+      logOut()
+      .then(res => {
+        console.log(res);
+        localStorage.removeItem('key');
+        location.reload();
+        alert('logged out');
+        this.$router.push('/pages/login');
+      })
+      .catch(err =>{
+        console.log(err)
+      });
     },
   }
 }

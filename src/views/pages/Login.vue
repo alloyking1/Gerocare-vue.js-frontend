@@ -133,7 +133,10 @@ export default{
     logIn(){
       login(this.user)
       .then(res => {
-        console.log(res);
+        localStorage.setItem('key', res.data.access_token);
+        this.$store.dispatch('updateUserInfo', res.data.user.name);
+        this.$router.push('/home');
+        console.log(res.data.user.name);
       })
       .catch(err => {
         console.log(err);
