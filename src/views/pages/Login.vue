@@ -134,9 +134,8 @@ export default{
       login(this.user)
       .then(res => {
         localStorage.setItem('key', res.data.access_token);
-        this.$store.dispatch('updateUserInfo', res.data.user.name);
+        this.$store.dispatch('updateUserInfo', res.data.user);
         this.$router.push('/home');
-        console.log(res.data.user.name);
       })
       .catch(err => {
         console.log(err);

@@ -23,7 +23,7 @@
                                       <div class="vx-row">
                                           <div class="vx-col md:w-1/2 w-full mt-5">
                                               <!-- <vs-input type="text" label="Full Name" v-model="user.fullName" class="w-full" label-placeholder="Full Name" @click="alert('hi')" /> -->
-                                              <vs-input name="email" type="text" v-model="user.fullName" icon-pack="feather" label-placeholder="Full Name" class="w-full"/>
+                                              <vs-input name="email" type="text" v-model="user.name" icon-pack="feather" label-placeholder="Full Name" class="w-full"/>
                                           </div>
                                           <div class="vx-col md:w-1/2 w-full mt-5">
                                               <vs-input type="email" label="Email"  v-model="user.email" class="w-full is-label-placeholder" label-placeholder="Email" />
@@ -32,7 +32,7 @@
                                               <vs-input type="password" label="Password"  v-model="user.password" class="w-full" label-placeholder="Password" />
                                           </div>
                                           <div class="vx-col md:w-1/2 w-full mt-5">
-                                              <vs-input type="password" label="Confirm password"  v-model="user.passwordConfirm" class="w-full" label-placeholder="Confirm Password" />
+                                              <vs-input type="password" label="Confirm password"  v-model="user.password_confirmation" class="w-full" label-placeholder="Confirm Password" />
                                           </div>
                                       </div>
                                   </tab-content>
@@ -132,14 +132,15 @@ export default {
         name: '',
         email: '',
         password: '',
-        passwordConfirm:'',
-        // patientName: '',
-        // patientAddress: '',
+        password_confirmation:'',
+        patientName: '',
+        patientAddress: '',
         patientPhone: '',
         city: '',
         state: '',
         patientVisit: '',
-        NumberOfMonths: ''
+        NumberOfMonths: '',
+        role:3
       },
       visitCostSum: '',
 
@@ -197,14 +198,20 @@ export default {
     formSubmitted () {
       if(!this.validate()){
 
-        createAccount(this.user)
+        createAccount({
+          name: this.user.name,
+          email: this.user.email,
+          password:this.user.password,
+          password_confirmation: this.user.password_confirmation,
+          phone_number: this.user.patientPhone,
+          role:this.user.role
+        })
         .then(res => {
-          alert(res);
+          console.log(res);
         })
         .catch(err => {
-          alert(err);
+          console.log(err);
         })
-        console.log(this.user);
       };
     },
 

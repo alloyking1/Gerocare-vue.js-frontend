@@ -8,7 +8,6 @@ import httpClient from './httpClient';
  */
 
 export async function createAccount(user_details) {
-    // const res = await httpClient.post('api/register',  user_details);
-    const res = "ready to make a call";
+    const res = await httpClient.post('/register',  user_details);
     return res;
 }

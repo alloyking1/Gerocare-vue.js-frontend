@@ -49,8 +49,8 @@ const actions = {
     // updateUserInfo({ commit }, payload) {
     //   commit('UPDATE_USER_INFO', payload)
     // }
-    updateUserInfo({ commit }, name) {
-      commit('UPDATE_USER_INFO', name)
+    updateUserInfo({ commit }, payload) {
+      commit('UPDATE_USER_INFO', payload)
     }
 }
 

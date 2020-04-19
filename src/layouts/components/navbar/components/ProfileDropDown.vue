@@ -1,6 +1,6 @@
 <template>
   <!-- <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo.displayName"> -->
-  <div class="the-navbar__user-meta flex items-center">
+  <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo">
 
     <div class="text-right leading-tight hidden sm:block">
       <p class="font-semibold">{{ activeUserInfo.name }}</p>
@@ -69,7 +69,7 @@ export default {
     activeUserInfo() {
       // return this.$store.state.AppActiveUser
       // return this.user_name = this.$store.state.user.name;
-      return this.$store.state.user;
+      return this.$store.state.user.name;
     }
   },
 
