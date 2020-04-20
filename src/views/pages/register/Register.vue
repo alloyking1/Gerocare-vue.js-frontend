@@ -16,7 +16,7 @@
                                     <p>Fill the below form to create a new account.</p>
                                 </div>
 
-                                <form-wizard color="rgba(var(--vs-primary), 1)" :title="null" :subtitle="null" finishButtonText="Submit" @on-complete="formSubmitted">
+                                <form-wizard color="rgba(var(--vs-primary), 1)" :title="null" :subtitle="null" finishButtonText="Submit" @on-complete="validate">
                                   <tab-content title="Step 1" class="mb-5">
 
                                       <!-- tab 1 content -->
@@ -195,8 +195,22 @@ export default {
   
     },
 
-    formSubmitted () {
-      if(!this.validate()){
+    validate(){
+      for(var key in this.user) {   
+        if(this.user[key] === ""){
+            return this.$vs.notify({title:'Empty form fields', text:'All fields in the form are required', color:'danger',position:'top-right'});
+        }
+      }
+
+      this.formSubmitted();
+
+    },
+
+    formSubmitted () {        
+        this.activeLoading = true
+        this.$vs.loading({
+          type:'default',
+        })
 
         createAccount({
           name: this.user.name,
@@ -207,21 +221,17 @@ export default {
           role:this.user.role
         })
         .then(res => {
-          console.log(res);
+          this.activeLoading = false
+          this.$vs.loading.close()
+          this.$vs.notify({title:'Registraton successful',text:'Check your email for E-mail verification',color:'warning',position:'top-right'});
+          
         })
         .catch(err => {
-          console.log(err);
+          this.activeLoading = false
+          this.$vs.loading.close()
+          // this.$vs.notify({title:'Error', text:'Something is wrong, please try again in a few minutes time', color:'danger',position:'top-right'});
+          
         })
-      };
-    },
-
-    validate(){
-      for(var val in this.user) {   
-        if(this.user[val] === ""){
-            alert('all fileds required')
-            return false;
-        }
-      }
     }
   },
   components: {

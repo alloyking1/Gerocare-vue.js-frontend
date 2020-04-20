@@ -46,12 +46,22 @@ export default {
             return false;
         }
 
+        this.activeLoading = true
+        this.$vs.loading({
+            type:'default',
+        })
+
         passwordReset({email:this.email})
         .then(res => {
-            console.log(res);
+
+            this.activeLoading = false
+            this.$vs.loading.close()
+            this.$vs.notify({title:'Email sent',text:'Check your email to a link to change your password',color:'warning',position:'top-right'});
+
         })
         .catch(err => {
-            console.log(err)
+            this.activeLoading = false
+            this.$vs.loading.close()
         });
 
     }

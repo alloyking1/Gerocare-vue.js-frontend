@@ -29,9 +29,8 @@ const router = new Router({
               path: '/home',
               name: 'home',
               component: () => import('./views/Home.vue'),
+              // router guard
               beforeEnter: (to, from, next) => {
-                // if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-                // else next()
                 console.log(store.state.user.name)
                 if(to.name === 'home' && !store.state.user.name) next({name:'page-login'})
                 else next()

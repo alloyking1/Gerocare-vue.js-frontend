@@ -129,14 +129,24 @@ export default{
     },
 
     logIn(){
+      // loader
+      this.activeLoading = true
+      this.$vs.loading({
+        type:'default',
+      })
+
       login(this.user)
       .then(res => {
+        this.activeLoading = false
+        this.$vs.loading.close()
+
         localStorage.setItem('key', res.data.access_token);
         this.$store.dispatch('updateUserInfo', res.data.user);
         this.$router.push('/home');
       })
       .catch(err => {
-        console.log(err);
+        this.activeLoading = false
+        this.$vs.loading.close()
       })
     }
   }

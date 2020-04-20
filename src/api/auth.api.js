@@ -31,7 +31,7 @@ export async function logOut(){
  */
 
 export async function passwordReset(email) {
-    const res = await httpClient.post('password/email', email);
+    const res = await httpClient.post('/password/email', email);
     return res;
 }
 
@@ -42,8 +42,16 @@ export async function passwordReset(email) {
  *
  */
 
-export async function RequestNewReset(email) {
-    const res = await httpClient.post('password/email', email);
+export async function RequestNewReset({
+        email,
+        password,
+        password_confirmation,
+    }) {
+    const res = await httpClient.post('/password/reset',{
+        email,
+        password,
+        password_confirmation,
+    });
     return res;
 }
 

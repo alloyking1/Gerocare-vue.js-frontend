@@ -18,7 +18,7 @@
                                 <span class="text-danger text-sm">{{ error }}</span>
                                 <vs-input type="email" label-placeholder="Email" v-model="email" class="w-full mb-8" />
                                 <vs-input type="password" label-placeholder="password" v-model="password" class="w-full mb-8" />
-                                <vs-input type="password_confirmation" label-placeholder="Confirm your password" v-model="password_confirmation" class="w-full mb-8" />
+                                <vs-input type="password" label-placeholder="Confirm your password" v-model="password_confirmation" class="w-full mb-8" />
 
                                 <vs-button type="border" to="/pages/login" class="px-4 w-full md:w-auto">Back To Login</vs-button>
                                 <vs-button class="float-right px-4 w-full md:w-auto mt-3 mb-8 md:mt-0 md:mb-0" @click="recover">Recover Password</vs-button>
@@ -51,15 +51,25 @@ export default {
             return false;
         }
 
+        this.activeLoading = true
+        this.$vs.loading({
+            type:'default',
+        })
+
         RequestNewReset({
             email:this.email,
             password: this.password,
             password_confirmation: this.password_confirmation,
         })
         .then(res => {
+            this.activeLoading = false
+            this.$vs.loading.close()
+            this.$vs.notify({title:'Password reset Successful',text:'Login to continue',color:'warning',position:'top-right'});
             console.log(res);
         })
         .catch(err => {
+            this.activeLoading = false
+            this.$vs.loading.close()
             console.log(err)
         });
 
