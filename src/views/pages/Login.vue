@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import {login} from '../../api/login.api'
+import {login} from '../../api/auth.api'
 
 export default{
   data() {

@@ -10,6 +10,7 @@
 
 import Vue from 'vue'
 import Router from 'vue-router'
+import store from '@/store/store'
 
 Vue.use(Router)
 
@@ -27,7 +28,14 @@ const router = new Router({
             {
               path: '/home',
               name: 'home',
-              component: () => import('./views/Home.vue')
+              component: () => import('./views/Home.vue'),
+              beforeEnter: (to, from, next) => {
+                // if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+                // else next()
+                console.log(store.state.user.name)
+                if(to.name === 'home' && !store.state.user.name) next({name:'page-login'})
+                else next()
+              }
             },
             {
               path: '/page2',
@@ -67,6 +75,11 @@ const router = new Router({
               path: '/pages/forgot-password',
               name: 'page-forgot-password',
               component: () => import('@/views/pages/ForgotPassword.vue'),
+            },
+            {
+              path: '/pages/reset-password',
+              name: 'page-reset-password',
+              component: () => import('@/views/pages/ResetPassword.vue'),
             },
             {
               path: '/pages/error-404',

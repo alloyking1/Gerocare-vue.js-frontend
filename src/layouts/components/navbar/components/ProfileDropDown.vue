@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import {logOut} from '../../../../api/login.api'
+import {logOut} from '../../../../api/auth.api'
 
 export default {
   data() {
