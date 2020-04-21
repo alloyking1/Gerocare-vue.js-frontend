@@ -22,11 +22,11 @@ const router = new Router({
     },
     routes: [
         {
-          path: '',
+          path: '/home',
           component: () => import('./layouts/main/Main.vue'),
           children: [
             {
-              path: '/home',
+              path: '/',
               name: 'home',
               component: () => import('./views/Home.vue'),
               // router guard
@@ -45,43 +45,31 @@ const router = new Router({
         },
 
         {
-          path: '',
+          path: '/pages',
           component: () => import('@/layouts/full-page/FullPage.vue'),
           children: [
             {
-              path: '/',
-              name: 'landing',
-              component: () => import('@/views/pages/Login.vue')
-            },
-          ],
-        },
-
-        {
-          path: '',
-          component: () => import('@/layouts/full-page/FullPage.vue'),
-          children: [
-            {
-              path: '/pages/login',
+              path: '/login',
               name: 'page-login',
               component: () => import('@/views/pages/Login.vue')
             },
             {
-              path: '/pages/register',
+              path: '/register',
               name: 'page-register',
               component: () => import('@/views/pages/register/Register.vue'),
             },
             {
-              path: '/pages/forgot-password',
+              path: '/forgot-password',
               name: 'page-forgot-password',
               component: () => import('@/views/pages/ForgotPassword.vue'),
             },
             {
-              path: '/pages/reset-password',
+              path: '/reset-password',
               name: 'page-reset-password',
               component: () => import('@/views/pages/ResetPassword.vue'),
             },
             {
-              path: '/pages/error-404',
+              path: '/error-404',
               name: 'page-error-404',
               component: () => import('@/views/pages/Error404.vue')
             },
@@ -90,7 +78,7 @@ const router = new Router({
         // Redirect to 404 page, if no match found
         {
             path: '*',
-            redirect: '/pages/error-404'
+            redirect: '/login'
         }
     ],
 })

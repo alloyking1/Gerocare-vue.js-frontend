@@ -104,7 +104,7 @@
                                 <vs-divider>OR</vs-divider>
                                 <div class="loginDiv">
                                   <small>Already have an account?</small>
-                                  <router-link to="/pages/login">Log In</router-link>
+                                  <router-link to="/login">Log In</router-link>
                                 </div>
                             </div>
                         </div>

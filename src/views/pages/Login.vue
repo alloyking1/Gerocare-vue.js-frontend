@@ -56,9 +56,9 @@
 
                     <div class="flex flex-wrap justify-between my-5">
                         <vs-checkbox v-model="user.checkbox_remember_me" class="mb-3">Remember Me</vs-checkbox>
-                        <router-link to="/pages/forgot-password">Forgot Password?</router-link>
+                        <router-link to="/forgot-password">Forgot Password?</router-link>
                     </div>
-                    <vs-button  type="border" to="/pages/register">Register</vs-button>
+                    <vs-button  type="border" to="/register">Register</vs-button>
                     <vs-button class="float-right" @click="validate">Login</vs-button>
 
                     <vs-divider>OR</vs-divider>
@@ -144,7 +144,7 @@ export default{
         this.$store.dispatch('updateUserInfo', res.data.user);
         this.$router.push('/home');
       })
-      .catch(err => {
+      .catch(() => {
         this.activeLoading = false
         this.$vs.loading.close()
       })

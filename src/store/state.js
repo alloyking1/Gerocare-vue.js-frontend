@@ -59,9 +59,7 @@ const is_touch_device = () => {
 // /////////////////////////////////////////////
 
 const state = {
-    user:{
-      // photoURL: require("@/assets/images/portrait/small/avatar-s-11.jpg"),
-    },
+    user:{},
     AppActiveUser           : userDefaults,
     bodyOverlay             : false,
     isVerticalNavMenuActive : true,

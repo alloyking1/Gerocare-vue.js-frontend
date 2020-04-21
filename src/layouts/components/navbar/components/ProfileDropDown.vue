@@ -16,7 +16,6 @@
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
         <ul style="min-width: 9rem">
-
           <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white">
             <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
             <span class="ml-2">Profile</span>
@@ -82,13 +81,13 @@ export default {
         localStorage.removeItem('key');
         location.reload();
         alert('logged out');
-        this.$router.push('/pages/login');
+        this.$router.push('/login');
       })
       .catch(err =>{
         console.log(err.message)
         if(err.message === 'Request failed with status code 401'){
           localStorage.removeItem('key');
-          this.$router.push('/pages/login');
+          this.$router.push('/login');
           // location.reload();
         }
       });
