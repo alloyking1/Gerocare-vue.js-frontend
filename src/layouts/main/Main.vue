@@ -12,9 +12,9 @@
   <div class="layout--main" :class="[layoutTypeClass, navbarClasses, footerClasses, {'no-scroll': isAppPage}]">
 
     <v-nav-menu
-    :navMenuItems = "navMenuItems"
-    title         = "Gerocare"
-    parent        = ".layout--main" />
+      :navMenuItems = "navMenuItems"
+      title         = "Gerocare"
+      parent        = ".layout--main" />
 
       <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
         <div id="content-overlay" />

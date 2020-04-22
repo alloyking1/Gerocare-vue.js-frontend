@@ -28,18 +28,23 @@ const router = new Router({
             {
               path: '/',
               name: 'home',
-              component: () => import('./views/Home.vue'),
+              component: () => import('./views/pages/dashBoardSponsor/Home.vue'),
               // router guard
-              beforeEnter: (to, from, next) => {
-                console.log(store.state.user.name)
-                if(to.name === 'home' && !store.state.user.name) next({name:'page-login'})
-                else next()
-              }
+              // beforeEnter: (to, from, next) => {
+              //   console.log(store.state.user.name)
+              //   if(to.name === 'home' && !store.state.user.name) next({name:'page-login'})
+              //   else next()
+              // }
             },
             {
-              path: '/page2',
+              path: '/elderly',
               name: 'page-2',
-              component: () => import('./views/Page2.vue')
+              component: () => import('./views/pages/dashBoardSponsor/Elderly.vue')
+            },
+            {
+              path: '/appointment',
+              name: 'appointment',
+              component: () => import('./views/pages/dashBoardSponsor/Appointment.vue')
             },
           ],
         },

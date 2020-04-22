@@ -16,8 +16,26 @@ export default [
     icon: "HomeIcon",
   },
   {
-    url: "/page2",
-    name: "Page 2",
+    url: "/elderly",
+    name: "Elderly",
+    slug: "Elderly",
+    icon: "ClockIcon",
+  },
+  {
+    url: "/appointment",
+    name: "Appointment",
+    slug: "Appointment",
+    icon: "ClockIcon",
+  },
+  {
+    url: "/page4",
+    name: "Appointments",
+    slug: "page2",
+    icon: "FileIcon",
+  },
+  {
+    url: "/page5",
+    name: "Appointments",
     slug: "page2",
     icon: "FileIcon",
   },
