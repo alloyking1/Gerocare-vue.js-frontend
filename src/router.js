@@ -46,6 +46,31 @@ const router = new Router({
               name: 'appointment',
               component: () => import('./views/pages/dashBoardSponsor/Appointment.vue')
             },
+            {
+              path: '/medical/request',
+              name: 'appointment',
+              component: () => import('./views/pages/dashBoardSponsor/MedRequest.vue')
+            },
+            {
+              path: '/message',
+              name: 'message',
+              component: () => import('./views/pages/dashBoardSponsor/Message.vue')
+            },
+            {
+              path: '/subscription',
+              name: 'message',
+              component: () => import('./views/pages/dashBoardSponsor/Subscription.vue')
+            },
+            {
+              path: '/complaint',
+              name: 'complaint',
+              component: () => import('./views/pages/dashBoardSponsor/Complaint.vue')
+            },
+            {
+              path: '/special/offer',
+              name: 'special/offer',
+              component: () => import('./views/pages/dashBoardSponsor/SpecialOffer.vue')
+            },
           ],
         },
 
