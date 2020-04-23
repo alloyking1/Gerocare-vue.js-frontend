@@ -16,9 +16,45 @@ export default [
     icon: "HomeIcon",
   },
   {
-    url: "/page2",
-    name: "Page 2",
-    slug: "page2",
+    url: "/elderly",
+    name: "Elderly",
+    slug: "Elderly",
+    icon: "ClockIcon",
+  },
+  {
+    url: "/appointment",
+    name: "Appointment",
+    slug: "Appointment",
+    icon: "ClockIcon",
+  },
+  {
+    url: "/medical/request",
+    name: "Medical Requests",
+    slug: "MedRequest",
+    icon: "FileIcon",
+  },
+  {
+    url: "/message",
+    name: "Message",
+    slug: "Message",
+    icon: "FileIcon",
+  },
+  {
+    url: "/subscription",
+    name: "Subscription",
+    slug: "Subscription",
+    icon: "FileIcon",
+  },
+  {
+    url: "/complaint",
+    name: "Complaint/Feedback",
+    slug: "Complaint",
+    icon: "FileIcon",
+  },
+  {
+    url: "/special/offer",
+    name: "specalial offer",
+    slug: "SpecialOffer",
     icon: "FileIcon",
   },
 ]
