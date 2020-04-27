@@ -100,6 +100,7 @@
 
 <script>
 import {login} from '../../api/auth.api'
+import axios from 'axios';
 
 export default{
   data() {
@@ -126,6 +127,12 @@ export default{
             return false;
         }
       this.logIn();
+      // axios.post('http://api-dev.gerocare.org/api/v1/login', {email:this.user.email, password:this.user.password})
+      // .then(res => {
+      //   console.log(res)
+      // }).catch(error => {
+      //   console.log(error);
+      // })
     },
 
     logIn(){
