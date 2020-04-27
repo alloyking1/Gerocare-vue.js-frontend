@@ -19,7 +19,7 @@ export default [
     url: "/elderly",
     name: "Elderly",
     slug: "Elderly",
-    icon: "ClockIcon",
+    icon: "BriefcaseIcon",
   },
   {
     url: "/appointment",
@@ -37,19 +37,19 @@ export default [
     url: "/message",
     name: "Message",
     slug: "Message",
-    icon: "FileIcon",
+    icon: "MessageCircleIcon",
   },
   {
     url: "/subscription",
     name: "Subscription",
     slug: "Subscription",
-    icon: "FileIcon",
+    icon: "ShoppingBagIcon",
   },
   {
     url: "/complaint",
     name: "Complaint/Feedback",
     slug: "Complaint",
-    icon: "FileIcon",
+    icon: "BookIcon",
   },
   {
     url: "/special/offer",

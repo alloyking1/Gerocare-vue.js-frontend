@@ -6,7 +6,6 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "start": "node server.js",
-    "postinstall": "npm install express",
     "heroku-postinstall": "npm install && npm run build",
     "lint": "vue-cli-service lint"
   },
