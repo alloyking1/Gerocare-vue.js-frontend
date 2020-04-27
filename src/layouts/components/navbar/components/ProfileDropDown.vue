@@ -77,19 +77,14 @@ export default {
     logout() {
       logOut()
       .then(res => {
-        console.log(res.response);
         localStorage.removeItem('key');
+        
+        this.$vs.notify({title:'Logged-out',text:'Logged out successful. Login to continue',color:'warning',position:'top-right'});
         location.reload();
-        alert('logged out');
         this.$router.push('/login');
       })
       .catch(err =>{
-        console.log(err.message)
-        if(err.message === 'Request failed with status code 401'){
-          localStorage.removeItem('key');
-          this.$router.push('/login');
-          // location.reload();
-        }
+        console.log(err.message);
       });
     },
   }

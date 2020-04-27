@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const httpsClient = axios.create({
-    baseUrl: process.env.VUE_APP_MAIN_URL || 'http://api-dev.gerocare.org/api/v1',
+    baseURL: process.env.VUE_APP_MAIN_URL || 'http://api-dev.gerocare.org/api/v1',
     timeout: 50000, // indicates, 5000ms ie. 5 second
     headers: {
         "Content-Type": "application/json",
