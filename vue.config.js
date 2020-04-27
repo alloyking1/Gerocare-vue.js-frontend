@@ -1,20 +1,11 @@
 module.exports = {
-  publicPath: '/',
-  transpileDependencies: [
-    'vue-echarts',
-    'resize-detector'
-  ],
+  publicPath: "/",
+  transpileDependencies: ["vue-echarts", "resize-detector"],
   configureWebpack: {
     optimization: {
       splitChunks: {
-        chunks: 'all'
+        chunks: "all"
       }
     }
-  },
-
-  devServer: {
-    proxy: process.env.VUE_APP_BASE_URL,
   }
-  
-}
-
+};
