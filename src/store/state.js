@@ -60,6 +60,7 @@ const is_touch_device = () => {
 
 const state = {
     user:{},
+    sponsor:{},
     AppActiveUser           : userDefaults,
     bodyOverlay             : false,
     isVerticalNavMenuActive : true,

@@ -104,6 +104,8 @@
 import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue' 
 import VueApexCharts from 'vue-apexcharts'
 
+import {getSponsor} from '../../../api/sponsor/sponsor.api'
+
 export default {
     data(){
         return{
@@ -169,6 +171,23 @@ export default {
             },
         }
     },
+
+    created(){
+        this.fetchSponsor();
+    },
+
+    methods:{
+        fetchSponsor(){
+            let id = this.$store.state.user.id
+            getSponsor(id)
+            .then(res => {
+                // console.log(res.data.data)
+                this.$store.dispatch("updateSponsorInfo", res.data.data);
+                console.log(this.$store.state.sponsor)
+            })
+        }
+    },
+
 
 	components:{
         VueApexCharts,

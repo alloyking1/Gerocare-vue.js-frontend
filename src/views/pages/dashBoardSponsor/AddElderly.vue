@@ -70,28 +70,6 @@
 			</div>
 		</div>
 
-		<div class="vx-row">
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<vx-card title="Number of Elderly">
-					tesint
-				</vx-card>
-			</div>
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<vx-card title="Number of Visits">
-					tesint
-				</vx-card>
-			</div>
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<vx-card title="Active Subscriptions"> 
-					tesint
-				</vx-card>
-			</div>
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<vx-card title="Messages">
-					tesint
-				</vx-card>
-			</div>
-		</div>
 	</div>
 </template>
 
@@ -109,7 +87,6 @@ export default {
 	},
 
 	mounted(){
-		alert('hi');
 		this.getPatients();
 	},
 

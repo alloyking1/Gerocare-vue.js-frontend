@@ -15,12 +15,28 @@ export default [
     slug: "home",
     icon: "HomeIcon",
   },
+
   {
-    url: "/elderly",
-    name: "Elderly",
-    slug: "Elderly",
-    icon: "BriefcaseIcon",
+    url: null,
+    name: 'Elderly',
+    icon: 'UserIcon',
+    i18n: 'BriefcaseIcon',
+    submenu: [
+      {
+        url: '/elderly/add',
+        name: 'Add Elderly',
+        slug: 'app-user-list',
+        i18n: 'List'
+      },
+      {
+        url: '/elderly/all',
+        name: 'All Elderly',
+        slug: 'app-user-view',
+        i18n: 'View'
+      }
+    ]
   },
+
   {
     url: "/appointment",
     name: "Appointment",

@@ -6,16 +6,12 @@
                     <small class="mb-5">Please take a few minutes to let us know about your complaints or give us feedback about our service. We appreciate you.</small>
                     <form onsubmit="return false">
 
-                        <!-- <vs-select v-model="city" class="w-full select-large mb-5 mt-5">
-                            <vs-select-item text="Subject" class="w-full" />
-                            <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in subjects" class="w-full" />
-                        </vs-select> -->
 						<div class="vx-col md:w-2/2 w-full mt-5">
                             <vs-input label="Subject" v-model="complaint.subject" class="w-full" />
                         </div>
 
                         <div class="vx-col md:w-2/2 w-full mt-5">
-                            <vs-textarea v-model="complaint.comment" label="Height set to 200px" height="200px" />
+                            <vs-textarea v-model="complaint.comment" label="Height set to 200px" height="200px"/>
                         </div>
                         <div class="vx-col md:w-2/2 w-full mt-5 mb-5">
                             <span class="text-danger text-sm">{{error}}</span>
@@ -28,66 +24,46 @@
                 </vx-card>
             </div>
 
-            <!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base">
-                <vx-card style="padding:2.5rem">
-                    <template slot="no-body">
-                        <div class="p-8 clearfix">
-                            <div class="text-center">
-                                <h1>
-                                  <span>All Complaints/Feedback</span>
-                                </h1>
-                                <br>
-                                <small>
-                                  <span class="text-grey">Previous Complaints/Feedbakc </span>
-                                </small>
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base">
+                <vx-card title="All Complaints">
+                    <vs-collapse>
+
+                        <vs-collapse-item>
+                            <div slot="header">
+                                Collapse item
                             </div>
-                            <div>
-                            <vs-table :data="users">
+                            Lorem....metus.
+                        </vs-collapse-item>
 
-                                <template slot="thead">
-                                <vs-th>Date</vs-th>
-                                <vs-th>Type</vs-th>
-                                <vs-th>For</vs-th>
-                                <vs-th>Amount</vs-th>
-                                <vs-th>Status</vs-th>
-                                <vs-th>Date</vs-th>
-                                </template>
-
-                                <template slot-scope="{data}">
-                                    <vs-tr :state="indextr == 2 || indextr == 5 ? 'success':indextr == 6 ? 'danger':null" :key="indextr" v-for="(tr, indextr) in data">
-
-                                        <vs-td :data="data[indextr].email">
-                                        {{ data[indextr].email }}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].username">
-                                        {{ data[indextr].name }}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].id">
-                                        {{ data[indextr].website }}
-                                        </vs-td>
-
-                                        <vs-td :data="data[indextr].id">
-                                        {{ data[indextr].id }}
-                                        </vs-td>
-                                    </vs-tr>
-                                </template>
-
-                            </vs-table>
-                            </div>
-                            <br>
+                        <vs-collapse-item>
+                        <div slot="header">
+                            Collapse item 2
                         </div>
-                        
-                    </template>
-                </vx-card>
-            </div> -->
+                        Nunc....maximus.
+                        </vs-collapse-item>
+
+                        <vs-collapse-item disabled>
+                        <div slot="header">
+                            Collapse item 3 - Disabled
+                        </div>
+                        Suspendisse....eu
+                        </vs-collapse-item>
+
+                        <vs-collapse-item>
+                        <div slot="header">
+                            Collapse item 4
+                        </div>
+                        Suspendisse....finibus.
+                        </vs-collapse-item>
+                    </vs-collapse>
+			    </vx-card>
+            </div>
 		</div>
     </div>
 </template>
 
 <script>
-import {createComplaint} from '../../../api/sponsor/complaint.api'
+import {createComplaint, getComplaint} from '../../../api/sponsor/complaint.api'
 
 export default {
     data(){
@@ -96,7 +72,30 @@ export default {
                 subject:"",
                 comment:""
             },
-            error:""
+            error:"",
+            appointmentData: [
+                {
+                color : 'primary',
+                icon  : 'PlusIcon',
+                title : 'New Task Added',
+                desc  : 'Bonbon macaroon jelly beans gummi bears jelly lollipop apple',
+                time  : '25 Days Ago'
+                },
+                {
+                color : 'warning',
+                icon  : 'AlertCircleIcon',
+                title : 'Task Update Found',
+                desc  : 'Cupcake gummi bears soufflé caramels candy',
+                time  : '15 Days Ago'
+                },
+                {
+                color : 'success',
+                icon  : 'CheckIcon',
+                title : 'Task Finished',
+                desc  : 'Candy ice cream cake. Halvah gummi bears',
+                time  : '20 mins ago'
+                }
+            ],
         }
     },
 
@@ -109,10 +108,19 @@ export default {
                 let userId = this.$store.state.user.id;
                 createComplaint(userId, this.complaint)
                 .then(res => {
-                    console.log(res)
+                    
+                    this.$vs.notify({title:'Complaint sent successful',text:'We will get back to you shortly',color:'warning',position:'top-right'});
+                })
+                .catch(err => {
+                    
+                    this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
                 })
             }
-        }
+        },
+
+        // fetchComplaint(){
+        //     getComplaint()
+        // }
     }
 }
 </script>

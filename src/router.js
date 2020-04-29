@@ -33,9 +33,14 @@ const router = new Router({
               //  
             },
             {
-              path: '/elderly',
+              path: '/elderly/add',
               name: 'page-2',
-              component: () => import('./views/pages/dashBoardSponsor/Elderly.vue')
+              component: () => import('./views/pages/dashBoardSponsor/AddElderly.vue')
+            },
+            {
+              path: '/elderly/all',
+              name: 'page-2',
+              component: () => import('./views/pages/dashBoardSponsor/AllElderly.vue')
             },
             {
               path: '/appointment',

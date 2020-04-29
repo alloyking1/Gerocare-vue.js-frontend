@@ -1,14 +1,13 @@
 import httpsClient from "../httpClient";
 
 /**
- * @function allPatients
+ * @function getSponsor
  * @params NULL
  * @description Fetch all patients/elderly related to a sponsor
  *
  */
 
-export async function allPatients(id){
-    const res = await httpsClient.get('/sponsors/'+id+'patients/');
+export async function getSponsor(id){
+    const res = await httpsClient.get('/sponsors/users/'+id);
     return res;
 }
-
