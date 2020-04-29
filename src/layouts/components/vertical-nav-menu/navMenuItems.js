@@ -51,10 +51,4 @@ export default [
     slug: "Complaint",
     icon: "BookIcon",
   },
-  // {
-  //   url: "/special/offer",
-  //   name: "specalial offer",
-  //   slug: "SpecialOffer",
-  //   icon: "FileIcon",
-  // },
 ]

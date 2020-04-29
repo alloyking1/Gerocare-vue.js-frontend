@@ -4,21 +4,31 @@
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base">
                 <vx-card title="User Complaints/Feedbacks">
                     <small class="mb-5">Please take a few minutes to let us know about your complaints or give us feedback about our service. We appreciate you.</small>
-                    <form action="">
+                    <form onsubmit="return false">
 
-                        <vs-select v-model="city" class="w-full select-large mb-5 mt-5">
+                        <!-- <vs-select v-model="city" class="w-full select-large mb-5 mt-5">
                             <vs-select-item text="Subject" class="w-full" />
                             <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in subjects" class="w-full" />
-                        </vs-select>
-                        <vs-textarea v-model="textarea" label="Height set to 200px" height="200px" />
-                        
-                        <vs-button icon-pack="feather" icon="icon-chevrons-right" icon-after class="shadow-md w-full">Send</vs-button>
+                        </vs-select> -->
+						<div class="vx-col md:w-2/2 w-full mt-5">
+                            <vs-input label="Subject" v-model="complaint.subject" class="w-full" />
+                        </div>
+
+                        <div class="vx-col md:w-2/2 w-full mt-5">
+                            <vs-textarea v-model="complaint.comment" label="Height set to 200px" height="200px" />
+                        </div>
+                        <div class="vx-col md:w-2/2 w-full mt-5 mb-5">
+                            <span class="text-danger text-sm">{{error}}</span>
+                        </div>
+
+
+                        <vs-button @click="send" icon-pack="feather" icon="icon-chevrons-right" icon-after class="shadow-md w-full">Send</vs-button>
                     </form>
                     
                 </vx-card>
             </div>
 
-            <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base">
+            <!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base">
                 <vx-card style="padding:2.5rem">
                     <template slot="no-body">
                         <div class="p-8 clearfix">
@@ -71,18 +81,37 @@
                         
                     </template>
                 </vx-card>
-            </div>
+            </div> -->
 		</div>
     </div>
 </template>
 
 <script>
+import {createComplaint} from '../../../api/sponsor/complaint.api'
+
 export default {
     data(){
         return{
-            subjects:[
-                {text:'this is the first subject', value:'text-val'}
-            ],
+            complaint:{
+                subject:"",
+                comment:""
+            },
+            error:""
+        }
+    },
+
+    methods:{
+        send(){
+            if(this.complaint.subject === "" || this.complaint.comment === ""){
+                this.error = "All fields are required"
+            }else{
+                // get user id form state
+                let userId = this.$store.state.user.id;
+                createComplaint(userId, this.complaint)
+                .then(res => {
+                    console.log(res)
+                })
+            }
         }
     }
 }

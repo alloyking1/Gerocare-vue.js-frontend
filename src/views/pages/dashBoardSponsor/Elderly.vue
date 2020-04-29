@@ -99,7 +99,32 @@
 import {FormWizard, TabContent} from 'vue-form-wizard'
 import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 
+import {allPatients} from '../../../api/sponsor/patient.api'
+
 export default {
+	data(){
+		return {
+
+		}
+	},
+
+	mounted(){
+		alert('hi');
+		this.getPatients();
+	},
+
+	methods:{
+		getPatients(){
+			allPatients()
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err);
+			});
+		}
+	},
+
 	components: {
     FormWizard,
     TabContent
