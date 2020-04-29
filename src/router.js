@@ -30,11 +30,7 @@ const router = new Router({
               name: 'home',
               component: () => import('./views/pages/dashBoardSponsor/Home.vue'),
               //router guard
-              beforeEnter: (to, from, next) => {
-                console.log(store.state.user.name)
-                if(to.name === 'home' && !store.state.user.name) next({name:'page-login'})
-                else next()
-              }
+              //  
             },
             {
               path: '/elderly',

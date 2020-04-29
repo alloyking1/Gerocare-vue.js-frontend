@@ -85,12 +85,14 @@
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
 				<vx-card title="Statistics" class="mb-base">
-                    <template slot="actions">
-                        <feather-icon icon="SettingsIcon" svgClasses="w-6 h-6 text-grey"></feather-icon>
-                    </template>
-                    <div slot="no-body" class="p-6 pb-0">
-                        <!-- <vue-apex-charts type="line" height="266" :options="analyticsData.salesLine.chartOptions" :series="salesLine.series" /> -->
-                    </div>
+                    
+
+                    <statistics-card-line
+                        icon="MonitorIcon"
+                        icon-right
+                        statistic="78.9k"
+                        statisticTitle="Site Traffic"
+                        :chartData="siteTrafficChartData" />
                 </vx-card>
 			</div>
 		</div>
@@ -99,10 +101,77 @@
 
 <script>
 
-import StatisticsCardLine from '@/components/statistics-cards/StatisticsCardLine.vue'
+import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue' 
+import VueApexCharts from 'vue-apexcharts'
 
 export default {
+    data(){
+        return{
+            siteTrafficChartData: {
+                series: [{
+                    name: 'Traffic Rate',
+                    data: [150, 200, 125, 225, 200, 250]
+                }],
+                chartOptions: {
+                    grid: {
+                        show: false,
+                        padding: {
+                            left: 0,
+                            right: 0
+                        }
+                    },
+                    chart: {
+                        type: 'line',
+                        dropShadow: {
+                            enabled: true,
+                            top: 5,
+                            left: 0,
+                            blur: 4,
+                            opacity: 0.10,
+                        },
+                        toolbar: {
+                            show: false,
+                        },
+                        sparkline: {
+                            enabled: true
+                        }
+                    },
+                    stroke: {
+                        width: 5,
+                        curve: 'smooth'
+                    },
+                    xaxis: {
+                        type: 'numeric',
+                    },
+                    colors: ['#7367F0'],
+                    fill: {
+                        type: 'gradient',
+                        gradient: {
+                            shade: 'dark',
+                            gradientToColors: ['#A9A2F6'],
+                            shadeIntensity: 1,
+                            type: 'horizontal',
+                            opacityFrom: 1,
+                            opacityTo: 1,
+                            stops: [0, 100, 100, 100]
+                        },
+                    },
+                    markers: {
+                        size: 0,
+                        hover: {
+                            size: 5
+                        }
+                    },
+                    tooltip: {
+                        x: { show: false }
+                    },
+                }
+            },
+        }
+    },
+
 	components:{
+        VueApexCharts,
 		StatisticsCardLine	
 	}	
 }
