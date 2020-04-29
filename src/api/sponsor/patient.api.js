@@ -12,3 +12,15 @@ export async function allPatients(id){
     return res;
 }
 
+/**
+ * @function createPatients
+ * @params 
+ * @description Create a new patient
+ *
+ */
+
+export async function createPatients(id, patients){
+    const res = await httpsClient.post('/sponsors/'+id+'patients/', patients);
+    return res;
+}
+

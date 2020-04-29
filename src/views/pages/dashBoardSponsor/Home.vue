@@ -183,7 +183,6 @@ export default {
             .then(res => {
                 // console.log(res.data.data)
                 this.$store.dispatch("updateSponsorInfo", res.data.data);
-                console.log(this.$store.state.sponsor)
             })
         }
     },

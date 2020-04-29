@@ -42,6 +42,7 @@ const router = new Router({
               name: 'page-2',
               component: () => import('./views/pages/dashBoardSponsor/AllElderly.vue')
             },
+
             {
               path: '/appointment',
               name: 'appointment',
