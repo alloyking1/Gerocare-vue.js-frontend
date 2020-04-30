@@ -99,6 +99,10 @@ export default {
         }
     },
 
+    created(){
+        this.fetchComplaint();
+    },
+
     methods:{
         send(){
             if(this.complaint.subject === "" || this.complaint.comment === ""){
@@ -118,9 +122,11 @@ export default {
             }
         },
 
-        // fetchComplaint(){
-        //     getComplaint()
-        // }
+        fetchComplaint(){
+            getComplaint().then(res => {
+                console.log(res);
+            })
+        }
     }
 }
 </script>
