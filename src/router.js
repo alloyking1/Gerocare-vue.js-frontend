@@ -73,6 +73,11 @@ const router = new Router({
               name: 'special/offer',
               component: () => import('./views/pages/dashBoardSponsor/SpecialOffer.vue')
             },
+            {
+              path: '/sponsor/profile',
+              name: 'sponsor/profile',
+              component: () => import('./views/pages/dashBoardSponsor/SponsorProfile.vue')
+            },
           ],
         },
 

@@ -67,4 +67,10 @@ export default [
     slug: "Complaint",
     icon: "BookIcon",
   },
+  {
+    url: "/sponsor/profile",
+    name: "sponsor/profile",
+    slug: "Complaint",
+    icon: "UserIcon",
+  },
 ]
