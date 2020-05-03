@@ -45,20 +45,20 @@
 									<vs-input type="text" label="Country"  v-model="patient.country" class="w-full" />
 								</div>
 
-								<div class="vx-col md:w-1/2 mt-5 w-full">
+								<!-- <div class="vx-col md:w-1/2 mt-5 w-full">
 									<div class="flex items-start flex-col sm:flex-row">
-									<!-- <img src="@/assets/images/portrait/small/avatar-s-11.jpg" class="mr-8 rounded h-24 w-24" /> -->
+									<img src="@/assets/images/portrait/small/avatar-s-11.jpg" class="mr-8 rounded h-24 w-24" />
 									<vs-avatar :src="require('@/assets/images/portrait/small/avatar-s-11.jpg')" size="90px" class="mr-4" />
 									<div>
 										<p class="text-lg font-medium mb-2 mt-4 sm:mt-0"></p>
 										<input type="file" class="hidden" ref="update_avatar_input" @change="update_avatar" accept="image/*">
 
-										<!-- Toggle comment of below buttons as one for actual flow & currently shown is only for demo -->
+										Toggle comment of below buttons as one for actual flow & currently shown is only for demo
 										<vs-button class="mr-4" @click="$refs.update_avatar_input.click()">Change Avatar</vs-button>
 
 									</div>
 									</div>
-								</div>
+								</div> -->
 								
 							</div>
 						</tab-content>
@@ -150,8 +150,12 @@ export default {
 
 	methods:{
 		formSubmitted(){
-			console.log(this.patient)
-			alert('hi');
+			let id = this.$store.state.user.id;
+
+			createPatients(id, this.patients)
+			.then(function(res){
+				console.log(res);
+			})	
 		}
 	},
 

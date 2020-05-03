@@ -181,7 +181,6 @@ export default {
             let id = this.$store.state.user.id
             getSponsor(id)
             .then(res => {
-                // console.log(res.data.data)
                 this.$store.dispatch("updateSponsorInfo", res.data.data);
             })
         }

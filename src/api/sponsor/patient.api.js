@@ -8,7 +8,7 @@ import httpsClient from "../httpClient";
  */
 
 export async function allPatients(id){
-    const res = await httpsClient.get('/sponsors/'+id+'patients/');
+    const res = await httpsClient.get('/sponsors/'+id+'/patients/');
     return res;
 }
 
@@ -20,7 +20,13 @@ export async function allPatients(id){
  */
 
 export async function createPatients(id, patients){
-    const res = await httpsClient.post('/sponsors/'+id+'patients/', patients);
+    const res = await httpsClient.post('/sponsors/'+id+'/patients/', patients);
+    return res;
+}
+
+
+export async function deletePatient(id, patientsId){
+    const res = await httpsClient.delete(`/sponsors/${id}/patients/${patientsId}`);
     return res;
 }
 
