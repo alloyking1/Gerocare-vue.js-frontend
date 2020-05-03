@@ -35,8 +35,7 @@
 								</div>
 								<div class="vx-col md:w-1/3 w-full mt-5">
 									<vs-select v-model="patient.city" class="w-full select-large" label="City">
-										<vs-select-item value="Male" text="Male"  class="w-full" />
-										<vs-select-item value="Female" text="Female"  class="w-full" />
+										<vs-select-item :value="each.value" :text="each.name"  class="w-full" v-for="(each, i) in city" :key="i" />
 									</vs-select>
 								</div>
 								<div class="vx-col md:w-1/3 w-full mt-5">
@@ -88,7 +87,7 @@
 						<!-- tab 3 content -->
 						<tab-content title="Step 3" class="mb-5">
 							<div class="vx-row">
-								<ul class="centerx">
+								<ul class="centerx" >
 									<li>
 										<vs-radio v-model="radios1" vs-value="luis">Pay Now</vs-radio>
 									</li>
@@ -96,22 +95,28 @@
 										<vs-radio v-model="radios1" vs-value="carols">Pay Later</vs-radio>
 									</li>
 								</ul>
+							</div>
+							<div class="vx-row">
 								<div class="vx-col md:w-1/3 w-full mt-5">
-									<vs-select v-model="patient.city" class="w-full select-large" label="SELECT SERVICE">
-										<vs-select-item value="Male" text="Male"  class="w-full" />
-										<vs-select-item value="Female" text="Female"  class="w-full" />
+									<vs-select v-model="patient.city" class="w-full select-large" label="Select Service">
+										<vs-select-item value="home visit" text="Elderly home visit"  class="w-full" />
 									</vs-select>
 								</div>
 								<div class="vx-col md:w-1/3 w-full mt-5">
-									<vs-select v-model="patient.city" class="w-full select-large" label="NUMBER OF VISITS">
-										<vs-select-item value="Male" text="Male"  class="w-full" />
-										<vs-select-item value="Female" text="Female"  class="w-full" />
+									<vs-select v-model="patient.visit" class="w-full select-large" label="Number Of Visits">
+										<vs-select-item value="1" text="1 Visit/Month"  class="w-full" />
+										<vs-select-item value="2" text="2 Visit/Month"  class="w-full" />
+										<vs-select-item value="3" text="3 Visit/Month"  class="w-full" />
+										<vs-select-item value="4" text="4 Visit/Month"  class="w-full" />
+										
 									</vs-select>
 								</div>
 								<div class="vx-col md:w-1/3 w-full mt-5">
-									<vs-select v-model="patient.city" class="w-full select-large" label="DURATION">
-										<vs-select-item value="Male" text="Male"  class="w-full" />
-										<vs-select-item value="Female" text="Female"  class="w-full" />
+									<vs-select v-model="patient.monthly" class="w-full select-large" label="DURATION">
+										<vs-select-item value="1" text="Monthly"  class="w-full" />
+										<vs-select-item value="3" text="Quaterly or 3 Months"  class="w-full" />
+										<vs-select-item value="6" text="Bi-Anually or 6 Months"  class="w-full" />
+										<vs-select-item value="12" text="Anually or Yearly"  class="w-full" />
 									</vs-select>
 								</div>
 							</div>
@@ -134,6 +139,11 @@ export default {
 	data(){
 		return {
 			patient:{},
+			city:[
+				{name:'Rivers state', value:'Rivers'},
+				{name:'Uyo', value:'Uyo'},
+				{name:'Kalabar', value:'Kalabar'},
+			],
 			country:[],
 		}
 	},

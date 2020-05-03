@@ -26,35 +26,15 @@
 
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base">
                 <vx-card title="All Complaints">
-                    <vs-collapse>
+                    <vs-collapse v-for="(each, complaint) in allComplaint" :key="complaint">
 
                         <vs-collapse-item>
                             <div slot="header">
-                                Collapse item
+                                {{each.subject}}
                             </div>
-                            Lorem....metus.
+                            {{each.comment}}
                         </vs-collapse-item>
 
-                        <vs-collapse-item>
-                        <div slot="header">
-                            Collapse item 2
-                        </div>
-                        Nunc....maximus.
-                        </vs-collapse-item>
-
-                        <vs-collapse-item disabled>
-                        <div slot="header">
-                            Collapse item 3 - Disabled
-                        </div>
-                        Suspendisse....eu
-                        </vs-collapse-item>
-
-                        <vs-collapse-item>
-                        <div slot="header">
-                            Collapse item 4
-                        </div>
-                        Suspendisse....finibus.
-                        </vs-collapse-item>
                     </vs-collapse>
 			    </vx-card>
             </div>
@@ -73,29 +53,7 @@ export default {
                 comment:""
             },
             error:"",
-            appointmentData: [
-                {
-                color : 'primary',
-                icon  : 'PlusIcon',
-                title : 'New Task Added',
-                desc  : 'Bonbon macaroon jelly beans gummi bears jelly lollipop apple',
-                time  : '25 Days Ago'
-                },
-                {
-                color : 'warning',
-                icon  : 'AlertCircleIcon',
-                title : 'Task Update Found',
-                desc  : 'Cupcake gummi bears soufflé caramels candy',
-                time  : '15 Days Ago'
-                },
-                {
-                color : 'success',
-                icon  : 'CheckIcon',
-                title : 'Task Finished',
-                desc  : 'Candy ice cream cake. Halvah gummi bears',
-                time  : '20 mins ago'
-                }
-            ],
+            allComplaint:{}
         }
     },
 
@@ -123,8 +81,10 @@ export default {
         },
 
         fetchComplaint(){
-            getComplaint().then(res => {
-                console.log(res);
+            let id = this.$store.state.user.id
+            getComplaint(id).then(res => {
+                this.allComplaint = res.data.data;
+                console.log(this.allComplaint);
             })
         }
     }
