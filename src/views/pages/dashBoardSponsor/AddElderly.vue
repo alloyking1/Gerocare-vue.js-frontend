@@ -45,7 +45,7 @@
 									<vs-input type="number" label="Patient number" v-model="patient.phone_number" class="w-full mt-5" />
 								</div>
 								<div class="vx-col md:w-1/2 w-full">
-									<vs-select v-model="type" class="w-full select-large mt-5" label="type">
+									<vs-select v-model="patient.type" class="w-full select-large mt-5" label="type">
 										<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in type" class="w-full" />
 									</vs-select>
 								</div>
@@ -82,10 +82,7 @@ import {createPatients} from '../../../api/sponsor/patient.api'
 export default {
 	data(){
 		return {
-			patient:{
-				// name:'',
-				// address:''
-			},
+			patient:{},
 			city:[
 				{name:'Rivers state', value:'Rivers'},
 				{name:'Uyo', value:'Uyo'},
@@ -104,28 +101,30 @@ export default {
 			for(var val in this.patient){
 				if(this.patient[val]  === ""){
           			this.$vs.notify({title:'Validation error',text:`All field is required`,color:'danger',position:'top-right'});
-				}else{
-					this.post();
 				}
 			}
+
+			this.post();
 		},
 
 		post(){
+			this.activeLoading = true
+			this.$vs.loading({
+			type:'default',
+			})
+
 			let id = this.$store.state.user.id;
 
-			createPatients(id, {
-				name: this.patient.name,
-				address: this.patient.address,
-				state: this.patient.state,
-				city: this.patient.city,
-				phone_number: this.patient.phone_number,
-				type: this.patient.type,
-				avatar:'@/home/kaperskyguru/Downloads/solomon2.png'
-			})
+			createPatients(id, this.patient)
 			.then(function(res){
-				console.log(res);
+				this.activeLoading = false
+				this.$vs.loading.close()
+				console.log(res)
+				this.$vs.notify({title:'Success',text:`patient added successfully`,color:'warning',position:'top-right'});
 			})
 			.catch(err => {
+				this.activeLoading = false
+          		this.$vs.loading.close()
 				this.$vs.notify({title:'Error',text:`Something is wrong. Patient not created. Reload the page and try again`,color:'danger',position:'top-right'});
 			})
 		}

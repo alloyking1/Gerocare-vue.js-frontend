@@ -48,17 +48,17 @@
                         <p>{{this.sponsor.country || "Edit to add country"}}</p>
                     </div>
 
-                    <!-- <form action="">
+                    <form action="">
                         <div class="vx-row">
                             <div class="vx-col sm:w-1/2 w-full mb-2">
-                            <vs-input class="w-full" label-placeholder="First Name" value="this.sponsor.user.name"  />
+                            <vs-input class="w-full" label-placeholder="First Name" v-model="sponsor.name"  />
                             </div>
                             
                             <div class="vx-col sm:w-1/2 w-full mb-2">
                             <vs-input class="w-full" label-placeholder="Last Name" v-model="input26" />
                             </div>
                         </div>
-                        <div class="vx-row">
+                        <!-- <div class="vx-row">
                             <div class="vx-col sm:w-1/2 w-full mb-2">
                             <vs-input class="w-full" label-placeholder="City" v-model="input27" />
                             </div>
@@ -84,8 +84,10 @@
                             <vs-button class="mr-3 mb-2">Submit</vs-button>
                             <vs-button color="warning" type="border" class="mb-2" @click="input25 = input26 = input27 = input28 = input29 = input30 = ''; check7 = false;">Reset</vs-button>
                             </div>
-                        </div>
-                    </form> -->
+                        </div> -->
+                        <vs-button class="mr-3 mb-2" @click="editProfile">Submit</vs-button>
+                    </form> 
+
                 </vx-card>
             </div>
             
@@ -98,7 +100,7 @@ export default {
     data(){
         return{
             sponsor:{
-                name:"hello"
+                name:'testing'
             }
         }
     },
@@ -107,6 +109,12 @@ export default {
         this.sponsor = this.$store.state.sponsor;
         console.log(this.sponsor)
         console.log(this.sponsor.user.name)
+    },
+
+    methods:{
+        editProfile(){
+            alert(this.sponsor.name)
+        }
     }
 }
 </script>

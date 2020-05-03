@@ -69,7 +69,7 @@ export default [
   },
   {
     url: "/sponsor/profile",
-    name: "sponsor/profile",
+    name: "profile",
     slug: "Complaint",
     icon: "UserIcon",
   },

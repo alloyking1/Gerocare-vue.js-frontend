@@ -89,7 +89,7 @@ export default {
             deletePatient(id, itemId)
             .then(res => {
                 this.popupActivo5 = true;
-                this.$vs.notify({title:'Deleted',text:'User deleted successfully',color:'danger',position:'top-right'});
+                this.$vs.notify({title:'Deleted',text:'User deleted successfully',color:'warning',position:'top-right'});
             })
             .catch(err => {
                 this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
