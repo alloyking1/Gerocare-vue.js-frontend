@@ -33,10 +33,16 @@ const router = new Router({
               //  
             },
             {
-              path: '/elderly',
+              path: '/elderly/add',
               name: 'page-2',
-              component: () => import('./views/pages/dashBoardSponsor/Elderly.vue')
+              component: () => import('./views/pages/dashBoardSponsor/AddElderly.vue')
             },
+            {
+              path: '/elderly/all',
+              name: 'page-2',
+              component: () => import('./views/pages/dashBoardSponsor/AllElderly.vue')
+            },
+
             {
               path: '/appointment',
               name: 'appointment',
@@ -66,6 +72,11 @@ const router = new Router({
               path: '/special/offer',
               name: 'special/offer',
               component: () => import('./views/pages/dashBoardSponsor/SpecialOffer.vue')
+            },
+            {
+              path: '/sponsor/profile',
+              name: 'sponsor/profile',
+              component: () => import('./views/pages/dashBoardSponsor/SponsorProfile.vue')
             },
           ],
         },
