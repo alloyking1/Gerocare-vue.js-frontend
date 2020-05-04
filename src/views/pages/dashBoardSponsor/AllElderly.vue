@@ -40,7 +40,6 @@
                         </vs-td>
                         <vs-td>
                             <vs-button color="success" type="border" @click="viewPatient(item.id)">View</vs-button>
-                            <vs-button color="warning" type="border">Edit</vs-button>
                             <vs-button color="danger" type="border" @click="removePatient(item.id)">Delete</vs-button>
                         </vs-td>
                         <div id="delte">
@@ -68,19 +67,19 @@
                                     <h6>Full Name:</h6>
                                     <p>{{this.singleElderly.name}}</p> 
                                 </div>
-                                <div class="Full Name">
+                                <div class="Address">
                                     <h6>Address:</h6>
                                     <p>{{this.singleElderly.address}}</p> 
                                 </div>
-                                <div class="Full Name">
+                                <div class="state">
                                     <h6>State:</h6>
                                     <p>{{this.singleElderly.state}}</p> 
                                 </div>
-                                <div class="Full Name">
+                                <div class="phone_number">
                                     <h6>Phone Number:</h6>
                                     <p>{{this.singleElderly.phone_number}}</p> 
                                 </div>
-                                <div class="Full Name">
+                                <div class="type">
                                     <h6>Type:</h6>
                                     <p>{{this.singleElderly.type}}</p> 
                                 </div>
@@ -89,7 +88,26 @@
                         
                         <vs-tab label="Edit">
                             <div class="vx-col w-full lg:w-2/4">
-                                
+                                <form action="">
+                                    <div class="vx-row">
+                                        <div class="vx-col md:w-1/2 w-full">
+                                            <vs-input label="Full Name" v-model="singleElderly.name" class="w-full mt-5" />
+                                        </div>
+                                        <div class="vx-col md:w-1/2 w-full">
+                                            <vs-input label="Address" v-model="singleElderly.address" class="w-full mt-5" />
+                                        </div>
+                                        <div class="vx-col md:w-1/2 w-full">
+                                            <vs-input label="State" v-model="singleElderly.state" class="w-full mt-5" />
+                                        </div>
+                                        <div class="vx-col md:w-1/2 w-full">
+                                            <vs-textarea label="Phone Number" v-model="singleElderly.phone_number" class="w-full mt-5" />
+                                        </div>
+                                        <div class="vx-col md:w-1/2 w-full">
+                                            <vs-input label="Patient Type" v-model="singleElderly.type" class="w-full mt-5" />
+                                        </div>
+                                    </div>
+                                    <vs-button color="success" type="border" @click="edit(singleElderly.id)">Save</vs-button>
+                                </form>
                             </div>
                         </vs-tab>
                     </vs-tabs>
@@ -101,7 +119,7 @@
 
 <script>
 import {allPatients} from '../../../api/sponsor/sponsor.api' 
-import {deletePatient, findPatient} from '../../../api/sponsor/patient.api' 
+import {deletePatient, findPatient, editPatient} from '../../../api/sponsor/patient.api' 
 
 export default {
     data(){
@@ -142,14 +160,22 @@ export default {
             findPatient(this.sponsorId, itemId)
             .then(res =>{
                 this.singleElderly = res.data.data;
-                console.log(this.singleElderly);
-                
             })
             .catch(err => {
-                console.log(err);
+                this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
 
             this.popupActive2=true
+        },
+
+        edit(patientId){
+            editPatient(this.sponsorId, patientId, this.singleElderly)
+            .then(res => {
+                this.$vs.notify({title:'Edited',text:'Patient edited successfully',color:'warning',position:'top-right'});
+            })
+            .catch(err => {
+                this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
+            })
         }
     }
 

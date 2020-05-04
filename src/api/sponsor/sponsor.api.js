@@ -8,6 +8,19 @@ import httpsClient from "../httpClient";
  */
 
 export async function getSponsor(id){
-    const res = await httpsClient.get('/sponsors/users/'+id);
+    const res = await httpsClient.get(`/sponsors/users/${id}`);
     return res;
 }
+
+/**
+ * @function updateSponsor
+ * @params sponsor{}
+ * @description updates sponsors profile to db
+ *
+ */
+
+export async function updateSponsor(id, sponsor){
+    // const res = await httpsClient.get(`/sponsors/users/${id}`);
+    return res;
+}
+
