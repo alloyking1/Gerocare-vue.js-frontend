@@ -22,30 +22,30 @@
 
                     <vs-tr v-for="(item, i) in elderly" :key="i">
 
-                      <vs-td>
-                          {{item.name}}
-                      </vs-td>
-                      <vs-td>
-                          {{item.address}}
-                      </vs-td>
-                      <vs-td>
-                          {{item.state}}
-                      </vs-td>
-                      <vs-td>
-                          {{item.city}}
-                      </vs-td>
-                      <vs-td>
-                          {{item.type}}
-                      </vs-td>
-                      <vs-td>
-                          {{item.phone_number}}
-                      </vs-td>
-                      <vs-td>
-                          <vs-button color="success" type="border" >View</vs-button>
-                          <vs-button color="warning" type="border">Edit</vs-button>
-                          <vs-button color="danger" type="border" @click="popupActivo5=true">Delete</vs-button>
-                      </vs-td>
-                      <div >
+                        <vs-td>
+                            {{item.name}}
+                        </vs-td>
+                        <vs-td>
+                            {{item.address}}
+                        </vs-td>
+                        <vs-td>
+                            {{item.state}}
+                        </vs-td>
+                        <vs-td>
+                            {{item.city}}
+                        </vs-td>
+                        <vs-td>
+                            {{item.type}}
+                        </vs-td>
+                        <vs-td>
+                            {{item.phone_number}}
+                        </vs-td>
+                        <vs-td>
+                            <vs-button color="success" type="border" @click="viewPatient(item.id)">View</vs-button>
+                            <vs-button color="warning" type="border">Edit</vs-button>
+                            <vs-button color="danger" type="border" @click="removePatient(item.id)">Delete</vs-button>
+                        </vs-td>
+                        <div id="delte">
                             <vs-popup
                                 style="color:rgb(255,255,255)"
                                 background-color="rgba(255,255,255,.6)"
@@ -53,6 +53,15 @@
                                 <h4>Are you sure you want to delete this patient?</h4>
                                 <vs-button color="danger" type="border" @click="removePatient(item.id)">Delete</vs-button>
                             </vs-popup>
+                        </div>
+
+                        <div class="view">
+                            <vs-popup classContent="popup-example" title="Lorem ipsum dolor sit amet" :active.sync="popupActive2">
+                                    <vs-input class="inputx mb-3" placeholder="Placeholder"/>
+                                    <vs-input disabled class="inputx mb-3" placeholder="Disabled"  />
+                                    <vs-button @click="viewPatient(item.id)" color="primary" type="filled">Open Inner Popup</vs-button>
+                            </vs-popup>
+
                         </div>
 
                     </vs-tr>
@@ -66,7 +75,7 @@
 
 <script>
 import {allPatients} from '../../../api/sponsor/sponsor.api' 
-import {deletePatient} from '../../../api/sponsor/patient.api' 
+import {deletePatient, findPatient} from '../../../api/sponsor/patient.api' 
 
 export default {
     data(){
@@ -74,19 +83,25 @@ export default {
             elderly:{},
             colorx:"#4a5153",
             popupActivo5:false,
+            popupActive2: false,
+            sponsorId:""
         }
     },
 
     created(){
         this.elderly = this.$store.state.sponsor.patients;
+        this.sponsorId = this.$store.state.user.id;
     },
 
     methods:{
          
         removePatient(itemId){
-            let id =  this.$store.state.user.id;
 
-            deletePatient(id, itemId)
+            console.log(itemId)
+
+            confirm();
+
+            deletePatient(this.sponsorId, itemId)
             .then(res => {
                 this.popupActivo5 = true;
                 this.$vs.notify({title:'Deleted',text:'User deleted successfully',color:'warning',position:'top-right'});
@@ -95,6 +110,13 @@ export default {
                 this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
 
+        },
+
+        viewPatient(itemId){
+            this.popupActive2=true
+            findPatient(this.sponsorId, itemId).then(res =>{
+                console.log(res);
+            })
         }
     }
 

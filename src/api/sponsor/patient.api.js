@@ -31,3 +31,8 @@ export async function deletePatient(id, patientsId){
     return res;
 }
 
+// find patient
+export async function findPatient(id, patientsId){
+    const res = await httpsClient.get(`/sponsors/${id}/patients/${patientsId}`);
+    return res
+}

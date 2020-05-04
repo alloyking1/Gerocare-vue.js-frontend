@@ -41,7 +41,7 @@
                   class="mb-base"
                   icon="UsersIcon"
                   icon-right
-                  :statistic= this.$store.state.sponsor.patients.length
+                  :statistic= this.elderly
                   statisticTitle="Number of Elderly" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -98,12 +98,14 @@ import {getSponsor} from '../../../api/sponsor/sponsor.api'
 export default {
     data(){
         return{
-            data:{}
+            data:{},
+            elderly:''
         }
     },
 
     created(){
         this.fetchSponsor();
+        this.elderly = this.$store.state.sponsor.patients.length || "No patients added" 
     },
 
     methods:{
