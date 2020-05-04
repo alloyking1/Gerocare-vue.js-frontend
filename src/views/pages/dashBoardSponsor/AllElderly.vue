@@ -53,21 +53,49 @@
                             </vs-popup>
                         </div>
 
-                        <div class="view">
-                            <vs-popup classContent="popup-example" title="Lorem ipsum dolor sit amet" :active.sync="popupActive2">
-                                    <vs-input class="inputx mb-3" placeholder="Placeholder"/>
-                                    <vs-input disabled class="inputx mb-3" placeholder="Disabled"  />
-                                    <vs-button @click="viewPatient(item.id)" color="primary" type="filled">Open Inner Popup</vs-button>
-                            </vs-popup>
-
-                        </div>
-
                     </vs-tr>
                 </template>
 
             </vs-table>
         </vx-card>
+        <div class="view">
+            <vs-popup classContent="popup-example" title="Lorem ipsum dolor sit amet" :active.sync="popupActive2">
+                    <vs-tabs alignment="center">
+                        <vs-tab label="Profile">
+                            <div class="vx-col w-full lg:w-1/3">
+                                <!-- USER BIO -->
+                                <div class="Full Name">
+                                    <h6>Full Name:</h6>
+                                    <p>{{this.singleElderly.name}}</p> 
+                                </div>
+                                <div class="Full Name">
+                                    <h6>Address:</h6>
+                                    <p>{{this.singleElderly.address}}</p> 
+                                </div>
+                                <div class="Full Name">
+                                    <h6>State:</h6>
+                                    <p>{{this.singleElderly.state}}</p> 
+                                </div>
+                                <div class="Full Name">
+                                    <h6>Phone Number:</h6>
+                                    <p>{{this.singleElderly.phone_number}}</p> 
+                                </div>
+                                <div class="Full Name">
+                                    <h6>Type:</h6>
+                                    <p>{{this.singleElderly.type}}</p> 
+                                </div>
+                            </div>
+                        </vs-tab>
+                        
+                        <vs-tab label="Edit">
+                            <div class="vx-col w-full lg:w-2/4">
+                                
+                            </div>
+                        </vs-tab>
+                    </vs-tabs>
+            </vs-popup>
 
+        </div>
     </div>
 </template>
 
@@ -79,10 +107,11 @@ export default {
     data(){
         return{
             elderly:{},
+            singleElderly:{},
             colorx:"#4a5153",
             popupActivo5:false,
             popupActive2: false,
-            sponsorId:""
+            sponsorId:"",
         }
     },
 
@@ -109,10 +138,18 @@ export default {
         },
 
         viewPatient(itemId){
-            this.popupActive2=true
-            findPatient(this.sponsorId, itemId).then(res =>{
-                console.log(res);
+            
+            findPatient(this.sponsorId, itemId)
+            .then(res =>{
+                this.singleElderly = res.data.data;
+                console.log(this.singleElderly);
+                
             })
+            .catch(err => {
+                console.log(err);
+            })
+
+            this.popupActive2=true
         }
     }
 
