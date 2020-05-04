@@ -11,8 +11,6 @@
                 <vs-th>Type</vs-th>
                 <vs-th>Phone</vs-th>
                 <vs-th>Actions</vs-th>
-                <!-- <vs-th>Edit</vs-th>
-                <vs-th>Delete</vs-th> -->
                 </template>
 
                 <template slot-scope="{data}">
@@ -97,13 +95,11 @@ export default {
          
         removePatient(itemId){
 
-            console.log(itemId)
-
             confirm();
 
             deletePatient(this.sponsorId, itemId)
             .then(res => {
-                this.popupActivo5 = true;
+                // this.popupActivo5 = true;
                 this.$vs.notify({title:'Deleted',text:'User deleted successfully',color:'warning',position:'top-right'});
             })
             .catch(err => {

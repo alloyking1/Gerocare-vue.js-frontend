@@ -105,7 +105,7 @@ export default {
 
     created(){
         this.fetchSponsor();
-        this.elderly = this.$store.state.sponsor.patients.length || "No patients added" 
+        this.elderly = this.$store.state.sponsor.patients.length 
     },
 
     methods:{

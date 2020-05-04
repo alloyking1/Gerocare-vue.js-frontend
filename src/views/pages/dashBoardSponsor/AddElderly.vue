@@ -126,6 +126,7 @@ export default {
 				this.activeLoading = false
           		this.$vs.loading.close()
 				this.$vs.notify({title:'Error',text:`Something is wrong. Patient not created. Reload the page and try again`,color:'danger',position:'top-right'});
+				conosle.log(err)
 			})
 		}
 	},

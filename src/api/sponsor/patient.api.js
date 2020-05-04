@@ -27,7 +27,8 @@ export async function createPatients(id, patients){
 
 // delete patient
 export async function deletePatient(id, patientsId){
-    const res = await httpsClient.delete(`/sponsors/${id}/patients/${patientsId}`);
+    // const res = await httpsClient.delete(`/sponsors/${id}/patients/${patientsId}`);
+    const res = await httpsClient.delete('/sponsors/'+id+'/patients/'+patientsId);
     return res;
 }
 
