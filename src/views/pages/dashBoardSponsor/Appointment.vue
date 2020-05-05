@@ -31,7 +31,7 @@
                         svgClasses="w-5 h-5 m-1"
                         class="cursor-pointer bg-primary text-white rounded-full" />
 
-                        <span class="mx-3 text-xl font-medium whitespace-no-wrap">{{ new Date() | month }}</span>
+                        <span class="mx-3 text-xl font-medium whitespace-no-wrap">{{ showDate | month }}</span>
 
                         <feather-icon
                         :icon="$vs.rtl ? 'ChevronLeftIcon' : 'ChevronRightIcon'"
