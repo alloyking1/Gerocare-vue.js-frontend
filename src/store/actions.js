@@ -49,9 +49,10 @@ const actions = {
     updateUserInfo({ commit }, payload) {
       commit('UPDATE_USER_INFO', payload)
     },
+
     updateSponsorInfo({commit}, payload){
       commit('UPDATE_SPONSOR_INFO', payload)
-    }
+    },
 }
 
 export default actions

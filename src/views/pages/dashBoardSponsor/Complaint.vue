@@ -24,11 +24,11 @@
                 </vx-card>
             </div>
 
-            <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base">
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base" id="div-with-loadingt">
                 <vx-card title="All Complaints">
                     <vs-collapse v-for="(each, complaint) in allComplaint" :key="complaint">
 
-                        <vs-collapse-item>
+                        <vs-collapse-item >
                             <div slot="header">
                                 {{each.subject}}
                             </div>
@@ -67,24 +67,33 @@ export default {
                 this.error = "All fields are required"
             }else{
                 // get user id form state
+                this.$vs.loading()
                 let userId = this.$store.state.user.id;
                 createComplaint(userId, this.complaint)
                 .then(res => {
-                    
+                    this.$vs.loading.close()
                     this.$vs.notify({title:'Complaint sent successful',text:'We will get back to you shortly',color:'warning',position:'top-right'});
                 })
                 .catch(err => {
-                    
+                    this.$vs.loading.close()
                     this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
                 })
             }
         },
 
         fetchComplaint(){
+            // this.$vs.loading({
+            //     container: '#div-with-loadingt',
+            //     scale: 0.6
+            // })
+
+            this.$vs.loading()
+
             let id = this.$store.state.user.id
-            getComplaint(id).then(res => {
+            getComplaint(id).
+            then(res => {
                 this.allComplaint = res.data.data;
-                console.log(this.allComplaint);
+                this.$vs.loading.close()
             })
         }
     }

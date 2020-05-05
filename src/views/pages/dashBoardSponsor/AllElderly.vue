@@ -134,8 +134,10 @@ export default {
     },
 
     created(){
+        // this.$vs.loading()
         this.elderly = this.$store.state.sponsor.patients;
         this.sponsorId = this.$store.state.user.id;
+        this.$vs.loading.close()
     },
 
     methods:{
@@ -143,25 +145,29 @@ export default {
         removePatient(itemId){
 
             confirm();
-
+            this.$vs.loading()
             deletePatient(this.sponsorId, itemId)
             .then(res => {
                 // this.popupActivo5 = true;
+                this.$vs.loading.close()
                 this.$vs.notify({title:'Deleted',text:'User deleted successfully',color:'warning',position:'top-right'});
             })
             .catch(err => {
+                this.$vs.loading.close()
                 this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
 
         },
 
         viewPatient(itemId){
-            
+            this.$vs.loading()
             findPatient(this.sponsorId, itemId)
             .then(res =>{
                 this.singleElderly = res.data.data;
+                this.$vs.loading.close()
             })
             .catch(err => {
+                this.$vs.loading.close()
                 this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
 
@@ -169,11 +175,14 @@ export default {
         },
 
         edit(patientId){
+            this.$vs.loading()
             editPatient(this.sponsorId, patientId, this.singleElderly)
             .then(res => {
+                this.$vs.loading.close()
                 this.$vs.notify({title:'Edited',text:'Patient edited successfully',color:'warning',position:'top-right'});
             })
             .catch(err => {
+                this.$vs.loading.close()
                 this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
         }

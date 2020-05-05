@@ -104,17 +104,23 @@ export default {
     },
 
     created(){
+        
         this.fetchSponsor();
         this.elderly = this.$store.state.sponsor.patients.length 
     },
 
     methods:{
         fetchSponsor(){
+            this.$vs.loading()
+            this.$store.dispatch("loader","start");
+
             let id = this.$store.state.user.id
             getSponsor(id)
             .then(res => {
                 this.data = res.data.data;
                 this.$store.dispatch("updateSponsorInfo", res.data.data);
+
+                this.$vs.loading.close();
             })
         }
     },

@@ -5,46 +5,44 @@
                 <div class="vx-col w-full lg:w-1/3">
                     <!-- ABOUT CARD -->
                     <vx-card title="About" class="mt-base">
-                        <!-- ACTION SLOT -->
+                        
                         <template slot="actions">
                             <feather-icon icon="MoreHorizontalIcon"></feather-icon>
                         </template>
 
-                        <!-- USER BIO -->
                         <div class="Full Name">
                             <h6>Full Name:</h6>
-                            <p>{{this.sponsor.user.name}}</p> 
+                            <p>{{this.sponsorEdit.user.name}}</p> 
                         </div>
 
                         <div class="mt-5">
                             <h6>Email:</h6>
-                            <p>{{this.sponsor.user.email}}</p>  
+                            <p>{{this.sponsorEdit.user.email}}</p>  
                         </div>
 
-                        <!-- OTEHR DATA -->
                         <div class="mt-5">
                             <h6>Phone Number:</h6>
-                            <p>{{this.sponsor.phone_number}}</p>
+                            <p>{{this.sponsorEdit.phone_number}}</p>
                         </div>
 
                         <div class="mt-5">
                             <h6>Address:</h6>
-                            <p>{{this.sponsor.address || "Edit to add Address"}}</p>
+                            <p>{{this.sponsorEdit.address || "Edit to add Address"}}</p>
                         </div>
 
                         <div class="mt-5">
                             <h6>City:</h6>
-                            <p>{{this.sponsor.city || "Edit to add city"}}</p>
+                            <p>{{this.sponsorEdit.city || "Edit to add city"}}</p>
                         </div>
 
                         <div class="mt-5">
                             <h6>State:</h6>
-                            <p>{{this.sponsor.state || "Edit to add state"}}</p>
+                            <p>{{this.sponsorEdit.state || "Edit to add state"}}</p>
                         </div>
 
                         <div class="mt-5">
                             <h6>Country:</h6>
-                            <p>{{this.sponsor.country || "Edit to add country"}}</p>
+                            <p>{{this.sponsorEdit.country || "Edit to add country"}}</p>
                         </div> 
 
                     </vx-card>
@@ -56,25 +54,25 @@
                     <form action="">
                         <div class="vx-row">
                             <div class="vx-col md:w-1/2 w-full">
-                                <vs-input label="Full Name" v-model="sponsor.user.name" class="w-full mt-5" />
+                                <vs-input label="Full Name" v-model="sponsorEdit.user.name" class="w-full mt-5" />
                             </div>
                             <div class="vx-col md:w-1/2 w-full">
-                                <vs-input label="Phone Number" v-model="sponsor.phone_number" class="w-full mt-5" />
+                                <vs-input label="Phone Number" v-model="sponsorEdit.phone_number" class="w-full mt-5" />
                             </div>
                             <div class="vx-col md:w-1/2 w-full">
-                                <vs-textarea label="Address" v-model="sponsor.address" class="w-full mt-5" />
+                                <vs-textarea label="Address" v-model="sponsorEdit.address" class="w-full mt-5" />
                             </div>
                             <div class="vx-col md:w-1/2 w-full">
-                                <vs-textarea label="City" v-model="sponsor.city" class="w-full mt-5" />
+                                <vs-textarea label="City" v-model="sponsorEdit.city" class="w-full mt-5" />
                             </div>
                             <div class="vx-col md:w-1/2 w-full">
-                                <vs-textarea label="State" v-model="sponsor.state" class="w-full mt-5" />
+                                <vs-textarea label="State" v-model="sponsorEdit.state" class="w-full mt-5" />
                             </div>
                             <div class="vx-col md:w-1/2 w-full">
-                                <vs-input label="Country" v-model="sponsor.country" class="w-full mt-5" />
+                                <vs-input label="Country" v-model="sponsorEdit.country" class="w-full mt-5" />
                             </div>
                         </div>
-                        <vs-button color="success" type="border" @click="editProfile()">Save</vs-button>
+                        <vs-button color="success" type="border" @click="profileEdit()">Save</vs-button>
                     </form>
                 </div>
             </vs-tab>
@@ -83,39 +81,48 @@
 </template>
 
 <script>
-import { updateSponsor } from  "../../../api/sponsor/sponsor.api";
+import {getSponsor, updateSponsor } from  "../../../api/sponsor/sponsor.api";
 
 export default {
 
     data(){
         return{
-            sponsor:{}
+            sponsorEdit:{},
+            id:''
         }
     },
 
     created(){
-        this.sponsor = this.$store.state.sponsor;
-        console.log(this.sponsor)
+        this.$vs.loading()
+        this.id = this.$store.state.user.id;
+        getSponsor(this.id)
+        .then(res => {
+            this.$vs.loading.close()
+            this.sponsorEdit = res.data.data;
+        })
     },
 
     methods:{
-        editProfile(){
-            id = this.sponsor.user.id;
-            updateSponsor(id, {
-                name: this.sponsor.user.name,
-                address: this.ponsor.address,
-                city: this.sponsor.city,
-                state: this.sponsor.state,
-                country: this.sponsor.country,
-                // currency: this.sponsor.user.name,
-                // medium: this.sponsor.user.name,
-                // referral: this.sponsor.user.name,
+
+        profileEdit(){
+            this.$vs.loading()
+            updateSponsor(this.id, {
+                name: this.sponsorEdit.user.name,
+                address: this.sponsorEdit.address,
+                city: this.sponsorEdit.city,
+                state: this.sponsorEdit.state,
+                country: this.sponsorEdit.country,
+                currency: "",
+                medium: "",
+                referral: "",
             })
             .then(result => {
-                console.log(result);
+                this.$vs.loading.close()
+                this.$vs.notify({title:'Edited',text:'Sponsor profile edited successfully',color:'warning',position:'top-right'});
             })
             .catch(err => {
-                console.log(err)
+                this.$vs.loading.close()
+                this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
         }
     }
