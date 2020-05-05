@@ -12,6 +12,12 @@ export async function getSponsor(id){
     return res;
 }
 
+// get sponsors appointments
+export async function getSponsorAppointment(id){
+    const response = await httpsClient(`/sponsors/${id}/appointments`);
+    return response;
+}
+
 /**
  * @function updateSponsor
  * @params sponsor{}
@@ -20,7 +26,7 @@ export async function getSponsor(id){
  */
 
 export async function updateSponsor(id, sponsor){
-    // const res = await httpsClient.get(`/sponsors/users/${id}`);
+    const res = await httpsClient.patch(`/sponsors/${id}`, sponsor);
     return res;
 }
 

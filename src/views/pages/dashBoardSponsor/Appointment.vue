@@ -59,12 +59,9 @@
 
 <script>
 import VxTimeline from '@/components/timeline/VxTimeline.vue'
+import {getSponsorAppointment} from '../../../api/sponsor/sponsor.api'
 
 export default {
-    components: {
-        VxTimeline
-    },
-
     data(){
         return{
             appointmentData: [
@@ -92,6 +89,21 @@ export default {
             ],
             type: 'margin',
         }
-    }
+    },
+
+    created(){
+        var sponsorId = this.$store.state.user.id;
+        getSponsorAppointment(sponsorId)
+        .then(res => {
+            console.log(res);
+        })
+        .catch(error => {
+            console.log(error)
+        })
+    },
+    
+    components: {
+        VxTimeline
+    },
 }
 </script>

@@ -1,6 +1,5 @@
 <template>
     <div>
-        
         <vs-tabs alignment="center">
             <vs-tab label="Profile">
                 <div class="vx-col w-full lg:w-1/3">
@@ -50,51 +49,32 @@
 
                     </vx-card>
                 </div>
-                <div class="vx-col w-full lg:w-2/3">
-                        klkjkljkljkl
-                </div>
             </vs-tab>
 
             <vs-tab label="Edit">
                 <div class="vx-col w-full lg:w-2/4">
                     <form action="">
                         <div class="vx-row">
-                            <div class="vx-col sm:w-1/2 w-full mb-2">
-                            <vs-input class="w-full" label-placeholder="First Name" v-model="sponsor.name"  />
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-input label="Full Name" v-model="sponsor.user.name" class="w-full mt-5" />
                             </div>
-                            
-                            <div class="vx-col sm:w-1/2 w-full mb-2">
-                            <vs-input class="w-full" label-placeholder="Last Name" v-model="input26" />
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-input label="Phone Number" v-model="sponsor.phone_number" class="w-full mt-5" />
                             </div>
-                        </div>
-                        <!-- <div class="vx-row">
-                            <div class="vx-col sm:w-1/2 w-full mb-2">
-                            <vs-input class="w-full" label-placeholder="City" v-model="input27" />
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-textarea label="Address" v-model="sponsor.address" class="w-full mt-5" />
                             </div>
-                            <div class="vx-col sm:w-1/2 w-full mb-2">
-                            <vs-input class="w-full" label-placeholder="Country" v-model="input28" />
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-textarea label="City" v-model="sponsor.city" class="w-full mt-5" />
                             </div>
-                        </div>
-                        <div class="vx-row">
-                            <div class="vx-col sm:w-1/2 w-full mb-2">
-                            <vs-input class="w-full" label-placeholder="Company" v-model="input29" />
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-textarea label="State" v-model="sponsor.state" class="w-full mt-5" />
                             </div>
-                            <div class="vx-col sm:w-1/2 w-full mb-6">
-                            <vs-input type="email" class="w-full" label-placeholder="Email" v-model="input30" />
+                            <div class="vx-col md:w-1/2 w-full">
+                                <vs-input label="Country" v-model="sponsor.country" class="w-full mt-5" />
                             </div>
                         </div>
-                        <div class="vx-row">
-                            <div class="vx-col w-full mb-6">
-                            <vs-checkbox class="inline-flex" v-model="check7">Remember Me</vs-checkbox>
-                            </div>
-                        </div>
-                        <div class="vx-row">
-                            <div class="vx-col w-full">
-                            <vs-button class="mr-3 mb-2">Submit</vs-button>
-                            <vs-button color="warning" type="border" class="mb-2" @click="input25 = input26 = input27 = input28 = input29 = input30 = ''; check7 = false;">Reset</vs-button>
-                            </div>
-                        </div> -->
-                        <vs-button class="mr-3 mb-2" @click="editProfile">Submit</vs-button>
+                        <vs-button color="success" type="border" @click="editProfile()">Save</vs-button>
                     </form>
                 </div>
             </vs-tab>
@@ -103,24 +83,40 @@
 </template>
 
 <script>
+import { updateSponsor } from  "../../../api/sponsor/sponsor.api";
+
 export default {
+
     data(){
         return{
-            sponsor:{
-                name:'testing'
-            }
+            sponsor:{}
         }
     },
 
     created(){
         this.sponsor = this.$store.state.sponsor;
         console.log(this.sponsor)
-        console.log(this.sponsor.user.name)
     },
 
     methods:{
         editProfile(){
-            alert(this.sponsor.name)
+            id = this.sponsor.user.id;
+            updateSponsor(id, {
+                name: this.sponsor.user.name,
+                address: this.ponsor.address,
+                city: this.sponsor.city,
+                state: this.sponsor.state,
+                country: this.sponsor.country,
+                // currency: this.sponsor.user.name,
+                // medium: this.sponsor.user.name,
+                // referral: this.sponsor.user.name,
+            })
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                console.log(err)
+            })
         }
     }
 }
