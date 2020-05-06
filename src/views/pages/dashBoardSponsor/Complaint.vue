@@ -26,8 +26,7 @@
 
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 mb-base" id="div-with-loadingt">
                 <vx-card title="All Complaints">
-                    <vs-collapse v-for="(each, complaint) in allComplaint" :key="complaint">
-
+                    <vs-collapse  :type="type" v-for="(each, complaint) in allComplaint" :key="complaint" >
                         <vs-collapse-item >
                             <div slot="header">
                                 {{each.subject}}
@@ -53,6 +52,7 @@ export default {
                 comment:""
             },
             error:"",
+            type:"margin",
             allComplaint:{}
         }
     },
@@ -82,11 +82,6 @@ export default {
         },
 
         fetchComplaint(){
-            // this.$vs.loading({
-            //     container: '#div-with-loadingt',
-            //     scale: 0.6
-            // })
-
             this.$vs.loading()
 
             let id = this.$store.state.user.id
