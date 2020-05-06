@@ -207,10 +207,7 @@ export default {
     },
 
     formSubmitted () {        
-        this.activeLoading = true
-        this.$vs.loading({
-          type:'default',
-        })
+        this.$vs.loading();
 
         createAccount({
           name: this.user.name,
@@ -221,15 +218,13 @@ export default {
           role:this.user.role
         })
         .then(res => {
-          this.activeLoading = false
           this.$vs.loading.close()
           this.$vs.notify({title:'Registraton successful',text:'Check your email for E-mail verification',color:'warning',position:'top-right'});
           
         })
         .catch(err => {
-          this.activeLoading = false
           this.$vs.loading.close()
-          // this.$vs.notify({title:'Error', text:'Something is wrong, please try again in a few minutes time', color:'danger',position:'top-right'});
+          this.$vs.notify({title:'Error', text:'Something is wrong, please try again in a few minutes time', color:'danger',position:'top-right'});
           
         })
     }

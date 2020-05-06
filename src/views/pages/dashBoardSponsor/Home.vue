@@ -4,8 +4,9 @@
 			<div class="vx-col w-full lg:w-1/2 mb-base">
 				<vx-card slot="no-body" class="text-center bg-primary-gradient greet-user">
 				<feather-icon icon="AwardIcon" class="p-6 mb-8 bg-primary inline-flex rounded-full text-white shadow" svgClasses="h-8 w-8"></feather-icon>
-				<h1 class="mb-6 text-white">Welcome {{this.$store.state.user.name}}</h1>
-				<p class="xl:w-3/4 lg:w-4/5 md:w-2/3 w-4/5 mx-auto text-white">You have done <strong>some text</strong> more sales today. Check your new badge in your profile.</p>
+				<h1 class="mb-6 text-white">Welcome {{this.data.name}}</h1>
+				<p class="xl:w-3/4 lg:w-4/5 md:w-2/3 w-4/5 mx-auto text-white" v-if="this.data.user.email_verified === false">Please take a moment to  <strong>Verify your email</strong> head over to your profile for more.</p>
+				<p class="xl:w-3/4 lg:w-4/5 md:w-2/3 w-4/5 mx-auto text-white" v-else>Your email is  <strong>Verified</strong> Welcome.</p>
 				</vx-card>
 			</div>
 			<div class="vx-col w-full lg:w-1/2 mb-base">
@@ -41,7 +42,7 @@
                   class="mb-base"
                   icon="UsersIcon"
                   icon-right
-                  :statistic= this.elderly
+                  :statistic= this.data.patients.length
                   statisticTitle="Number of Elderly" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -112,12 +113,12 @@ export default {
     methods:{
         fetchSponsor(){
             this.$vs.loading()
-            this.$store.dispatch("loader","start");
 
             let id = this.$store.state.user.id
             getSponsor(id)
             .then(res => {
                 this.data = res.data.data;
+                console.log(this.data)
                 this.$store.dispatch("updateSponsorInfo", res.data.data);
 
                 this.$vs.loading.close();
