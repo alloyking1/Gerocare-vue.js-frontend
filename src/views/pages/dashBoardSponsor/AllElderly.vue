@@ -42,15 +42,6 @@
                             <vs-button color="success" type="border" @click="viewPatient(item.id)">View</vs-button>
                             <vs-button color="danger" type="border" @click="removePatient(item.id)">Delete</vs-button>
                         </vs-td>
-                        <div id="delte">
-                            <vs-popup
-                                style="color:rgb(255,255,255)"
-                                background-color="rgba(255,255,255,.6)"
-                                :background-color-popup="colorx" title="Confirm" :active.sync="popupActivo5">
-                                <h4>Are you sure you want to delete this patient?</h4>
-                                <vs-button color="danger" type="border" @click="removePatient(item.id)">Delete</vs-button>
-                            </vs-popup>
-                        </div>
 
                     </vs-tr>
                 </template>
@@ -141,10 +132,18 @@ export default {
     },
 
     methods:{
-         
-        removePatient(itemId){
 
-            confirm();
+        removePatient(itemId){
+            // this.$vs.dialog({
+            //     type: 'confirm',
+            //     color: 'danger',
+            //     title: `Confirm`,
+            //     text: 'Are you sure you want to delete this?',
+            //     // accept: this.removePatient(itemId)
+            // })
+
+            confirm()
+
             this.$vs.loading()
             deletePatient(this.sponsorId, itemId)
             .then(res => {

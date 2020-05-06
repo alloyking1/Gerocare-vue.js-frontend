@@ -209,23 +209,22 @@ export default {
 
     logIn() {
       // loader
-      this.activeLoading = true;
-      this.$vs.loading({
-        type: "default"
-      });
+      this.$vs.loading();
 
       login(this.user)
         .then(res => {
-          this.activeLoading = false;
-          this.$vs.loading.close();
-
           localStorage.setItem("key", res.data.access_token);
           this.$store.dispatch("updateUserInfo", res.data.user);
           this.$router.push("/home");
+          this.$vs.loading.close();
         })
-        .catch(() => {
+        .catch((err) => {
+          
           this.activeLoading = false;
           this.$vs.loading.close();
+          if(err.message === "Request failed with status code 401"){
+            this.$vs.notify({title:'Incorrect user details', text:'Your email or password is not correct', color:'danger',position:'top-right'});
+          }
         });
     }
   }
