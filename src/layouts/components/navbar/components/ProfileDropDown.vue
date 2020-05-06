@@ -78,17 +78,18 @@ export default {
 
   methods: {
     logout() {
-      this.$vs.loader()
+      this.$vs.loading()
       logOut()
       .then(res => {
         localStorage.removeItem('key');
         location.reload();
+        this.$vs.loading.close()
+        
         this.$vs.notify({title:'Logged-out',text:'Logged out successful. Login to continue',color:'warning',position:'top-right'});
-        this.$vs.loader.close()
         this.$router.push('/login');
       })
       .catch(err =>{
-        this.$vs.loader.close()
+        this.$vs.loading.close()
         this.$vs.notify({title:'Logged-out failed',text:'make sure you are connected to the internet.',color:'danger',position:'top-right'});
       });
     },
