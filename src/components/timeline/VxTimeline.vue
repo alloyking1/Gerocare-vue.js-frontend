@@ -13,7 +13,7 @@
       <li v-for="item in data" :key="item.title">
           <div class="timeline-icon" :class="`bg-${item.color}`">
               <!-- <feather-icon :icon="item.icon" svgClasses="text-white stroke-current w-5 h-5" /> -->
-              <feather-icon icon="AlertCircleIcon" svgClasses="text-white stroke-blue w-5 h-5"/>
+              <feather-icon icon="AlertCircleIcon" svgClasses="text-white stroke-current w-5 h-5"/>
           </div>
           <div class="timeline-info">
               <p class="font-semibold">Appointment Date: {{ item.appointment_date }}</p>
