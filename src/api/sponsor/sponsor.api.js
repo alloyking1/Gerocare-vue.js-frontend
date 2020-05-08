@@ -18,6 +18,12 @@ export async function getSponsorAppointment(id){
     return response;
 }
 
+// get sponsor precription
+export async function getSponsorPrescription(id){
+    const res = await httpsClient.get(`/sponsors/${id}/prescriptions`);
+    return res;
+}
+
 /**
  * @function updateSponsor
  * @params sponsor{}

@@ -220,7 +220,6 @@ export default {
         })
         .catch((err) => {
           
-          this.activeLoading = false;
           this.$vs.loading.close();
           if(err.message === "Request failed with status code 401"){
             this.$vs.notify({title:'Incorrect user details', text:'Your email or password is not correct', color:'danger',position:'top-right'});

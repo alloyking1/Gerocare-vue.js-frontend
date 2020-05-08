@@ -48,6 +48,7 @@
 
             </vs-table>
         </vx-card>
+        
         <div class="view">
             <vs-popup classContent="popup-example" title="Lorem ipsum dolor sit amet" :active.sync="popupActive2">
                     <vs-tabs alignment="center">
@@ -135,7 +136,7 @@
 </template>
 
 <script>
-import {allPatients} from '../../../api/sponsor/sponsor.api' 
+import {getSponsor} from '../../../api/sponsor/sponsor.api' 
 import {deletePatient, findPatient, editPatient} from '../../../api/sponsor/patient.api' 
 
 export default {
@@ -151,13 +152,24 @@ export default {
     },
 
     created(){
-        // this.$vs.loading()
-        this.elderly = this.$store.state.sponsor.patients;
         this.sponsorId = this.$store.state.user.id;
-        this.$vs.loading.close()
+        this.fetchPatient();
     },
 
     methods:{
+        fetchPatient(){
+            
+            this.$vs.loading();
+            getSponsor(this.sponsorId)
+            .then(res => {
+                this.elderly = res.data.data.patients;
+                this.$vs.loading.close();
+            })
+            .catch(err => {
+                this.$vs.loading.close()
+                this.$vs.notify({title:'Error',text:'something is wrong. Make sure you are connected to the internet',color:'danger',position:'top-right'});
+            })
+        },
 
         removePatient(itemId){
             // this.$vs.dialog({
@@ -180,6 +192,7 @@ export default {
             .catch(err => {
                 this.$vs.loading.close()
                 this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
+                // console.log(err)
             })
 
         },
