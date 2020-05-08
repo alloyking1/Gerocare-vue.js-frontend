@@ -108,25 +108,18 @@ export default {
 		},
 
 		post(){
-			this.activeLoading = true
-			this.$vs.loading({
-			type:'default',
-			})
+			this.$vs.loading()
 
 			let id = this.$store.state.user.id;
 
 			createPatients(id, this.patient)
 			.then(function(res){
-				this.activeLoading = false
 				this.$vs.loading.close()
-				console.log(res)
 				this.$vs.notify({title:'Success',text:`patient added successfully`,color:'warning',position:'top-right'});
 			})
 			.catch(err => {
-				this.activeLoading = false
           		this.$vs.loading.close()
 				this.$vs.notify({title:'Error',text:`Something is wrong. Patient not created. Reload the page and try again`,color:'danger',position:'top-right'});
-				conosle.log(err)
 			})
 		}
 	},

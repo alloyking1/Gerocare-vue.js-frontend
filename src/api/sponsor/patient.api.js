@@ -37,3 +37,9 @@ export async function findPatient(id, patientsId){
     const res = await httpsClient.get(`/sponsors/${id}/patients/${patientsId}`);
     return res
 }
+
+// Edit patient
+export async function editPatient(sponsorId, patientId, patients){
+    const res = await httpsClient.patch(`/sponsors/${sponsorId}/patients/${patientId}`, patients); 
+    return res
+}
