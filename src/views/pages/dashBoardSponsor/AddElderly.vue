@@ -113,7 +113,7 @@ export default {
 			let id = this.$store.state.user.id;
 
 			createPatients(id, this.patient)
-			.then(function(res){
+			.then(res => {
 				this.$vs.loading.close()
 				this.$vs.notify({title:'Success',text:`patient added successfully`,color:'warning',position:'top-right'});
 			})
