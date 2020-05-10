@@ -6,13 +6,8 @@
                 <div slot="no-body" class="">
                     <div class="vx-row">
                         <div class="vx-col hidden sm:hidden md:hidden lg:block lg:w-1/2 mx-auto self-center">
-                            <img src="@/assets/images/pages/forgot_password.png" alt="login" class="mx-auto login-img">
-                        </div>
-                        <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
-                            <div class="p-8">
-                                <div class="vx-card__title mb-8">
-                                    <div class="logo">
-                                        <svg width="113" height="39" viewBox="0 0 113 39" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                <div class="logo center">
+                                        <svg width="215" height="59" viewBox="0 0 113 39" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="113" height="39" fill="url(#pattern0)"/>
                                         <defs>
                                         <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -22,6 +17,11 @@
                                         </defs>
                                         </svg>
                                     </div>
+                            <img src="@/assets/images/pages/forgot_password.png" alt="login" class="mx-auto login-img">
+                        </div>
+                        <div class="vx-col sm:w-full md:w-full lg:w-1/2 mx-auto self-center d-theme-dark-bg">
+                            <div class="p-8">
+                                <div class="vx-card__title mb-8">
                                     <h4 class="mb-4">Recover your password</h4>
                                     <p>Please enter your email address and we'll send you instructions on how to reset your password.</p>
                                 </div>
