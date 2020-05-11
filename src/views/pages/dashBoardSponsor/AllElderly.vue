@@ -1,56 +1,24 @@
 <template>
     <div>
-        <vx-card title="All Request">
-            <vs-table :data="elderly">
-
-                <template slot="thead">
-                <vs-th>Name</vs-th>
-                <vs-th>Address</vs-th>
-                <vs-th>State</vs-th>
-                <vs-th>City</vs-th>
-                <vs-th>Type</vs-th>
-                <vs-th>Phone</vs-th>
-                <vs-th>Actions</vs-th>
-                </template>
-
-                <template slot-scope="{data}">
-                    <!-- <vs-tr :state="indextr == 2 || indextr == 5 ? 'success':indextr == 6 ? 'danger':null" :key="indextr" v-for="(tr, indextr) in data"> -->
-                    <!-- <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-                    </vs-tr> -->
-
-                    <vs-tr v-for="(item, i) in elderly" :key="i">
-
-                        <vs-td>
-                            {{item.name}}
-                        </vs-td>
-                        <vs-td>
-                            {{item.address}}
-                        </vs-td>
-                        <vs-td>
-                            {{item.state}}
-                        </vs-td>
-                        <vs-td>
-                            {{item.city}}
-                        </vs-td>
-                        <vs-td>
-                            {{item.type}}
-                        </vs-td>
-                        <vs-td>
-                            {{item.phone_number}}
-                        </vs-td>
-                        <vs-td>
-                            <vs-button color="success" type="border" @click="viewPatient(item.id)">View</vs-button>
-                            <vs-button color="danger" type="border" @click="removePatient(item.id)">Delete</vs-button>
-                        </vs-td>
-
-                    </vs-tr>
-                </template>
-
-            </vs-table>
-        </vx-card>
+        <div class="vx-row">
+			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base" v-for="(item, i) in elderly" :key="i">
+				<vx-card :title=item.name @click="viewPatient(item.id)">
+                    <div class="vx-row">
+                        <div class="vx-col w-full sm:w-1/3 md:w-1/3  mb-base">
+                            <vs-chip color="success">Active</vs-chip>
+                            <br>
+                            <p style="font-size:10px">8 Visits left</p>
+                        </div>
+                        <div class="vx-col w-full sm:w-2/3 md:w-2/3 mb-base">
+                            <vs-avatar  class="mx-auto mb-6 block" size="47px" src="https://www.bing.com/images/search?view=detailV2&ccid=ydgLdMPR&id=1DC342F26F911C03617CB94E81A96F78345125BA&thid=OIP.XZ0Y8eEx1e7nyYJIO_IfpgHaHa&mediaurl=http%3a%2f%2f4.bp.blogspot.com%2f-zsbDeAUd8aY%2fUS7F0ta5d9I%2fAAAAAAAAEKY%2fUL2AAhHj6J8%2fs1600%2ffacebook-default-no-profile-pic.jpg&exph=1290&expw=1290&q=Facebook+Avatar+Icon&simid=608049184228052981&selectedIndex=3" />
+                        </div>
+                    </div>
+                </vx-card>
+			</div>
+        </div>
         
         <div class="view">
-            <vs-popup classContent="popup-example" title="Lorem ipsum dolor sit amet" :active.sync="popupActive2">
+            <vs-popup classContent="popup-example" title="Patient Profile" :active.sync="popupActive2">
                     <vs-tabs alignment="center">
                         <vs-tab label="Profile">
                             <div class="vx-col w-full lg:w-3/3 sm:w-3/3 mb-base">
@@ -91,16 +59,16 @@
                                         <p>{{this.singleElderly.type || "Edit to add country"}}</p>
                                         <vs-divider />
                                     </div>
-                                    <!-- <div class="flex justify-between flex-wrap">
-                                        <vs-button class="mt-4 mr-2 shadow-lg" type="gradient" color="#7367F0" gradient-color-secondary="#CE9FFC">{{ card_6.btn_left_text }}</vs-button>
-                                        <vs-button class="mt-4" type="border" color="#b9b9b9">{{ card_6.btn_right_text }}</vs-button>
-                                    </div> -->
+                                    <div class="flex justify-between flex-wrap">
+                                        <vs-button class="mt-4 mr-2 shadow-lg" type="gradient" gradient-color-secondary="#CE9FFC">Edit</vs-button>
+                                        <vs-button class="mt-4" type="border" color="#b9b9b9" @click="removePatient(singleElderly.id)">Delete</vs-button>
+                                    </div>
                                 </vx-card>
                             </div>
                         </vs-tab>
                         
                         <vs-tab label="Edit">
-                            <div class="vx-col w-full lg:w-2/3 sm:w-2/2 mb-base" style="margin:0 auto">
+                            <div class="vx-col w-full lg:w-3/3 sm:w-3/3 mb-base" style="margin:0 auto">
                                 <vx-card class="p-2" title="Edit Profile">
                                     <form action="">
                                         <vs-divider/>
@@ -123,7 +91,7 @@
                                         </div>
                                         <vs-divider/>
                                         <vs-button type="gradient" class="w-full mt-6" @click="edit(singleElderly.id)">Save</vs-button>
-                                        <!-- <vs-button color="success" type="border" @click="edit(singleElderly.id)">Save</vs-button> -->
+                                        
                                     </form>
                                 </vx-card>
                             </div>
@@ -136,8 +104,9 @@
 </template>
 
 <script>
+import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue' 
 import {getSponsor} from '../../../api/sponsor/sponsor.api' 
-import {deletePatient, findPatient, editPatient} from '../../../api/sponsor/patient.api' 
+import {findPatient, editPatient, deletePatient, createPatients} from '../../../api/sponsor/patient.api' 
 
 export default {
     data(){
@@ -162,8 +131,8 @@ export default {
             this.$vs.loading();
             getSponsor(this.sponsorId)
             .then(res => {
-                this.elderly = res.data.data.patients;
                 this.$vs.loading.close();
+                this.elderly = res.data.data.patients;
             })
             .catch(err => {
                 this.$vs.loading.close()
@@ -198,14 +167,14 @@ export default {
         },
 
         viewPatient(itemId){
-            this.$vs.loading()
+            // this.$vs.loading()
             findPatient(this.sponsorId, itemId)
             .then(res =>{
                 this.singleElderly = res.data.data;
-                this.$vs.loading.close()
+                // this.$vs.loading.close()
             })
             .catch(err => {
-                this.$vs.loading.close()
+                // this.$vs.loading.close()
                 this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
 
