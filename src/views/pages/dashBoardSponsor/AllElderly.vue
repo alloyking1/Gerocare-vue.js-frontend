@@ -6,8 +6,7 @@
                     <div class="vx-row">
                         <div class="vx-col w-full sm:w-1/3 md:w-1/3  mb-base">
                             <vs-chip color="success">Active</vs-chip>
-                            <br>
-                            <p style="font-size:10px">8 Visits left</p>
+                            <p style="font-size:10px; color:#9DCB47; padding-top:35px">8 Visits left</p>
                         </div>
                         <div class="vx-col w-full sm:w-2/3 md:w-2/3 mb-base">
                             <vs-avatar  class="mx-auto mb-6 block" size="47px" src="https://www.bing.com/images/search?view=detailV2&ccid=ydgLdMPR&id=1DC342F26F911C03617CB94E81A96F78345125BA&thid=OIP.XZ0Y8eEx1e7nyYJIO_IfpgHaHa&mediaurl=http%3a%2f%2f4.bp.blogspot.com%2f-zsbDeAUd8aY%2fUS7F0ta5d9I%2fAAAAAAAAEKY%2fUL2AAhHj6J8%2fs1600%2ffacebook-default-no-profile-pic.jpg&exph=1290&expw=1290&q=Facebook+Avatar+Icon&simid=608049184228052981&selectedIndex=3" />
@@ -60,8 +59,8 @@
                                         <vs-divider />
                                     </div>
                                     <div class="flex justify-between flex-wrap">
-                                        <vs-button class="mt-4 mr-2 shadow-lg" type="gradient" gradient-color-secondary="#CE9FFC">Edit</vs-button>
-                                        <vs-button class="mt-4" type="border" color="#b9b9b9" @click="removePatient(singleElderly.id)">Delete</vs-button>
+                                        <!-- <vs-button class="mt-4 mr-2 shadow-lg" type="gradient" gradient-color-secondary="#CE9FFC">Edit</vs-button> -->
+                                        <vs-button class="w-full mt-6" type="border" color="danger" @click="removePatient(singleElderly.id)">Delete</vs-button>
                                     </div>
                                 </vx-card>
                             </div>
