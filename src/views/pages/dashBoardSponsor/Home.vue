@@ -123,11 +123,11 @@
 			</div>
 
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
-				<vx-card title="Recent Visits">
-                    <vs-table search :data="users">
+				<vx-card>
+                    <vs-table  pagination max-items="3" stripe search :data="users">
                         <template slot="header">
                             <h3>
-                            Users
+                            Recent Visits
                             </h3>
                         </template>
                         <template slot="thead">
@@ -161,6 +161,7 @@
 
                     </vs-table>
                 </vx-card>
+                
 			</div>
 		</div>
 
