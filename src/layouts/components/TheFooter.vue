@@ -14,7 +14,7 @@
         <p>
           <span>COPYRIGHT &copy;</span>
           <span>{{ new Date().getFullYear() }} </span>
-          <a href="#" target="_blank" rel="nofollow">Gerocare.org</a>
+          <a href="#" target="_blank" rel="nofollow">Gerocare Solutions Limited</a>
           <span class="hidden sm:inline-block">, All rights Reserved</span>
         </p>
         <span class="md:flex hidden items-center">

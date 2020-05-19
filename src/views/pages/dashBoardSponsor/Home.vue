@@ -1,47 +1,52 @@
 <template>
 	<div>
 		<div class="vx-row">
-			<div class="vx-col w-full lg:w-1/4 mb-base">
-				<vx-card slot="no-body" class="text-center bg-primary-gradient greet-user">
+			<div class="vx-col w-full lg:w-1/6 mb-base">
+				<!-- <vx-card slot="no-body" class="text-center bg-primary-gradient greet-user">
 				<feather-icon icon="AwardIcon" class="p-6 mb-8 bg-primary inline-flex rounded-full text-white shadow" svgClasses="h-8 w-8"></feather-icon>
 				<h1 class="mb-6 text-white">Welcome {{this.data.name}}</h1>
 				<p class="xl:w-3/4 lg:w-4/5 md:w-2/3 w-4/5 mx-auto text-white" v-if="this.data.user.email_verified === false">Please take a moment to  <strong>Verify your email</strong> head over to your profile for more.</p>
 				<p class="xl:w-3/4 lg:w-4/5 md:w-2/3 w-4/5 mx-auto text-white" v-else>Your email is  <strong>Verified</strong> Welcome.</p>
-				</vx-card>
+				</vx-card> -->
+                <p>Hi</p>
+                <br>
+                <h3 class="text-3xl">{{this.data.user.name}}</h3>
+                <br>
+                <small class="font-gray">{{this.data.phone_number}}</small>
+                <br>
+                <small class="font-gray">{{this.data.user.email}}</small>
 			</div>
             
-            <div class="vx-col w-full lg:w-1/3 mb-base">
-                <vx-card title="Next Due Subscription">
-
-                    <!-- DATA -->
-                    <div class="flex justify-between text-center mt-4" slot="no-body-bottom">
-
-                        <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0">
-                            <p class="mb-4 text-3xl font-semibold">Patient Name</p>
-                            <p class="mt-4">12/12/12</p>
-                        </div>
-                        <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0">
-                            <p class="mb-4 text-3xl font-semibold">N6,000</p>
-                            <p class="mt-4">Amount</p>
-                        </div>
+            <div class="vx-col w-full lg:w-2/5 mb-base">
+                <div class="vx-row text-center ml-24 mr-24 pl-10 pb-8">
+                    <h5>Next Due Subscription</h5>
+                </div>
+                <div class="flex justify-between text-center mt-4" slot="no-body-bottom">
+                    <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0 border-t-0">
+                        <p class="mb-4 text-2xl">{{this.data.name}}</p>
+                        <p class="mt-4">12-12-12</p>
                     </div>
-                </vx-card>
+                    <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-t-0">
+                        <p class="mb-4 text-2xl font-danger">N6,000</p>
+                        <p class="mt-4 font-purple">Pay Now</p>
+                    </div>
+                </div>
+
             </div>
 
-			<div class="vx-col w-full lg:w-1/3 mb-base">
-				<vx-card title="User Wallet">
+			<div class="vx-col w-full lg:w-2/5 mb-base">
+				<vx-card title="" class="text-center bg-primary-gradient greet-user">
                     <template slot="no-body">
                         <div class="p-8 clearfix">
-                            <div>
+                            <div class=" font-white">
+                                <p class="text-center pb-3">Wallet Balance:</p>
                                 <h1>
-                                  <sup class="text-lg">$</sup>
-                                  <span>233</span>
+                                  <sup class="text-lg font-white">N</sup>
+                                  <span class="font-white text-5xl">6,300</span>
                                 </h1>
                                 <br>
                                 <small>
-                                  <span class="text-grey">Deposits: </span>
-                                  <span>$</span>
-                                  <span>200</span>
+                                  <a href="#"><span class="font-purple">See billing history: </span></a>
                                 </small>
                             </div>
                         </div>
@@ -97,13 +102,13 @@
 		<div class="vx-row">
 			
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<vx-card title="Subscriptions">
+				<!-- <vx-card title="Subscriptions">
                     <template slot="no-body">
                         <div class="flex justify-between items-center p-6 border border-solid d-theme-border-grey-light border-r-0 border-l-0 border-t-0">
-                            <!-- <div>
+                            <div>
                                 <p><span class="font-semibold">{{ todoToday.numComletedTasks }} task completed</span> out of {{ todoToday.totalTasks }}</p>
                                 <vs-progress :percent="20" color="primary"></vs-progress>
-                            </div> -->
+                            </div>
                         </div>
                         <ul class="tasks-today-container">
                             <li class="px-6 py-4 tasks-today__task">
@@ -119,6 +124,20 @@
                             </li>
                         </ul>
                     </template>
+                </vx-card> -->
+                <div class="mb-2">
+                    <h5>Subscriptions</h5>
+                </div>
+                <vx-card class="mb-2">
+                    <p class="mb-4 text-2xl">
+                        <!-- <vs-chip color="success" style="min-width: 15px!important; min-height: 8px!important;"></vs-chip> -->
+                        {{this.data.name}}
+                    </p>
+                    <p class="mt-4 font-lemon">8 visits remaining</p>
+                </vx-card>
+                <vx-card>
+                    <p class="mb-4 text-1xl text-2xl">Luna Q</p>
+                    <p class="mt-4 text-danger">0 Visits Remaining</p>
                 </vx-card>
 			</div>
 
@@ -132,13 +151,16 @@
                         </template>
                         <template slot="thead">
                             <vs-th sort-key="email">
-                            Email
+                            Date
                             </vs-th>
                             <vs-th sort-key="username">
-                            Name
+                            Description
                             </vs-th>
                             <vs-th sort-key="id">
-                            Nro
+                            Status
+                            </vs-th>
+                            <vs-th sort-key="id">
+                            Report
                             </vs-th>
                         </template>
 
@@ -269,7 +291,7 @@ export default {
             getSponsor(id)
             .then(res => {
                 this.data = res.data.data;
-                console.log(this.data)
+                console.log(res.data.data);
                 this.$store.dispatch("updateSponsorInfo", res.data.data);
 
                 this.$vs.loading.close();
@@ -284,6 +306,24 @@ export default {
 	}	
 }
 </script>
+
+<style scoped>
+    .font-gray{
+        color:#CACBCE;
+    }
+    .font-danger{
+        color: #E65252;
+    }
+    .font-purple{
+        color:#9F1AA2;
+    }
+    .font-white{
+        color: white;
+    }
+    .font-lemon{
+        color:#9DCB47;
+    }
+</style>
 
 
 
