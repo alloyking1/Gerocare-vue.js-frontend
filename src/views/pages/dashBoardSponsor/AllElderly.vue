@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="vx-row">
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base" v-for="(item, i) in elderly" :key="i">
+			<div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base" v-for="(item, i) in elderly" :key="i">
 				<vx-card :title=item.name @click="viewPatient(item.id)">
                     <div class="vx-row">
                         <div class="vx-col w-full sm:w-1/3 md:w-1/3  mb-base">
@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="flex justify-between flex-wrap">
                                         <!-- <vs-button class="mt-4 mr-2 shadow-lg" type="gradient" gradient-color-secondary="#CE9FFC">Edit</vs-button> -->
-                                        <vs-button class="w-full mt-6" type="border" color="danger" @click="removePatient(singleElderly.id)">Delete</vs-button>
+                                        <vs-button class="w-full mt-6 cutomBtn" type="gradient" color="danger" @click="removePatient(singleElderly.id)">Delete</vs-button>
                                     </div>
                                 </vx-card>
                             </div>
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                         <vs-divider/>
-                                        <vs-button type="gradient" class="w-full mt-6" @click="edit(singleElderly.id)">Save</vs-button>
+                                        <vs-button type="gradient" class="w-full mt-6 cutomBtn" @click="edit(singleElderly.id)">Save</vs-button>
                                         
                                     </form>
                                 </vx-card>

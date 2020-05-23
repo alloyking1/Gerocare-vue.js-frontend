@@ -15,6 +15,7 @@
                         <vs-divider></vs-divider>
                     </div>
                     <div class="add-form">
+                        <h3 class="text-center pb-5 text-1xl">Add Subscription</h3>
                         <form action="">
                             <vs-select v-model="city" class="w-full select-large mb-5">
                                 <vs-select-item text="Basic Home Visit" class="w-full" />
@@ -29,22 +30,15 @@
                                 <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
                             </vs-select>
 
-                            <!-- <ul class="con-s">
-                                <li>
-                                <label>Pay Now/Later</label>
-                                <vs-switch color="success" v-model="switch2" />
-                                </li>
-                            </ul> -->
-
-                            <div class="text-center visits">
-                                <h6>AMOUNT</h6>
-                                <h2> N 18,900</h2>
-                                <p>1 visit every month for 3 months</p>
+                            <div class="text-center visits p-3">
+                                <h6 class="p-1">AMOUNT</h6>
+                                <h2 class="p-1"> N 18,900</h2>
+                                <p class="p-1">1 visit every month for 3 months</p>
                                 <vs-radio color="success" v-model="radios2" vs-value="Success">Pay Now</vs-radio>
                                 <vs-radio style="margin-left:10px;" color="success" v-model="radios2" vs-value="Success">Pay Later</vs-radio>
                             </div>
                             
-                            <vs-button icon-pack="feather" icon="icon-chevrons-right" icon-after class="shadow-md w-full">Pay Now</vs-button>
+                            <vs-button icon-pack="feather" class="shadow-md w-full cutomBtn">CONFIRM</vs-button>
                         </form>
                     </div>
 
@@ -258,6 +252,11 @@ export default {
 
     .visits{
         line-height: 30px;
+    }
+
+    .cutomBtn{
+        border-radius:55px;
+        padding:1rem !important;
     }
 
 </style>
