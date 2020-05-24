@@ -72,7 +72,7 @@ export default {
       // return this.$store.state.AppActiveUser
       // return this.user_name = this.$store.state.user.name;
       
-      return this.$store.state.user.name;
+      return this.$store.state.user.sponsor.name;
     }
   },
 

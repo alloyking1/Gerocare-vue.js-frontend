@@ -229,8 +229,8 @@ export default {
       login(this.user)
         .then(res => {
           localStorage.setItem("key", res.data.access_token);
-          this.$store.dispatch("updateUserInfo", res.data.user);
-          this.$router.push("/home");
+          this.$store.dispatch("updateUserInfo", res.data);
+          this.$router.push({ name: 'home', params: { sponsor: res.data } });
           this.$vs.loading.close();
         })
         .catch((err) => {

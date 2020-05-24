@@ -137,12 +137,11 @@ export default {
         fetchComplaint(){
             this.$vs.loading()
 
-            let id = this.$store.state.user.id
+            let id = this.$store.state.user.user.id
             getComplaint(id).
             then(res => {
-                // this.allComplaint = res.data.data;
                 this.users = res.data.data;
-                // console.log(res.data.data.date_created.toDateString());
+                console.log(res.data.data);
                 this.$vs.loading.close()
             })
         }

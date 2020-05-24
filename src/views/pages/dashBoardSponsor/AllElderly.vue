@@ -60,7 +60,7 @@
                                     </div>
                                     <div class="flex justify-between flex-wrap">
                                         <!-- <vs-button class="mt-4 mr-2 shadow-lg" type="gradient" gradient-color-secondary="#CE9FFC">Edit</vs-button> -->
-                                        <vs-button class="w-full mt-6 cutomBtn" type="gradient" color="danger" @click="removePatient(singleElderly.id)">Delete</vs-button>
+                                        <vs-button class="w-full mt-6 cutomBtn" style="background: #E65252 !important;" @click="removePatient(singleElderly.id)">Delete</vs-button>
                                     </div>
                                 </vx-card>
                             </div>
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                         <vs-divider/>
-                                        <vs-button type="gradient" class="w-full mt-6 cutomBtn" @click="edit(singleElderly.id)">Save</vs-button>
+                                        <vs-button class="w-full mt-6 cutomBtn" @click="edit(singleElderly.id)">Save</vs-button>
                                         
                                     </form>
                                 </vx-card>

@@ -4,9 +4,9 @@
 			<div class="vx-col w-full lg:w-1/6 mb-base">
                 <p>Hi</p>
                 <br>
-                <h3 class="text-3xl">{{this.data.user.name}}</h3>
+                <h3 class="text-3xl">{{this.data.sponsor.name}}</h3>
                 <br>
-                <small class="font-gray">{{this.data.phone_number}}</small>
+                <small class="font-gray">{{this.data.sponsor.phone_number}}</small>
                 <br>
                 <small class="font-gray">{{this.data.user.email}}</small>
 			</div>
@@ -17,7 +17,7 @@
                 </div>
                 <div class="flex justify-between text-center mt-4" slot="no-body-bottom">
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0 border-t-0">
-                        <p class="mb-4 text-2xl">{{this.data.name}}</p>
+                        <!-- <p class="mb-4 text-2xl">{{this.data.name}}</p> -->
                         <p class="mt-4">12-12-12</p>
                     </div>
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-t-0">
@@ -36,7 +36,7 @@
                                 <p class="text-center pb-3">Wallet Balance:</p>
                                 <h1>
                                   <sup class="text-lg font-white">N</sup>
-                                  <span class="font-white text-5xl">6,300</span>
+                                  <span class="font-white text-5xl">{{this.data.insights.balance}}</span>
                                 </h1>
                                 <br>
                                 <small>
@@ -60,7 +60,7 @@
                   class="mb-base"
                   icon="UsersIcon"
                   icon-right
-                  :statistic= this.data.patients.length
+                  :statistic= this.data.insights.patients
                   statisticTitle="Number of Elderly" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -69,7 +69,7 @@
                   class="mb-base"
                   icon="GiftIcon"
                   icon-right
-                  statistic="2"
+                  :statistic= this.data.insights.visits
                   statisticTitle="Number of Visits" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -78,7 +78,7 @@
                   class="mb-base"
                   icon="UserCheckIcon"
                   icon-right
-                  statistic="1"
+                  :statistic= this.data.insights.subscriptions
                   statisticTitle="Active Subscriptions" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -87,7 +87,7 @@
                   class="mb-base"
                   icon="MailIcon"
                   icon-right
-                  statistic="0"
+                  :statistic= this.data.insights.message
                   statisticTitle="Messages" />
 			</div>
 		</div>
@@ -274,22 +274,12 @@ export default {
     created(){
         
         this.fetchSponsor();
-        this.elderly = this.$store.state.sponsor.patients.length 
     },
 
     methods:{
         fetchSponsor(){
-            this.$vs.loading()
-
-            let id = this.$store.state.user.id
-            getSponsor(id)
-            .then(res => {
-                this.data = res.data.data;
-                console.log(res.data.data);
-                this.$store.dispatch("updateSponsorInfo", res.data.data);
-
-                this.$vs.loading.close();
-            })
+            this.data = this.$store.state.user;
+            console.log(this.data); 
         }
     },
 

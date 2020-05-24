@@ -157,7 +157,7 @@
 
             <div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
 				<vx-card>
-                    <vs-button  icon-pack="feather" type="border"  class="shadow-md w-full cutomBtn mb-3 btn-outline">UPDATE PROFILE</vs-button>
+                    <vs-button @click="updateProfile" icon-pack="feather" type="border"  class="shadow-md w-full cutomBtn mb-3 btn-outline">UPDATE PROFILE</vs-button>
                     <vs-button  icon-pack="feather" type="border" class="shadow-md w-full cutomBtn mb-3">UPDATE PREFERENCES</vs-button>
                     <vs-button  icon-pack="feather"  class="shadow-md w-full cutomBtn mb-3">CHANGE PASSWORD</vs-button>
                     
@@ -204,7 +204,7 @@
 
         created(){
             this.$vs.loading()
-            this.id = this.$store.state.user.id;
+            this.id = this.$store.state.user.user.id;
             getSponsor(this.id)
             .then(res => {
                 this.$vs.loading.close()
