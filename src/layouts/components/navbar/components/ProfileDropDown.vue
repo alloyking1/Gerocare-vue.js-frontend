@@ -16,10 +16,12 @@
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
         <ul style="min-width: 9rem">
-          <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white">
-            <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
-            <span class="ml-2">Profile</span>
-          </li>
+          <router-link to="/sponsor/profile">
+            <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white">
+              <feather-icon icon="UserIcon" svgClasses="w-4 h-4" />
+              <span class="ml-2">Profile</span>
+            </li>
+          </router-link>
 
           <li class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white">
             <feather-icon icon="MailIcon" svgClasses="w-4 h-4" />
@@ -69,22 +71,26 @@ export default {
     activeUserInfo() {
       // return this.$store.state.AppActiveUser
       // return this.user_name = this.$store.state.user.name;
-      return this.$store.state.user.name;
+      
+      return this.$store.state.user.sponsor.name;
     }
   },
 
   methods: {
     logout() {
+      this.$vs.loading()
       logOut()
       .then(res => {
         localStorage.removeItem('key');
+        location.reload();
+        this.$vs.loading.close()
         
         this.$vs.notify({title:'Logged-out',text:'Logged out successful. Login to continue',color:'warning',position:'top-right'});
-        location.reload();
         this.$router.push('/login');
       })
       .catch(err =>{
-        console.log(err.message);
+        this.$vs.loading.close()
+        this.$vs.notify({title:'Logged-out failed',text:'make sure you are connected to the internet.',color:'danger',position:'top-right'});
       });
     },
   }

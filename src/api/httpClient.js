@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const baseDomain =
-  process.env.VUE_APP_BASE_URL || "http://api-dev.gerocare.org";
+const baseDomain = process.env.VUE_APP_BASE_URL || "http://api-dev.gerocare.org";
 const baseURL = `${baseDomain}/api/v1`;
 
 const httpsClient = axios.create({

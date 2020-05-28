@@ -30,17 +30,19 @@ const router = new Router({
               name: 'home',
               component: () => import('./views/pages/dashBoardSponsor/Home.vue'),
               //router guard
-              beforeEnter: (to, from, next) => {
-                console.log(store.state.user.name)
-                if(to.name === 'home' && !store.state.user.name) next({name:'page-login'})
-                else next()
-              }
+              //  
             },
             {
-              path: '/elderly',
+              path: '/elderly/add',
               name: 'page-2',
-              component: () => import('./views/pages/dashBoardSponsor/Elderly.vue')
+              component: () => import('./views/pages/dashBoardSponsor/AddElderly.vue')
             },
+            {
+              path: '/elderly/all',
+              name: 'page-2',
+              component: () => import('./views/pages/dashBoardSponsor/AllElderly.vue')
+            },
+
             {
               path: '/appointment',
               name: 'appointment',
@@ -70,6 +72,11 @@ const router = new Router({
               path: '/special/offer',
               name: 'special/offer',
               component: () => import('./views/pages/dashBoardSponsor/SpecialOffer.vue')
+            },
+            {
+              path: '/sponsor/profile',
+              name: 'sponsor/profile',
+              component: () => import('./views/pages/dashBoardSponsor/SponsorProfile.vue')
             },
           ],
         },

@@ -20,7 +20,7 @@ import colors from "@/../themeConfig.js"
 //   uid         : 0,          // From Auth
 //   displayName : "alloy Doe", // From Auth
 //   about       : "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
-//   photoURL    : require("@/assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
+  // photoURL    : require("@/assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
 //   status      : "online",
 //   userRole    : "admin"
 // }
@@ -60,6 +60,7 @@ const is_touch_device = () => {
 
 const state = {
     user:{},
+    sponsor:{},
     AppActiveUser           : userDefaults,
     bodyOverlay             : false,
     isVerticalNavMenuActive : true,
