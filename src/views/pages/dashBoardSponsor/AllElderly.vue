@@ -175,7 +175,8 @@ export default {
             })
             .catch(err => {
                 // this.$vs.loading.close()
-                this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
+                // this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
+                console.log(err)
             })
 
             this.popupActive2=true

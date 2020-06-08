@@ -1,26 +1,28 @@
 <template>
 	<div>
 		<div class="vx-row">
-			<div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base">
+			<div class="vx-col w-full sm:w-2/2 md:w-2/12 lg:w-4/4 xl:w-4/12 mb-base">
 				<vx-card title="Add Elderly">
 					<form-wizard color="rgba(var(--vs-primary), 1)" :title="null" :subtitle="null" finishButtonText="Finish"	@on-complete="formSubmitted">
 						<tab-content title="Step 1" class="mb-5">
 
 							<!-- tab 1 content -->
-							<div class="vx-row">
-								<div class="vx-col md:w-1/2 w-full mt-5">
-									<vs-input label="Patient Name" v-model="patient.name" class="w-full" />
-								</div>
-								<div class="vx-col md:w-1/2 w-full mt-5">
-									<vs-input label="Patient Address"  v-model="patient.address" class="w-full" />
-								</div>
-								<div class="vx-col md:w-1/2 w-full mt-5">
-									<vs-input type="text" label="State"  v-model="patient.state" class="w-full" />
-								</div>
-								<div class="vx-col md:w-1/2 w-full mt-5">
-									<vs-select v-model="patient.city" class="w-full select-large" label="City">
-										<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in city" class="w-full" />
-									</vs-select>
+							<div class="container">
+								<div class="vx-row">
+									<div class="vx-col md:w-2/2 w-full mt-5">
+										<vs-input label="Patient Name" v-model="patient.name" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-5">
+										<vs-input label="Patient Address"  v-model="patient.address" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-5">
+										<vs-input type="text" label="State"  v-model="patient.state" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-5">
+										<vs-select v-model="patient.city" class="w-full select-large" label="City">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in city" class="w-full" />
+										</vs-select>
+									</div>
 								</div>
 							</div>
 						</tab-content>
@@ -82,6 +84,18 @@
 					</form-wizard>
 				</vx-card>
 			</div>
+		</div>
+
+
+
+		<div class="row">
+			<div class="col-md-4">fsdfsds</div>
+			<div class="col-md-4">
+				<vx-card class="m-5">
+					<h1>hello world</h1>
+				</vx-card>
+			</div>
+			<div class="col-md-4">dfsd</div>
 		</div>
 
 	</div>

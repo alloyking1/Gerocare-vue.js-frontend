@@ -97,18 +97,18 @@ export default [
         i18n: 'List'
       },
       {
-        url: '#',
+        url: '/sponsor/profile',
         name: 'Account Preference',
         slug: 'Account-preference',
         i18n: 'View-account',
         icon:'SettingsIcon'
       },
-      {
-        url: "/sponsor/profile",
-        name: "Sponsor Profile",
-        slug: "app-user-view",
-        icon: "UserIcon",
-      },
+      // {
+      //   url: "/sponsor/profile",
+      //   name: "Sponsor Profile",
+      //   slug: "app-user-view",
+      //   icon: "UserIcon",
+      // },
     ]
   },
 
