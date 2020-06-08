@@ -16,6 +16,7 @@
       title         = "Gerocare"
       parent        = ".layout--main" />
 
+
       <div id="content-area" :class="[contentAreaClass, {'show-overlay': bodyOverlay}]">
         <div id="content-overlay" />
 

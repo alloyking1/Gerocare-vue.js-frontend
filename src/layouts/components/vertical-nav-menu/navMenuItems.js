@@ -67,10 +67,49 @@ export default [
     slug: "Complaint",
     icon: "BookIcon",
   },
+
   {
-    url: "/sponsor/profile",
-    name: "profile",
-    slug: "Complaint",
-    icon: "UserIcon",
+    header: 'Special Offer',
+    icon: 'PackageIcon',
+    i18n: 'Apps',
+    items: [
+      {
+        url: '/specialoffer',
+        name: 'Special Offer',
+        slug: 'specialoffer',
+        icon: 'DropletIcon',
+        i18n: 'Email'
+      },
+    ]
   },
+
+
+  {
+    header: 'Account Settings',
+    icon: 'PackageIcon',
+    i18n: 'Apps',
+    items: [
+      {
+        url: '/billing',
+        name: 'Billing',
+        slug: 'app-user-list',
+        icon: 'CreditCardIcon',
+        i18n: 'List'
+      },
+      {
+        url: '#',
+        name: 'Account Preference',
+        slug: 'Account-preference',
+        i18n: 'View-account',
+        icon:'SettingsIcon'
+      },
+      {
+        url: "/sponsor/profile",
+        name: "Sponsor Profile",
+        slug: "app-user-view",
+        icon: "UserIcon",
+      },
+    ]
+  },
+
 ]

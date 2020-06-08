@@ -28,9 +28,7 @@ const router = new Router({
             {
               path: '/',
               name: 'home',
-              component: () => import('./views/pages/dashBoardSponsor/Home.vue'),
-              //router guard
-              //  
+              component: () => import('./views/pages/dashBoardSponsor/Home.vue'), 
             },
             {
               path: '/elderly/add',
@@ -69,9 +67,14 @@ const router = new Router({
               component: () => import('./views/pages/dashBoardSponsor/Complaint.vue')
             },
             {
-              path: '/special/offer',
+              path: '/specialoffer',
               name: 'special/offer',
               component: () => import('./views/pages/dashBoardSponsor/SpecialOffer.vue')
+            },
+            {
+              path: '/billing',
+              name: 'billing',
+              component: () => import('./views/pages/dashBoardSponsor/PaymentDetails.vue')
             },
             {
               path: '/sponsor/profile',
