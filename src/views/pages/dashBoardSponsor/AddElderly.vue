@@ -26,7 +26,7 @@
 						</tab-content>
 
 						<!-- tab 2 content -->
-						<!-- <tab-content title="Step 2" class="mb-5">
+						<tab-content title="Step 2" class="mb-5">
 							<div class="vx-row">
 								<div class="vx-col md:w-1/2 w-full">
 									<vs-input label="Proposal Title" v-model="proposalTitle" class="w-full mt-4" />
@@ -36,7 +36,7 @@
 									<vs-textarea v-model="textarea" label="Short discription" class="mb-0 md:mt-10 mt-6" rows="3" />
 								</div>
 							</div>
-						</tab-content> -->
+						</tab-content>
 
 						<!-- tab 3 content -->
 						<tab-content title="Step 3" class="mb-5">
@@ -65,6 +65,20 @@
 								</div> -->
 							</div>
 						</tab-content>
+
+						<!-- tab 4 content -->
+						<tab-content title="Step 4" class="mb-5">
+							<div class="vx-row">
+								<div class="vx-col md:w-1/2 w-full">
+									<vs-input label="Proposal Title" v-model="proposalTitle" class="w-full mt-4" />
+									<vs-input label="Job Title"  v-model="jobTitle" class="w-full mt-4" />
+								</div>
+								<div class="vx-col md:w-1/2 w-full">
+									<vs-textarea v-model="textarea" label="Short discription" class="mb-0 md:mt-10 mt-6" rows="3" />
+								</div>
+							</div>
+						</tab-content>
+
 					</form-wizard>
 				</vx-card>
 			</div>

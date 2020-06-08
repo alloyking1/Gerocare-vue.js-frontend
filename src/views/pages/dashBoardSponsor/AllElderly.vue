@@ -135,6 +135,7 @@ export default {
             })
             .catch(err => {
                 this.$vs.loading.close()
+                console.log(err )
                 this.$vs.notify({title:'Error',text:'something is wrong. Make sure you are connected to the internet',color:'danger',position:'top-right'});
             })
         },

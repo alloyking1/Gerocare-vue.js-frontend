@@ -8,10 +8,10 @@
 ==========================================================================================*/
 
 
-import state from '../../../../store/chat/moduleChatState.js'
-import mutations from '../../../../store/chat/moduleChatMutations.js'
-import actions from '../../../../store/chat/moduleChatActions.js'
-import getters from '../../../../store/chat/moduleChatGetters.js'
+import state from './moduleChatState.js'
+import mutations from './moduleChatMutations.js'
+import actions from './moduleChatActions.js'
+import getters from './moduleChatGetters.js'
 
 export default {
   namespaced: true,

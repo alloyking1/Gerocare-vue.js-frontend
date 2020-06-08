@@ -4,11 +4,11 @@
 			<div class="vx-col w-full sm:w-1/3 md:w-1/3 mb-base">
                 <vx-card title="Your Subscriptions">
                     <h3>New Subscription</h3>
-                    <vs-select v-model="city" class="w-full select-large mb-5">
+                    <vs-select v-model="city" @change="seletedElderly" class="w-full select-large mb-5">
                         <vs-select-item text="Select Elderly" class="w-full" />
                         <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
                     </vs-select>
-                    <div class="container">
+                    <div class="container" v-if="elderly">
                         <h6 class="p-100 name-heading">Name: <span class="name-inner">Alloy king1</span> </h6>
                         <h6 class="p-100 name-heading">Status: <span class="name-inner">Active</span> </h6>
                         <h6 class="p-100 name-heading">Plan: <span class="name-inner">Basic Home Visit</span> </h6>
@@ -125,19 +125,19 @@
 
 <script>
 export default {
-  data(){
-    return {
-        cityOptions: [
-        {text: "New York", value:"new-york"},
-        {text: "Chicago", value:"chicago"},
-        {text: "San Francisco", value:"san-francisco"},
-        {text: "Boston", value:"boston"},
-        ],
-        color:'#5a3cc4',
-        switch1:true,
-        switch2:true,
+    data(){
+        return {
+            cityOptions: [
+            {text: "New York", value:"new-york"},
+            {text: "Chicago", value:"chicago"},
+            {text: "San Francisco", value:"san-francisco"},
+            {text: "Boston", value:"boston"},
+            ],
+            color:'#5a3cc4',
+            switch1:true,
+            switch2:true,
 
-        users:[
+            users:[
                 {
                     "id": 1,
                     "name": "Leanne Graham",
@@ -145,72 +145,15 @@ export default {
                     "email": "Sincere@april.biz",
                     "website": "hildegard.org",
                 },
-                {
-                    "id": 2,
-                    "name": "Ervin Howell",
-                    "username": "Antonette",
-                    "email": "Shanna@melissa.tv",
-                    "website": "anastasia.net",
-                },
-                {
-                    "id": 3,
-                    "name": "Clementine Bauch",
-                    "username": "Samantha",
-                    "email": "Nathan@yesenia.net",
-                    "website": "ramiro.info",
-                },
-                {
-                    "id": 4,
-                    "name": "Patricia Lebsack",
-                    "username": "Karianne",
-                    "email": "Julianne.OConner@kory.org",
-                    "website": "kale.biz",
-                },
-                {
-                    "id": 5,
-                    "name": "Chelsey Dietrich",
-                    "username": "Kamren",
-                    "email": "Lucio_Hettinger@annie.ca",
-                    "website": "demarco.info",
-                },
-                {
-                    "id": 6,
-                    "name": "Mrs. Dennis Schulist",
-                    "username": "Leopoldo_Corkery",
-                    "email": "Karley_Dach@jasper.info",
-                    "website": "ola.org",
-                },
-                {
-                    "id": 7,
-                    "name": "Kurtis Weissnat",
-                    "username": "Elwyn.Skiles",
-                    "email": "Telly.Hoeger@billy.biz",
-                    "website": "elvis.io",
-                },
-                {
-                    "id": 8,
-                    "name": "Nicholas Runolfsdottir V",
-                    "username": "Maxime_Nienow",
-                    "email": "Sherwood@rosamond.me",
-                    "website": "jacynthe.com",
-                },
-                {
-                    "id": 9,
-                    "name": "Glenna Reichert",
-                    "username": "Delphine",
-                    "email": "Chaim_McDermott@dana.io",
-                    "website": "conrad.com",
-                },
-                {
-                    "id": 10,
-                    "name": "Clementina DuBuque",
-                    "username": "Moriah.Stanton",
-                    "email": "Rey.Padberg@karina.biz",
-                    "website": "ambrose.net",
-                }
             ]
+        }
+    },
+
+    methods:{
+        seletedElderly(){
+            console.log('good')
+        }
     }
-  }
 }
 </script>
 
