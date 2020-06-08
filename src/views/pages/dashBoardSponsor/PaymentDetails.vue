@@ -3,9 +3,9 @@
         <div class="vx-row">
 			
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-                <div class="mb-2">
+                <!-- <div class="mb-2">
                     <h5>Payment Detials</h5>
-                </div>
+                </div> -->
                 <vx-card class="mb-2 bg-primary-gradient greet-user">
                     <div class="flex justify-between flex-wrap p-1">
                         <span class="card-span">Debit Card</span>
