@@ -2,38 +2,41 @@
     <div>
         <div class="vx-row">
 			<div class="vx-col w-full sm:w-1/3 md:w-1/3 mb-base">
-                <vx-card title="Your Subscriptions">
-                    <h3>New Subscription</h3>
-                    <vs-select v-model="city" @change="seletedElderly" class="w-full select-large mb-5">
-                        <vs-select-item text="Select Elderly" class="w-full" />
-                        <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
-                    </vs-select>
-                    <div class="container" v-if="elderly">
-                        <h6 class="p-100 name-heading">Name: <span class="name-inner">Alloy king1</span> </h6>
-                        <h6 class="p-100 name-heading">Status: <span class="name-inner">Active</span> </h6>
-                        <h6 class="p-100 name-heading">Plan: <span class="name-inner">Basic Home Visit</span> </h6>
-                        <vs-divider></vs-divider>
+                <vx-card title="" class="p-2">
+                    <div class="container pl-5 pr-5 pt-5">
+                        <h3 class="p-1">New Subscription</h3>
+                        <vs-select v-model="city" @change="seletedElderly" class="w-full select-large mb-5">
+                            <vs-select-item text="Select Elderly" class="w-full" />
+                            <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
+                        </vs-select>
+                        <div class="container" v-if="elderly">
+                            <h6 class="p-100 name-heading">Name: <span class="name-inner">Alloy king1</span> </h6>
+                            <h6 class="p-100 name-heading">Status: <span class="name-inner">Active</span> </h6>
+                            <h6 class="p-100 name-heading">Plan: <span class="name-inner">Basic Home Visit</span> </h6>
+                            <vs-divider></vs-divider>
+                        </div>
                     </div>
+
                     <div class="add-form">
                         <h3 class="text-center pb-5 text-1xl">Add Subscription</h3>
                         <form action="">
-                            <vs-select v-model="city" class="w-full select-large mb-5">
+                            <vs-select v-model="city" class="w-full select-large mb-2">
                                 <vs-select-item text="Basic Home Visit" class="w-full" />
                                 <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
                             </vs-select>
-                            <vs-select v-model="city" class="w-full select-large mb-5">
+                            <vs-select v-model="city" class="w-full select-large mb-2">
                                 <vs-select-item text="1 visit / Month" class="w-full" />
                                 <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
                             </vs-select>
-                            <vs-select v-model="city" class="w-full select-large mb-5">
+                            <vs-select v-model="city" class="w-full select-large mb-2">
                                 <vs-select-item text="3 Months" class="w-full" />
                                 <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
                             </vs-select>
 
                             <div class="text-center visits p-3">
-                                <h6 class="p-1">AMOUNT</h6>
-                                <h2 class="p-1"> N 18,900</h2>
-                                <p class="p-1">1 visit every month for 3 months</p>
+                                <h6 class="p-2">AMOUNT</h6>
+                                <h2 class="p-2 text-5xl"> N 18,900</h2>
+                                <p class="p-2">1 visit every month for 3 months</p>
                                 <vs-radio color="success" v-model="radios2" vs-value="Success">Pay Now</vs-radio>
                                 <vs-radio style="margin-left:10px;" color="success" v-model="radios2" vs-value="Success">Pay Later</vs-radio>
                             </div>
@@ -41,24 +44,6 @@
                             <vs-button icon-pack="feather" class="shadow-md w-full cutomBtn">CONFIRM</vs-button>
                         </form>
                     </div>
-
-                    <!-- <template slot="no-body">
-                        <div class="p-8 clearfix">
-                            <div>
-                                <h1>
-                                  <sup class="text-lg">$</sup>
-                                  <span>233</span>
-                                </h1>
-                                <br>
-                                <small>
-                                  <span class="text-grey">Deposits: </span>
-                                  <span>$</span>
-                                  <span>200</span>
-                                </small>
-                            </div>
-                        </div>
-                        
-                    </template> -->
                     
                 </vx-card>
             </div>
@@ -182,13 +167,7 @@ export default {
         color: #000000;
     }
     .add-form{
-        /* width: 266px; */
-        /* height: 424px; */
-        /* left: 251px; */
         top: 323px;
-
-        /* background: #FFFFFF; */
-        border: 1px solid #CACBCE;
         border-radius: 5px;
         padding: 1.5rem;
     }

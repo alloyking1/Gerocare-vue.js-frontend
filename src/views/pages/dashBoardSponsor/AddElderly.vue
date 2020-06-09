@@ -1,25 +1,65 @@
 <template>
 	<div>
 		<div class="vx-row">
-			<div class="vx-col w-full sm:w-2/2 md:w-2/12 lg:w-4/4 xl:w-4/12 mb-base">
-				<vx-card title="Add Elderly">
-					<form-wizard color="rgba(var(--vs-primary), 1)" :title="null" :subtitle="null" finishButtonText="Finish"	@on-complete="formSubmitted">
-						<tab-content title="Step 1" class="mb-5">
+			<div class="vx-col w-full sm:w-2/2 md:w-5/12 lg:w-5/12 xl:w-5/12 mb-base" style="margin:0px auto; padding:2rem">
+				<vx-card title="">
+					<div class="text-center p-5">
+						<h3 class="text-3xl">Add Elderly</h3>
+					</div>
+					
+					<form-wizard color="rgba(var(--vs-primary), 1)" :title="null" :subtitle="null" finishButtonText="Finish" @on-complete="formSubmitted">
+						<tab-content title="Personal Details" class="mb-5" :before-change="validateFirstStep">
 
 							<!-- tab 1 content -->
 							<div class="container">
 								<div class="vx-row">
 									<div class="vx-col md:w-2/2 w-full mt-5">
-										<vs-input label="Patient Name" v-model="patient.name" class="w-full" />
+										<vs-input placeholder="Full Name" v-model="patient.name" class="w-full" />
 									</div>
-									<div class="vx-col md:w-2/2 w-full mt-5">
-										<vs-input label="Patient Address"  v-model="patient.address" class="w-full" />
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<!-- <vs-input label="Patient Address"  v-model="patient.address" class="w-full" /> -->
+										<vs-select class="w-full select-large" placeholder="Gender" v-model="patient.gender">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in gender" class="w-full" />
+										</vs-select>
 									</div>
-									<div class="vx-col md:w-2/2 w-full mt-5">
-										<vs-input type="text" label="State"  v-model="patient.state" class="w-full" />
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-select v-model="patient.status" placeholder="Marital Status" class="w-full select-large">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
+										</vs-select>
 									</div>
+									
+								</div>
+							</div>
+						</tab-content>
+
+						<!-- tab 2 content -->
+						<tab-content title="Contact Details" class="mb-5" :before-change="validateSecondStep">
+							<!-- tab 2 content -->
+							<div class="container">
+								<div class="vx-row">
 									<div class="vx-col md:w-2/2 w-full mt-5">
-										<vs-select v-model="patient.city" class="w-full select-large" label="City">
+										<vs-input placeholder="Phone Number" v-model="contactDetails.phone" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-input placeholder="Email" type="email" v-model="contactDetails.email" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-input placeholder="Home Address" v-model="contactDetails.address" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-select class="w-full select-large" placeholder="Country" v-model="contactDetails.country">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in country" class="w-full" />
+										</vs-select>
+									</div>
+
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-select class="w-full select-large" placeholder="State" v-model="contactDetails.state">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in state" class="w-full" />
+										</vs-select>
+									</div>
+
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-select class="w-full select-large" placeholder="City" v-model="contactDetails.city">
 											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in city" class="w-full" />
 										</vs-select>
 									</div>
@@ -27,59 +67,71 @@
 							</div>
 						</tab-content>
 
-						<!-- tab 2 content -->
-						<tab-content title="Step 2" class="mb-5">
-							<div class="vx-row">
-								<div class="vx-col md:w-1/2 w-full">
-									<vs-input label="Proposal Title" v-model="proposalTitle" class="w-full mt-4" />
-									<vs-input label="Job Title"  v-model="jobTitle" class="w-full mt-4" />
-								</div>
-								<div class="vx-col md:w-1/2 w-full">
-									<vs-textarea v-model="textarea" label="Short discription" class="mb-0 md:mt-10 mt-6" rows="3" />
-								</div>
-							</div>
-						</tab-content>
-
 						<!-- tab 3 content -->
-						<tab-content title="Step 3" class="mb-5">
-							<div class="vx-row">
-								<div class="vx-col md:w-1/2 w-full">
-									<vs-input type="number" label="Patient number" v-model="patient.phone_number" class="w-full mt-5" />
-								</div>
-								<div class="vx-col md:w-1/2 w-full">
-									<vs-select v-model="patient.type" class="w-full select-large mt-5" label="type">
-										<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in type" class="w-full" />
-									</vs-select>
-								</div>
-								<!-- <div class="vx-col md:w-1/2 w-full mt-5">
-									<vs-select v-model="status" class="w-full select-large" label="Event Status">
-										<vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in statusOptions" class="w-full" />
-									</vs-select>
-								</div>
-								<div class="vx-col md:w-1/2 w-full md:mt-8">
-									<div class="demo-alignment">
-										<span>Requirements:</span>
-										<div class="flex">
-											<vs-checkbox>Staffing</vs-checkbox>
-											<vs-checkbox>Catering</vs-checkbox>
-										</div>
+						<tab-content title="Emergency Contact" class="mb-5" :before-change="validateThirdStep">
+
+							<div class="container">
+								<div class="vx-row">
+									<div class="vx-col md:w-2/2 w-full mt-5">
+										<vs-input placeholder="Emergency Contact’s Name" v-model="emergencyDetails.name" class="w-full" />
 									</div>
-								</div> -->
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-input placeholder="Emergency Phone Number (e.g +234 12345678)" v-model="emergencyDetails.phone" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-input placeholder="Emergency Address" v-model="emergencyDetails.address" class="w-full" />
+									</div>
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-input placeholder="Emergency Email" v-model="emergencyDetails.email"  class="w-full" />
+									</div>
+								</div>
 							</div>
 						</tab-content>
 
 						<!-- tab 4 content -->
-						<tab-content title="Step 4" class="mb-5">
-							<div class="vx-row">
-								<div class="vx-col md:w-1/2 w-full">
-									<vs-input label="Proposal Title" v-model="proposalTitle" class="w-full mt-4" />
-									<vs-input label="Job Title"  v-model="jobTitle" class="w-full mt-4" />
-								</div>
-								<div class="vx-col md:w-1/2 w-full">
-									<vs-textarea v-model="textarea" label="Short discription" class="mb-0 md:mt-10 mt-6" rows="3" />
+						<tab-content title="Subscribe" class="mb-5">
+							<div class="container">
+								<div class="vx-row">
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<!-- <vs-input label="Patient Address"  v-model="patient.address" class="w-full" /> -->
+										<!-- <vs-input placeholder="Gender"  v-model="patient.address" class="w-full" /> -->
+										<vs-select class="w-full select-large">
+											<vs-select-item text="Visits/Month" class="w-full" />
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in gender" class="w-full" />
+										</vs-select>
+									</div>
+									
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-select  class="w-full select-large">
+											<vs-select-item text="Months/Year" class="w-full" />
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
+										</vs-select>
+									</div>
+
+									<div class="vx-col md:w-2/2 w-full mt-2">
+									<div class="text-center p-4">
+
+										<p class="p-2">AMOUNT</p>
+										<h3 class="text-5xl p-2">N 18,900</h3>
+										<p class="p-2">1 visit every month for 3 months</p>
+										<vs-radio color="success" vs-value="Success">Pay Now</vs-radio>
+                                		<vs-radio style="margin-left:10px;" color="success" vs-value="Success">Pay Later</vs-radio>
+									</div>
+									</div>
+
+									<div class="vx-col md:w-2/2 w-full mt-2">
+										<vs-select class="w-full select-large">
+											<vs-select-item text="Credit Card" class="w-full" />
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
+										</vs-select>
+									</div>
 								</div>
 							</div>
 						</tab-content>
+
+						<el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button>
+						<el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button>
+						<el-button type="primary" class="btn-custom-next" slot="finish">FINISH</el-button>
 
 					</form-wizard>
 				</vx-card>
@@ -88,15 +140,7 @@
 
 
 
-		<div class="row">
-			<div class="col-md-4">fsdfsds</div>
-			<div class="col-md-4">
-				<vx-card class="m-5">
-					<h1>hello world</h1>
-				</vx-card>
-			</div>
-			<div class="col-md-4">dfsd</div>
-		</div>
+		
 
 	</div>
 </template>
@@ -110,16 +154,57 @@ import {createPatients} from '../../../api/sponsor/patient.api'
 export default {
 	data(){
 		return {
-			patient:{},
-			city:[
-				{name:'Rivers state', value:'Rivers'},
-				{name:'Uyo', value:'Uyo'},
-				{name:'Kalabar', value:'Kalabar'},
+			patient:{
+				name:'',
+				gender:'',
+				status:''
+			},
+
+			contactDetails:{
+				phone:'',
+				email:'',
+				address:'',
+				country:'',
+				state:'',
+				city:'',
+			},
+
+
+			emergencyDetails:{
+				name:'',
+				phone:'',
+				address:'',
+				email:''
+			},
+
+
+
+			gender:[
+				{name:'Male', value:'Male'},
+				{name:'Female', value:'female'},
 			],
-			type:[
+			status:[
 				{name:'Single', value:'single'},
 				{name:'Couple', value:'couple'},
 			],
+			country:[
+				{name:'Nigeria', value:'Nigeria'},
+				{name:'Ghana', value:'ghana'},
+			],
+			state:[
+				{name:'Rivers', value:'rivers'},
+				{name:'Lagos', value:'lagos'},
+			],
+			city:[
+				{name:'port harcourt', value:'ph'},
+				{name:'asaba', value:'asaba'}
+			],
+
+
+
+			error:{
+				personalDetails:''
+			}
 		}
 	},
 
@@ -149,6 +234,36 @@ export default {
           		this.$vs.loading.close()
 				this.$vs.notify({title:'Error',text:`Something is wrong. Patient not created. Reload the page and try again`,color:'danger',position:'top-right'});
 			})
+		},
+
+		validateFirstStep(){
+			if(this.patient.name === "" || this.patient.gender === "" || this.patient.status  === ""){
+				this.$vs.notify({title:'Validation error',text:`All field is required`,color:'danger',position:'top-right'});
+				return false
+			}else{
+				this.error.personalDetails = ''
+				return true
+			}
+		},
+		
+		validateSecondStep(){
+			for(var val in this.contactDetails){
+				if(this.contactDetails[val]  === ""){
+					this.$vs.notify({title:'Validation error',text:`All field is required`,color:'danger',position:'top-right'});
+					return false
+				}
+			}
+			return true
+		},
+
+		validateThirdStep(){
+			for(var val in this.emergencyDetails){
+				if(this.emergencyDetails[val]  === ""){
+					this.$vs.notify({title:'Validation error',text:`All field is required`,color:'danger',position:'top-right'});
+					return false
+				}
+			}
+			return true
 		}
 	},
 
@@ -158,3 +273,30 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+	.btn-custom-next{
+		border-radius: 22px; 
+		padding: 10px; 
+		padding-left: 80px; 
+		padding-right: 80px; 
+		width: 100%; 
+		background-color: 
+		rgba(var(--vs-primary), 1);
+		color: white;
+		align-items: center;
+		/* : pointer; */
+	}
+	.btn-custom-prev{
+		border-radius: 22px; 
+		padding: 10px; 
+		padding-left: 80px; 
+		padding-right: 80px; 
+		width: 100%; 
+		background-color: white;
+		color: rgba(var(--vs-primary), 1);
+		border:1px solid rgba(var(--vs-primary), 1);
+		align-items: center;
+	}
+
+</style>
