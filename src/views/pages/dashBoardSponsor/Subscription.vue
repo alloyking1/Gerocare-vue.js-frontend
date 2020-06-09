@@ -112,15 +112,15 @@
 export default {
     data(){
         return {
-            cityOptions: [
-            {text: "New York", value:"new-york"},
-            {text: "Chicago", value:"chicago"},
-            {text: "San Francisco", value:"san-francisco"},
-            {text: "Boston", value:"boston"},
-            ],
-            color:'#5a3cc4',
-            switch1:true,
-            switch2:true,
+            // cityOptions: [
+            //     {text: "New York", value:"new-york"},
+            //     {text: "Chicago", value:"chicago"},
+            //     {text: "San Francisco", value:"san-francisco"},
+            //     {text: "Boston", value:"boston"},
+            // ],
+            // color:'#5a3cc4',
+            // switch1:true,
+            // switch2:true,
 
             users:[
                 {
@@ -135,9 +135,17 @@ export default {
     },
 
     methods:{
-        seletedElderly(){
-            console.log('good')
-        }
+        visitCost(){
+
+			let visits = this.paymentDetails.visit;
+			let months = this.paymentDetails.months;
+			let amount = 6500;
+
+			let cost = visits * 6500;
+			let total = cost * months;
+			this.visitCostSum = total;
+		
+		},
     }
 }
 </script>

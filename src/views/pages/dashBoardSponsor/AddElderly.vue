@@ -8,7 +8,8 @@
 					</div>
 					
 					<form-wizard color="rgba(var(--vs-primary), 1)" :title="null" :subtitle="null" finishButtonText="Finish" @on-complete="formSubmitted">
-						<tab-content title="Personal Details" class="mb-5" :before-change="validateFirstStep">
+						<!-- <tab-content title="Personal Details" class="mb-5" :before-change="validateFirstStep"> -->
+						<tab-content title="Personal Details" class="mb-5" >
 
 							<!-- tab 1 content -->
 							<div class="container">
@@ -33,7 +34,8 @@
 						</tab-content>
 
 						<!-- tab 2 content -->
-						<tab-content title="Contact Details" class="mb-5" :before-change="validateSecondStep">
+						<!-- <tab-content title="Contact Details" class="mb-5" :before-change="validateSecondStep"> -->
+						<tab-content title="Contact Details" class="mb-5">
 							<!-- tab 2 content -->
 							<div class="container">
 								<div class="vx-row">
@@ -68,7 +70,8 @@
 						</tab-content>
 
 						<!-- tab 3 content -->
-						<tab-content title="Emergency Contact" class="mb-5" :before-change="validateThirdStep">
+						<!-- <tab-content title="Emergency Contact" class="mb-5" :before-change="validateThirdStep"> -->
+						<tab-content title="Emergency Contact" class="mb-5">
 
 							<div class="container">
 								<div class="vx-row">
@@ -89,22 +92,18 @@
 						</tab-content>
 
 						<!-- tab 4 content -->
-						<tab-content title="Subscribe" class="mb-5">
+						<tab-content title="Subscribe" class="mb-5" :before-change="validateForthStep">
 							<div class="container">
 								<div class="vx-row">
 									<div class="vx-col md:w-2/2 w-full mt-2">
-										<!-- <vs-input label="Patient Address"  v-model="patient.address" class="w-full" /> -->
-										<!-- <vs-input placeholder="Gender"  v-model="patient.address" class="w-full" /> -->
-										<vs-select class="w-full select-large">
-											<vs-select-item text="Visits/Month" class="w-full" />
-											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in gender" class="w-full" />
+										<vs-select class="w-full select-large" placeholder="Visits/Month" v-model="paymentDetails.visit" @change="visitCost">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in visit" class="w-full" />
 										</vs-select>
 									</div>
 									
 									<div class="vx-col md:w-2/2 w-full mt-2">
-										<vs-select  class="w-full select-large">
-											<vs-select-item text="Months/Year" class="w-full" />
-											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
+										<vs-select  class="w-full select-large" placeholder="Month/Year" v-model="paymentDetails.months" @change="visitCost">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in months" class="w-full" />
 										</vs-select>
 									</div>
 
@@ -112,23 +111,21 @@
 									<div class="text-center p-4">
 
 										<p class="p-2">AMOUNT</p>
-										<h3 class="text-5xl p-2">N 18,900</h3>
+										<h3 class="text-5xl p-2">N {{this.visitCostSum}}</h3>
 										<p class="p-2">1 visit every month for 3 months</p>
-										<vs-radio color="success" vs-value="Success">Pay Now</vs-radio>
-                                		<vs-radio style="margin-left:10px;" color="success" vs-value="Success">Pay Later</vs-radio>
+										<vs-radio color="success" vs-value="true" v-model="payment">Pay Now</vs-radio>
+                                		<vs-radio style="margin-left:10px;" color="success" vs-value="false" v-model="payment">Pay Later</vs-radio>
 									</div>
 									</div>
 
-									<div class="vx-col md:w-2/2 w-full mt-2">
-										<vs-select class="w-full select-large">
-											<vs-select-item text="Credit Card" class="w-full" />
-											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
+									<div class="vx-col md:w-2/2 w-full mt-2" v-if="payment === 'true'">
+										<vs-select class="w-full select-large" placeholder="Payment methods" v-model="paymentDetails.paymentMethod">
+											<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in paymentOption" class="w-full" />
 										</vs-select>
 									</div>
 								</div>
 							</div>
 						</tab-content>
-
 						<el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button>
 						<el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button>
 						<el-button type="primary" class="btn-custom-next" slot="finish">FINISH</el-button>
@@ -169,7 +166,6 @@ export default {
 				city:'',
 			},
 
-
 			emergencyDetails:{
 				name:'',
 				phone:'',
@@ -177,7 +173,14 @@ export default {
 				email:''
 			},
 
+			paymentDetails:{
+				visit:'',
+				months:'',
+				paymentMethod:''
+			},
 
+			visitCostSum:0,
+			payment:'',
 
 			gender:[
 				{name:'Male', value:'Male'},
@@ -199,12 +202,23 @@ export default {
 				{name:'port harcourt', value:'ph'},
 				{name:'asaba', value:'asaba'}
 			],
+			visit:[
+				{name: '1/Month', value:'1'},
+				{name: '2/Month', value:'2'},
+				{name: '4/Month', value:'4'},
+			],
 
+			months: [
+				{name: '1 Month', value:'1'},
+				{name: '3 Months', value:'3'},
+				{name: '6 Months', value:'6'},
+				{name: '1 Year', value:'12'}
+			],
 
-
-			error:{
-				personalDetails:''
-			}
+			paymentOption:[
+				{name:'Debit/Credit Cards', value:'card'},
+				{name:'Teller Payment/Bankd Transfer', value:'TF'}
+			]
 		}
 	},
 
@@ -241,7 +255,6 @@ export default {
 				this.$vs.notify({title:'Validation error',text:`All field is required`,color:'danger',position:'top-right'});
 				return false
 			}else{
-				this.error.personalDetails = ''
 				return true
 			}
 		},
@@ -264,7 +277,34 @@ export default {
 				}
 			}
 			return true
-		}
+		},
+
+		validateForthStep(){
+			if(this.visitCostSum <= 0){
+				this.$vs.notify({title:'Validation error',text:`Select number of visits and number of months`,color:'danger',position:'top-right'});
+			}else{
+				if(this.payment === ''){
+					this.$vs.notify({title:'Validation error',text:`Select a payment option`,color:'danger',position:'top-right'});
+				}
+
+				// if(this.){
+
+				// }
+			}
+			return true
+		},
+
+		visitCost(){
+
+			let visits = this.paymentDetails.visit;
+			let months = this.paymentDetails.months;
+			let amount = 6500;
+
+			let cost = visits * 6500;
+			let total = cost * months;
+			this.visitCostSum = total;
+		
+		},
 	},
 
 	components: {
