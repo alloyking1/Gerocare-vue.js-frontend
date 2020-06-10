@@ -49,7 +49,7 @@
               </vs-table>
           </vx-card>
           <br>
-          <vx-card>
+          <!-- <vx-card>
               <vs-table  pagination max-items="3" stripe search :data="users">
                   <template slot="header">
                       <h3>
@@ -95,7 +95,7 @@
 
 
               </vs-table>
-          </vx-card>
+          </vx-card> -->
         
         <!-- <vx-card title="Patients Prescriptions">
   
