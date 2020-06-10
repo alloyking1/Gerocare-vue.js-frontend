@@ -129,10 +129,12 @@
                                 </div>
                             </div>
                         </tab-content> -->
-
-                        <el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button>
-                        <el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button>
-                        <el-button type="primary" class="btn-custom-next" slot="finish">FINISH</el-button>
+                          <!-- <el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button> -->
+                          <button class="btn-custom-prev m-2" slot="prev">BACK</button>
+                          <!-- <el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button> -->
+                          <button type="primary" class="btn-custom-next m-2" slot="next">NEXT</button>
+                          <!-- <el-button type="primary" class="btn-custom-next" slot="finish">FINISH</el-button> -->
+                          <button type="primary" class="btn-custom-next m-2" slot="finish">FINISH</button>
 
                       </form-wizard>
 
@@ -308,6 +310,7 @@ export default {
       /* background-image: url("../../assets/images/pages/green_bg.jpg"); */
       /* background-color:linear-gradient(to bottom right, red, yellow); */
       // background-image: linear-gradient(to bottom right, #034013, #17c964);
+      background-color: white;
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -327,6 +330,7 @@ export default {
 <style>
   .btn-custom-next{
 		border-radius: 22px; 
+    border:none;
 		padding: 12px; 
 		padding-left: 80px; 
 		padding-right: 80px; 

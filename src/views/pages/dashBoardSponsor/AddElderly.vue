@@ -126,9 +126,12 @@
 								</div>
 							</div>
 						</tab-content>
-						<el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button>
-						<el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button>
-						<el-button type="primary" class="btn-custom-next" slot="finish">FINISH</el-button>
+						<!-- <el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button> -->
+                          <button class="btn-custom-prev m-2" slot="prev">BACK</button>
+                          <!-- <el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button> -->
+                          <button type="primary" class="btn-custom-next m-2" slot="next">NEXT</button>
+                          <!-- <el-button type="primary" class="btn-custom-next" slot="finish">FINISH</el-button> -->
+                          <button type="primary" class="btn-custom-next m-2" slot="finish">FINISH</button>
 
 					</form-wizard>
 				</vx-card>
@@ -317,7 +320,8 @@ export default {
 <style scoped>
 	.btn-custom-next{
 		border-radius: 22px; 
-		padding: 10px; 
+		padding: 10px;
+		border:none; 
 		padding-left: 80px; 
 		padding-right: 80px; 
 		width: 100%; 
