@@ -245,4 +245,9 @@
         border: 1px solid #047BF8 !important;
         border-radius: 5px !important;
     }
+
+    .cutomBtn{
+        border-radius:55px;
+        padding:1rem !important;
+    }
 </style>

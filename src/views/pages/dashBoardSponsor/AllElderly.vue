@@ -22,25 +22,17 @@
                         <vs-tab label="Profile">
                             <div class="vx-col w-full lg:w-3/3 sm:w-3/3 mb-base">
                                 <vx-card class="p-2">
-                                    <vs-avatar class="mx-auto mb-6 block" size="80px" src="https://www.bing.com/images/search?view=detailV2&ccid=ydgLdMPR&id=1DC342F26F911C03617CB94E81A96F78345125BA&thid=OIP.XZ0Y8eEx1e7nyYJIO_IfpgHaHa&mediaurl=http%3a%2f%2f4.bp.blogspot.com%2f-zsbDeAUd8aY%2fUS7F0ta5d9I%2fAAAAAAAAEKY%2fUL2AAhHj6J8%2fs1600%2ffacebook-default-no-profile-pic.jpg&exph=1290&expw=1290&q=Facebook+Avatar+Icon&simid=608049184228052981&selectedIndex=3" />
-                                    <div class="text-center">
-                                        <h4>{{this.singleElderly.name}}</h4>
-                                        <p class="text-grey">{{this.singleElderly.phone_number || "Edit profile to add"}}</p>
-                                    </div>
-                                    <div class="mb-4 mt-base">
-                                        <div class="flex justify-between">
-                                            <small class="font-semibold">120 points</small>
-                                            <small class="text-grey">100</small>
-                                        </div>
-                                        <vs-progress percent="80" class="block mt-1 shadow-md"></vs-progress>
-                                        profile completed
+                                    <!-- <vs-avatar class="mx-auto mb-6 block" size="80px" src="https://www.bing.com/images/search?view=detailV2&ccid=ydgLdMPR&id=1DC342F26F911C03617CB94E81A96F78345125BA&thid=OIP.XZ0Y8eEx1e7nyYJIO_IfpgHaHa&mediaurl=http%3a%2f%2f4.bp.blogspot.com%2f-zsbDeAUd8aY%2fUS7F0ta5d9I%2fAAAAAAAAEKY%2fUL2AAhHj6J8%2fs1600%2ffacebook-default-no-profile-pic.jpg&exph=1290&expw=1290&q=Facebook+Avatar+Icon&simid=608049184228052981&selectedIndex=3" /> -->
+                                    <div class="text-center p-5" style="padding:2rem !important">
+                                        <h3 class="text-3xl p-2">{{this.singleElderly.name}}</h3>
+                                        <!-- <p class="text-grey">{{this.singleElderly.phone_number || "Edit profile to add"}}</p> -->
                                     </div>
                                     
-                                    <div class="mb-4 mt-base">
+                                    <!-- <div class="mb-4 mt-base">
                                         <div class="text-center">
                                             <small>Profile Details</small>
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="flex justify-between flex-wrap">
                                         <h6>Phone Number:</h6>
                                         <p>{{this.singleElderly.phone_number || "Edit profile to add"}}</p>
@@ -68,27 +60,31 @@
                         
                         <vs-tab label="Edit">
                             <div class="vx-col w-full lg:w-3/3 sm:w-3/3 mb-base" style="margin:0 auto">
-                                <vx-card class="p-2" title="Edit Profile">
+                                <vx-card class="p-2">
+                                    <div class="text-center p-4">
+										<h3 class="text-3xl p-2">Edit Profile</h3>
+										<p class="p-2">1 visit every month for 3 months</p>
+									</div>
+
                                     <form action="">
-                                        <vs-divider/>
+                                        <!-- <vs-divider/> -->
                                         <div class="vx-row">
                                             <div class="vx-col md:w-2/2 w-full">
-                                                <vs-input label="Full Name" v-model="singleElderly.name" class="w-full mt-5" />
+                                                <vs-input v-model="singleElderly.name" placeholder="patient name" class="w-full mt-2" />
                                             </div>
                                             <div class="vx-col md:w-2/2 w-full">
-                                                <vs-input label="Address" v-model="singleElderly.address" class="w-full mt-5" />
+                                                <vs-input v-model="singleElderly.address" placeholder="patient address" class="w-full mt-2" />
                                             </div>
                                             <div class="vx-col md:w-2/2 w-full">
-                                                <vs-input label="State" v-model="singleElderly.state" class="w-full mt-5" />
+                                                <vs-input v-model="singleElderly.state" placeholder="patient state" class="w-full mt-2" />
                                             </div>
                                             <div class="vx-col md:w-2/2 w-full">
-                                                <vs-input label="Phone Number" v-model="singleElderly.phone_number" class="w-full mt-5" />
+                                                <vs-input v-model="singleElderly.phone_number" placeholder="contact Phone number" class="w-full mt-2" />
                                             </div>
                                             <div class="vx-col md:w-2/2 w-full">
-                                                <vs-input label="Patient Type" v-model="singleElderly.type" class="w-full mt-5" />
+                                                <vs-input v-model="singleElderly.type" placeholder="patient type" class="w-full mt-2" />
                                             </div>
                                         </div>
-                                        <vs-divider/>
                                         <vs-button class="w-full mt-6 cutomBtn" @click="edit(singleElderly.id)">Save</vs-button>
                                         
                                     </form>
@@ -120,7 +116,7 @@ export default {
     },
 
     created(){
-        this.sponsorId = this.$store.state.user.id;
+        this.sponsorId = this.$store.state.user.user.id;
         this.fetchPatient();
     },
 
@@ -135,7 +131,6 @@ export default {
             })
             .catch(err => {
                 this.$vs.loading.close()
-                console.log(err )
                 this.$vs.notify({title:'Error',text:'something is wrong. Make sure you are connected to the internet',color:'danger',position:'top-right'});
             })
         },
@@ -175,8 +170,7 @@ export default {
             })
             .catch(err => {
                 // this.$vs.loading.close()
-                // this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
-                console.log(err)
+                this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
             })
 
             this.popupActive2=true
@@ -198,3 +192,12 @@ export default {
 
 }
 </script>
+
+
+<style>
+    .cutomBtn{
+        border-radius:55px;
+        padding:1rem !important;
+    }
+
+</style>
