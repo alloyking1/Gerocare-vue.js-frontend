@@ -279,7 +279,6 @@ export default {
     methods:{
         fetchSponsor(){
             this.data = this.$store.state.user;
-            console.log(this.data); 
         }
     },
 

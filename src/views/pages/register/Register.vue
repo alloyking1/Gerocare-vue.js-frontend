@@ -277,7 +277,7 @@ export default {
   .bg-img2{
       /* background-image: url("../../assets/images/pages/green_bg.jpg"); */
       /* background-color:linear-gradient(to bottom right, red, yellow); */
-      background-image: linear-gradient(to bottom right, #034013, #17c964);
+      // background-image: linear-gradient(to bottom right, #034013, #17c964);
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
