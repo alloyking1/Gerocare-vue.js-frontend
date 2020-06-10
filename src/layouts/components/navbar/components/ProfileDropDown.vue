@@ -82,7 +82,7 @@ export default {
       logOut()
       .then(res => {
         localStorage.removeItem('key');
-        location.reload();
+        // location.reload();
         this.$vs.loading.close()
         
         this.$vs.notify({title:'Logged-out',text:'Logged out successful. Login to continue',color:'warning',position:'top-right'});
