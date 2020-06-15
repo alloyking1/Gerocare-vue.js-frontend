@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-
+import VeeValidate from 'vee-validate';
 // Vuesax Component Framework
 import Vuesax from 'vuesax'
 import 'material-icons/iconfont/material-icons.css' //Material Icons
 import 'vuesax/dist/vuesax.css'; // Vuesax
 Vue.use(Vuesax)
-
+Vue.use(VeeValidate);
 
 // Theme Configurations
 import '../themeConfig.js'

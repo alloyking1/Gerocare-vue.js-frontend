@@ -32,7 +32,7 @@
                     <vs-table  pagination max-items="3" stripe search :data="users">
                         <template slot="header">
                             <h3>
-                            Completed Medical Request
+                            Complaint/Feedback
                             </h3>
                         </template>
                         <template slot="thead">
