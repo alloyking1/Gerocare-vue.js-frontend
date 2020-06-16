@@ -59,10 +59,16 @@ const actions = {
      if(res){
         console.log(res.data)
         window.open( res.data )
-       
-
-      // commit('CREATE_PATIENT', res)
+        // commit('CREATE_PATIENT', res)
      }
+    },
+
+    async fetchServices({commit}){
+      const res = await PatientRepository.fetchServices()
+      if(res.data){
+        // commit('STORE_SERVICES', res.data)
+        return res.data.data
+      }
     }
 }
 

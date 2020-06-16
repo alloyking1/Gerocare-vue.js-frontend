@@ -19,7 +19,7 @@
 											
 												<div class="vx-col md:w-2/2 w-full mt-2">
 													<ValidationProvider  name="Marital Status" rules="required" v-slot="{ errors }">
-														<vs-select v-model="patients.type" placeholder="Marital Status" class="w-full select-large">
+														<vs-select v-model="patients.type" placeholder="Marital Status" class="w-full select-large" @change="setService">
 															<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
 														</vs-select>
 														<span>{{ errors[0] }}</span>
@@ -168,9 +168,18 @@
 								<ValidationObserver ref="fourthForm">
 									<div class="container">
 										<div class="vx-row">
+											<!-- <div class="vx-col md:w-2/2 w-full mt-2">
+												<ValidationProvider  name="Duration" rules="required" v-slot="{ errors }">
+													<vs-select  class="w-full select-large" placeholder="Services" v-model="patients.service_id" @change="visitCost">
+														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in services" class="w-full" />
+													</vs-select>
+													<span>{{ errors[0] }}</span>
+												</ValidationProvider>
+											</div> -->
+
 											<div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Number of Visits" rules="required" v-slot="{ errors }">
-													<vs-select class="w-full select-large" placeholder="Visits/Month" v-model="patients.no_of_visit" @change="visitCost">
+													<vs-select class="w-full select-large" placeholder="Visits/Month" v-model="patients.no_of_visits" @change="visitCost">
 														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in visit" class="w-full" />
 													</vs-select>
 													<span>{{ errors[0] }}</span>
@@ -260,9 +269,9 @@ export default {
 				{name:'asaba', value:'asaba'}
 			],
 			visit:[
-				{name: '1/Month', value:'1'},
-				{name: '2/Month', value:'2'},
-				{name: '4/Month', value:'4'},
+				{name: '1/Month', value:1},
+				{name: '2/Month', value:2},
+				{name: '4/Month', value:4},
 			],
 
 			months: [
@@ -275,9 +284,14 @@ export default {
 			paymentOption:[
 				{name:'Debit/Credit Cards', value:'card'},
 				{name:'Teller Payment/Bankd Transfer', value:'TF'}
+			],
+
+			services:[
 			]
 		}
 	},
+
+
 
 	methods:{
 
@@ -290,9 +304,17 @@ export default {
 		generateFormData(){
 			const form = new FormData;
 			// Add other form field
-			form.append('subscription', 1);
-			form.append('amount', this.visitCostSum)
-			form.append('secretKey', 'ajshdajksdh')
+			form.append('subscription', this.patients.no_of_visits);
+			form.append('amount', parseInt(this.visitCostSum)*100);
+
+			// services
+			if(this.patients.type === 'single'){
+				form.append('service_id', 1) // TODO:: Set Service ID from API
+
+			}else if(this.patients.type === 'couple'){
+				form.append('service_id', 2)
+			}
+
 			form.append('payer', 'patient')
 			for(const key in this.patients){
 				if(this.patients.hasOwnProperty(key)){
@@ -309,24 +331,18 @@ export default {
 			data.id = id;
 			data.data = patients
 			this.$store.dispatch('createNewPatient', data)
-
-
-			// createPatients(id, data)
-			// .then(res => {
-			// 	this.$vs.loading.close()
-			// 	this.$vs.notify({title:'Success',text:`patient added successfully`,color:'warning',position:'top-right'});
-			// })
-			// .catch(err => {
-          	// 	this.$vs.loading.close()
-			// 	this.$vs.notify({title:'Error',text:`Something is wrong. Patient not created. Reload the page and try again`,color:'danger',position:'top-right'});
-			// 	console.log(err)
-			// })
 		},
+
+		async fetchServices(){
+			const services = await this.$store.dispatch('fetchServices')
+			this.services = services
+			console.log(this.services)
+ 		},
 
 		async validateFirstStep(){
 
 			try {
-				return await this.$refs.firstForm.validate();
+				return true //await this.$refs.firstForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
@@ -335,7 +351,7 @@ export default {
 		
 		async validateSecondStep(){
 			try {
-				return await this.$refs.secondForm.validate();
+				return true //await this.$refs.secondForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
@@ -343,7 +359,7 @@ export default {
 
 		async validateThirdStep(){
 			try {
-				return await this.$refs.thirdForm.validate();
+				return true //await this.$refs.thirdForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
@@ -352,25 +368,39 @@ export default {
 		async validateForthStep(){
 
 			try {
-				// return await this.$refs.fourthForm.validate();
+				return true //await this.$refs.fourthForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
-			return true
 		},
 
 		visitCost(){
 
 			let visits = parseInt(this.patients.no_of_visit) || 1;
 			let months = parseInt(this.patients.sub_duration) || 1;
+			let amount = 0;
 
-			let amount = 6500;
+			if(this.patients.type === 'single'){
 
-			let cost = visits * 6500;
+				amount = this.services[0].amount;
+			}else if(this.patients.type === 'couple'){
+				amount = this.services[1].amount;
+			}
+
+			let cost = visits * amount;
 			let total = cost * months;
-			this.visitCostSum = total*100;
+			this.visitCostSum = total;
 		
 		},
+
+		setService(e){
+			
+			const s = this.services.filter((service) => {
+					
+			})
+
+			console.log(s)
+		}
 	},
 
 	components: {
@@ -378,7 +408,11 @@ export default {
 	TabContent,
 	ValidationProvider, 
 	ValidationObserver
-  },
+  	},
+
+	created(){
+		this.fetchServices()
+	}
 
 }
 </script>
