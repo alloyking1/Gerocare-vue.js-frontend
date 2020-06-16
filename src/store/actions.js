@@ -6,7 +6,7 @@
   Author: Pixinvent
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
-
+import PatientRepository from '../api/patients/PatientRepository'
 const actions = {
 
     // /////////////////////////////////////////////
@@ -53,6 +53,14 @@ const actions = {
     updateSponsorInfo({commit}, payload){
       commit('UPDATE_SPONSOR_INFO', payload)
     },
+
+    async createNewPatient({commit}, {id, data}){
+     const res =  PatientRepository.create(id, data)
+     if(res){
+       console.log(res)
+      commit('CREATE_PATIENT', res)
+     }
+    }
 }
 
 export default actions

@@ -19,7 +19,7 @@
 											
 												<div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Marital Status" rules="required" v-slot="{ errors }">
-													<vs-select v-model="patients.marital_status" placeholder="Marital Status" class="w-full select-large">
+													<vs-select v-model="patients.type" placeholder="Marital Status" class="w-full select-large">
 														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
 													</vs-select>
 													<span>{{ errors[0] }}</span>
@@ -211,6 +211,7 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 
 import {createPatients} from '../../../api/sponsor/patient.api'
+import { MapActions } from 'vuex'
 
 export default {
 	data(){
@@ -262,6 +263,8 @@ export default {
 	methods:{
 
 		formSubmitted(){
+			// Dispatch CreatePatient here
+			
 			this.createPatient(this.generateFormData());
 		},
 
@@ -279,47 +282,51 @@ export default {
 			return form;
 		},
 
-		createPatient(data){
+		createPatient(patients){
 			let id = this.$store.state.user.user.id;
-			createPatients(id, data)
-			.then(res => {
-				this.$vs.loading.close()
-				this.$vs.notify({title:'Success',text:`patient added successfully`,color:'warning',position:'top-right'});
-			})
-			.catch(err => {
-          		this.$vs.loading.close()
-				this.$vs.notify({title:'Error',text:`Something is wrong. Patient not created. Reload the page and try again`,color:'danger',position:'top-right'});
-				console.log(err)
-			})
+
+			const data = {};
+			data.id = id;
+			data.data = patients
+			this.$store.dispatch('createNewPatient', data)
+
+
+			// createPatients(id, data)
+			// .then(res => {
+			// 	this.$vs.loading.close()
+			// 	this.$vs.notify({title:'Success',text:`patient added successfully`,color:'warning',position:'top-right'});
+			// })
+			// .catch(err => {
+          	// 	this.$vs.loading.close()
+			// 	this.$vs.notify({title:'Error',text:`Something is wrong. Patient not created. Reload the page and try again`,color:'danger',position:'top-right'});
+			// 	console.log(err)
+			// })
 		},
 
 		async validateFirstStep(){
 
 			try {
-				// return await this.$refs.firstForm.validate();
+				return await this.$refs.firstForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
-			return true;
 						
 		},
 		
 		async validateSecondStep(){
 			try {
-				// return await this.$refs.secondForm.validate();
+				return await this.$refs.secondForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
-			return true;
 		},
 
 		async validateThirdStep(){
 			try {
-				// return await this.$refs.thirdForm.validate();
+				return await this.$refs.thirdForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
-			return true
 		},
 
 		async validateForthStep(){
