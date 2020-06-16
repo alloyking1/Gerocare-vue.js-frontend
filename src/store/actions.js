@@ -55,10 +55,13 @@ const actions = {
     },
 
     async createNewPatient({commit}, {id, data}){
-     const res =  PatientRepository.create(id, data)
+     const res =  await PatientRepository.create(id, data)
      if(res){
-       console.log(res)
-      commit('CREATE_PATIENT', res)
+        console.log(res.data)
+        window.open( res.data )
+       
+
+      // commit('CREATE_PATIENT', res)
      }
     }
 }

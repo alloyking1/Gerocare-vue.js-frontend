@@ -18,18 +18,35 @@
 										<div class="vx-row">
 											
 												<div class="vx-col md:w-2/2 w-full mt-2">
-												<ValidationProvider  name="Marital Status" rules="required" v-slot="{ errors }">
-													<vs-select v-model="patients.type" placeholder="Marital Status" class="w-full select-large">
-														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
-													</vs-select>
-													<span>{{ errors[0] }}</span>
+													<ValidationProvider  name="Marital Status" rules="required" v-slot="{ errors }">
+														<vs-select v-model="patients.type" placeholder="Marital Status" class="w-full select-large">
+															<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
+														</vs-select>
+														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
 											
 											
 												<div class="vx-col md:w-2/2 w-full mt-2">
 													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Full Name" v-model="patients.name" class="w-full" />
+														<span v-if="patients.type === 'single'">
+															<vs-input placeholder="Full Name" v-model="patients.name" class="w-full" />
+														</span>
+														<span v-else-if="patients.type === 'couple'">
+															<vs-input placeholder="Male Partner Name" v-model="patients.name" class="w-full" />
+														</span>
+														<span v-else>
+															<vs-input placeholder="Full Name" v-model="patients.name" class="w-full" />
+														</span>
+
+														<span>{{ errors[0] }}</span>
+													</ValidationProvider>
+												</div>
+
+
+												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type === 'couple'">
+													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
+														<vs-input placeholder="Female Partner Name" v-model="patients.couple_name" class="w-full" />
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
@@ -38,10 +55,12 @@
 											
 												<div class="vx-col md:w-2/2 w-full mt-2">
 													<!-- <vs-input label="Patient Address"  v-model="patient.address" class="w-full" /> -->
-													<ValidationProvider  name="Sex" rules="required" v-slot="{ errors }">
-														<vs-select class="w-full select-large" placeholder="Gender" v-model="patients.sex">
-															<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in gender" class="w-full" />
-														</vs-select>
+													<ValidationProvider  name="Sex" rules="required" v-slot="{ errors }" v-if="patients.type === 'single'">
+														<span v-if="patients.type === 'single'">
+															<vs-select class="w-full select-large" placeholder="Gender" v-model="patients.sex">
+																<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in gender" class="w-full" />
+															</vs-select>
+														</span>
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
@@ -173,7 +192,7 @@
 												<p class="p-2">AMOUNT</p>
 												<h3 class="text-5xl p-2">N {{visitCostSum}}</h3>
 												<p class="p-2">1 visit every month for 3 months</p>
-												<vs-radio color="success" vs-value="true" v-model="patients.payment">Pay Now</vs-radio>
+												<vs-radio color="success" vs-value="pay_now" v-model="patients.pay_action">Pay Now</vs-radio>
 												<vs-radio style="margin-left:10px;" color="success" vs-value="false" v-model="patients.payment">Pay Later</vs-radio>
 											</div>
 											</div>
@@ -274,6 +293,7 @@ export default {
 			form.append('subscription', 1);
 			form.append('amount', this.visitCostSum)
 			form.append('secretKey', 'ajshdajksdh')
+			form.append('payer', 'patient')
 			for(const key in this.patients){
 				if(this.patients.hasOwnProperty(key)){
 					form.append(key, this.patients[key])
@@ -348,7 +368,7 @@ export default {
 
 			let cost = visits * 6500;
 			let total = cost * months;
-			this.visitCostSum = total;
+			this.visitCostSum = total*100;
 		
 		},
 	},
