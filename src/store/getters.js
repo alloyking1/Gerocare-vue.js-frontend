@@ -27,6 +27,18 @@ const getters = {
 
   scrollbarTag: state => {
     return state.is_touch_device ? 'div' : 'VuePerfectScrollbar'
+  },
+
+  findElderly: state => {
+    return "testing"
+  },
+
+  getElderlyById: (state) => (id) => {
+    return state.user.sponsor.patients.find(patient => patient.id === id)
+  },
+
+  getServiceById: (state) => (id) => {
+    return state.services.data.find(service => service.id === id)
   }
 }
 

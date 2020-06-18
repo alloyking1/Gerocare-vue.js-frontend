@@ -190,6 +190,7 @@ import StatisticsCardLine from '../../../components/statistics-cards/StatisticsC
 import VueApexCharts from 'vue-apexcharts'
 
 import {getSponsor} from '../../../api/sponsor/sponsor.api'
+import { MapActions } from 'vuex'
 
 export default {
     data(){
@@ -271,17 +272,23 @@ export default {
         }
     },
 
-    created(){
-        
-        this.fetchSponsor();
-    },
-
     methods:{
         fetchSponsor(){
             this.data = this.$store.state.user;
-        }
+        },
+
+        /**fetch service and update state */
+        async fetchServices(){
+			const services = await this.$store.dispatch('fetchServices')
+			this.services = services
+ 		},
     },
 
+    
+    created(){
+        this.fetchSponsor();
+        this.fetchServices()
+    },
 
 	components:{
         VueApexCharts,

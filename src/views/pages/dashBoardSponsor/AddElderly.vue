@@ -19,7 +19,7 @@
 											
 												<div class="vx-col md:w-2/2 w-full mt-2">
 													<ValidationProvider  name="Marital Status" rules="required" v-slot="{ errors }">
-														<vs-select v-model="patients.type" placeholder="Marital Status" class="w-full select-large" @change="setService">
+														<vs-select v-model="patients.type" placeholder="Marital Status" class="w-full select-large">
 															<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
 														</vs-select>
 														<span>{{ errors[0] }}</span>
@@ -42,7 +42,6 @@
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
-
 
 												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type === 'couple'">
 													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
@@ -218,6 +217,7 @@
 									</div>
 								</ValidationObserver>
 							</tab-content>
+
 							<!-- <el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button> -->
 							<button class="btn-custom-prev m-2" slot="prev">BACK</button>
 							<!-- <el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button> -->
@@ -404,10 +404,10 @@ export default {
 	},
 
 	components: {
-    FormWizard,
-	TabContent,
-	ValidationProvider, 
-	ValidationObserver
+		FormWizard,
+		TabContent,
+		ValidationProvider, 
+		ValidationObserver
   	},
 
 	created(){

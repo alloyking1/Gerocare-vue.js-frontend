@@ -101,7 +101,11 @@ const mutations = {
   UPDATE_SPONSOR_INFO(state, payload) {
     state.sponsor = payload;
   },
-  
+
+  UPDATE_SERVICES_INFO(state, payload) {
+    state.services = payload;
+  },
+
 }
 
 export default mutations

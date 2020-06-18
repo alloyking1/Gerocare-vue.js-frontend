@@ -15,6 +15,9 @@ import state from "./state"
 import getters from "./getters"
 import mutations from "./mutations"
 import actions from "./actions"
+import createPersistedState from "vuex-persistedstate";
+
+/**vuex persist */
 
 Vue.use(Vuex)
 
@@ -23,5 +26,7 @@ export default new Vuex.Store({
     mutations,
     state,
     actions,
-    strict: process.env.NODE_ENV !== 'production'
+    strict: process.env.NODE_ENV !== 'production',
+    /**persisting the state with PersistedState package */
+    plugins: [createPersistedState()]
 })

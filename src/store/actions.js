@@ -7,11 +7,8 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 import PatientRepository from '../api/patients/PatientRepository'
+import SubscriptionRepository from '../api/patients/SubscriptionRepository'
 const actions = {
-
-    // /////////////////////////////////////////////
-    // COMPONENTS
-    // /////////////////////////////////////////////
 
     // Vertical NavMenu
     updateVerticalNavMenuWidth({ commit }, width) {
@@ -56,20 +53,31 @@ const actions = {
 
     async createNewPatient({commit}, {id, data}){
      const res =  await PatientRepository.create(id, data)
-     if(res){
-        console.log(res.data)
+    if(!Array.isArray(res)){
         window.open( res.data )
-        // commit('CREATE_PATIENT', res)
-     }
+      }else{
+        return res
+      }
     },
 
     async fetchServices({commit}){
       const res = await PatientRepository.fetchServices()
       if(res.data){
-        // commit('STORE_SERVICES', res.data)
+        commit('UPDATE_SERVICES_INFO', res.data)
         return res.data.data
       }
+    },
+
+    async createSubscription({commit}, {id, data}){
+      const res = await SubscriptionRepository.createSubscription(id, data)
+      // commit('UPDATE_SUBSCRIPTION_INFO', data) //commti the changes
+      if(Array.isArray(res)){
+        return res
+      }else{
+        window.open( res.data)
+      }
     }
+
 }
 
 export default actions
