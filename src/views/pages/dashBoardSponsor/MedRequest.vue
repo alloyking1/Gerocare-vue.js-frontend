@@ -25,23 +25,35 @@
                       Amount
                       </vs-th>
                       <vs-th sort-key="id">
-                      view
+                      Action
                       </vs-th>
                   </template>
 
                   <template slot-scope="{data}">
                       <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                      <vs-td :data="data[indextr].email">
-                          {{data[indextr].email}}
-                      </vs-td>
+                        <vs-td :data="data[indextr].reference">
+                            {{data[indextr].reference}}
+                        </vs-td>
 
-                      <vs-td :data="data[indextr].username">
-                          {{data[indextr].username}}
-                      </vs-td>
+                        <vs-td :data="data[indextr].type">
+                            {{data[indextr].type}}
+                        </vs-td>
 
-                      <vs-td :data="data[indextr].id">
-                          {{data[indextr].id}}
-                      </vs-td>
+                        <vs-td :data="data[indextr].description">
+                            {{data[indextr].description}}
+                        </vs-td>
+                        
+                        <vs-td :data="data[indextr].vendor_comment">
+                            {{data[indextr].vendor_comment}}
+                        </vs-td>
+
+                        <vs-td :data="data[indextr].amount">
+                            {{data[indextr].amount}}
+                        </vs-td>
+
+                        <vs-td :data="data[indextr].amount">
+                            <vs-button size="small">view</vs-button>
+                        </vs-td>
                       </vs-tr>
                   </template>
 
@@ -66,14 +78,7 @@ export default {
       type:"margin",
       percent:"%",
 
-      users:[
-                {
-                    "id": 1,
-                    "name": "Leanne Graham",
-                    "username": "Bret",
-                    "email": "Sincere@april.biz",
-                    "website": "hildegard.org",
-                },]
+      users:[],
     }
   },
 
@@ -83,21 +88,19 @@ export default {
   },
 
   methods:{
-    getPrescription(){
+    async getPrescription(){
       this.$vs.loading();
-      getSponsorPrescription(this.sponsorId)
-      .then(res => {
+      
+      try{
+        this.$vs.loading.close()
+        const res = await getSponsorPrescription(this.sponsorId)
+        this.users = res.data.data
         this.$vs.loading.close();
-        // this.elderly = res.data.data;
-        console.log(res.data.data);
-        this.users = res.data.data;
-        console.log(this.elderly);
-      })
-      .catch(err => {
+      }catch{
         this.$vs.loading.close();
         this.$vs.notify({title:'Error',text:'Could not load prescriptions. Make sure you are connected to the internet',color:'danger',position:'top-right'});
-        console.log(res);
-      })
+      }
+      
     },
 
     loadMore(){

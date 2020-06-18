@@ -17,8 +17,6 @@ import mutations from "./mutations"
 import actions from "./actions"
 import createPersistedState from "vuex-persistedstate";
 
-/**vuex persist */
-
 Vue.use(Vuex)
 
 export default new Vuex.Store({
