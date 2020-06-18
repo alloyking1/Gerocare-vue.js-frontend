@@ -106,6 +106,30 @@ const mutations = {
     state.services = payload;
   },
 
+  UPDATE_MEDREQUEST_INFO(state, payload) {
+    state.medRequest = payload;
+  },
+
+  UPDATE_APPOINTMENT_INFO(state, payload) {
+    const upcoming = payload.filter(appointment => {
+      return appointment.status === 'UPCOMING'
+    });
+
+    const precious = payload.filter(appointment => {
+      return appointment.status === 'PREVIOUS'
+    });
+
+    const booking = payload.filter(appointment => {
+      return appointment.status === 'BOOKINGS'
+    });
+
+    state.appointments = payload;
+    state.upcomingAppointments = upcoming;
+    state.previousAppointments = precious;
+    state.bookingAppointments = booking;
+
+  },
+
 }
 
 export default mutations

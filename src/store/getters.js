@@ -39,6 +39,10 @@ const getters = {
 
   getServiceById: (state) => (id) => {
     return state.services.data.find(service => service.id === id)
+  },
+
+  getMedRequestById: (state) => (id) => {
+    return state.medRequest.find(medRequest => medRequest.id === id)
   }
 }
 

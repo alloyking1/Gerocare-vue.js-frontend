@@ -8,6 +8,8 @@
 ==========================================================================================*/
 import PatientRepository from '../api/patients/PatientRepository'
 import SubscriptionRepository from '../api/patients/SubscriptionRepository'
+import {getSponsorPrescription, getSponsorAppointment} from '../api/sponsor/sponsor.api' 
+
 const actions = {
 
     // Vertical NavMenu
@@ -51,15 +53,17 @@ const actions = {
       commit('UPDATE_SPONSOR_INFO', payload)
     },
 
+    /**create a new patient */
     async createNewPatient({commit}, {id, data}){
      const res =  await PatientRepository.create(id, data)
-    if(!Array.isArray(res)){
-        window.open( res.data )
-      }else{
-        return res
-      }
+      if(!Array.isArray(res)){
+          window.open( res.data )
+        }else{
+          return res
+        }
     },
 
+    /** */
     async fetchServices({commit}){
       const res = await PatientRepository.fetchServices()
       if(res.data){
@@ -76,7 +80,22 @@ const actions = {
       }else{
         window.open( res.data)
       }
+    },
+
+
+    async fetchMedRequest({commit}, {id}){
+      const res = await getSponsorPrescription(id)
+      commit('UPDATE_MEDREQUEST_INFO', res.data.data) 
+      return res
+    },
+
+    /** fetch sponsor's visit */
+    async fetchRecentVisit({commit}, {id}){
+      const res = await getSponsorAppointment(id)
+      commit('UPDATE_APPOINTMENT_INFO', res.data.data)
+      return res
     }
+  
 
 }
 

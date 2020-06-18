@@ -5,23 +5,29 @@
 			
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
 				<vx-card>
-                    <h3 style="font-size:10px">PENDING APPOINTMENTS</h3>
-                    <div class="pending-inner">
-                        testing
+                    <h3 style="font-size:10px" class="pb-2">PENDING APPOINTMENTS</h3>
+                    <div class="pending-inner mb-3 p-2" v-for="(appointment, i) in previousAppointments" :key="i">
+                        <small>
+                            Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
+                        </small>
                     </div>
                 </vx-card>
                 <br>
                 <vx-card>
-                    <h3 style="font-size:10px">UPCOMING APPOINTMENTS</h3>
-                    <div class="upcoming-inner">
-                        testing
+                    <h3 style="font-size:10px" class="pb-2">UPCOMING APPOINTMENTS</h3>
+                    <div class="upcoming-inner mb-3 p-2" v-for="(appointment, i) in upcomingAppointments" :key="i">
+                        <small>
+                            Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
+                        </small>
                     </div>
                 </vx-card>
                 <br>
                 <vx-card>
-                    <h3 style="font-size:10px">CANCELED APPOINTMENTS</h3>
-                    <div class="cancel-inner">
-                        testing
+                    <h3 style="font-size:10px" class="pb-2">BOOKING APPOINTMENTS</h3>
+                    <div class="cancel-inner mb-3 p-2" v-for="(appointment, i) in bookingAppointments" :key="i">
+                        <small>
+                            Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
+                        </small>
                     </div>
                 </vx-card>
 			</div>
@@ -35,38 +41,47 @@
                             </h3>
                         </template>
                         <template slot="thead">
-                            <vs-th sort-key="email">
+                            <vs-th sort-key="date">
                             DATE
                             </vs-th>
-                            <vs-th sort-key="username">
+                            <vs-th sort-key="description">
                             DESCRIPTION
                             </vs-th>
-                            <vs-th sort-key="id">
+                            <vs-th sort-key="doctor">
                             DOCTOR
                             </vs-th>
-                            <vs-th sort-key="id">
-                            DOCTOR
+                            <vs-th sort-key="patient">
+                            PATIENT
                             </vs-th>
-                            <vs-th sort-key="id">
+                            <vs-th sort-key="status">
                             STATUS
                             </vs-th>
-                            <vs-th sort-key="id">
+                            <vs-th sort-key="report">
                             REPORT
                             </vs-th>
                         </template>
 
                         <template slot-scope="{data}">
                             <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                            <vs-td :data="data[indextr].email">
-                                {{data[indextr].email}}
+                            <vs-td :data="data[indextr].appointment_date">
+                                {{data[indextr].appointment_date}}
                             </vs-td>
 
-                            <vs-td :data="data[indextr].username">
-                                {{data[indextr].username}}
+                            <vs-td :data="data[indextr].description">
+                                {{data[indextr].description}}
                             </vs-td>
 
-                            <vs-td :data="data[indextr].id">
-                                {{data[indextr].id}}
+                            <vs-td :data="data[indextr].doctor">
+                                {{data[indextr].doctor.name || 'kapasky'}}
+                            </vs-td>
+                            <vs-td :data="data[indextr].patient">
+                                {{data[indextr].patient.name}}
+                            </vs-td>
+                            <vs-td :data="data[indextr].status">
+                                {{data[indextr].status}}
+                            </vs-td>
+                            <vs-td :data="data[indextr].report">
+                                <vs-button size="small">View</vs-button>
                             </vs-td>
                             </vs-tr>
                         </template>
@@ -86,110 +101,48 @@
 
 
 // api call
-import {getSponsorAppointment} from '../../../api/sponsor/sponsor.api'
+import { mapState } from 'vuex'
 
 export default {
     data(){
         return{
-            
-            users:[
-                {
-                    "id": 1,
-                    "name": "Leanne Graham",
-                    "username": "Bret",
-                    "email": "Sincere@april.biz",
-                    "website": "hildegard.org",
-                },
-                {
-                    "id": 2,
-                    "name": "Ervin Howell",
-                    "username": "Antonette",
-                    "email": "Shanna@melissa.tv",
-                    "website": "anastasia.net",
-                },
-                {
-                    "id": 3,
-                    "name": "Clementine Bauch",
-                    "username": "Samantha",
-                    "email": "Nathan@yesenia.net",
-                    "website": "ramiro.info",
-                },
-                {
-                    "id": 4,
-                    "name": "Patricia Lebsack",
-                    "username": "Karianne",
-                    "email": "Julianne.OConner@kory.org",
-                    "website": "kale.biz",
-                },
-                {
-                    "id": 5,
-                    "name": "Chelsey Dietrich",
-                    "username": "Kamren",
-                    "email": "Lucio_Hettinger@annie.ca",
-                    "website": "demarco.info",
-                },
-                {
-                    "id": 6,
-                    "name": "Mrs. Dennis Schulist",
-                    "username": "Leopoldo_Corkery",
-                    "email": "Karley_Dach@jasper.info",
-                    "website": "ola.org",
-                },
-                {
-                    "id": 7,
-                    "name": "Kurtis Weissnat",
-                    "username": "Elwyn.Skiles",
-                    "email": "Telly.Hoeger@billy.biz",
-                    "website": "elvis.io",
-                },
-                {
-                    "id": 8,
-                    "name": "Nicholas Runolfsdottir V",
-                    "username": "Maxime_Nienow",
-                    "email": "Sherwood@rosamond.me",
-                    "website": "jacynthe.com",
-                },
-                {
-                    "id": 9,
-                    "name": "Glenna Reichert",
-                    "username": "Delphine",
-                    "email": "Chaim_McDermott@dana.io",
-                    "website": "conrad.com",
-                },
-                {
-                    "id": 10,
-                    "name": "Clementina DuBuque",
-                    "username": "Moriah.Stanton",
-                    "email": "Rey.Padberg@karina.biz",
-                    "website": "ambrose.net",
-                }
-            ]
-
-            
+            users:[],
 
         }
     },
 
-    created(){
-        var sponsorId = this.$store.state.user.id;
-        getSponsorAppointment(sponsorId)
-        .then(res => {
-            this.appointmentData = res.data.data;
-            console.log(this.appointmentData);
-        })
-        .catch(error => {
-            console.log(error)
-        })
-
+    computed:{
+        ...mapState([
+            'previousAppointments',
+            'upcomingAppointments',
+            'bookingAppointments',
+        ])
     },
 
     methods:{
-        updateMonth (val) {
-            this.showDate = this.$refs.calendar.getIncrementedPeriod(val)
+        async fetchAppointments(){
+            try{
+                this.$vs.loading.close()
+                const data = {}
+                data.id = this.$store.state.user.user.id
+                const res = await this.$store.dispatch('fetchRecentVisit', data)
+                this.users = res.data.data
+                this.$vs.loading.close()
+                console.log(res.data)
+            }catch{
+                this.$vs.loading.close()
+                this.$vs.notify({title:'Error',text:'Could not load Appointments. Make sure you are connected to the internet',color:'danger',position:'top-right'})
+                this.$vs.loading.close()
+            }
         },
-
     },
-    
+
+
+    created(){
+        
+        this.fetchAppointments()
+        
+    },
 }
 </script>
 
