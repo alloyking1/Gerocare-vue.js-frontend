@@ -110,6 +110,11 @@ const mutations = {
     state.medRequest = payload;
   },
 
+    SUBSCRIPTIONS(state, payload) {
+    state.subscriptions = payload;
+  },
+
+
   UPDATE_APPOINTMENT_INFO(state, payload) {
     const upcoming = payload.filter(appointment => {
       return appointment.status === 'UPCOMING'

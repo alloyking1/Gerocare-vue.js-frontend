@@ -97,7 +97,7 @@
                 <vx-card style="padding:2.5rem">
                     <template slot="no-body">
                         <div class="p-8 clearfix">
-                            <vs-table  pagination max-items="3" stripe search :data="users">
+                            <vs-table  pagination max-items="3" stripe search :data="subscriptions">
                                 <template slot="header">
                                     <h3>
                                     Subscription
@@ -107,7 +107,7 @@
                                     <vs-th sort-key="email">
                                     Date
                                     </vs-th>
-                                    <vs-th sort-key="username">
+                                    <vs-th sort-key="type">
                                     Type
                                     </vs-th>
                                     <vs-th sort-key="id">
@@ -126,16 +126,27 @@
 
                                 <template slot-scope="{data}">
                                     <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                                    <vs-td :data="data[indextr].email">
-                                        {{data[indextr].email}}
+                                    <vs-td :data="data[indextr].created_at">
+                                        {{data[indextr].created_at}}
+                                    </vs-td>
+                                    <vs-td :data="data[indextr].description">
+                                        {{data[indextr].description}}
                                     </vs-td>
 
-                                    <vs-td :data="data[indextr].username">
-                                        {{data[indextr].username}}
+                                    <vs-td :data="data[indextr].patient.name">
+                                        {{data[indextr].patient.name || ''}}
                                     </vs-td>
 
-                                    <vs-td :data="data[indextr].id">
-                                        {{data[indextr].id}}
+                                    <vs-td :data="data[indextr].visit_count">
+                                        {{data[indextr].visit_count}}
+                                    </vs-td>
+
+                                    <vs-td :data="data[indextr].status">
+                                        {{data[indextr].status}}
+                                    </vs-td>
+
+                                    <vs-td :data="data[indextr].created_at">
+                                        {{data[indextr].created_at}}
                                     </vs-td>
                                     </vs-tr>
                                 </template>
@@ -154,7 +165,7 @@
 </template>
 
 <script>
-import { MapActions } from 'vuex'
+import {  mapState } from 'vuex'
 
 export default {
     data(){
@@ -313,13 +324,23 @@ export default {
             data.id = id
             data.data=form
             this.$store.dispatch('createSubscription', data)
+        },
+
+        async fetchSubscriptions(){
+            await this.$store.dispatch('fetchSubscriptions')
+            // console.log(response)
         }
 
+    },
+
+    computed:{
+        ...mapState(['subscriptions'])
     },
 
     created(){
         this.fetchElderly()
         this.fetService()
+        this.fetchSubscriptions()
     }
 }
 </script>

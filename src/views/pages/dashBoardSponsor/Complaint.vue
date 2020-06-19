@@ -144,6 +144,11 @@ export default {
                 console.log(res.data.data);
                 this.$vs.loading.close()
             })
+            .catch((err) => {
+                this.$vs.loading.close()
+                this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
+                console.log(err)
+            })
         }
     }
 }

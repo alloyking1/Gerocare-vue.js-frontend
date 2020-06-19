@@ -94,6 +94,17 @@ const actions = {
       const res = await getSponsorAppointment(id)
       commit('UPDATE_APPOINTMENT_INFO', res.data.data)
       return res
+    },
+
+    /** fetch sponsor's visit */
+    async fetchSubscriptions({commit, state}){
+      const id = state.user.user.id
+      const res = await SubscriptionRepository.fetchSubscriptions(id)
+      
+      if(res.data.data){
+        commit('SUBSCRIPTIONS', res.data.data);
+      }
+      return res;
     }
   
 

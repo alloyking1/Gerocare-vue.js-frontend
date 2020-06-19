@@ -55,6 +55,7 @@ const state = {
     services:{},
     medRequest:{},
     appointments:{},
+    subscriptions:{},
     upcomingAppointments:{},
     previousAppointments:{},
     bookingAppointments:{},

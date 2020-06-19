@@ -7,10 +7,11 @@
 				<vx-card>
                     <h3 style="font-size:10px" class="pb-2">PENDING APPOINTMENTS</h3>
                     <div class="pending-inner mb-3 p-2" v-for="(appointment, i) in previousAppointments" :key="i">
-                        <small>
+                        <small >
                             Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
                         </small>
                     </div>
+                    <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
                 </vx-card>
                 <br>
                 <vx-card>
@@ -19,15 +20,18 @@
                         <small>
                             Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
                         </small>
+                        <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
                     </div>
                 </vx-card>
                 <br>
                 <vx-card>
                     <h3 style="font-size:10px" class="pb-2">BOOKING APPOINTMENTS</h3>
+
                     <div class="cancel-inner mb-3 p-2" v-for="(appointment, i) in bookingAppointments" :key="i">
                         <small>
                             Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
                         </small>
+                        <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
                     </div>
                 </vx-card>
 			</div>
@@ -112,23 +116,29 @@ export default {
     },
 
     computed:{
+
         ...mapState([
             'previousAppointments',
             'upcomingAppointments',
             'bookingAppointments',
-        ])
+        ]),
+
+        isPreviousAppointmentEmpty(){
+            if(this.previousAppointments)
+                return Object.entries(this.previousAppointments).length === 0;
+            return true;
+        },
     },
 
     methods:{
         async fetchAppointments(){
+            this.$vs.loading()
             try{
-                this.$vs.loading.close()
                 const data = {}
                 data.id = this.$store.state.user.user.id
                 const res = await this.$store.dispatch('fetchRecentVisit', data)
                 this.users = res.data.data
                 this.$vs.loading.close()
-                console.log(res.data)
             }catch{
                 this.$vs.loading.close()
                 this.$vs.notify({title:'Error',text:'Could not load Appointments. Make sure you are connected to the internet',color:'danger',position:'top-right'})
