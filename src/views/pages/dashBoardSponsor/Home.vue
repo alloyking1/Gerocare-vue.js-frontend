@@ -135,7 +135,7 @@
                 </vx-card>
 			</div>
 
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
+			<!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
 				<vx-card>
                     <vs-table  pagination max-items="3" stripe search :data="users">
                         <template slot="header">
@@ -178,7 +178,10 @@
                     </vs-table>
                 </vx-card>
                 
-			</div>
+			</div> -->
+            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
+                <recentVisits></recentVisits>
+            </div>
 		</div>
 
 	</div>
@@ -191,6 +194,8 @@ import VueApexCharts from 'vue-apexcharts'
 
 import {getSponsor} from '../../../api/sponsor/sponsor.api'
 import { MapActions } from 'vuex'
+
+import recentVisits from '../Components/recentVisits'
 
 export default {
     data(){
@@ -292,7 +297,8 @@ export default {
 
 	components:{
         VueApexCharts,
-		StatisticsCardLine	
+		StatisticsCardLine,
+        recentVisits	
 	}	
 }
 </script>
