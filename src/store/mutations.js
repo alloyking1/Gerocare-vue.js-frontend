@@ -135,6 +135,10 @@ const mutations = {
 
   },
 
+  UPDATE_PATIENT_INFO(state, payload){
+    state.user.sponsor.patients = payload
+  }
+
 }
 
 export default mutations

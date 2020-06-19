@@ -58,7 +58,7 @@ const actions = {
   /**create a new patient */
   async createNewPatient({ commit }, { id, data }) {
     const res = await PatientRepository.create(id, data);
-    //commit to state
+    commit("UPDATE_PATIENT_INFO", data); //commit to state
     if (!Array.isArray(res)) {
       window.open(res.data);
     } else {
