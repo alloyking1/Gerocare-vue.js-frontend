@@ -6,29 +6,35 @@
                     <small class="mb-5">Hi</small>
                     <br>
                     <small class="mb-5">Please take a few minutes to let us know about your complaints or give us feedback about our service. We appreciate you.</small>
-                    <form onsubmit="return false">
-
-						<div class="vx-col md:w-2/2 w-full mt-5">
-                            <vs-input label="Subject" v-model="complaint.subject" class="w-full" />
-                        </div>
-
-                        <div class="vx-col md:w-2/2 w-full mt-5">
-                            <vs-textarea v-model="complaint.comment" label="Height set to 200px" height="200px"/>
-                        </div>
-                        <div class="vx-col md:w-2/2 w-full mt-5 mb-5">
-                            <span class="text-danger text-sm">{{error}}</span>
-                        </div>
 
 
-                        <vs-button @click="send" icon-pack="feather"  class="shadow-md w-full cutomBtn">SUBMIT FEEDBACK</vs-button>
-                    </form>
+                    <ValidationObserver ref="firstForm">
+                        <form onsubmit="return false">
+                            <div class="vx-col md:w-2/2 w-full mt-5">
+                                <ValidationProvider  name="Topic" rules="required" v-slot="{ errors }">
+                                    <vs-input label="Subject" v-model="complaint.subject" class="w-full" />
+                                    <span>{{ errors[0] }}</span>
+                                </ValidationProvider>
+                            </div>
+
+                            <div class="vx-col md:w-2/2 w-full mt-5">
+                                <ValidationProvider  name="Complaint" rules="required" v-slot="{ errors }">
+                                    <vs-textarea v-model="complaint.comment" label="Height set to 200px" height="200px"/>
+                                    <span>{{errors[0]}}</span>
+                                </ValidationProvider>
+                            </div>
+
+                            <vs-button @click="send" icon-pack="feather"  class="shadow-md w-full cutomBtn">SUBMIT FEEDBACK</vs-button>
+                        </form>
+                    </ValidationObserver>
+
                     
                 </vx-card>
             </div>
 
             <div class="vx-col w-full sm:w-2/3 md:w-2/3 mb-base" id="div-with-loadingt">
 
-                <vx-card>
+                <!-- <vx-card>
                     <vs-table  pagination max-items="3" stripe search :data="users">
                         <template slot="header">
                             <h3>
@@ -77,79 +83,49 @@
 
 
                     </vs-table>
-                </vx-card>
-                <br>
-                <!-- <vx-card title="All Complaints">
-                    <vs-collapse  :type="type" v-for="(each, complaint) in allComplaint" :key="complaint" >
-                        <vs-collapse-item >
-                            <div slot="header">
-                                {{each.subject}}
-                            </div>
-                            {{each.comment}}
-                        </vs-collapse-item>
-
-                    </vs-collapse>
-			    </vx-card> -->
+                </vx-card> -->
             </div>
 		</div>
     </div>
 </template>
 
 <script>
-import {createComplaint, getComplaint} from '../../../api/sponsor/complaint.api'
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
 export default {
     data(){
         return{
             complaint:{
-                subject:"",
-                comment:""
+                role:3 //role of sponsor
             },
-            error:"",
-            users:[]
         }
-    },
-
-    created(){
-        this.fetchComplaint();
     },
 
     methods:{
-        send(){
-            if(this.complaint.subject === "" || this.complaint.comment === ""){
-                this.error = "All fields are required"
+
+        async send(){
+            if(await this.$refs.firstForm.validate() === true){
+                const data={
+                    id:this.$store.state.user.sponsor.id,
+                    data:this.complaint,
+                }
+                try{
+                    const res = await this.$store.dispatch('createComplaint', data)
+                    console.log(res)
+                }catch(e){
+                    console.log(e)
+                }
             }else{
-                // get user id form state
-                this.$vs.loading()
-                let userId = this.$store.state.user.id;
-                createComplaint(userId, this.complaint)
-                .then(res => {
-                    this.$vs.loading.close()
-                    this.$vs.notify({title:'Complaint sent successful',text:'We will get back to you shortly',color:'warning',position:'top-right'});
-                })
-                .catch(err => {
-                    this.$vs.loading.close()
-                    this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
-                })
+                return false
             }
+
         },
 
-        fetchComplaint(){
-            this.$vs.loading()
+    },
 
-            let id = this.$store.state.user.user.id
-            getComplaint(id).
-            then(res => {
-                this.users = res.data.data;
-                console.log(res.data.data);
-                this.$vs.loading.close()
-            })
-            .catch((err) => {
-                this.$vs.loading.close()
-                this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
-                console.log(err)
-            })
-        }
+    components:{
+        ValidationProvider, 
+        ValidationObserver
     }
 }
 </script>

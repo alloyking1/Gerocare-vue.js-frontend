@@ -59,6 +59,7 @@ const state = {
     upcomingAppointments:{},
     previousAppointments:{},
     bookingAppointments:{},
+    complaint:{},
     AppActiveUser           : userDefaults,
     bodyOverlay             : false,
     isVerticalNavMenuActive : true,

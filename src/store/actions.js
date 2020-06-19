@@ -8,6 +8,7 @@
 ==========================================================================================*/
 import PatientRepository from "../api/patients/PatientRepository";
 import SubscriptionRepository from "../api/patients/SubscriptionRepository";
+import complaint from "../api/sponsor/complaint.api";
 import {
   getSponsorPrescription,
   getSponsorAppointment
@@ -75,6 +76,7 @@ const actions = {
     }
   },
 
+  /**create a new subscription */
   async createSubscription({ commit }, { id, data }) {
     const res = await SubscriptionRepository.createSubscription(id, data);
     // commit('UPDATE_SUBSCRIPTION_INFO', data) //commti the changes
@@ -106,6 +108,13 @@ const actions = {
     if (res.data.data) {
       commit("SUBSCRIPTIONS", res.data.data);
     }
+    return res;
+  },
+
+  /**make complaints */
+  async createComplaint({ commit }, { id, data }) {
+    const res = await complaint.createComplaint(id, data);
+    commit("UPDATE_COMPLAINT_INFO", res.data.data);
     return res;
   }
 };

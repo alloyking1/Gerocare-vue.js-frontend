@@ -110,7 +110,7 @@ const mutations = {
     state.medRequest = payload;
   },
 
-    SUBSCRIPTIONS(state, payload) {
+  SUBSCRIPTIONS(state, payload) {
     state.subscriptions = payload;
   },
 
@@ -137,6 +137,10 @@ const mutations = {
 
   UPDATE_PATIENT_INFO(state, payload){
     state.user.sponsor.patients = payload
+  },
+
+  UPDATE_COMPLAINT_INFO(state, payload){
+    state.complaint = payload
   }
 
 }
