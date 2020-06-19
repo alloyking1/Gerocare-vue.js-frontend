@@ -33,57 +33,7 @@
             </div>
 
             <div class="vx-col w-full sm:w-2/3 md:w-2/3 mb-base" id="div-with-loadingt">
-
-                <!-- <vx-card>
-                    <vs-table  pagination max-items="3" stripe search :data="users">
-                        <template slot="header">
-                            <h3>
-                            Complaint/Feedback
-                            </h3>
-                        </template>
-                        <template slot="thead">
-                            <vs-th sort-key="date_created">
-                            DATE
-                            </vs-th>
-                            <vs-th sort-key="message">
-                            MESSAGE
-                            </vs-th>
-                            <vs-th sort-key="subject">
-                            SUBJECT
-                            </vs-th>
-                            <vs-th sort-key="status">
-                            STATUS
-                            </vs-th>
-                            <vs-th sort-key="report">
-                            REPORT
-                            </vs-th>
-                        </template>
-
-                        <template slot-scope="{data}">
-                            <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                            <vs-td :data="data[indextr].date_created">
-                                {{data[indextr].date_created}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].message">
-                                {{data[indextr].comment}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].subject">
-                                {{data[indextr].subject}}
-                            </vs-td>
-                            <vs-td :data="data[indextr].status">
-                                {{data[indextr].role}}
-                            </vs-td>
-                            <vs-td :data="data[indextr].report">
-                                {{data[indextr].report}}
-                            </vs-td>
-                            </vs-tr>
-                        </template>
-
-
-                    </vs-table>
-                </vx-card> -->
+                <complaintList></complaintList>
             </div>
 		</div>
     </div>
@@ -91,6 +41,7 @@
 
 <script>
 import { ValidationProvider, ValidationObserver } from 'vee-validate'
+import complaintList from '../Components/allComplaints'
 
 export default {
     data(){
@@ -110,10 +61,10 @@ export default {
                     data:this.complaint,
                 }
                 try{
-                    const res = await this.$store.dispatch('createComplaint', data)
-                    console.log(res)
+                    await this.$store.dispatch('createComplaint', data)
+                    this.$vs.notify({title:'Complaint sent successful',text:'We will get back to you shortly',color:'warning',position:'top-right'})
                 }catch(e){
-                    console.log(e)
+                    this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'})
                 }
             }else{
                 return false
@@ -125,7 +76,8 @@ export default {
 
     components:{
         ValidationProvider, 
-        ValidationObserver
+        ValidationObserver,
+        complaintList
     }
 }
 </script>
