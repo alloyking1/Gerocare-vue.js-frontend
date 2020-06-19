@@ -32,8 +32,8 @@
             </vs-td>
 
             <vs-td :data="tr.message">
-              <!-- {{prefix(tr.comment, 25, "...")}} -->
-              {{ tr.comment }}
+              {{ prefix(tr.comment, 20, "...") }}
+              <!-- {{ tr.comment }} -->
             </vs-td>
 
             <vs-td :data="tr.subject">
@@ -67,8 +67,8 @@ export default {
       await this.$store.dispatch("fetchComplaint", data);
     },
 
-    prefix(text, length, suffix = null) {
-      return helper.textPrefix(text, length, (suffix = null));
+    prefix(text, length, suffix) {
+      return helper.textPrefix(text, length, suffix);
     }
   },
 
