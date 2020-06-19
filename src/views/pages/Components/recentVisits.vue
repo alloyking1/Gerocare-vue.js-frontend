@@ -32,7 +32,7 @@
                     <template slot-scope="{data}">
                         <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
                         <vs-td :data="data[indextr].appointment_date">
-                            {{data[indextr].appointment_date}}
+                            {{moment(data[indextr].appointment_date).format('MM-DD-YYYY')}}
                         </vs-td>
 
                         <vs-td :data="data[indextr].description">
@@ -63,6 +63,7 @@
 </template>
 
 <script>
+
 export default {
     data(){
         return{

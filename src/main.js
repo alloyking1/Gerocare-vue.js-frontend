@@ -40,6 +40,7 @@ Vue.use(VueHammer)
 // PrismJS
 import 'prismjs'
 import 'prismjs/themes/prism-tomorrow.css'
+import moment from 'moment'
 
 
 // Feather font icon
@@ -50,8 +51,9 @@ require('./assets/css/iconfont.css')
 // Note: In latest version you have to add it separately
 // import 'vue-select/dist/vue-select.css';
 
-
+Vue.prototype.moment = moment
 Vue.config.productionTip = false
+
 
 new Vue({
     router,

@@ -8,7 +8,7 @@
                     <h3 style="font-size:10px" class="pb-2">PENDING APPOINTMENTS</h3>
                     <div class="pending-inner mb-3 p-2" v-for="(appointment, i) in previousAppointments" :key="i">
                         <small >
-                            Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
+                            Appointment with {{appointment.doctor.name || ''}} on {{moment(appointment.appointment_date).format('LLLL')}} for {{appointment.patient.name}}.
                         </small>
                     </div>
                     <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
@@ -18,7 +18,7 @@
                     <h3 style="font-size:10px" class="pb-2">UPCOMING APPOINTMENTS</h3>
                     <div class="upcoming-inner mb-3 p-2" v-for="(appointment, i) in upcomingAppointments" :key="i">
                         <small>
-                            Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
+                            Appointment with {{appointment.doctor.name || ''}} on {{ moment(appointment.appointment_date).format('LLLL')}} for {{appointment.patient.name}}.
                         </small>
                         <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
                     </div>
@@ -29,7 +29,7 @@
 
                     <div class="cancel-inner mb-3 p-2" v-for="(appointment, i) in bookingAppointments" :key="i">
                         <small>
-                            Appointment with {{appointment.doctor.name || ''}} on {{appointment.appointment_date}} for {{appointment.patient.name}}.
+                            Appointment with {{appointment.doctor.name || ''}} on {{moment(appointment.appointment_date).format('LLLL')}} for {{appointment.patient.name}}.
                         </small>
                         <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
                     </div>

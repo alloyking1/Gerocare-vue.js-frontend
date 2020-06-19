@@ -127,7 +127,7 @@
                                 <template slot-scope="{data}">
                                     <vs-tr :key="indextr" v-for="(subscription, indextr) in data" >
                                     <vs-td :data="subscription.created_at">
-                                        {{subscription.created_at}}
+                                        {{moment(subscription.created_at).format('MM-DD-YYYY')}}
                                     </vs-td>
                                     <vs-td :data="subscription.description">
                                         {{subscription.description}}
@@ -156,7 +156,7 @@
                                     </vs-td>
 
                                     <vs-td :data="subscription.created_at">
-                                        {{subscription.created_at}}
+                                        {{moment(subscription.created_at).format('DD-MM-YYYY')}}
                                     </vs-td>
                                     </vs-tr>
                                 </template>
