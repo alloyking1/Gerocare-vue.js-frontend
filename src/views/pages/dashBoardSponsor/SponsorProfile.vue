@@ -1,82 +1,5 @@
 <template>
     <div>
-        <!-- <vs-tabs alignment="center">
-            <vs-tab label="Profile">
-
-                <div class="vx-col w-full lg:w-1/3 sm:w-1/2 mb-base" style="margin:0 auto">
-                    <vx-card class="p-2">
-                        <vs-avatar class="mx-auto mb-6 block" size="80px" src="https://www.bing.com/images/search?view=detailV2&ccid=ydgLdMPR&id=1DC342F26F911C03617CB94E81A96F78345125BA&thid=OIP.XZ0Y8eEx1e7nyYJIO_IfpgHaHa&mediaurl=http%3a%2f%2f4.bp.blogspot.com%2f-zsbDeAUd8aY%2fUS7F0ta5d9I%2fAAAAAAAAEKY%2fUL2AAhHj6J8%2fs1600%2ffacebook-default-no-profile-pic.jpg&exph=1290&expw=1290&q=Facebook+Avatar+Icon&simid=608049184228052981&selectedIndex=3" />
-                        <div class="text-center">
-                            <h4>{{ this.sponsorEdit.user.name }}</h4>
-                            <p class="text-grey">{{ this.sponsorEdit.user.email }}</p>
-                        </div>
-                        <div class="mb-4 mt-base">
-                            <div class="flex justify-between">
-                                <small class="font-semibold">120 points</small>
-                                <small class="text-grey">100</small>
-                            </div>
-                            <vs-progress percent="80" class="block mt-1 shadow-md"></vs-progress>
-                            profile completed
-                        </div>
-                        
-                        <div class="mb-4 mt-base">
-                            <div class="text-center">
-                                <small>Profile Details</small>
-                            </div>
-                        </div>
-                        <div class="flex justify-between flex-wrap">
-                            <h6>Phone Number:</h6>
-                            <p>{{this.sponsorEdit.phone_number}}</p>
-                            <vs-divider />
-                            <h6>Address:</h6>
-                            <p>{{this.sponsorEdit.address || "Edit to add Address"}}</p>
-                            <vs-divider />
-                            <h6>City:</h6>
-                            <p>{{this.sponsorEdit.city || "Edit to add city"}}</p>
-                            <vs-divider />
-                            <h6>State:</h6>
-                            <p>{{this.sponsorEdit.state || "Edit to add state"}}</p>
-                            <vs-divider />
-                            <h6>Country:</h6>
-                            <p>{{this.sponsorEdit.country || "Edit to add country"}}</p>
-                            <vs-divider />
-                        </div>
-                    </vx-card>
-                </div>
-            </vs-tab>
-
-            <vs-tab label="Edit">
-                <div class="vx-col w-full lg:w-2/3 sm:w-2/2 mb-base" style="margin:0 auto">
-                    <vx-card class="p-2" title="Edit Profile">
-                        <form action="">
-                            <vs-divider/>
-                            <div class="vx-row">
-                                <div class="vx-col md:w-1/2 w-full">
-                                    <vs-input label="Full Name" v-model="sponsorEdit.user.name" class="w-full mt-5" />
-                                </div>
-                                <div class="vx-col md:w-1/2 w-full">
-                                    <vs-input label="Phone Number" v-model="sponsorEdit.phone_number" class="w-full mt-5" />
-                                </div>
-                                <div class="vx-col md:w-1/2 w-full">
-                                    <vs-textarea label="Address" v-model="sponsorEdit.address" class="w-full mt-5" />
-                                </div>
-                                <div class="vx-col md:w-1/2 w-full">
-                                    <vs-input label="City" v-model="sponsorEdit.city" class="w-full mt-5" />
-                                </div>
-                                <div class="vx-col md:w-1/2 w-full">
-                                    <vs-input label="State" v-model="sponsorEdit.state" class="w-full mt-5" />
-                                </div>
-                                <div class="vx-col md:w-1/2 w-full">
-                                    <vs-input label="Country" v-model="sponsorEdit.country" class="w-full mt-5" />
-                                </div>
-                            </div>
-                            <vs-divider/>
-                            <vs-button type="gradient" class="w-full mt-6" @click="profileEdit()">Save</vs-button>
-                        </form>
-                    </vx-card>
-                </div>
-            </vs-tab>
-        </vs-tabs> -->
         <div class="vx-row">
             <div class="vx-col w-full sm:w-1/2 md:w-2/4 lg:w-2/4 xl:w-2/4 mb-base">
                 <vx-card class="p-3">
@@ -157,7 +80,7 @@
 
             <div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
 				<vx-card>
-                    <vs-button @click="updateProfile" icon-pack="feather" type="border"  class="shadow-md w-full cutomBtn mb-3 btn-outline">UPDATE PROFILE</vs-button>
+                    <vs-button icon-pack="feather" type="border"  class="shadow-md w-full cutomBtn mb-3 btn-outline">UPDATE PROFILE</vs-button>
                     <vs-button  icon-pack="feather" type="border" class="shadow-md w-full cutomBtn mb-3">UPDATE PREFERENCES</vs-button>
                     <vs-button  icon-pack="feather"  class="shadow-md w-full cutomBtn mb-3">CHANGE PASSWORD</vs-button>
                     
@@ -166,7 +89,7 @@
             <div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
 				<vx-card class="invoice-card" style="background: #EDF5FC !important;border: 1px solid #047BF8 !important;border-radius: 5px !important;">
                     <h5 class="text-center p-3" style="font-weight: 500;font-size: 14px;line-height: 16px;color: #047BF8;">BACKUP/DOWNLOAD</h5>
-                    <vs-select v-model="city" class="w-full select-large mb-5">
+                    <vs-select class="w-full select-large mb-5">
                         <vs-select-item text="All Invoices" class="w-full" />
                         <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in cityOptions" class="w-full" />
                     </vs-select>
@@ -186,6 +109,7 @@
 
 <script>
     import {getSponsor, updateSponsor } from  "../../../api/sponsor/sponsor.api";
+import { mapState } from 'vuex';
 
     export default {
 
@@ -197,45 +121,15 @@
                     {text: "San Francisco", value:"san-francisco"},
                     {text: "Boston", value:"boston"},
                 ],
-                sponsorEdit:{},
                 id:''
             }
         },
 
-        created(){
-            this.$vs.loading()
-            this.id = this.$store.state.user.user.id;
-            getSponsor(this.id)
-            .then(res => {
-                this.$vs.loading.close()
-                this.sponsorEdit = res.data.data;
+        computed:{
+            ...mapState({
+                sponsorEdit:state=>state.user.sponsor
             })
         },
-
-        methods:{
-
-            profileEdit(){
-                this.$vs.loading()
-                updateSponsor(this.id, {
-                    name: this.sponsorEdit.user.name,
-                    address: this.sponsorEdit.address,
-                    city: this.sponsorEdit.city,
-                    state: this.sponsorEdit.state,
-                    country: this.sponsorEdit.country,
-                    currency: "",
-                    medium: "",
-                    referral: "",
-                })
-                .then(result => {
-                    this.$vs.loading.close()
-                    this.$vs.notify({title:'Edited',text:'Sponsor profile edited successfully',color:'warning',position:'top-right'});
-                })
-                .catch(err => {
-                    this.$vs.loading.close()
-                    this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'});
-                })
-            }
-        }
     }
 </script>
 

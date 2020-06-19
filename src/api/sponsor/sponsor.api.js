@@ -8,7 +8,7 @@ import httpsClient from "../httpClient";
  */
 
 export async function getSponsor(id){
-    const res = await httpsClient.get(`/sponsors/users/${id}`);
+    const res = await httpsClient.get(`/sponsors/${id}`);
     return res;
 }
 

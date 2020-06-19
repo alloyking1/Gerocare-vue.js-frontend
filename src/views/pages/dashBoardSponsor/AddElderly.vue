@@ -336,7 +336,6 @@ export default {
 		async fetchServices(){
 			const services = await this.$store.dispatch('fetchServices')
 			this.services = services
-			console.log(this.services)
  		},
 
 		async validateFirstStep(){

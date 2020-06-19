@@ -114,7 +114,7 @@
                                     For
                                     </vs-th>
                                     <vs-th sort-key="id">
-                                    Amount
+                                    Visit Count(s)
                                     </vs-th>
                                     <vs-th sort-key="id">
                                     Status
@@ -125,28 +125,38 @@
                                 </template>
 
                                 <template slot-scope="{data}">
-                                    <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                                    <vs-td :data="data[indextr].created_at">
-                                        {{data[indextr].created_at}}
+                                    <vs-tr :key="indextr" v-for="(subscription, indextr) in data" >
+                                    <vs-td :data="subscription.created_at">
+                                        {{subscription.created_at}}
                                     </vs-td>
-                                    <vs-td :data="data[indextr].description">
-                                        {{data[indextr].description}}
-                                    </vs-td>
-
-                                    <vs-td :data="data[indextr].patient.name">
-                                        {{data[indextr].patient.name || ''}}
+                                    <vs-td :data="subscription.description">
+                                        {{subscription.description}}
                                     </vs-td>
 
-                                    <vs-td :data="data[indextr].visit_count">
-                                        {{data[indextr].visit_count}}
+                                    <vs-td :data="subscription.patient? subscription.patient.name: ''">
+                                            {{subscription.patient ? subscription.patient.name : ''}}
                                     </vs-td>
 
-                                    <vs-td :data="data[indextr].status">
-                                        {{data[indextr].status}}
+                                    <!-- <vs-td :data="subscription.name">
+                                        <span v-if="subscription.name">
+                                            {{subscription.subscription.name}}
+                                        </span>
+                                        <span v-else>
+                                            {{subscription.subscription.name}}
+                                            testing
+                                        </span>
+                                    </vs-td> -->
+
+                                    <vs-td :data="subscription.visit_count">
+                                        {{subscription.visit_count}}
                                     </vs-td>
 
-                                    <vs-td :data="data[indextr].created_at">
-                                        {{data[indextr].created_at}}
+                                    <vs-td :data="subscription.status">
+                                        {{subscription.status}}
+                                    </vs-td>
+
+                                    <vs-td :data="subscription.created_at">
+                                        {{subscription.created_at}}
                                     </vs-td>
                                     </vs-tr>
                                 </template>
