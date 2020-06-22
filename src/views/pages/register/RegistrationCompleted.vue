@@ -23,7 +23,6 @@
                 <h4 class="mb-4 2xl p-2"><strong>{{$route.query.message}}</strong></h4>
                 <p class="p-text">Thanks for taking a moment to verify your email. Please login to continue</p>
                 <!-- <vs-divider/> -->
-
                 <!-- <router-link to="/login" class="float-right authBtnCustom pl-4 pr-4 mt-5">Login</router-link> -->
               </div>
             </div>
