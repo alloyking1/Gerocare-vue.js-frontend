@@ -83,3 +83,25 @@ export default {
 }
 
 </script>
+
+<style>
+  .authBtnCustom{
+		border-radius: 22px; 
+		padding: 10px; 
+		padding-left: 40px !important; 
+		padding-right: 40px !important; 
+		width: 100%;
+		background-color: 
+		rgba(var(--vs-primary), 1);
+		color: rgb(59, 36, 36);
+		align-items: center;
+    border: none;
+    color:white
+		/* : pointer; */
+	}
+
+  .authBtnCustom:hover{
+    box-shadow: 0 8px 25px -8px rgba(var(--vs-primary),1);
+    cursor: pointer;
+  }
+</style>

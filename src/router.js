@@ -99,6 +99,11 @@ const router = new Router({
               component: () => import('@/views/pages/register/Register.vue'),
             },
             {
+              path: '/register/email/verify',
+              name: 'page-register-verify',
+              component: () => import('@/views/pages/register/RegistrationCompleted.vue'),
+            },
+            {
               path: '/forgot-password',
               name: 'page-forgot-password',
               component: () => import('@/views/pages/ForgotPassword.vue'),

@@ -9,10 +9,8 @@
 import PatientRepository from "../api/patients/PatientRepository";
 import SubscriptionRepository from "../api/patients/SubscriptionRepository";
 import complaint from "../api/sponsor/complaint.api";
-import {
-  getSponsorPrescription,
-  getSponsorAppointment
-} from "../api/sponsor/sponsor.api";
+import auth from "../api/auth.api";
+import {getSponsorPrescription,getSponsorAppointment} from "../api/sponsor/sponsor.api";
 
 const actions = {
   // Vertical NavMenu
@@ -48,8 +46,33 @@ const actions = {
   // User/Account
   // /////////////////////////////////////////////
 
-  updateUserInfo({ commit }, payload) {
-    commit("UPDATE_USER_INFO", payload);
+  async updateUserInfo({ commit }, payload) {
+    const res = await auth.login(payload)
+    commit("UPDATE_USER_INFO", res.data);
+    return res
+  },
+
+  async registerSponsor(ctx, payload){
+    const res = await auth.register(payload)
+    return res
+  },
+
+  /**Logout */
+  async LogOutIcon(){
+    const res = await auth.logOut()
+    return res
+  },
+
+  /**forgot password request */
+  async forgetPassword({commit}, payload){
+    const res = await auth.passwordReset(payload)
+    return res
+  },
+
+  /**password reset */
+  async resetPassword({commit}, payload){
+    const res = await auth.RequestNewReset(payload)
+    return res
   },
 
   updateSponsorInfo({ commit }, payload) {

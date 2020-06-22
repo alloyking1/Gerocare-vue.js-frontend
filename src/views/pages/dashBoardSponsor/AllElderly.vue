@@ -17,7 +17,7 @@ import Patient from "../../../components/dashboard/Patient.vue";
 // } from "../api/sponsor/patient.api";
 import { mapState } from "vuex";
 
-export default {
+export default { 
   components:{
     Patient
   },

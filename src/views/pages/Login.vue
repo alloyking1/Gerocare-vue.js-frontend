@@ -34,29 +34,38 @@
               </div>
 
               <div>
-                <form onsubmit="return false">
-                  <vs-input name="email" type="email" placeholder="Email" v-model="user.email" class="w-full"/>
+                <ValidationObserver ref="loginForm">
+                  <form @submit.prevent="validate">
+                    <ValidationProvider  name="Email" rules="required" v-slot="{ errors }">
+                      <vs-input name="email" type="email" placeholder="Email" v-model="user.email" class="w-full"/>
+                      <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
 
-                  <vs-input type="password" name="password" placeholder="Password" v-model="user.password" class="w-full mt-4"/>
-
-                  
-                  <div class="p-5">
+                    <ValidationProvider  name="Password" rules="required" v-slot="{ errors }">
+                      <vs-input type="password" name="password" placeholder="Password" v-model="user.password" class="w-full mt-4"/>
+                      <span class="text-danger">{{ errors[0] }}</span>
+                    </ValidationProvider>
+                    
                     <div class="p-5">
-                      <vs-button class="float-right btn-custom-next pl-4 pr-4" @click="validate">Login</vs-button>
-                    </div>
-                    <div class="pt-5">
-                      <div class="text-center">
-                        <div class="p-3 pt-5">
-                          <p class="p-2">Don’t have an account? <router-link to="/register">Register</router-link></p>
-                        </div>
-                        <div class="p-3">
-                          <p class="p-2">Help, I forgot my password</p>
+                      <div class="p-5">
+                        <!-- <vs-button class="float-right authBtnCustom pl-4 pr-4" @click="validate">Login</vs-button> -->
+                        <input class="float-right authBtnCustom pl-4 pr-4 p-3" type="submit" value="Login" />
+                      </div>
+
+                      <div class="pt-5">
+                        <div class="text-center">
+                          <div class="p-3 pt-5">
+                            <p class="p-2">Don’t have an account? <router-link to="/register">Register</router-link></p>
+                          </div>
+                          <div class="p-3">
+                            <p class="p-2">I forgot my password, <router-link to="/forgot-password">Help</router-link></p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                </form>
+                  </form>
+                </ValidationObserver>
               </div>
             </div>
           </div>
@@ -67,56 +76,43 @@
 </template>
 
 <script>
-import { login } from "../../api/auth.api";
+import { ValidationProvider, ValidationObserver } from 'vee-validate'
 
 export default {
   data() {
     return {
-      user: {
-        email: "",
-        password: ""
-      },
+      user: {},
     };
   },
 
   methods: {
-    validate() {
-      if (this.user.email === "") {
-        return this.$vs.notify({title:'Empty form fields', text:'Email field cannot be empty', color:'danger',position:'top-right'});
-        return false;
-      } else if (this.user.password === "") {
-        return this.$vs.notify({title:'Empty form fields', text:'Password field cannot be empty', color:'danger',position:'top-right'});
-        return false;
-      }
-      this.logIn();
+    async validate() {
+      if(await this.$refs.loginForm.validate() === true)
+      this.logIn(this.user);
     },
 
-    logIn() {
-      // loader
-      this.$vs.loading();
+    async logIn(data) {
+      try{
+        this.$vs.loading();
+        const res = await this.$store.dispatch("updateUserInfo", data)
+        localStorage.setItem("key", res.data.access_token)
+        this.$router.push({ name: 'home'})
+        this.$vs.loading.close()
+      }catch(e){
+        this.$vs.loading.close()
+        this.$vs.notify({title:'Incorrect user details', text:'Your email or password is not correct', color:'danger',position:'top-right'})
+      }
+    },
+  },
 
-      login(this.user)
-        .then(res => {
-          localStorage.setItem("key", res.data.access_token);
-          this.$store.dispatch("updateUserInfo", res.data);
-          this.$router.push({ name: 'home', params: { sponsor: res.data } });
-          this.$vs.loading.close();
-        })
-        .catch((err) => {
-          
-          this.$vs.loading.close();
-          if(err.message === "Request failed with status code 401"){
-            this.$vs.notify({title:'Incorrect user details', text:'Your email or password is not correct', color:'danger',position:'top-right'});
-          }
-        });
-    }
+  components:{
+    ValidationProvider, 
+    ValidationObserver,
   }
 };
 </script>
 
 <style lang="scss">
-
-// custome look
 
 .center {
   text-align: center;
@@ -152,17 +148,4 @@ export default {
   background-repeat: no-repeat;
   background-size: cover;
 }
-
-.btn-custom-next{
-		border-radius: 22px; 
-		padding: 10px; 
-		padding-left: 40px !important; 
-		padding-right: 40px !important; 
-		width: 100%;
-		background-color: 
-		rgba(var(--vs-primary), 1);
-		color: white;
-		align-items: center;
-		/* : pointer; */
-	}
 </style>
