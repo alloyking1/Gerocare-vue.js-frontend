@@ -3,15 +3,14 @@
   <div class="the-navbar__user-meta flex items-center">
 
     <div class="text-right leading-tight hidden sm:block">
-      <p class="font-semibold">{{ activeUserInfo }}</p>
+      <p class="font-semibold">{{ user.name || '' }}</p>
       <small>Available</small>
     </div>
 
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
 
       <div class="con-img ml-3">
-        <img v-if="activeUserInfo.photoURL" key="onlineImg" :src="activeUserInfo.photoURL" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
-        <img key="onlineImg" :src="profile_pix" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
+        <img key="onlineImg" :src="user.avatar" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
       </div>
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
@@ -58,21 +57,13 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 
 export default {
-  data() {
-    return {
-      profile_pix:'@/assets/images/portrait/small/avatar-s-11.jpg',
-
-    }
-  },
   computed: {
-    activeUserInfo() {
-      // return this.$store.state.AppActiveUser
-      // return this.user_name = this.$store.state.user.name;
-      
-      return this.$store.state.user.sponsor.name;
-    }
+    ...mapState({
+      user: state=> state.user.sponsor
+    })
   },
 
   methods: {
