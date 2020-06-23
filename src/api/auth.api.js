@@ -1,4 +1,5 @@
 import httpClient from './httpClient';
+import httpsClient from './httpClient';
 
 
 export default {
@@ -57,5 +58,10 @@ export default {
         return res;
     },
 
+    /**Token refresh */
+    async TokenRefresh(data){
+        const res = await httpsClient.post('/auth/login/refresh', data)
+        return res
+    }
 
 }

@@ -40,7 +40,7 @@
                                 </h1>
                                 <br>
                                 <small>
-                                  <a href="#"><span class="font-purple">See billing history: </span></a>
+                                  <router-link to="/billing"><span class="font-purple">See billing history: </span></router-link>
                                 </small>
                             </div>
                         </div>
@@ -96,29 +96,6 @@
 		<div class="vx-row">
 			
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<!-- <vx-card title="Subscriptions">
-                    <template slot="no-body">
-                        <div class="flex justify-between items-center p-6 border border-solid d-theme-border-grey-light border-r-0 border-l-0 border-t-0">
-                            <div>
-                                <p><span class="font-semibold">{{ todoToday.numComletedTasks }} task completed</span> out of {{ todoToday.totalTasks }}</p>
-                                <vs-progress :percent="20" color="primary"></vs-progress>
-                            </div>
-                        </div>
-                        <ul class="tasks-today-container">
-                            <li class="px-6 py-4 tasks-today__task">
-                                <div class="vx-row">
-                                    <div class="vx-col w-full sm:w-auto">
-                                        <p class="font-semibold text-lg">"patient Name"</p>
-                                        <small>"Visits remaining"</small>
-                                        <vs-divider/>
-                                        <p class="font-semibold text-lg">"patient Name"</p>
-                                        <small>"Visits remaining"</small>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </template>
-                </vx-card> -->
                 <div class="mb-2">
                     <h5>Subscriptions</h5>
                 </div>
@@ -202,78 +179,7 @@ export default {
         return{
             data:{},
             elderly:'',
-            users:[
-                {
-                    "id": 1,
-                    "name": "Leanne Graham",
-                    "username": "Bret",
-                    "email": "Sincere@april.biz",
-                    "website": "hildegard.org",
-                },
-                {
-                    "id": 2,
-                    "name": "Ervin Howell",
-                    "username": "Antonette",
-                    "email": "Shanna@melissa.tv",
-                    "website": "anastasia.net",
-                },
-                {
-                    "id": 3,
-                    "name": "Clementine Bauch",
-                    "username": "Samantha",
-                    "email": "Nathan@yesenia.net",
-                    "website": "ramiro.info",
-                },
-                {
-                    "id": 4,
-                    "name": "Patricia Lebsack",
-                    "username": "Karianne",
-                    "email": "Julianne.OConner@kory.org",
-                    "website": "kale.biz",
-                },
-                {
-                    "id": 5,
-                    "name": "Chelsey Dietrich",
-                    "username": "Kamren",
-                    "email": "Lucio_Hettinger@annie.ca",
-                    "website": "demarco.info",
-                },
-                {
-                    "id": 6,
-                    "name": "Mrs. Dennis Schulist",
-                    "username": "Leopoldo_Corkery",
-                    "email": "Karley_Dach@jasper.info",
-                    "website": "ola.org",
-                },
-                {
-                    "id": 7,
-                    "name": "Kurtis Weissnat",
-                    "username": "Elwyn.Skiles",
-                    "email": "Telly.Hoeger@billy.biz",
-                    "website": "elvis.io",
-                },
-                {
-                    "id": 8,
-                    "name": "Nicholas Runolfsdottir V",
-                    "username": "Maxime_Nienow",
-                    "email": "Sherwood@rosamond.me",
-                    "website": "jacynthe.com",
-                },
-                {
-                    "id": 9,
-                    "name": "Glenna Reichert",
-                    "username": "Delphine",
-                    "email": "Chaim_McDermott@dana.io",
-                    "website": "conrad.com",
-                },
-                {
-                    "id": 10,
-                    "name": "Clementina DuBuque",
-                    "username": "Moriah.Stanton",
-                    "email": "Rey.Padberg@karina.biz",
-                    "website": "ambrose.net",
-                }
-            ]
+            users:[]
         }
     },
 

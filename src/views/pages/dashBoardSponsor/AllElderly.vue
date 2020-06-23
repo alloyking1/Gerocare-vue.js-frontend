@@ -9,12 +9,6 @@
 <script>
 import { getSponsor } from "../../../api/sponsor/sponsor.api";
 import Patient from "../../../components/dashboard/Patient.vue";
-// import {
-//   findPatient,
-//   editPatient,
-//   deletePatient,
-//   createPatients
-// } from "../api/sponsor/patient.api";
 import { mapState } from "vuex";
 
 export default { 

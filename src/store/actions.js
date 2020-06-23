@@ -75,6 +75,13 @@ const actions = {
     return res
   },
 
+  /**token refresh action */
+  async refreshTokenAction(ctx, data){
+    const res = await auth.TokenRefresh(data)
+    localStorage.setItem("key", res.data.access_token)
+    return res
+  },
+
   updateSponsorInfo({ commit }, payload) {
     commit("UPDATE_SPONSOR_INFO", payload);
   },

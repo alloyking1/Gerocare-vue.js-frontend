@@ -18,11 +18,19 @@ httpsClient.interceptors.request.use(
     if (token) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
-
     return config;
   },
-  error => {
-    return Promise.reject(error);
+  (error) => {
+    // return Promise.reject(error);
+    if(error.response.status !== 401){
+      return Promise.reject(error);
+    }else {
+      const data = {
+        refresh_token:this.$store.state.user.refresh_token,
+        user_role:3
+      }
+      this.$store.dispatch('refreshTokenAction', data)
+    }
   }
 );
 
