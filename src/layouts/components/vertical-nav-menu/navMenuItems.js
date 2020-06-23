@@ -38,6 +38,12 @@ export default [
   },
 
   {
+    url: "#",
+    name: "TeleConsultation",
+    slug: "Appointment",
+    icon: "SmartphoneIcon",
+  },
+  {
     url: "/appointment",
     name: "Appointment",
     slug: "Appointment",

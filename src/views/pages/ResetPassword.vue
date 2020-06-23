@@ -102,6 +102,8 @@ methods:{
             this.$route.pushpush({ name: 'page-login'})
         }catch(e){
             this.$vs.loading.close()
+            // console.log()
+
             this.$vs.notify({title:'Something is wrong', text:'You have entered an invalid email', color:'danger',position:'top-right'})
         }
     },
