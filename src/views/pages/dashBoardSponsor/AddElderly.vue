@@ -301,12 +301,12 @@
 		</div>
 	</div>
 </template> 
+>>>>>>> db99a10b04b4d082bdfa223c0d0cdba2aef391b1
 
 <script>
-import {FormWizard, TabContent} from 'vue-form-wizard'
-import 'vue-form-wizard/dist/vue-form-wizard.min.css'
-import { ValidationProvider, ValidationObserver } from 'vee-validate';
-
+import { FormWizard, TabContent } from "vue-form-wizard";
+import "vue-form-wizard/dist/vue-form-wizard.min.css";
+import { ValidationProvider, ValidationObserver } from "vee-validate";
 import {createPatients} from '../../../api/sponsor/patient.api'
 import { MapActions, mapState } from 'vuex'
 import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue' 
@@ -514,32 +514,31 @@ export default {
 	}
 
 }
+>>>>>>> db99a10b04b4d082bdfa223c0d0cdba2aef391b1
 </script>
 
 <style scoped>
-	.btn-custom-next{
-		border-radius: 22px; 
-		padding: 10px;
-		border:none; 
-		padding-left: 80px; 
-		padding-right: 80px; 
-		width: 100%; 
-		background-color: 
-		rgba(var(--vs-primary), 1);
-		color: white;
-		align-items: center;
-		/* : pointer; */
-	}
-	.btn-custom-prev{
-		border-radius: 22px; 
-		padding: 10px; 
-		padding-left: 80px; 
-		padding-right: 80px; 
-		width: 100%; 
-		background-color: white;
-		color: rgba(var(--vs-primary), 1);
-		border:1px solid rgba(var(--vs-primary), 1);
-		align-items: center;
-	}
-
+.btn-custom-next {
+  border-radius: 22px;
+  padding: 10px;
+  border: none;
+  padding-left: 80px;
+  padding-right: 80px;
+  width: 100%;
+  background-color: rgba(var(--vs-primary), 1);
+  color: white;
+  align-items: center;
+  /* : pointer; */
+}
+.btn-custom-prev {
+  border-radius: 22px;
+  padding: 10px;
+  padding-left: 80px;
+  padding-right: 80px;
+  width: 100%;
+  background-color: white;
+  color: rgba(var(--vs-primary), 1);
+  border: 1px solid rgba(var(--vs-primary), 1);
+  align-items: center;
+}
 </style>

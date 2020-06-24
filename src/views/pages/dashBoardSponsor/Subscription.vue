@@ -88,7 +88,7 @@
                         </div>
                     </div>
 
-                    <vs-button icon-pack="feather" @click="subscribe"  class="shadow-md w-full cutomBtn">PAY NOW</vs-button>
+                         <vs-button icon-pack="feather" @click="subscribe"  class="shadow-md w-full cutomBtn">PAY NOW</vs-button>
                     
                 </vx-card>
             </div>
@@ -343,7 +343,7 @@ export default {
     },
 
     computed:{
-        ...mapState(['subscriptions'])
+            ...mapState(['subscriptions'])
     },
 
     created(){

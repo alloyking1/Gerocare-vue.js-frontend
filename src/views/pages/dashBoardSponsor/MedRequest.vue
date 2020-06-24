@@ -22,9 +22,6 @@
               Description
             </vs-th>
             <vs-th sort-key="id">
-              Vendor
-            </vs-th>
-            <vs-th sort-key="id">
               Amount
             </vs-th>
             <vs-th sort-key="id">
@@ -33,29 +30,24 @@
           </template>
 
           <template slot-scope="{ data }">
-            <vs-tr :key="indextr" v-for="(tr, indextr) in data">
-              <vs-td :data="data[indextr].reference">
-                {{ data[indextr].reference }}
+            <vs-tr :key="indextr" v-for="(medical_request, indextr) in data">
+              <vs-td :data="medical_request.reference">
+                {{ medical_request.reference }}
               </vs-td>
 
-              <vs-td :data="data[indextr].type">
-                {{ data[indextr].type }}
+              <vs-td :data="medical_request.type">
+                {{ medical_request.type }}
               </vs-td>
 
-              <vs-td :data="data[indextr].description">
-                {{ truncate(data[indextr].description, 25, " ...") }}
+              <vs-td :data="medical_request.description">
+                {{ truncate(medical_request.description, 25, ' ...') }}
+              </vs-td>
+              <vs-td :data="medical_request.amount">
+                {{ medical_request.amount }}
               </vs-td>
 
-              <vs-td :data="data[indextr].vendor_comment">
-                {{ data[indextr].vendor_comment }}
-              </vs-td>
-
-              <vs-td :data="data[indextr].amount">
-                {{ data[indextr].amount }}
-              </vs-td>
-
-              <vs-td :data="data[indextr].amount">
-                <vs-button size="small" @click="more(tr.id)">View</vs-button>
+              <vs-td :data="medical_request.amount">
+                <vs-button size="small" @click="more(medical_request.id)">View</vs-button>
               </vs-td>
             </vs-tr>
           </template>
@@ -80,19 +72,19 @@
 
                 <div class="flex justify-between flex-wrap">
                   <h6>Refference:</h6>
-                  <p>{{ this.singleRequest.reference }}</p>
+                  <p>{{ singleRequest.reference }}</p>
                   <vs-divider />
                   <h6>Type:</h6>
-                  <p>{{ this.singleRequest.type }}</p>
+                  <p>{{ singleRequest.type }}</p>
                   <vs-divider />
                   <h6>Description:</h6>
-                  <p>{{ this.singleRequest.description }}</p>
+                  <p>{{ singleRequest.description }}</p>
                   <vs-divider />
                   <h6>Comment:</h6>
-                  <p>{{ this.singleRequest.vendor_comment }}</p>
+                  <p>{{ singleRequest.vendor_comment }}</p>
                   <vs-divider />
                   <h6>Amount:</h6>
-                  <p>{{ this.singleRequest.amount }}</p>
+                  <p>{{ singleRequest.amount }}</p>
                   <vs-divider />
                 </div>
                 <div class="flex justify-between flex-wrap">
@@ -118,68 +110,24 @@ import { mapState } from 'vuex';
 export default {
   data() {
     return {
-      elderly: {},
-      sponsorId: "",
       popupActive2: false,
-      users: [],
-      singleRequest: {}
+      singleRequest: {},
     };
   },
 
   computed:{
-    ...mapState(['medical_requests'])
+    ...mapState(['medical_requests']),
   },
 
-  // created() {
-  //   this.sponsorId = this.$store.state.user.user.id;
-  //   this.getPrescription();
-  // },
-
   methods: {
-    // async getPrescription() {
-    //   this.$vs.loading();
-
-    //   try {
-    //     this.$vs.loading.close();
-    //     let data = {};
-    //     data.id = this.sponsorId;
-    //     const res = await this.$store.dispatch("fetchMedRequest", data);
-    //     this.users = res.data.data;
-    //     this.$vs.loading.close();
-    //   } catch {
-    //     this.$vs.loading.close();
-    //     this.$vs.notify({
-    //       title: "Error",
-    //       text:
-    //         "Could not load prescriptions. Make sure you are connected to the internet",
-    //       color: "danger",
-    //       position: "top-right"
-    //     });
-    //   }
-    // },
-
+   
     async more(id) {
-      try {
         const res = await this.$store.getters.getMedRequestById(id);
         this.singleRequest = res;
         this.popupActive2 = true;
-      } catch {
-        this.$vs.notify({
-          title: "Error",
-          text:
-            "Could not load prescription, make sure you are still logged in",
-          color: "danger",
-          position: "top-right"
-        });
-      }
     },
 
     truncate(text, length, suffix) {
-      // if (text.length > length) {
-      //     return text.substring(0, length) + suffix;
-      // } else {
-      //     return text;
-      // }
       return helper.textPrefix(text, length, suffix);
     }
   }
