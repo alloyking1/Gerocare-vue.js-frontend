@@ -11,39 +11,39 @@
 // import tailwindConfig from "../../tailwind.config.js"
 
 const getters = {
-
-	// COMPONENT
-		// vx-autosuggest
-	// starredPages: state => state.navbarSearchAndPinList.data.filter((page) => page.highlightAction),
+  // COMPONENT
+  // vx-autosuggest
+  // starredPages: state => state.navbarSearchAndPinList.data.filter((page) => page.highlightAction),
   windowBreakPoint: state => {
-
     // This should be same as tailwind. So, it stays in sync with tailwind utility classes
-    if (state.windowWidth >= 1200) return "xl"
-    else if (state.windowWidth >= 992) return "lg"
-    else if (state.windowWidth >= 768) return "md"
-    else if (state.windowWidth >= 576) return "sm"
-    else return "xs"
+    if (state.windowWidth >= 1200) return "xl";
+    else if (state.windowWidth >= 992) return "lg";
+    else if (state.windowWidth >= 768) return "md";
+    else if (state.windowWidth >= 576) return "sm";
+    else return "xs";
   },
 
   scrollbarTag: state => {
-    return state.is_touch_device ? 'div' : 'VuePerfectScrollbar'
+    return state.is_touch_device ? "div" : "VuePerfectScrollbar";
   },
 
   findElderly: state => {
-    return "testing"
+    return "testing";
   },
 
-  getElderlyById: (state) => (id) => {
-    return state.user.sponsor.patients.find(patient => patient.id === id)
+  getElderlyById: state => id => {
+    return state.user.sponsor.patients.find(patient => patient.id === id);
   },
 
-  getServiceById: (state) => (id) => {
-    return state.services.data.find(service => service.id === id)
+  getServiceById: state => id => {
+    return state.services.data.find(service => service.id === id);
   },
 
-  getMedRequestById: (state) => (id) => {
-    return state.medRequest.find(medRequest => medRequest.id === id)
+  getMedRequestById: state => id => {
+    return state.medical_requests.find(
+      medical_request => medical_request.id === id
+    );
   }
-}
+};
 
-export default getters
+export default getters;

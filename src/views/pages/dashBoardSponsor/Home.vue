@@ -4,11 +4,11 @@
 			<div class="vx-col w-full lg:w-1/6 mb-base">
                 <p>Hi</p>
                 <br>
-                <h3 class="text-3xl">{{this.data.sponsor.name}}</h3>
+                <h3 class="text-3xl">{{data.sponsor.name || ''}}</h3>
                 <br>
-                <small class="font-gray">{{this.data.sponsor.phone_number}}</small>
+                <small class="font-gray">{{data.sponsor.phone_number || ''}}</small>
                 <br>
-                <small class="font-gray">{{this.data.user.email}}</small>
+                <small class="font-gray">{{data.sponsor.email || data.user.email }}</small>
 			</div>
             
             <div class="vx-col w-full lg:w-2/5 mb-base">
@@ -17,11 +17,11 @@
                 </div>
                 <div class="flex justify-between text-center mt-4" slot="no-body-bottom">
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0 border-t-0">
-                        <!-- <p class="mb-4 text-2xl">{{this.data.name}}</p> -->
+                        <p class="mb-4 text-2xl">{{data.most_due_subscription || ''}}</p>
                         <p class="mt-4">12-12-12</p>
                     </div>
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-t-0">
-                        <p class="mb-4 text-2xl font-danger">N6,000</p>
+                        <p class="mb-4 text-2xl font-danger">{{data.most_due_subscription}}</p>
                         <p class="mt-4 font-purple">Pay Now</p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                                 <p class="text-center pb-3">Wallet Balance:</p>
                                 <h1>
                                   <sup class="text-lg font-white">N</sup>
-                                  <span class="font-white text-5xl">{{this.data.insights.balance}}</span>
+                                  <span class="font-white text-5xl">{{data.insights.balance || 'N0'}}</span>
                                 </h1>
                                 <br>
                                 <small>
@@ -60,7 +60,7 @@
                   class="mb-base"
                   icon="UsersIcon"
                   icon-right
-                  :statistic= this.data.insights.patients
+                  :statistic= data.insights.patients
                   statisticTitle="Number of Elderly" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -69,7 +69,7 @@
                   class="mb-base"
                   icon="GiftIcon"
                   icon-right
-                  :statistic= this.data.insights.visits
+                  :statistic= data.insights.visits
                   statisticTitle="Number of Visits" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -78,7 +78,7 @@
                   class="mb-base"
                   icon="UserCheckIcon"
                   icon-right
-                  :statistic= this.data.insights.subscriptions
+                  :statistic= data.insights.subscriptions
                   statisticTitle="Active Subscriptions" />
 			</div>
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
@@ -87,7 +87,7 @@
                   class="mb-base"
                   icon="MailIcon"
                   icon-right
-                  :statistic= this.data.insights.message
+                  :statistic= data.insights.message
                   statisticTitle="Messages" />
 			</div>
 		</div>
@@ -102,7 +102,7 @@
                 <vx-card class="mb-2">
                     <p class="mb-4 text-2xl">
                         <!-- <vs-chip color="success" style="min-width: 15px!important; min-height: 8px!important;"></vs-chip> -->
-                        {{this.data.name}}
+                        {{data.name}}
                     </p>
                     <p class="mt-4 font-lemon">8 visits remaining</p>
                 </vx-card>

@@ -4,7 +4,7 @@
 		<div class="vx-row">
 			
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<vx-card>
+				<!-- <vx-card>
                     <h3 style="font-size:10px" class="pb-2">PENDING APPOINTMENTS</h3>
                     <div class="pending-inner mb-3 p-2" v-for="(appointment, i) in previousAppointments" :key="i">
                         <small >
@@ -13,7 +13,7 @@
                     </div>
                     <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
                 </vx-card>
-                <br>
+                <br> -->
                 <vx-card>
                     <h3 style="font-size:10px" class="pb-2">UPCOMING APPOINTMENTS</h3>
                     <div class="upcoming-inner mb-3 p-2" v-for="(appointment, i) in upcomingAppointments" :key="i">
@@ -24,7 +24,7 @@
                     </div>
                 </vx-card>
                 <br>
-                <vx-card>
+                <!-- <vx-card>
                     <h3 style="font-size:10px" class="pb-2">BOOKING APPOINTMENTS</h3>
 
                     <div class="cancel-inner mb-3 p-2" v-for="(appointment, i) in bookingAppointments" :key="i">
@@ -33,7 +33,7 @@
                         </small>
                         <small v-if="isPreviousAppointmentEmpty">You have no upcoming appointments</small>
                     </div>
-                </vx-card>
+                </vx-card> -->
 			</div>
 
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
