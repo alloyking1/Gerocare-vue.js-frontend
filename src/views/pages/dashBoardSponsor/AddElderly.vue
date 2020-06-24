@@ -35,29 +35,22 @@
 
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
-												</div>
-
-												<div class="vx-col md:w-2/2 w-full mt-2">
 													<ValidationProvider  name="Sex" rules="required" v-slot="{ errors }">
 														<span>
-															<vs-select class="w-full select-large" placeholder="Gender" v-model="patients.sex">
+															<vs-select class="w-full select-large mt-2" placeholder="Gender" v-model="patients.sex">
 																<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in gender" class="w-full" />
 															</vs-select>
 														</span>
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
-												</div>
-
-												<div class="vx-col md:w-2/2 w-full mt-2">
 													<ValidationProvider  name="Phone number" rules="required" v-slot="{ errors }">
 														<span>
-															<vs-input placeholder="Phone Number" v-model="patients.name" class="w-full" />
+															<vs-input placeholder="Phone Number" v-model="patients.name" class="w-full mt-2" />
 														</span>
 
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
-
 
 												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type === 'couple'">
 													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
@@ -76,6 +69,16 @@
 
 													<ValidationProvider  name="Email 2" rules="required" v-slot="{ errors }">
 														<vs-input placeholder="Email 2" v-model="patients.couple_name" class="w-full mt-2" />
+														<span>{{ errors[0] }}</span>
+													</ValidationProvider>
+
+													<ValidationProvider  name="Phone Number 1" rules="required" v-slot="{ errors }">
+														<vs-input placeholder="Phone Number 1" v-model="patients.couple_name" class="w-full mt-2" />
+														<span>{{ errors[0] }}</span>
+													</ValidationProvider>
+
+													<ValidationProvider  name="Phone Number 2" rules="required" v-slot="{ errors }">
+														<vs-input placeholder="Phone Number 2" v-model="patients.couple_name" class="w-full mt-2" />
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
@@ -149,6 +152,12 @@
 								<ValidationObserver ref="thirdForm">
 									<div class="container">
 										<div class="vx-row">
+											<div class="vx-col md:w-2/2 w-full mt-5">
+												<!-- <vs-radio color="success" :vs-value="emergencyDetails" id="user_sponsor">Use Sponsor's Details</vs-radio> -->
+												<!-- <vs-radio color="success" @change="formDetailsUpdate" v-model="emergencyDetails" id="user_sponsor">Use Sponsor's Details</vs-radio> -->
+												<vs-checkbox color="success" @change="formDetailsUpdate" v-model="emergencyDetails" id="user_sponsor">Use Sponsor's Details</vs-checkbox>
+											</div>
+
 											<div class="vx-col md:w-2/2 w-full mt-5">
 												<ValidationProvider  name="Emergency Name" rules="required" v-slot="{ errors }">
 													<vs-input placeholder="Emergency Contact’s Name" v-model="patients.emergency_name" class="w-full" />
@@ -234,11 +243,8 @@
 								</ValidationObserver>
 							</tab-content>
 
-							<!-- <el-button type="primary" class="btn-custom-prev" slot="prev">BACK</el-button> -->
 							<button class="btn-custom-prev m-2" slot="prev">BACK</button>
-							<!-- <el-button type="primary" class="btn-custom-next" slot="next">NEXT</el-button> -->
 							<button type="primary" class="btn-custom-next m-2" slot="next">NEXT</button>
-							<!-- <el-button type="primary" class="btn-custom-next" slot="finish">FINISH</el-button> -->
 							<button type="primary" class="btn-custom-next m-2" slot="finish">FINISH</button>
 
 						</form-wizard>
@@ -255,7 +261,7 @@ import 'vue-form-wizard/dist/vue-form-wizard.min.css'
 import { ValidationProvider, ValidationObserver } from 'vee-validate';
 
 import {createPatients} from '../../../api/sponsor/patient.api'
-import { MapActions } from 'vuex'
+import { MapActions, mapState } from 'vuex'
 
 export default {
 	data(){
@@ -263,6 +269,7 @@ export default {
 			patients:{},
 			visitCostSum: 0,
 			payment:'',
+			emergencyDetails:false,
 
 			gender:[
 				{name:'Male', value:'Male'},
@@ -307,7 +314,12 @@ export default {
 		}
 	},
 
-
+	computed:{
+		...mapState({
+			sponsor: state => state.user.sponsor,
+			email: state => state.user.sponsor.email || state.user.user.email
+		})
+	},
 
 	methods:{
 
@@ -315,6 +327,25 @@ export default {
 			// Dispatch CreatePatient here
 			
 			this.createPatient(this.generateFormData());
+		},
+
+		formDetailsUpdate() {
+			if(this.emergencyDetails === true){
+				this.patients = {
+					emergency_name:this.sponsor.name,
+					emergency_phone:this.sponsor.phone_number,
+					emergency_fulladdress:this.sponsor.address,
+					emergency_email:this.email,
+				}
+			}
+			else{
+				this.patients = {
+					emergency_name:null,
+					emergency_phone:"",
+					emergency_fulladdress:"",
+					emergency_email:null,
+				}
+			}
 		},
 
 		generateFormData(){
