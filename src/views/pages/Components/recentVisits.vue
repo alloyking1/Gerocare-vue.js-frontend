@@ -2,7 +2,7 @@
     <div>
         <div>
             <vx-card>
-                <vs-table  pagination max-items="3" stripe search :data="users">
+                <vs-table  pagination max-items="3" stripe search :data="appointments">
                     <template slot="header">
                         <h3>
                         Recent Visits
@@ -63,37 +63,10 @@
 </template>
 
 <script>
-
+import {mapState} from 'vuex';
 export default {
-    data(){
-        return{
-            users:[]
-        }
+    computed:{
+        ...mapState(['appointments'])
     },
-
-    methods:{
-        async fetchAppointments(){
-            this.$vs.loading()
-            try{
-                const data = {}
-                data.id = this.$store.state.user.user.id
-                const res = await this.$store.dispatch('fetchRecentVisit', data)
-                this.users = res.data.data
-                this.$vs.loading.close()
-            }catch{
-                this.$vs.loading.close()
-                this.$vs.notify({title:'Error',text:'Could not load Appointments. Make sure you are connected to the internet',color:'danger',position:'top-right'})
-                this.$vs.loading.close()
-            }
-        },
-    },
-
-
-    created(){
-        
-        this.fetchAppointments()
-        
-    },
-
 }
 </script>

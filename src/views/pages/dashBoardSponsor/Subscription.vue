@@ -327,7 +327,7 @@ export default {
         },
 
         subscribe(){
-            let id = this.$store.state.user.user.id
+            let id = this.$store.state.user.sponsor.id
             let form = this.appendFormDetails(this.visitCostSum)
             
             let data={}
@@ -336,10 +336,9 @@ export default {
             this.$store.dispatch('createSubscription', data)
         },
 
-        async fetchSubscriptions(){
-            await this.$store.dispatch('fetchSubscriptions')
-            // console.log(response)
-        }
+        // async fetchSubscriptions(){
+        //     await this.$store.dispatch('fetchSubscriptions')
+        // }
 
     },
 
@@ -350,7 +349,7 @@ export default {
     created(){
         this.fetchElderly()
         this.fetService()
-        this.fetchSubscriptions()
+        // this.fetchSubscriptions()
     }
 }
 </script>

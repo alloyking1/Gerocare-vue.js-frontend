@@ -14,7 +14,7 @@ export async function getSponsor(id){
 
 // get sponsors appointments
 export async function getSponsorAppointment(id){
-    const response = await httpsClient(`/sponsors/${id}/appointments`);
+    const response = await httpsClient.get(`/sponsors/${id}/appointments`);
     return response;
 }
 

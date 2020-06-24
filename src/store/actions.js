@@ -76,9 +76,14 @@ const actions = {
   },
 
   /**token refresh action */
-  async refreshTokenAction(ctx, data){
+  async refreshTokenAction({commit}, data){
     const res = await auth.TokenRefresh(data)
-    localStorage.setItem("key", res.data.access_token)
+    // localStorage.removeItem('key')
+    // this.replaceState({})
+    if(res.data){
+    commit("UPDATE_USER_INFO", res.data);
+    console.log(res.data)
+    }
     return res
   },
 
@@ -124,7 +129,7 @@ const actions = {
   },
 
   /** fetch sponsor's visit */
-  async fetchRecentVisit({ commit }, { id }) {
+  async fetchRecentVisit({ commit }, id ) {
     const res = await getSponsorAppointment(id);
     commit("UPDATE_APPOINTMENT_INFO", res.data.data);
     return res;

@@ -168,10 +168,6 @@
 
 import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue' 
 import VueApexCharts from 'vue-apexcharts'
-
-import {getSponsor} from '../../../api/sponsor/sponsor.api'
-import { MapActions } from 'vuex'
-
 import recentVisits from '../Components/recentVisits'
 
 export default {
@@ -188,17 +184,34 @@ export default {
             this.data = this.$store.state.user;
         },
 
+        async fetchAppointment(){
+            await this.$store.dispatch('fetchRecentVisit', this.$store.state.user.sponsor.id)
+        },
+
         /**fetch service and update state */
         async fetchServices(){
-			const services = await this.$store.dispatch('fetchServices')
-			this.services = services
+			await this.$store.dispatch('fetchServices');
  		},
+
+        async fetchSubscriptions(){
+            await this.$store.dispatch('fetchSubscriptions')
+        },
+
+        async getPrescription() {
+            let data = {};
+            data.id = this.$store.state.user.sponsor.id;
+            await this.$store.dispatch("fetchMedRequest", data);
+        }
+
     },
 
     
     created(){
         this.fetchSponsor();
-        this.fetchServices()
+        this.fetchServices();
+        this.fetchAppointment();
+        this.fetchSubscriptions();
+        this.getPrescription();
     },
 
 	components:{

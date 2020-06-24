@@ -53,7 +53,7 @@ const state = {
     user:{},
     sponsor:{},
     services:{},
-    medRequest:{},
+    medical_requests:{},
     appointments:{},
     subscriptions:{},
     upcomingAppointments:{},

@@ -95,6 +95,10 @@ const mutations = {
   // /////////////////////////////////////////////
 
   UPDATE_USER_INFO(state, payload) {
+
+    
+    localStorage.setItem("key", payload.access_token)
+    localStorage.setItem("refresh_token", payload.refresh_token)
     state.user = payload;
   },
 
@@ -107,7 +111,7 @@ const mutations = {
   },
 
   UPDATE_MEDREQUEST_INFO(state, payload) {
-    state.medRequest = payload;
+    state.medical_requests = payload;
   },
 
   SUBSCRIPTIONS(state, payload) {

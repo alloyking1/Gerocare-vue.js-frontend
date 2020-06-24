@@ -5,7 +5,7 @@
       id="div-with-loadingt"
     >
       <vx-card title="Medical Request">
-        <vs-table pagination max-items="3" stripe search :data="users">
+        <vs-table pagination max-items="3" stripe search :data="medical_requests">
           <template slot="header">
             <h3>
               Pending Medical Request
@@ -114,6 +114,7 @@
 
 <script>
 import helper from "../../../helpers/helper";
+import { mapState } from 'vuex';
 export default {
   data() {
     return {
@@ -125,33 +126,37 @@ export default {
     };
   },
 
-  created() {
-    this.sponsorId = this.$store.state.user.user.id;
-    this.getPrescription();
+  computed:{
+    ...mapState(['medical_requests'])
   },
 
-  methods: {
-    async getPrescription() {
-      this.$vs.loading();
+  // created() {
+  //   this.sponsorId = this.$store.state.user.user.id;
+  //   this.getPrescription();
+  // },
 
-      try {
-        this.$vs.loading.close();
-        let data = {};
-        data.id = this.sponsorId;
-        const res = await this.$store.dispatch("fetchMedRequest", data);
-        this.users = res.data.data;
-        this.$vs.loading.close();
-      } catch {
-        this.$vs.loading.close();
-        this.$vs.notify({
-          title: "Error",
-          text:
-            "Could not load prescriptions. Make sure you are connected to the internet",
-          color: "danger",
-          position: "top-right"
-        });
-      }
-    },
+  methods: {
+    // async getPrescription() {
+    //   this.$vs.loading();
+
+    //   try {
+    //     this.$vs.loading.close();
+    //     let data = {};
+    //     data.id = this.sponsorId;
+    //     const res = await this.$store.dispatch("fetchMedRequest", data);
+    //     this.users = res.data.data;
+    //     this.$vs.loading.close();
+    //   } catch {
+    //     this.$vs.loading.close();
+    //     this.$vs.notify({
+    //       title: "Error",
+    //       text:
+    //         "Could not load prescriptions. Make sure you are connected to the internet",
+    //       color: "danger",
+    //       position: "top-right"
+    //     });
+    //   }
+    // },
 
     async more(id) {
       try {

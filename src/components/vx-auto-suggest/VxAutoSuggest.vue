@@ -75,6 +75,7 @@ export default{
     },
     data: {
       type: Object,
+      default: () => {},
       required: true,
     },
     initalData: {

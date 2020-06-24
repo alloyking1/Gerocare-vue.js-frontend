@@ -94,8 +94,7 @@ export default {
     async logIn(data) {
       try{
         this.$vs.loading();
-        const res = await this.$store.dispatch("updateUserInfo", data)
-        localStorage.setItem("key", res.data.access_token)
+        await this.$store.dispatch("updateUserInfo", data)
         this.$router.push({ name: 'home'})
         this.$vs.loading.close()
       }catch(e){
