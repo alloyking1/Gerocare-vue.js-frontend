@@ -11,8 +11,8 @@ import { getSponsor } from "../../../api/sponsor/sponsor.api";
 import Patient from "../../../components/dashboard/Patient.vue";
 import { mapState } from "vuex";
 
-export default { 
-  components:{
+export default {
+  components: {
     Patient
   },
 
@@ -21,9 +21,8 @@ export default {
       patients: state => {
         return state.user.sponsor.patients;
       }
-    }),
-  },
-
+    })
+  }
 };
 </script>
 
