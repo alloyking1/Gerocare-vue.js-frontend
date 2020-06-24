@@ -18,7 +18,7 @@ export default [
 
   {
     url: null,
-    name: 'Elderly',
+    name: 'Beneficiary',
     icon: 'UserIcon',
     i18n: 'BriefcaseIcon',
     submenu: [
@@ -38,7 +38,7 @@ export default [
   },
 
   {
-    url: "#",
+    url: "/teleconsultation",
     name: "TeleConsultation",
     slug: "Appointment",
     icon: "SmartphoneIcon",
