@@ -45,7 +45,7 @@
 													</ValidationProvider>
 													<ValidationProvider  name="Phone number" rules="required" v-slot="{ errors }">
 														<span>
-															<vs-input placeholder="Phone Number" v-model="patients.name" class="w-full mt-2" />
+															<vs-input placeholder="Phone Number" v-model="patients.phone_number" class="w-full mt-2" />
 														</span>
 
 														<span>{{ errors[0] }}</span>
@@ -63,22 +63,22 @@
 													</ValidationProvider>
 
 													<ValidationProvider  name="Email 1" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Email 1" v-model="patients.couple_name" class="w-full mt-2" />
+														<vs-input placeholder="Email 1" v-model="patients.email" class="w-full mt-2" />
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 
 													<ValidationProvider  name="Email 2" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Email 2" v-model="patients.couple_name" class="w-full mt-2" />
+														<vs-input placeholder="Email 2" v-model="patients.couple_email" class="w-full mt-2" />
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 
 													<ValidationProvider  name="Phone Number 1" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Phone Number 1" v-model="patients.couple_name" class="w-full mt-2" />
+														<vs-input placeholder="Phone Number 1" v-model="patients.phone_number" class="w-full mt-2" />
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 
 													<ValidationProvider  name="Phone Number 2" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Phone Number 2" v-model="patients.couple_name" class="w-full mt-2" />
+														<vs-input placeholder="Phone Number 2" v-model="patients.couple_phone_number" class="w-full mt-2" />
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
@@ -438,7 +438,7 @@ export default {
 		async validateFirstStep(){
 
 			try {
-				return true //await this.$refs.firstForm.validate();
+				return await this.$refs.firstForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
@@ -490,6 +490,7 @@ export default {
 		},
 
 		getService(e){
+			console.log(this.$store.getters.getServiceByType(e))
 			this.service = this.$store.getters.getServiceByType(e)
 		},
 		setPaymentDetails(paymentDetails){
@@ -514,7 +515,6 @@ export default {
 	}
 
 }
->>>>>>> db99a10b04b4d082bdfa223c0d0cdba2aef391b1
 </script>
 
 <style scoped>
