@@ -16,27 +16,33 @@ export default [
     icon: "HomeIcon",
   },
 
-  {
-    url: null,
-    name: 'Beneficiary',
-    icon: 'UserIcon',
-    i18n: 'BriefcaseIcon',
-    submenu: [
-      {
-        url: '/elderly/add',
-        name: 'Add Elderly',
-        slug: 'app-user-list',
-        i18n: 'List'
-      },
-      {
-        url: '/elderly/all',
-        name: 'All Elderly',
-        slug: 'app-user-view',
-        i18n: 'View'
-      }
-    ]
-  },
+  // {
+  //   url: null,
+  //   name: 'Beneficiary',
+  //   icon: 'UserIcon',
+  //   i18n: 'BriefcaseIcon',
+  //   submenu: [
+  //     {
+  //       url: '/elderly/add',
+  //       name: 'Add Elderly',
+  //       slug: 'app-user-list',
+  //       i18n: 'List'
+  //     },
+  //     {
+  //       url: '/elderly/all',
+  //       name: 'All Elderly',
+  //       slug: 'app-user-view',
+  //       i18n: 'View'
+  //     }
+  //   ]
+  // },
 
+  {
+    url: "/elderly/all",
+    name: "All Beneficiary",
+    slug: "Appointment",
+    icon: "UserIcon",
+  },
   {
     url: "/teleconsultation",
     name: "TeleConsultation",
