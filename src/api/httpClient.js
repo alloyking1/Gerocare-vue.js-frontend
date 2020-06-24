@@ -1,5 +1,5 @@
 import axios from "axios";
-import store from '../store/store'
+// import store from '../store/store'
 
 const baseDomain = process.env.VUE_APP_BASE_URL || "http://api-dev.gerocare.org";
 const baseURL = `${baseDomain}/api/v1`;

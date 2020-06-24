@@ -81,6 +81,11 @@ const router = new Router({
               name: 'sponsor/profile',
               component: () => import('./views/pages/dashBoardSponsor/SponsorProfile.vue')
             },
+            {
+              path: '/teleconsultation',
+              name: 'teleconsultation',
+              component: () => import('./views/pages/dashBoardSponsor/TeleConsultation.vue')
+            },
           ],
         },
 

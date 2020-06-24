@@ -27,15 +27,9 @@
 												</div>
 											
 											
-												<div class="vx-col md:w-2/2 w-full mt-2">
+												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type!='couple'">
 													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
-														<span v-if="patients.type === 'single'">
-															<vs-input placeholder="Full Name" v-model="patients.name" class="w-full" />
-														</span>
-														<span v-else-if="patients.type === 'couple'">
-															<vs-input placeholder="Male Partner Name" v-model="patients.name" class="w-full" />
-														</span>
-														<span v-else>
+														<span>
 															<vs-input placeholder="Full Name" v-model="patients.name" class="w-full" />
 														</span>
 
@@ -43,23 +37,45 @@
 													</ValidationProvider>
 												</div>
 
-												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type === 'couple'">
-													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Female Partner Name" v-model="patients.couple_name" class="w-full" />
-														<span>{{ errors[0] }}</span>
-													</ValidationProvider>
-												</div>
-											
-
-											
 												<div class="vx-col md:w-2/2 w-full mt-2">
-													<!-- <vs-input label="Patient Address"  v-model="patient.address" class="w-full" /> -->
-													<ValidationProvider  name="Sex" rules="required" v-slot="{ errors }" v-if="patients.type === 'single'">
-														<span v-if="patients.type === 'single'">
+													<ValidationProvider  name="Sex" rules="required" v-slot="{ errors }">
+														<span>
 															<vs-select class="w-full select-large" placeholder="Gender" v-model="patients.sex">
 																<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in gender" class="w-full" />
 															</vs-select>
 														</span>
+														<span>{{ errors[0] }}</span>
+													</ValidationProvider>
+												</div>
+
+												<div class="vx-col md:w-2/2 w-full mt-2">
+													<ValidationProvider  name="Phone number" rules="required" v-slot="{ errors }">
+														<span>
+															<vs-input placeholder="Phone Number" v-model="patients.name" class="w-full" />
+														</span>
+
+														<span>{{ errors[0] }}</span>
+													</ValidationProvider>
+												</div>
+
+
+												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type === 'couple'">
+													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
+														<span class="mt-2">
+															<vs-input placeholder="Name 1" v-model="patients.name" class="w-full" />
+														</span>
+
+														<vs-input placeholder="Name 2" v-model="patients.couple_name" class="w-full mt-2" />
+														<span>{{ errors[0] }}</span>
+													</ValidationProvider>
+
+													<ValidationProvider  name="Email 1" rules="required" v-slot="{ errors }">
+														<vs-input placeholder="Email 1" v-model="patients.couple_name" class="w-full mt-2" />
+														<span>{{ errors[0] }}</span>
+													</ValidationProvider>
+
+													<ValidationProvider  name="Email 2" rules="required" v-slot="{ errors }">
+														<vs-input placeholder="Email 2" v-model="patients.couple_name" class="w-full mt-2" />
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
 												</div>
