@@ -35,8 +35,20 @@ const getters = {
     return state.user.sponsor.patients.find(patient => patient.id === id);
   },
 
-  getServiceById: state => id => {
-    return state.services.data.find(service => service.id === id);
+
+  getServiceByType: (state) => (type) => {
+
+    if (type === 'couple') {
+      return state.services.data.find(service => service.code === 'GC-HV-02')
+    } else if (type === 'single') {
+      return state.services.data.find(service => service.code === 'GC-HV-01')
+    }
+
+
+  },
+
+  getServiceById: (state) => (id) => {
+    return state.services.data.find(service => service.id === id)
   },
 
   getMedRequestById: state => id => {
