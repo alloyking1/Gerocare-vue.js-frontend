@@ -149,41 +149,41 @@
 							<!-- tab 3 content -->
 							<tab-content title="Emergency Contact" class="mb-5" :before-change="validateThirdStep">
 							<!-- <tab-content title="Emergency Contact" class="mb-5"> -->
-								<ValidationObserver ref="thirdForm">
+								<ValidationObserver ref="thirdForm" v-slot="{ reset}">
+									<form @reset.prevent="reset">
 									<div class="container">
 										<div class="vx-row">
 											<div class="vx-col md:w-2/2 w-full mt-5">
-												<!-- <vs-radio color="success" :vs-value="emergencyDetails" id="user_sponsor">Use Sponsor's Details</vs-radio> -->
-												<!-- <vs-radio color="success" @change="formDetailsUpdate" v-model="emergencyDetails" id="user_sponsor">Use Sponsor's Details</vs-radio> -->
-												<vs-checkbox color="success" @change="formDetailsUpdate" v-model="emergencyDetails" id="user_sponsor">Use Sponsor's Details</vs-checkbox>
+												<vs-checkbox color="success" @change="autoFillEmergencyDetails" v-model="isEmergencyDetailsFilled" id="user_sponsor">Use Sponsor's Details</vs-checkbox>
 											</div>
 
 											<div class="vx-col md:w-2/2 w-full mt-5">
 												<ValidationProvider  name="Emergency Name" rules="required" v-slot="{ errors }">
-													<vs-input placeholder="Emergency Contact’s Name" v-model="patients.emergency_name" class="w-full" />
+													<vs-input :disabled="isEmergencyDetailsFilled" placeholder="Emergency Contact’s Name" v-model="patients.emergency_name" class="w-full" />
 													<span>{{ errors[0] }}</span>
 												</ValidationProvider>
 											</div>
 											<div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Emergency Phone Number" rules="required" v-slot="{ errors }">
-													<vs-input placeholder="Emergency Phone Number (e.g +234 12345678)" v-model="patients.emergency_phone" class="w-full" />
+													<vs-input :disabled="isEmergencyDetailsFilled" placeholder="Emergency Phone Number (e.g +234 12345678)" v-model="patients.emergency_phone" class="w-full" />
 													<span>{{ errors[0] }}</span>
 												</ValidationProvider>
 											</div>
 											<div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Emergency Address" rules="required" v-slot="{ errors }">
-													<vs-input placeholder="Emergency Address" v-model="patients.emergency_fulladdress" class="w-full" />
+													<vs-input :disabled="isEmergencyDetailsFilled" placeholder="Emergency Address" v-model="patients.emergency_fulladdress" class="w-full" />
 													<span>{{ errors[0] }}</span>
 												</ValidationProvider>
 											</div>
 											<div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Emergency Email" rules="required" v-slot="{ errors }">
-													<vs-input placeholder="Emergency Email" v-model="patients.emergency_email"  class="w-full" />
+													<vs-input :disabled="isEmergencyDetailsFilled" placeholder="Emergency Email" v-model="patients.emergency_email"  class="w-full" />
 													<span>{{ errors[0] }}</span>
 												</ValidationProvider>
 											</div>
 										</div>
 									</div>
+									</form>
 								</ValidationObserver>
 							</tab-content>
 
@@ -192,14 +192,6 @@
 								<ValidationObserver ref="fourthForm">
 									<div class="container">
 										<div class="vx-row">
-											<!-- <div class="vx-col md:w-2/2 w-full mt-2">
-												<ValidationProvider  name="Duration" rules="required" v-slot="{ errors }">
-													<vs-select  class="w-full select-large" placeholder="Services" v-model="patients.service_id" @change="visitCost">
-														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in services" class="w-full" />
-													</vs-select>
-													<span>{{ errors[0] }}</span>
-												</ValidationProvider>
-											</div> -->
 
 											<div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Number of Visits" rules="required" v-slot="{ errors }">
@@ -269,7 +261,7 @@ export default {
 			patients:{},
 			visitCostSum: 0,
 			payment:'',
-			emergencyDetails:false,
+			isEmergencyDetailsFilled:false,
 
 			gender:[
 				{name:'Male', value:'Male'},
@@ -292,21 +284,21 @@ export default {
 				{name:'asaba', value:'asaba'}
 			],
 			visit:[
-				{name: '1/Month', value:1},
-				{name: '2/Month', value:2},
-				{name: '4/Month', value:4},
+				{name: '1 Visit per Month', value:1},
+				{name: '2 Visits per Month', value:2},
+				{name: '4 Visits per Month', value:4},
 			],
 
 			months: [
 				{name: '1 Month', value:'1'},
-				{name: '3 Months', value:'3'},
-				{name: '6 Months', value:'6'},
-				{name: '1 Year', value:'12'}
+				{name: '3 Months (Quarterly)', value:'3'},
+				{name: '6 Months (Semi-Quarterly)', value:'6'},
+				{name: '1 Year (Annually)', value:'12'}
 			],
 
 			paymentOption:[
 				{name:'Debit/Credit Cards', value:'card'},
-				{name:'Teller Payment/Bankd Transfer', value:'TF'}
+				{name:'Teller Payment/Bank Transfer', value:'TF'}
 			],
 
 			services:[
@@ -329,8 +321,8 @@ export default {
 			this.createPatient(this.generateFormData());
 		},
 
-		formDetailsUpdate() {
-			if(this.emergencyDetails === true){
+		autoFillEmergencyDetails() {
+			if(this.isEmergencyDetailsFilled){
 				this.patients = {
 					emergency_name:this.sponsor.name,
 					emergency_phone:this.sponsor.phone_number,
@@ -341,8 +333,8 @@ export default {
 			else{
 				this.patients = {
 					emergency_name:null,
-					emergency_phone:"",
-					emergency_fulladdress:"",
+					emergency_phone:null,
+					emergency_fulladdress:null,
 					emergency_email:null,
 				}
 			}
