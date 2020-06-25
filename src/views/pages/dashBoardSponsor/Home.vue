@@ -5,10 +5,10 @@
                 <p>Hi</p>
                 <br>
                 <h3 class="text-3xl">{{data.sponsor.name || ''}}</h3>
-                <br>
+                <!-- <br>
                 <small class="font-gray">{{data.sponsor.phone_number || ''}}</small>
                 <br>
-                <small class="font-gray">{{data.sponsor.email || data.user.email }}</small>
+                <small class="font-gray">{{data.sponsor.email || data.user.email }}</small> -->
 			</div>
             
             <div class="vx-col w-full lg:w-2/5 mb-base">
@@ -17,12 +17,12 @@
                 </div>
                 <div class="flex justify-between text-center mt-4" slot="no-body-bottom">
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0 border-t-0">
-                        <p class="mb-4 text-2xl">{{data.most_due_subscription.visit_count || ''}}</p>
+                        <p class="mb-4 text-2xl">{{data.most_due_subscription.patient.name || ''}}</p>
                         <p class="mt-4">12-12-12</p>
                     </div>
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-t-0">
-                        <p class="mb-4 text-2xl font-danger">{{data.most_due_subscription.patient.name || ''}}</p>
-                        <router-link to="/subscription"><p class="mt-4 font-purple">Pay Now</p></router-link>
+                        <p class="mb-4 text-2xl font-danger">{{data.most_due_subscription.visit_count}}</p>
+                        <p class="mt-4 font-purple">Pay Now</p>
                     </div>
                 </div>
 
