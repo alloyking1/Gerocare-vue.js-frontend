@@ -53,34 +53,55 @@
 												</div>
 
 												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type === 'couple'">
-													<ValidationProvider  name="Name" rules="required" v-slot="{ errors }">
-														<span class="mt-2">
-															<vs-input placeholder="Name 1" v-model="patients.name" class="w-full" />
-														</span>
+													<div class="vx-row">
+														<div class="vx-col md:w-1/2 w-full mt-2">
+															<ValidationProvider  name="First Elderly Name" rules="required" v-slot="{ errors }">
+																<vs-input placeholder="First Elderly Name" v-model="patients.name" class="w-full" />
+																<span>{{ errors[0] }}</span>
+															</ValidationProvider>
+														</div>
 
-														<vs-input placeholder="Name 2" v-model="patients.couple_name" class="w-full mt-2" />
-														<span>{{ errors[0] }}</span>
-													</ValidationProvider>
+														<div class="vx-col md:w-1/2 w-full mt-2">
+															<ValidationProvider  name="Second Elderly Name" rules="required" v-slot="{ errors }">
+																<vs-input placeholder="Second Elderly Name" v-model="patients.couple_name" class="w-full" />
+																<span>{{ errors[0] }}</span>
+															</ValidationProvider>
+														</div>
+													</div>
 
-													<ValidationProvider  name="Email 1" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Email 1" v-model="patients.email" class="w-full mt-2" />
-														<span>{{ errors[0] }}</span>
-													</ValidationProvider>
+													<div class="vx-row">
+														<div class="vx-col md:w-1/2 w-full mt-2">
+															<!-- <ValidationProvider  name="Male Elderly Email" rules="required" v-slot="{ errors }"> -->
+																<vs-input placeholder="Male Elderly Email" v-model="patients.email" class="w-full mt-2" />
+																<!-- <span>{{ errors[0] }}</span> -->
+															<!-- </ValidationProvider> -->
+														</div>
 
-													<ValidationProvider  name="Email 2" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Email 2" v-model="patients.couple_email" class="w-full mt-2" />
-														<span>{{ errors[0] }}</span>
-													</ValidationProvider>
+														<div class="vx-col md:w-1/2 w-full mt-2">
 
-													<ValidationProvider  name="Phone Number 1" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Phone Number 1" v-model="patients.phone_number" class="w-full mt-2" />
-														<span>{{ errors[0] }}</span>
-													</ValidationProvider>
+															<!-- <ValidationProvider  name="Female Elderly Email" rules="required" v-slot="{ errors }"> -->
+																<vs-input placeholder="Femail Elderly Email" v-model="patients.couple_email" class="w-full mt-2" />
+																<!-- <span>{{ errors[0] }}</span> -->
+															<!-- </ValidationProvider> -->
+														</div>
+													</div>
 
-													<ValidationProvider  name="Phone Number 2" rules="required" v-slot="{ errors }">
-														<vs-input placeholder="Phone Number 2" v-model="patients.couple_phone_number" class="w-full mt-2" />
-														<span>{{ errors[0] }}</span>
-													</ValidationProvider>
+													<div class="vx-row">
+														<div class="vx-col md:w-1/2 w-full mt-2">	
+
+															<ValidationProvider  name="Male Phone Number" rules="required" v-slot="{ errors }">
+																<vs-input placeholder="Male Phone Number" v-model="patients.phone_number" class="w-full mt-2" />
+																<span>{{ errors[0] }}</span>
+															</ValidationProvider>
+														</div>
+														
+														<div class="vx-col md:w-1/2 w-full mt-2">
+															<ValidationProvider  name="Female Phone Number" rules="required" v-slot="{ errors }">
+																<vs-input placeholder="Female Phone Number" v-model="patients.couple_phone_number" class="w-full mt-2" />
+																<span>{{ errors[0] }}</span>
+															</ValidationProvider>
+														</div>
+													</div>
 												</div>
 											
 																					
@@ -97,18 +118,7 @@
 								<ValidationObserver ref="secondForm">
 									<div class="container">
 										<div class="vx-row">
-											<div class="vx-col md:w-2/2 w-full mt-5">
-												<ValidationProvider  name="Phone Number" rules="required" v-slot="{ errors }">
-													<vs-input placeholder="Phone Number" v-model="patients.phone_number" class="w-full" />
-													<span>{{ errors[0] }}</span>
-												</ValidationProvider>
-											</div>
-											<div class="vx-col md:w-2/2 w-full mt-2">
-												<ValidationProvider  name="Email" rules="required" v-slot="{ errors }">
-													<vs-input placeholder="Email" type="email" v-model="patients.email" class="w-full" />
-													<span>{{ errors[0] }}</span>
-												</ValidationProvider>
-											</div>
+											
 											<div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Home Address" rules="required" v-slot="{ errors }">
 													<vs-input placeholder="Home Address" v-model="patients.address" class="w-full" />
@@ -210,16 +220,7 @@
 														</vs-collapse-item>
 												</vs-collapse>
 											</div>
-
-											<div class="container pointer">
-												<statistics-card-line
-													hideChart
-													class="mb-base"
-													icon="UsersIcon"
-													icon-right
-													statistic= Home Visit
-													statisticTitle="Elderly Home visit" />
-											</div>
+											
 											<div class="container">
 												<statistics-card-line
 													hideChart
@@ -438,7 +439,7 @@ export default {
 		async validateFirstStep(){
 
 			try {
-				return await this.$refs.firstForm.validate();
+				return  true//await this.$refs.firstForm.validate();
 			} catch (error) {
 				console.log(error)
 			}
