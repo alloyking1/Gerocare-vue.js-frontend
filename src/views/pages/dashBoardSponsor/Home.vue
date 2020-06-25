@@ -18,10 +18,10 @@
                 <div class="flex justify-between text-center mt-4" slot="no-body-bottom">
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0 border-t-0">
                         <p class="mb-4 text-2xl">{{data.most_due_subscription.patient.name || ''}}</p>
-                        <p class="mt-4">12-12-12</p>
+                        <p class="mt-4">{{ moment(data.most_due_subscription.created_at).format("DD-MM-YYYY") }}</p>
                     </div>
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-t-0">
-                        <p class="mb-4 text-2xl font-danger">{{data.most_due_subscription.visit_count}}</p>
+                        <p class="mb-4 text-2xl font-danger">{{data.most_due_subscription.patient.visit_count}}</p>
                         <p class="mt-4 font-purple">Pay Now</p>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
                                 <p class="text-center pb-3">Wallet Balance:</p>
                                 <h1>
                                   <sup class="text-lg font-white">N</sup>
-                                  <span class="font-white text-5xl">{{data.insights.balance || 'N0'}}</span>
+                                  <span class="font-white text-5xl">{{data.insights.balance || 'N 0'}}</span>
                                 </h1>
                                 <br>
                                 <small>
@@ -99,17 +99,18 @@
                 <div class="mb-2">
                     <h5>Subscriptions</h5>
                 </div>
-                <vx-card class="mb-2">
+                <vx-card class="mb-2" v-for="(subscription, i) in data.subscriptions" :key="i">
+
                     <p class="mb-4 text-2xl">
                         <!-- <vs-chip color="success" style="min-width: 15px!important; min-height: 8px!important;"></vs-chip> -->
-                        {{data.name}}
+                        {{subscription.patient.name}}
                     </p>
-                    <p class="mt-4 font-lemon">8 visits remaining</p>
+                    <p class="mt-4 font-lemon">{{subscription.patient.visit_count}} visits remaining</p>
                 </vx-card>
-                <vx-card>
+                <!-- <vx-card>
                     <p class="mb-4 text-1xl text-2xl">Luna Q</p>
                     <p class="mt-4 text-danger">0 Visits Remaining</p>
-                </vx-card>
+                </vx-card> -->
 			</div>
 
 			<!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
