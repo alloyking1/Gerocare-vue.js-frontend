@@ -16,12 +16,12 @@ import colors from "@/../themeConfig.js"
 // /////////////////////////////////////////////
 
 const userDefaults = {
-  uid         : 0,          // From Auth
-  displayName : "alloy Doe", // From Auth
-  about       : "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
-  photoURL    : require("@/assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
-  status      : "online",
-  userRole    : "admin"
+  uid: 0,          // From Auth
+  displayName: "alloy Doe", // From Auth
+  about: "Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.",
+  photoURL: require("@/assets/images/portrait/small/avatar-s-11.jpg"), // From Auth
+  status: "online",
+  userRole: "admin"
 }
 
 
@@ -30,12 +30,12 @@ const userDefaults = {
 // Using Dynamic components
 const is_touch_device = () => {
   var prefixes = ' -webkit- -moz- -o- -ms- '.split(' ');
-  var mq = function(query) {
-      return window.matchMedia(query).matches;
+  var mq = function (query) {
+    return window.matchMedia(query).matches;
   }
 
   if (('ontouchstart' in window) || window.DocumentTouch) {
-      return true;
+    return true;
   }
 
   // include the 'heartz' as a way to have a non matching MQ to help terminate the join
@@ -50,33 +50,35 @@ const is_touch_device = () => {
 // /////////////////////////////////////////////
 
 const state = {
-    user:{},
-    sponsor:{},
-    services:{},
-    medical_requests:{},
-    appointments:{},
-    subscriptions:{},
-    upcomingAppointments:{},
-    previousAppointments:{},
-    bookingAppointments:{},
-    complaint:{},
-    AppActiveUser           : userDefaults,
-    bodyOverlay             : false,
-    isVerticalNavMenuActive : true,
-    is_touch_device         : is_touch_device(),
-    mainLayoutType          : themeConfig.mainLayoutType || "vertical",
-    navbarSearchAndPinList  : navbarSearchAndPinList,
-    reduceButton            : themeConfig.sidebarCollapsed,
-    verticalNavMenuWidth    : "default",
-    verticalNavMenuItemsMin : false,
-    scrollY                 : 0,
-    starredPages            : navbarSearchAndPinList["pages"].data.filter((page) => page.is_bookmarked),
-    theme                   : themeConfig.theme || "light",
-    themePrimaryColor       : colors.primary,
+  user: {},
+  sponsor: {},
+  services: {},
+  medical_requests: {},
+  appointments: {},
+  subscriptions: {},
+  upcomingAppointments: {},
+  previousAppointments: {},
+  bookingAppointments: {},
+  teleconsultations: {},
+  on_demands: {},
+  complaint: {},
+  AppActiveUser: userDefaults,
+  bodyOverlay: false,
+  isVerticalNavMenuActive: true,
+  is_touch_device: is_touch_device(),
+  mainLayoutType: themeConfig.mainLayoutType || "vertical",
+  navbarSearchAndPinList: navbarSearchAndPinList,
+  reduceButton: themeConfig.sidebarCollapsed,
+  verticalNavMenuWidth: "default",
+  verticalNavMenuItemsMin: false,
+  scrollY: 0,
+  starredPages: navbarSearchAndPinList["pages"].data.filter((page) => page.is_bookmarked),
+  theme: themeConfig.theme || "light",
+  themePrimaryColor: colors.primary,
 
-    // Can be used to get current window with
-    // Note: Above breakpoint state is for internal use of sidebar & navbar component
-    windowWidth: null,
+  // Can be used to get current window with
+  // Note: Above breakpoint state is for internal use of sidebar & navbar component
+  windowWidth: null,
 }
 
 export default state
