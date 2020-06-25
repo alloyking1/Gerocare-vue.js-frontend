@@ -61,13 +61,13 @@ const mutations = {
 
   ARRANGE_STARRED_PAGES_LIMITED(state, list) {
     const starredPagesMore = state.starredPages.slice(10)
-    state.starredPages     = list.concat(starredPagesMore)
+    state.starredPages = list.concat(starredPagesMore)
   },
   ARRANGE_STARRED_PAGES_MORE(state, list) {
-    let downToUp                 = false
+    let downToUp = false
     let lastItemInStarredLimited = state.starredPages[10]
-    const starredPagesLimited    = state.starredPages.slice(0, 10)
-    state.starredPages           = starredPagesLimited.concat(list)
+    const starredPagesLimited = state.starredPages.slice(0, 10)
+    state.starredPages = starredPagesLimited.concat(list)
 
     state.starredPages.slice(0, 10).map((i) => {
       if (list.indexOf(i) > -1) downToUp = true
@@ -83,11 +83,11 @@ const mutations = {
   // UI
   // ////////////////////////////////////////////
 
-  TOGGLE_CONTENT_OVERLAY(state, val) { state.bodyOverlay       = val   },
-  UPDATE_PRIMARY_COLOR(state, val)   { state.themePrimaryColor = val   },
-  UPDATE_THEME(state, val)           { state.theme             = val   },
-  UPDATE_WINDOW_WIDTH(state, width)  { state.windowWidth       = width },
-  UPDATE_WINDOW_SCROLL_Y(state, val) { state.scrollY           = val   },
+  TOGGLE_CONTENT_OVERLAY(state, val) { state.bodyOverlay = val },
+  UPDATE_PRIMARY_COLOR(state, val) { state.themePrimaryColor = val },
+  UPDATE_THEME(state, val) { state.theme = val },
+  UPDATE_WINDOW_WIDTH(state, width) { state.windowWidth = width },
+  UPDATE_WINDOW_SCROLL_Y(state, val) { state.scrollY = val },
 
 
   // /////////////////////////////////////////////
@@ -96,7 +96,7 @@ const mutations = {
 
   UPDATE_USER_INFO(state, payload) {
 
-    
+
     localStorage.setItem("key", payload.access_token)
     localStorage.setItem("refresh_token", payload.refresh_token)
     state.user = payload;
@@ -139,14 +139,21 @@ const mutations = {
 
   },
 
-  UPDATE_PATIENT_INFO(state, payload){
+  UPDATE_PATIENT_INFO(state, payload) {
     state.user.sponsor.patients = payload
   },
 
-  UPDATE_COMPLAINT_INFO(state, payload){
+  UPDATE_COMPLAINT_INFO(state, payload) {
     state.complaint = payload
-  }
+  },
 
+  UPDATE_TELECONSULTATION(state, payload) {
+    state.teleconsultations = payload;
+  },
+
+  UPDATE_ON_DEMAND(state, payload) {
+    state.on_demands = payload;
+  }
 }
 
 export default mutations

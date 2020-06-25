@@ -35,6 +35,12 @@
 
 														<span>{{ errors[0] }}</span>
 													</ValidationProvider>
+													<div class="vx-col md:w-2/2 w-full mt-2">
+														<ValidationProvider  name="Email" rules="required|email" v-slot="{ errors }">
+															<vs-input placeholder="Email" v-model="patients.email" class="w-full" />
+															<span>{{ errors[0] }}</span>
+														</ValidationProvider>
+													</div>
 													<ValidationProvider  name="Sex" rules="required" v-slot="{ errors }">
 														<span>
 															<vs-select class="w-full select-large mt-2" placeholder="Gender" v-model="patients.sex">
@@ -55,15 +61,15 @@
 												<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.type === 'couple'">
 													<div class="vx-row">
 														<div class="vx-col md:w-1/2 w-full mt-2">
-															<ValidationProvider  name="First Elderly Name" rules="required" v-slot="{ errors }">
-																<vs-input placeholder="First Elderly Name" v-model="patients.name" class="w-full" />
+															<ValidationProvider  name="Male Elderly Name" rules="required" v-slot="{ errors }">
+																<vs-input placeholder="Male Elderly Name" v-model="patients.name" class="w-full" />
 																<span>{{ errors[0] }}</span>
 															</ValidationProvider>
 														</div>
 
 														<div class="vx-col md:w-1/2 w-full mt-2">
-															<ValidationProvider  name="Second Elderly Name" rules="required" v-slot="{ errors }">
-																<vs-input placeholder="Second Elderly Name" v-model="patients.couple_name" class="w-full" />
+															<ValidationProvider  name="Female Elderly Name" rules="required" v-slot="{ errors }">
+																<vs-input placeholder="Female Elderly Name" v-model="patients.couple_name" class="w-full" />
 																<span>{{ errors[0] }}</span>
 															</ValidationProvider>
 														</div>
@@ -71,18 +77,18 @@
 
 													<div class="vx-row">
 														<div class="vx-col md:w-1/2 w-full mt-2">
-															<!-- <ValidationProvider  name="Male Elderly Email" rules="required" v-slot="{ errors }"> -->
+															<ValidationProvider  name="Male Elderly Email" rules="email" v-slot="{ errors }">
 																<vs-input placeholder="Male Elderly Email" v-model="patients.email" class="w-full mt-2" />
-																<!-- <span>{{ errors[0] }}</span> -->
-															<!-- </ValidationProvider> -->
+																<span>{{ errors[0] }}</span>
+															</ValidationProvider>
 														</div>
 
 														<div class="vx-col md:w-1/2 w-full mt-2">
 
-															<!-- <ValidationProvider  name="Female Elderly Email" rules="required" v-slot="{ errors }"> -->
-																<vs-input placeholder="Femail Elderly Email" v-model="patients.couple_email" class="w-full mt-2" />
-																<!-- <span>{{ errors[0] }}</span> -->
-															<!-- </ValidationProvider> -->
+															<ValidationProvider  name="Female Elderly Email" rules="email" v-slot="{ errors }">
+																<vs-input placeholder="Female Elderly Email" v-model="patients.couple_email" class="w-full mt-2" />
+																<span>{{ errors[0] }}</span>
+															</ValidationProvider>
 														</div>
 													</div>
 
@@ -163,7 +169,7 @@
 									<div class="container">
 										<div class="vx-row">
 											<div class="vx-col md:w-2/2 w-full mt-5">
-												<vs-checkbox color="success" @change="formDetailsUpdate" v-model="emergencyDetails" id="user_sponsor">Use Sponsor's Details</vs-checkbox>
+												<vs-checkbox color="success" @change="formDetailsUpdate" v-model="emergencyDetails" id="user_sponsor">Same as mine</vs-checkbox>
 											</div>
 
 											<div class="vx-col md:w-2/2 w-full mt-5">
