@@ -220,16 +220,7 @@
 														</vs-collapse-item>
 												</vs-collapse>
 											</div>
-
-											<div class="container pointer">
-												<statistics-card-line
-													hideChart
-													class="mb-base"
-													icon="UsersIcon"
-													icon-right
-													statistic= Home Visit
-													statisticTitle="Elderly Home visit" />
-											</div>
+											
 											<div class="container">
 												<statistics-card-line
 													hideChart

@@ -39,7 +39,7 @@ export default [
 
   {
     url: "/elderly/all",
-    name: "All Beneficiary",
+    name: "Beneficiary",
     slug: "Appointment",
     icon: "UserIcon",
   },

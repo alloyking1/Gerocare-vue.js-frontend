@@ -2,7 +2,7 @@
   <div>
     <div class="row mb-5">
       <router-link to="/elderly/add">
-        <vs-button color="success" type="border">Add Elderly</vs-button>
+        <vs-button color="success" type="border">Add Beneficiary</vs-button>
       </router-link>
     </div>
     <div class="vx-row">
