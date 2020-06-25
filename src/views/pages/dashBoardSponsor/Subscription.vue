@@ -44,6 +44,7 @@
                 popupActivo:false
             }
         },
+        
         components:{
             subscriptionHistory,
             subscriptionPayment

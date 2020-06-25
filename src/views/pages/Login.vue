@@ -87,7 +87,7 @@ export default {
 
   methods: {
     async validate() {
-      if(await this.$refs.loginForm.validate() === true)
+      if(await this.$refs.loginForm.validate())
       this.logIn(this.user);
     },
 
