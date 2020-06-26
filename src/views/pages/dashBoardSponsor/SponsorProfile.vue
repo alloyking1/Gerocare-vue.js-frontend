@@ -101,9 +101,10 @@
 			</div>
         </div>
 
-        <div>
-            <vs-popup :active.sync="popupActivo">
-                <sponsorPasswordReset></sponsorPasswordReset>
+        <div id="ooo">
+            <vs-popup :active.sync="popupActivo" >
+                <div id="popUp"></div>
+                <!-- <sponsorProfileUpdate></sponsorProfileUpdate> -->
             </vs-popup>
         </div>
 
@@ -133,6 +134,26 @@
         components:{
             sponsorPasswordReset,
             sponsorProfileUpdate
+        },
+
+        methods:{
+            bindComponent(){
+                // this.$nextTick(()=>{
+                    // console.log(document);
+                    
+                    const popUp = document.getElementById('popUp')
+                    // popUp.append(`<p>djflsdjfslj</p>`)
+                    const pp = document.createElement('p')
+                    pp.innerText = "hello world"
+                    popUp.append(pp)
+                // })
+                
+                // console.log(popUp.appendChild(<sponsorProfileUpdate></sponsorProfileUpdate>))
+            }
+        },
+        
+        mounted(){
+            this.bindComponent()
         }
     }
 </script>
