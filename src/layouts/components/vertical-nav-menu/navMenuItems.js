@@ -44,7 +44,7 @@ export default [
     icon: "UserIcon",
   },
   {
-    url: "/my-services",
+    url: "/subscription",
     name: "My Services",
     slug: "my-services",
     icon: "ShoppingBagIcon",
