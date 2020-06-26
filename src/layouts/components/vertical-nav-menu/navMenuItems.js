@@ -44,6 +44,12 @@ export default [
     icon: "UserIcon",
   },
   {
+    url: "/subscription",
+    name: "My Services",
+    slug: "my-services",
+    icon: "ShoppingBagIcon",
+  },
+  {
     url: "/teleconsultation",
     name: "TeleConsultation",
     slug: "Appointment",
@@ -68,10 +74,11 @@ export default [
     icon: "MessageCircleIcon",
   },
   {
-    url: "/subscription",
-    name: "Subscription",
-    slug: "Subscription",
-    icon: "ShoppingBagIcon",
+    url: '/billing',
+    name: 'Billing',
+    slug: 'app-user-list',
+    icon: 'CreditCardIcon',
+    i18n: 'List'
   },
   {
     url: "/complaint",
@@ -101,19 +108,13 @@ export default [
     icon: 'PackageIcon',
     i18n: 'Apps',
     items: [
-      {
-        url: '/billing',
-        name: 'Billing',
-        slug: 'app-user-list',
-        icon: 'CreditCardIcon',
-        i18n: 'List'
-      },
+
       {
         url: '/sponsor/profile',
         name: 'Account Preference',
         slug: 'Account-preference',
         i18n: 'View-account',
-        icon:'SettingsIcon'
+        icon: 'SettingsIcon'
       },
       // {
       //   url: "/sponsor/profile",
