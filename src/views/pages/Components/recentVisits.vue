@@ -31,24 +31,24 @@
 
                     <template slot-scope="{data}">
                         <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                        <vs-td :data="data[indextr].appointment_date">
-                            {{moment(data[indextr].appointment_date).format('MM-DD-YYYY')}}
+                        <vs-td :data="tr.appointment_date">
+                            {{moment(tr.appointment_date).format('MM-DD-YYYY')}}
                         </vs-td>
 
-                        <vs-td :data="data[indextr].description">
-                            {{data[indextr].description}}
+                        <vs-td :data="tr.description">
+                            {{tr.description}}
                         </vs-td>
 
-                        <vs-td :data="data[indextr].doctor">
-                            {{data[indextr].doctor.name || 'kapasky'}}
+                        <vs-td :data="tr.doctor">
+                            {{tr.doctor.name || 'kapasky'}}
                         </vs-td>
-                        <vs-td :data="data[indextr].patient">
-                            {{data[indextr].patient.name}}
+                        <vs-td :data="tr.patient">
+                            {{tr.patient.name}}
                         </vs-td>
-                        <vs-td :data="data[indextr].status">
-                            {{data[indextr].status}}
+                        <vs-td :data="tr.status">
+                            {{tr.status}}
                         </vs-td>
-                        <vs-td :data="data[indextr].report">
+                        <vs-td :data="tr.report">
                             <vs-button size="small">View</vs-button>
                         </vs-td>
                         </vs-tr>
@@ -65,6 +65,7 @@
 <script>
 import {mapState} from 'vuex';
 export default {
+    
     computed:{
         ...mapState(['appointments'])
     },
