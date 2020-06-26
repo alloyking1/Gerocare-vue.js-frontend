@@ -76,9 +76,9 @@
 
             <div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
 				<vx-card>
-                    <vs-button icon-pack="feather" type="border"  class="shadow-md w-full cutomBtn mb-3 btn-outline">UPDATE PROFILE</vs-button>
-                    <vs-button  icon-pack="feather" type="border" class="shadow-md w-full cutomBtn mb-3">UPDATE PREFERENCES</vs-button>
-                    <vs-button  icon-pack="feather"  class="shadow-md w-full cutomBtn mb-3" @click="popupActivo=true">CHANGE PASSWORD</vs-button>
+                    <vs-button icon-pack="feather" type="border"  class="shadow-md w-full cutomBtn mb-3 btn-outline" @click="popup.profile=true">UPDATE PROFILE</vs-button>
+                    <vs-button  icon-pack="feather" type="border" class="shadow-md w-full cutomBtn mb-3" @click="popu.preference = true">UPDATE PREFERENCES</vs-button>
+                    <vs-button  icon-pack="feather"  class="shadow-md w-full cutomBtn mb-3" @click="popup.password=true">CHANGE PASSWORD</vs-button>
                     
                 </vx-card>
 			</div>
@@ -101,10 +101,19 @@
 			</div>
         </div>
 
-        <div id="ooo">
-            <vs-popup :active.sync="popupActivo" >
-                <div id="popUp"></div>
-                <!-- <sponsorProfileUpdate></sponsorProfileUpdate> -->
+        <div>
+            <vs-popup :active.sync="popup.profile" title="Edit Profile">
+                <keep-alive>
+                    <sponsorProfileUpdate></sponsorProfileUpdate>
+                </keep-alive>
+            </vs-popup>
+        </div>
+
+        <div>
+            <vs-popup :active.sync="popup.password" title="Change password">
+                <keep-alive>
+                    <sponsorPasswordReset></sponsorPasswordReset>
+                </keep-alive>
             </vs-popup>
         </div>
 
@@ -120,7 +129,11 @@
     export default {
         data(){
             return{
-                popupActivo:false,
+                popup:{
+                    password:false,
+                    profile:false,
+                    preference:false
+                },
                 transactionRecord:[]
             }
         },
@@ -136,25 +149,6 @@
             sponsorProfileUpdate
         },
 
-        methods:{
-            bindComponent(){
-                // this.$nextTick(()=>{
-                    // console.log(document);
-                    
-                    const popUp = document.getElementById('popUp')
-                    // popUp.append(`<p>djflsdjfslj</p>`)
-                    const pp = document.createElement('p')
-                    pp.innerText = "hello world"
-                    popUp.append(pp)
-                // })
-                
-                // console.log(popUp.appendChild(<sponsorProfileUpdate></sponsorProfileUpdate>))
-            }
-        },
-        
-        mounted(){
-            this.bindComponent()
-        }
     }
 </script>
 

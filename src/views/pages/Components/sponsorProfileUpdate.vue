@@ -1,7 +1,6 @@
 <template>
     <div>
        <div>
-           <!-- <vs-card></vs-card> -->
             <ValidationObserver ref="passwordReset">    
                 <form @submit.prevent="validate">
                     <ValidationProvider  name="Email" rules="required" v-slot="{ errors }">
