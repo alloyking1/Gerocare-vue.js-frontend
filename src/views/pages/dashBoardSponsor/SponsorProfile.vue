@@ -107,9 +107,7 @@
                     <sponsorProfileUpdate></sponsorProfileUpdate>
                 </keep-alive>
             </vs-popup>
-        </div>
-
-        <div>
+        
             <vs-popup :active.sync="popup.password" title="Change password">
                 <keep-alive>
                     <sponsorPasswordReset></sponsorPasswordReset>
@@ -121,7 +119,6 @@
 </template>
 
 <script>
-    import {getSponsor, updateSponsor } from  "../../../api/sponsor/sponsor.api"
     import { mapState } from 'vuex'
     import sponsorPasswordReset from "../Components/sponsorPasswordReset"
     import sponsorProfileUpdate from "../Components/sponsorProfileUpdate"
