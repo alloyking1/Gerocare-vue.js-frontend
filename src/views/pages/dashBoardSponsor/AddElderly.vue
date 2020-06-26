@@ -18,12 +18,14 @@
 										<div class="vx-row">
 											
 												<div class="vx-col md:w-2/2 w-full mt-2">
-													<ValidationProvider  name="Marital Status" rules="required" v-slot="{ errors }">
-														<vs-select v-model="patients.type" @change="getService" placeholder="Marital Status" class="w-full select-large">
-															<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
-														</vs-select>
-														<span>{{ errors[0] }}</span>
-													</ValidationProvider>
+													<vx-tooltip title="Couples Notice" color="danger" position="left"  text="Beneficiary must live in the same address to be addressed as couples.">
+														<ValidationProvider  name="Marital Status" rules="required" v-slot="{ errors }">
+															<vs-select v-model="patients.type" @change="getService" placeholder="Marital Status" class="w-full select-large">
+																<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in status" class="w-full" />
+															</vs-select>
+															<span>{{ errors[0] }}</span>
+														</ValidationProvider>
+													</vx-tooltip>
 												</div>
 											
 											
@@ -227,33 +229,65 @@
 												</vs-collapse>
 											</div>
 											
-											<div class="container">
-												<statistics-card-line
-													hideChart
-													class="mb-base"
-													icon="SmartphoneIcon"
-													icon-right
-													statistic= Phone Consultation
-													statisticTitle="Telephone Consultation" />
+											<div class="w-full pointer">
+												<vs-collapse>
+													<vs-collapse-item icon-arrow="none">
+														<div slot="header">
+															<statistics-card-line
+																hideChart
+																class="mb-base"
+																icon="SmartphoneIcon"
+																icon-right
+																statistic= Phone Consultation
+																statisticTitle="Telephone Consultation" />
+														</div>
+														<div class="w-full">
+															<PaymentComponent :service="service" :type="patients.type" v-on:payment-details="setPaymentDetails"></PaymentComponent>
+														</div>
+													</vs-collapse-item>
+												</vs-collapse>
 											</div>
-											<div class="container">
-												<statistics-card-line
-													hideChart
-													class="mb-base"
-													icon="GitPullRequestIcon"
-													icon-right
-													statistic= On-demand
-													statisticTitle="On Demand Visit" />
+
+											<div class="w-full pointer">
+												<vs-collapse>
+													<vs-collapse-item icon-arrow="none">
+														<div slot="header">
+															<statistics-card-line
+																hideChart
+																class="mb-base"
+																icon="GitPullRequestIcon"
+																icon-right
+																statistic= On-demand
+																statisticTitle="On Demand Visit" />
+														</div>
+														<div class="w-full">
+															<PaymentComponent :service="service" :type="patients.type" v-on:payment-details="setPaymentDetails"></PaymentComponent>
+														</div>
+													</vs-collapse-item>
+												</vs-collapse>
 											</div>
-											<div class="container">
-												<statistics-card-line
-													hideChart
-													class="mb-base"
-													icon="MoreVerticalIcon"
-													icon-right
-													statistic= "Others"
-													statisticTitle="Other Services" />
+
+											<div class="w-full pointer">
+												<vs-collapse>
+													<vs-collapse-item icon-arrow="none">
+														<div slot="header">
+															<statistics-card-line
+																hideChart
+																class="mb-base"
+																icon="MoreVerticalIcon"
+																icon-right
+																statistic= On-demand
+																statisticTitle="On Demand Visit" />
+														</div>
+														<div class="w-full">
+															<PaymentComponent :service="service" :type="patients.type" v-on:payment-details="setPaymentDetails"></PaymentComponent>
+														</div>
+													</vs-collapse-item>
+												</vs-collapse>
 											</div>
+
+
+											
 
 											<!-- <div class="vx-col md:w-2/2 w-full mt-2">
 												<ValidationProvider  name="Number of Visits" rules="required" v-slot="{ errors }">

@@ -138,7 +138,7 @@ export default {
 
         /**fetch service and update state */
         async fetchServices(){
-			await this.$store.dispatch('fetchServices');
+			await this.$store.dispatch('fetchServices')
  		},
 
         async fetchSubscriptions(){
