@@ -106,12 +106,11 @@ export default {
 
   methods:{
     async validate(){
-        if(await this.$refs.forgotPassword.validate() === true)
+        if(await this.$refs.forgotPassword.validate())
         this.request(this.data)
     },
 
     async request(data){
-      console.log(this.check)
       if(this.check === true){
         try{
           this.$vs.loading()

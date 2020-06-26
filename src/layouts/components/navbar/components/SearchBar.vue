@@ -4,7 +4,7 @@
       <vx-auto-suggest
         ref="navbarSearch"
         :autoFocus="showFullSearch"
-        :data="navbarSearchAndPinList"
+        :data="navbarSearchAndPinList || {}"
         search_key="title"
         background-overlay
         class="w-full"

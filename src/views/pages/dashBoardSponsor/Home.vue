@@ -5,10 +5,6 @@
                 <p>Hi</p>
                 <br>
                 <h3 class="text-3xl">{{data.sponsor.name || ''}}</h3>
-                <!-- <br>
-                <small class="font-gray">{{data.sponsor.phone_number || ''}}</small>
-                <br>
-                <small class="font-gray">{{data.sponsor.email || data.user.email }}</small> -->
 			</div>
             
             <div class="vx-col w-full lg:w-2/5 mb-base">
@@ -102,61 +98,12 @@
                 <vx-card class="mb-2" v-for="(subscription, i) in data.subscriptions" :key="i">
 
                     <p class="mb-4 text-2xl">
-                        <!-- <vs-chip color="success" style="min-width: 15px!important; min-height: 8px!important;"></vs-chip> -->
                         {{subscription.patient.name}}
                     </p>
                     <p class="mt-4 font-lemon">{{subscription.patient.visit_count}} visits remaining</p>
                 </vx-card>
-                <!-- <vx-card>
-                    <p class="mb-4 text-1xl text-2xl">Luna Q</p>
-                    <p class="mt-4 text-danger">0 Visits Remaining</p>
-                </vx-card> -->
 			</div>
 
-			<!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
-				<vx-card>
-                    <vs-table  pagination max-items="3" stripe search :data="users">
-                        <template slot="header">
-                            <h3>
-                            Recent Visits
-                            </h3>
-                        </template>
-                        <template slot="thead">
-                            <vs-th sort-key="email">
-                            Date
-                            </vs-th>
-                            <vs-th sort-key="username">
-                            Description
-                            </vs-th>
-                            <vs-th sort-key="id">
-                            Status
-                            </vs-th>
-                            <vs-th sort-key="id">
-                            Report
-                            </vs-th>
-                        </template>
-
-                        <template slot-scope="{data}">
-                            <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                            <vs-td :data="data[indextr].email">
-                                {{data[indextr].email}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].username">
-                                {{data[indextr].username}}
-                            </vs-td>
-
-                            <vs-td :data="data[indextr].id">
-                                {{data[indextr].id}}
-                            </vs-td>
-                            </vs-tr>
-                        </template>
-
-
-                    </vs-table>
-                </vx-card>
-                
-			</div> -->
             <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
                 <recentVisits></recentVisits>
             </div>
