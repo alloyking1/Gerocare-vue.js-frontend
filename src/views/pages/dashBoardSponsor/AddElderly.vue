@@ -209,7 +209,7 @@
 									<div class="container">
 										<div class="vx-row">
 											
-											<div class="w-full pointer">
+											<div class="w-full pointer" @click="fetchServices">
 												<vs-collapse>
 													<vs-collapse-item icon-arrow="none">
 														<div slot="header">
@@ -286,46 +286,6 @@
 												</vs-collapse>
 											</div>
 
-
-											
-
-											<!-- <div class="vx-col md:w-2/2 w-full mt-2">
-												<ValidationProvider  name="Number of Visits" rules="required" v-slot="{ errors }">
-													<vs-select class="w-full select-large" placeholder="Visits/Month" v-model="patients.no_of_visits" @change="visitCost">
-														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in visit" class="w-full" />
-													</vs-select>
-													<span>{{ errors[0] }}</span>
-												</ValidationProvider>
-											</div>
-											
-											<div class="vx-col md:w-2/2 w-full mt-2">
-												<ValidationProvider  name="Duration" rules="required" v-slot="{ errors }">
-													<vs-select  class="w-full select-large" placeholder="Month/Year" v-model="patients.sub_duration" @change="visitCost">
-														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in months" class="w-full" />
-													</vs-select>
-													<span>{{ errors[0] }}</span>
-												</ValidationProvider>
-											</div>
-
-											<div class="vx-col md:w-2/2 w-full mt-2">
-												<div class="text-center p-4">
-
-													<p class="p-2">AMOUNT</p>
-													<h3 class="text-5xl p-2">N {{visitCostSum}}</h3>
-													<p class="p-2">1 visit every month for 3 months</p>
-													<vs-radio color="success" vs-value="pay_now" v-model="patients.pay_action">Pay Now</vs-radio>
-													<vs-radio style="margin-left:10px;" color="success" vs-value="false" v-model="patients.payment">Pay Later</vs-radio>
-												</div>
-											</div>
-
-											<div class="vx-col md:w-2/2 w-full mt-2" v-if="patients.payment === 'true'">
-												<ValidationProvider  name="Duration" rules="required" v-slot="{ errors }">
-													<vs-select class="w-full select-large" placeholder="Payment methods" v-model="patients.paymentDetails.paymentMethod">
-														<vs-select-item :key="index" :value="item.value" :text="item.name" v-for="(item,index) in paymentOption" class="w-full" />
-													</vs-select>
-													<span>{{ errors[0] }}</span>
-												</ValidationProvider>
-											</div> -->
 										</div>
 									</div>
 								</ValidationObserver>
@@ -342,7 +302,6 @@
 		</div>
 	</div>
 </template> 
->>>>>>> db99a10b04b4d082bdfa223c0d0cdba2aef391b1
 
 <script>
 import { FormWizard, TabContent } from "vue-form-wizard";
@@ -415,28 +374,28 @@ export default {
 	methods:{
 
 		formSubmitted(){
-			// Dispatch CreatePatient here
-			
-			this.createPatient(this.generateFormData());
+			const submit = this.createPatient(this.generateFormData());
+			console.log(submit)
 		},
 
 		formDetailsUpdate() {
-			if(this.emergencyDetails === true){
-				this.patients = {
-					emergency_name:this.sponsor.name,
-					emergency_phone:this.sponsor.phone_number,
-					emergency_fulladdress:this.sponsor.address,
-					emergency_email:this.email,
-				}
-			}
-			else{
-				this.patients = {
-					emergency_name:null,
-					emergency_phone:null,
-					emergency_fulladdress:null,
-					emergency_email:null,
-				}
-			}
+			// if(this.emergencyDetails === true){
+			// 	this.patients = {
+			// 		emergency_name:this.sponsor.name,
+			// 		emergency_phone:this.sponsor.phone_number,
+			// 		emergency_fulladdress:this.sponsor.address,
+			// 		emergency_email:this.email,
+			// 	}
+			// }
+			// else{
+			// 	this.patients = {
+			// 		emergency_name:null,
+			// 		emergency_phone:null,
+			// 		emergency_fulladdress:null,
+			// 		emergency_email:null,
+			// 	}
+			// }
+			return true
 		},
 
 		generateFormData(){
@@ -463,7 +422,7 @@ export default {
 		},
 
 		createPatient(patients){
-			let id = this.$store.state.user.user.id;
+			let id = this.sponsor.id;
 
 			const data = {};
 			data.id = id;
@@ -473,7 +432,7 @@ export default {
 
 		async fetchServices(){
 			const services = await this.$store.dispatch('fetchServices')
-			this.services = services
+			console.log(this.services = services)
  		},
 
 		async validateFirstStep(){
@@ -534,11 +493,14 @@ export default {
 			console.log(this.$store.getters.getServiceByType(e))
 			this.service = this.$store.getters.getServiceByType(e)
 		},
+
 		setPaymentDetails(paymentDetails){
 			console.log(paymentDetails)
 			this.patients.amount = paymentDetails.visitCostSum*100
 			this.patients.subscription = paymentDetails.no_of_visits
 			this.patients.service_id = paymentDetails.service_id
+			// this.patients.service_id = paymentDetails.service_id
+			// this.patients.visit_count = paymentDetails.no_of_visits
 		}
 	},
 

@@ -6,7 +6,7 @@
       </router-link>
     </div>
     <div class="vx-row">
-      <patient v-for="(patient, i) in patients" :key="i" :patient="patient" />
+      <patient v-for="(patient, i) in patients" :key="i" :patient="patient"/>
     </div>
   </div>
 </template>

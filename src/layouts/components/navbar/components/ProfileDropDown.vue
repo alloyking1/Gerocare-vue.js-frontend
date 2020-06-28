@@ -1,16 +1,21 @@
 <template>
   <!-- <div class="the-navbar__user-meta flex items-center" v-if="activeUserInfo"> -->
   <div class="the-navbar__user-meta flex items-center">
-
     <div class="text-right leading-tight hidden sm:block">
       <p class="font-semibold">{{ user.name || '' }}</p>
       <small>Available</small>
     </div>
 
     <vs-dropdown vs-custom-content vs-trigger-click class="cursor-pointer">
-
       <div class="con-img ml-3">
-        <img key="onlineImg" :src="user.avatar" alt="user-img" width="40" height="40" class="rounded-full shadow-md cursor-pointer block" />
+        <img
+          key="onlineImg"
+          :src="user.avatar"
+          alt="user-img"
+          width="40"
+          height="40"
+          class="rounded-full shadow-md cursor-pointer block"
+        />
       </div>
 
       <vs-dropdown-menu class="vx-navbar-dropdown">
@@ -46,7 +51,8 @@
 
           <li
             class="flex py-2 px-4 cursor-pointer hover:bg-primary hover:text-white"
-            @click="logout">
+            @click="logout"
+          >
             <feather-icon icon="LogOutIcon" svgClasses="w-4 h-4" />
             <span class="ml-2">Logout</span>
           </li>
@@ -57,27 +63,36 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from "vuex";
 
 export default {
   computed: {
     ...mapState({
-      user: state=> state.user.sponsor
+      user: state => state.user.sponsor
     })
   },
 
   methods: {
     logout() {
-      if( this.$store.dispatch('LogOutIcon'))
-      localStorage.removeItem('key')
-      this.$store.replaceState({})
+      if (this.$store.dispatch("LogOutIcon")) localStorage.removeItem("key");
+      // this.$store.replaceState({})
       //modulerized state
-      // store.replaceState({
-      //     a: {},
-      //     b: {}
-      //   })
-      this.$router.push('/login')
-    },
+      // this.$store.replaceState({
+      //   user: {}
+      //   sponsor: {},
+      //   services: {},
+      //   medical_requests: {},
+      //   appointments: {},
+      //   subscriptions: {},
+      //   upcomingAppointments: {},
+      //   previousAppointments: {},
+      //   bookingAppointments: {},
+      //   teleconsultations: {},
+      //   on_demands: {},
+      //   complaint: {},
+      // });
+      this.$router.push("/login");
+    }
   }
-}
+};
 </script>

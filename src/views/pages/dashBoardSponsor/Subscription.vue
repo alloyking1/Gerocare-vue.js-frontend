@@ -6,7 +6,6 @@
             <vx-card class="mt-2 mb-2">
                 <h3 style="font-size:10px" class="pb-2">SELECT A SERVICE TO SUBSCRIBE TO</h3>
                 <vs-divider></vs-divider>
-                <!-- <p style="font-size:10px" class="pb-2">Home Visit Services</p> -->
                 <vs-button color="primary" type="filled" @click="popupActivo=true">Home Visits</vs-button>
                 <vs-button color="primary" type="filled" @click="popupActivo=true" class="ml-2">Book Now</vs-button>
 

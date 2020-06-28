@@ -74,11 +74,11 @@ export default [
     icon: "MessageCircleIcon",
   },
   {
-    url: '/billing',
-    name: 'Billing',
-    slug: 'app-user-list',
-    icon: 'CreditCardIcon',
-    i18n: 'List'
+    url: "/billing",
+    name: "Billing",
+    slug: "app-user-list",
+    icon: "CreditCardIcon",
+    i18n: "List"
   },
   {
     url: "/complaint",
@@ -116,12 +116,6 @@ export default [
         i18n: 'View-account',
         icon: 'SettingsIcon'
       },
-      // {
-      //   url: "/sponsor/profile",
-      //   name: "Sponsor Profile",
-      //   slug: "app-user-view",
-      //   icon: "UserIcon",
-      // },
     ]
   },
 
