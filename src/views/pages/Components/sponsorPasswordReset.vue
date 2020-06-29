@@ -49,27 +49,38 @@
 
         methods:{
             async validate(){
-                if(await this.$refs.passwordReset.validate())
-                try{
-                    this.$vs.loading();
-                    this.data.email = this.sponsor.user.email
-                    await this.$store.dispatch("updatePassword", this.data)
+                if(this.data.password === this.data.password_confirmation){
+                    if(await this.$refs.passwordReset.validate())
+                    try{
+                        this.$vs.loading();
+                        this.data.email = this.sponsor.user.email
+                        await this.$store.dispatch("updatePassword", this.data)
+                        this.$vs.notify({
+                        title: "Password Changed",
+                        text: "You have successfully changed your password",
+                        color: "warning",
+                        position: "top-right"
+                        });
+                        this.$vs.loading.close();
+                    }catch(e){
+                        this.$vs.loading.close();
+                        this.$vs.notify({
+                        title: "Password reset failed",
+                        text: "Something is wrong please reload and try again",
+                        color: "danger",
+                        position: "top-right"
+                        });
+                        console.log(e)
+                    }
+                }else{
                     this.$vs.notify({
-                    title: "Password Changed",
-                    text: "You have successfully changed your password",
-                    color: "warning",
-                    position: "top-right"
-                    });
-                }catch(e){
-                    this.$vs.loading.close();
-                    this.$vs.notify({
-                    title: "Password reset failed",
-                    text: "Something is wrong please reload and try again",
+                    title: "Password Does not match",
+                    text: "Your new password does not match",
                     color: "danger",
                     position: "top-right"
                     });
-                    console.log(e)
                 }
+                
                 
             }
         },

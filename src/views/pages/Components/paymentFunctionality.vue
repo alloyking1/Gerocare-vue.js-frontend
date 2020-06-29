@@ -74,7 +74,7 @@ export default {
         visitCost(){
 
             this.paymentDetails.service_id = this.service.id
-			let visits = parseInt(this.paymentDetails.no_of_visit) || 1;
+			let visits = parseInt(this.paymentDetails.no_of_visits) || 1;
 			let months = parseInt(this.paymentDetails.sub_duration) || 1;
 			let amount = this.service.amount;
         
@@ -83,11 +83,12 @@ export default {
 			this.visitCostSum = total;
             this.paymentDetails.visitCostSum = this.visitCostSum
             this.paymentDetails.visit = visits
-            console.log(this.service)
+            
 		
 		},
 
         emitPaymentDetails() {
+            console.log(this.paymentDetails)
             this.$emit('payment-details', this.paymentDetails);
         }
     }

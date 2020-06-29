@@ -209,7 +209,7 @@
 									<div class="container">
 										<div class="vx-row">
 											
-											<div class="w-full pointer" @click="fetchServices">
+											<div class="w-full pointer">
 												<vs-collapse>
 													<vs-collapse-item icon-arrow="none">
 														<div slot="header">
@@ -307,8 +307,8 @@
 import { FormWizard, TabContent } from "vue-form-wizard";
 import "vue-form-wizard/dist/vue-form-wizard.min.css";
 import { ValidationProvider, ValidationObserver } from "vee-validate";
-import {createPatients} from '../../../api/sponsor/patient.api'
-import { MapActions, mapState } from 'vuex'
+// import {createPatients} from '../../../api/sponsor/patient.api'
+import { mapState } from 'vuex'
 import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue' 
 import PaymentComponent from '../Components/paymentFunctionality' 
 
@@ -400,18 +400,6 @@ export default {
 
 		generateFormData(){
 			const form = new FormData;
-			// Add other form field
-			// form.append('subscription', this.patients.no_of_visits);
-			// form.append('amount', parseInt(this.visitCostSum)*100);
-
-			// services
-			// if(this.patients.type === 'single'){
-			// 	form.append('service_id', 1) // TODO:: Set Service ID from API
-
-			// }else if(this.patients.type === 'couple'){
-			// 	form.append('service_id', 2)
-			// }
-
 			form.append('payer', 'patient')
 			for(const key in this.patients){
 				if(this.patients.hasOwnProperty(key)){
@@ -429,25 +417,22 @@ export default {
 			data.data = patients
 			this.$store.dispatch('createNewPatient', data)
 		},
-
-		async fetchServices(){
-			const services = await this.$store.dispatch('fetchServices')
-			return services
- 		},
-
+		// async fetchServices(){
+		// 	const services = await this.$store.dispatch('fetchServices')
+		// 	return services
+ 		// },
 		getService(e){
-			console.log(this.$store.getters.getServiceByType(e))
+			// console.log(this.$store.getters.getServiceByType(e))
 			this.service = this.$store.getters.getServiceByType(e)
 		},
 
 		setPaymentDetails(paymentDetails){
-			console.log(paymentDetails)
 			this.patients.amount = paymentDetails.visitCostSum*100
 			this.patients.subscription = paymentDetails.no_of_visits
+			this.patients.no_of_visits = paymentDetails.no_of_visits
 			this.patients.service_id = paymentDetails.service_id
 			this.patients.service_id = paymentDetails.service_id
-			this.patients.visit_count = paymentDetails.visit
-			console.log(this.patients.visit_count)
+			this.patients.pay_action = paymentDetails.pay_action
 		},
 
 		async validateFirstStep(){
@@ -514,9 +499,9 @@ export default {
 		PaymentComponent
   	},
 
-	created(){
-		this.fetchServices()
-	}
+	// created(){
+	// 	this.fetchServices()
+	// }
 
 }
 </script>
