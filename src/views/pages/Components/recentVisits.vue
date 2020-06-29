@@ -49,7 +49,7 @@
                             {{tr.status}}
                         </vs-td>
                         <vs-td :data="tr.report">
-                            <vs-button size="small">View</vs-button>
+                            <vs-button size="small" @click="fetchEachAppointment(tr.id)">View</vs-button>
                         </vs-td>
                         </vs-tr>
                     </template>
@@ -57,17 +57,47 @@
 
                 </vs-table>
             </vx-card>
-            
         </div>
+
+        <div class="view">
+            <vs-popup
+                classContent="popup-example"
+                title="Medical Request"
+                :active.sync="popupActive">
+                
+                <!-- <h1>{{eachVisit}}</h1> -->
+                <popUpInner :data='eachVisit'></popUpInner>
+                
+
+            </vs-popup>
+            </div>
     </div>
 </template>
 
 <script>
-import {mapState} from 'vuex';
+import {mapState, mapGetters} from 'vuex';
+import popUpInner from './popUpInner'
 export default {
+    data(){
+        return {
+            popupActive: false,
+            eachVisit:{}
+        }
+    },
     
     computed:{
-        ...mapState(['appointments'])
+        ...mapState(['appointments']),
     },
+
+    methods:{
+        fetchEachAppointment(id){
+            const res = this.$store.getters.getAppointmentById(id)
+            this.eachVisit = res
+            this.popupActive = true;
+        }
+    },
+    components:{
+        popUpInner
+    }
 }
 </script>

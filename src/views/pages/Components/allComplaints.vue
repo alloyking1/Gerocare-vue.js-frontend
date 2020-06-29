@@ -43,12 +43,45 @@
               {{ tr.role }}
             </vs-td>
             <vs-td :data="tr.report">
-              <vs-button size="small">View</vs-button>
+              <vs-button size="small" @click="getComplaintById(tr.id)">View</vs-button>
             </vs-td>
           </vs-tr>
         </template>
       </vs-table>
     </vx-card>
+
+
+    <vs-popup classContent="popup-example" title="Medical Request" :active.sync="popupActive">
+      <vx-card>
+        <div class="flex justify-between flex-wrap">
+                            
+        <h6>APPOINTMENT DATE:</h6>
+        <p>{{complaintData.date_created || ""}}</p>
+        <vs-divider />
+        <h6>SUBJECT:</h6>
+        <p>{{ complaintData.subject || ""}}</p>
+        <vs-divider />
+        <h6>STATUS :</h6>
+        <p>{{ complaintData.comment || "" }}</p>
+        <vs-divider />
+        <h6>STATUS :</h6>
+        <p>{{ complaintData.role || "" }}</p>
+        <vs-divider />
+        <h6>SENDER :</h6>
+        <!-- <p>{{ complaintData.user.name || "" }}</p> -->
+        <vs-divider />
+        </div>
+        <div class="flex justify-between flex-wrap">
+        <vs-button
+            class="w-full mt-6 cutomBtn"
+            style="background: #E65252 !important; border-radius:55px;"
+            @click=""
+            >Delete</vs-button
+        >
+        </div>
+      </vx-card>
+    </vs-popup>
+
   </div>
 </template>
 
@@ -57,23 +90,28 @@ import { mapState } from "vuex";
 import helper from "../../../helpers/helper";
 
 export default {
+  data(){
+    return{
+      popupActive:false,
+      complaintData:{}
+    }
+  },
   computed: {
     ...mapState(["complaint"])
   },
 
   methods: {
-    async fetch() {
-      const data = { id: this.$store.state.user.sponsor.id };
-      await this.$store.dispatch("fetchComplaint", data);
-    },
-
     prefix(text, length, suffix) {
       return helper.textPrefix(text, length, suffix);
+    },
+
+    getComplaintById(id){
+      const res = this.$store.getters.getComplaintById(id)
+      this.complaintData = res
+      this.popupActive = true
+      console.log(res)
     }
   },
 
-  created() {
-    this.fetch();
-  }
 };
 </script>

@@ -1,61 +1,62 @@
 <template>
   <div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
-    <!-- <vx-card :title="patient.name" @click="viewPatient(patient.id)">
-      <div class="vx-row">
-        <div class="vx-col w-full sm:w-1/3 md:w-1/3  mb-base">
-          <vs-chip color="success">{{ patient.status || 'Null' }}</vs-chip>
-          <p style="font-size:10px; color:#9DCB47; padding-top:35px">
-            {{ visit_count }}
-          </p>
-        </div>
+      <!-- <vx-card :title="patient.name" @click="viewPatient(patient.id)">
+        <div class="vx-row">
+          <div class="vx-col w-full sm:w-1/3 md:w-1/3  mb-base">
+            <vs-chip color="success">{{ patient.status || 'Null' }}</vs-chip>
+            <p style="font-size:10px; color:#9DCB47; padding-top:35px">
+              {{ visit_count }}
+            </p>
+          </div>
 
-        <div class="vx-col w-full sm:w-2/3 md:w-2/3 mb-base">
-          <vs-avatar v-if="patient.avatar"
-            class="mx-auto mb-6 block"
-            size="47px"
-            :src="patient.avatar"
-          />
+          <div class="vx-col w-full sm:w-2/3 md:w-2/3 mb-base">
+            <vs-avatar v-if="patient.avatar"
+              class="mx-auto mb-6 block"
+              size="47px"
+              :src="patient.avatar"
+            />
+            <vs-avatar v-else
+              class="mx-auto mb-6 block"
+              size="47px"
+              :text="patient.name"
+            />
+
+          </div>
+        </div>
+      </vx-card> -->
+
+
+      <vx-card class="p-2" @click="viewPatient(patient.id)">
+          <vs-avatar class="mx-auto mb-6 block" v-if="patient.avatar" size="80px"  :src="patient.avatar" />
           <vs-avatar v-else
             class="mx-auto mb-6 block"
             size="47px"
             :text="patient.name"
           />
-
-        </div>
-      </div>
-    </vx-card> -->
-
-
-            <vx-card class="p-2" @click="viewPatient(patient.id)">
-                <vs-avatar class="mx-auto mb-6 block" v-if="patient.avatar" size="80px"  :src="patient.avatar" />
-                <vs-avatar v-else
-                  class="mx-auto mb-6 block"
-                  size="47px"
-                  :text="patient.name"
-                />
-                <div class="text-center">
-                    <h4>{{ patient.name || 'Null' }}</h4>
-                    <p class="text-grey">{{ visit_count }}</p>
-                </div>
-                <!-- <div class="flex justify-between flex-wrap">
-                    <vs-button class="mt-4 mr-2 shadow-lg" type="gradient" color="#7367F0" gradient-color-secondary="#CE9FFC">{{ card_4.btn_1_text }}</vs-button>
-                    <vs-button class="mt-4" type="border" color="#b9b9b9">{{ card_4.btn_2_text }}</vs-button>
-                </div>--> 
-                <template slot="footer">
-                    <!-- <vs-divider /> -->
-                    <div class="flex justify-between">
-                        <!-- <span class="flex items-center">
-                            <feather-icon :icon="card_4.footer_text_1_icon" svgClasses="h-5 w-5 text-warning stroke-current" />
-                            <span class="ml-2">{{ visit_count || 0 }}</span>
-                        </span>
-                        <span class="flex items-center">
-                            <feather-icon :icon="card_4.footer_text_2_icon" svgClasses="h-5 w-5 text-primary stroke-current" />
-                            <span class="ml-2">{{ card_4.footer_text_2 }}</span>
-                        </span> -->
-                    </div>
-                </template>
-            </vx-card>
-        <!-- </div> -->
+          <div class="text-center">
+              <h4>{{ patient.name || 'Null' }}</h4>
+              <p class="text-grey">{{ visit_count }}</p>
+          </div>
+          <div class="flex justify-between flex-wrap">
+              <!-- <vs-button class="mt-4 mr-2 shadow-lg cutomBtn" type="gradient" color="#7367F0" gradient-color-secondary="#CE9FFC">Edit</vs-button>
+              <vs-button class="mt-4 cutomBtn" type="border" color="#b9b9b9">Delete</vs-button> -->
+          </div> 
+          <template slot="footer">
+              <vs-divider />
+              <div class="flex justify-between">
+                  <span class="flex items-center">
+                      <feather-icon icon="BellIcon" svgClasses="h-5 w-5 text-warning stroke-current" />
+                      <span class="ml-2">{{ visit_count || 0 }}</span>
+                  </span>
+                  <span class="flex items-center">
+                      <feather-icon icon="AlertCircleIcon" svgClasses="h-5 w-5 text-primary stroke-current" />
+                      <span class="ml-2">{{ patient.status || 'Null' }}</span>
+                      
+                  </span>
+              </div>
+          </template>
+      </vx-card>
+    <!-- </div> -->
 
 
 
@@ -174,6 +175,7 @@
   </div>
   </div>
 </template>
+
 <script>
 import {
   findPatient,

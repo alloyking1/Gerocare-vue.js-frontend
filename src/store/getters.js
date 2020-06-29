@@ -55,6 +55,14 @@ const getters = {
     return state.medical_requests.find(
       medical_request => medical_request.id === id
     );
+  },
+
+  getAppointmentById: (state) => (id) => {
+    return state.appointments.find(appointment => appointment.id === id)
+  },
+
+  getComplaintById: (state) => (id) => {
+    return state.complaint.find(complaint => complaint.id === id)
   }
 };
 
