@@ -7,21 +7,21 @@ import httpsClient from "../httpClient";
  *
  */
 
-export async function getSponsor(id){
-    const res = await httpsClient.get(`/sponsors/${id}`);
-    return res;
+export async function getSponsor(id) {
+  const res = await httpsClient.get(`/sponsors/${id}`);
+  return res;
 }
 
 // get sponsors appointments
-export async function getSponsorAppointment(id){
-    const response = await httpsClient.get(`/sponsors/${id}/appointments`);
-    return response;
+export async function getSponsorAppointment(id) {
+  const response = await httpsClient.get(`/sponsors/${id}/appointments`);
+  return response;
 }
 
 // get sponsor precription
-export async function getSponsorPrescription(id){
-    const res = await httpsClient.get(`/sponsors/${id}/prescriptions`);
-    return res;
+export async function getSponsorPrescription(id) {
+  const res = await httpsClient.get(`/sponsors/${id}/prescriptions`);
+  return res;
 }
 
 /**
@@ -31,8 +31,12 @@ export async function getSponsorPrescription(id){
  *
  */
 
-export async function updateSponsor(id, sponsor){
-    const res = await httpsClient.patch(`/sponsors/${id}`, sponsor);
-    return res;
+export async function updateSponsor(id, sponsor) {
+  const res = await httpsClient.patch(`/sponsors/${id}/update`, sponsor);
+  return res;
 }
 
+/**change sponsors password */
+export async function passwordReset(value) {
+  return await httpsClient.post(`/password/reset`, value);
+}

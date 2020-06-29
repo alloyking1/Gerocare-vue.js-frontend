@@ -10,7 +10,12 @@ import PatientRepository from "../api/patients/PatientRepository";
 import SubscriptionRepository from "../api/patients/SubscriptionRepository";
 import complaint from "../api/sponsor/complaint.api";
 import auth from "../api/auth.api";
-import { getSponsorPrescription, getSponsorAppointment } from "../api/sponsor/sponsor.api";
+import {
+  getSponsorPrescription,
+  getSponsorAppointment,
+  updateSponsor,
+  passwordReset
+} from "../api/sponsor/sponsor.api";
 
 const actions = {
   // Vertical NavMenu
@@ -47,44 +52,44 @@ const actions = {
   // /////////////////////////////////////////////
 
   async updateUserInfo({ commit }, payload) {
-    const res = await auth.login(payload)
+    const res = await auth.login(payload);
     commit("UPDATE_USER_INFO", res.data);
-    return res
+    return res;
   },
 
   async registerSponsor(ctx, payload) {
-    const res = await auth.register(payload)
-    return res
+    const res = await auth.register(payload);
+    return res;
   },
 
   /**Logout */
   async LogOutIcon() {
-    const res = await auth.logOut()
-    return res
+    const res = await auth.logOut();
+    return res;
   },
 
   /**forgot password request */
   async forgetPassword({ commit }, payload) {
-    const res = await auth.passwordReset(payload)
-    return res
+    const res = await auth.passwordReset(payload);
+    return res;
   },
 
   /**password reset */
   async resetPassword({ commit }, payload) {
-    const res = await auth.RequestNewReset(payload)
-    return res
+    const res = await auth.RequestNewReset(payload);
+    return res;
   },
 
   /**token refresh action */
   async refreshTokenAction({ commit }, data) {
-    const res = await auth.TokenRefresh(data)
+    const res = await auth.TokenRefresh(data);
     // localStorage.removeItem('key')
     // this.replaceState({})
     if (res.data) {
       commit("UPDATE_USER_INFO", res.data);
-      console.log(res.data)
+      console.log(res.data);
     }
-    return res
+    return res;
   },
 
   updateSponsorInfo({ commit }, payload) {
@@ -141,10 +146,9 @@ const actions = {
     const res = await SubscriptionRepository.fetchSubscriptions(id);
     const { data } = res.data;
     if (data) {
-
       //Check for Subscription with Teleconsultation
-      const teleconsultations = data.filter((subscription) => {
-        return subscription.service.code == "GC-HV-01" //TODO: Get Code from .env
+      const teleconsultations = data.filter(subscription => {
+        return subscription.service.code == "GC-HV-01"; //TODO: Get Code from .env
       });
 
       if (teleconsultations) {
@@ -152,8 +156,8 @@ const actions = {
       }
 
       //Check for Subscription with ON-Demand
-      const on_demands = data.filter((subscription) => {
-        return subscription.service.code == "GC-HV-02" //TODO: Get Code from .env
+      const on_demands = data.filter(subscription => {
+        return subscription.service.code == "GC-HV-02"; //TODO: Get Code from .env
       });
 
       if (on_demands) {
@@ -178,6 +182,19 @@ const actions = {
     //commit
     commit("UPDATE_COMPLAINT_INFO", res.data.data);
     return res;
+  },
+
+  /**sponsor profile update */
+  async updateProfile({ commit }, { id, data: data1 }) {
+    const res = await updateSponsor(id, data1);
+    const { data } = res.data;
+    commit("UPDATE_SPONSOR_PROFILE", data);
+    return res;
+  },
+
+  /**change password */
+  async updatePassword(ctx, data) {
+    return await passwordReset(data);
   }
 };
 

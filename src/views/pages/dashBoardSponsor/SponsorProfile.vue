@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="vx-row">
-            <div class="vx-col w-full sm:w-1/2 md:w-2/4 lg:w-2/4 xl:w-2/4 mb-base">
+            <div class="vx-col w-full sm:w-2/2 md:w-4/4 lg:w-4/4 xl:w-4/4 mb-base">
                 <vx-card class="p-3">
                     <div class="flex justify-between text-center mt-4" slot="no-body-bottom"> 
                         <div class="w-1/2 p-20 pt-20 border border-solid d-theme-border-grey-light border-r-1 border-b-0 border-l-0 border-t-0">
@@ -12,7 +12,8 @@
                         </div>
                         <div class="w-2/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0 border-t-0 p-3">
                             <div>
-                            <h4 class="text-center">Primary Contact</h4>
+                            <!-- <h4 class="text-center">Primary Contact</h4> -->
+                            <h4 class="text-center">Sponsor Profile</h4>
                             <div class="mb-4 mt-base">
                                 <div class="text-center">
                                     <small>Profile Details</small>
@@ -43,7 +44,7 @@
                     </div>
                 </vx-card>
             </div>
-            <div class="vx-col w-full sm:w-1/2 md:w-2/4 lg:w-2/4 xl:w-2/4 mb-base">
+            <!-- <div class="vx-col w-full sm:w-1/2 md:w-2/4 lg:w-2/4 xl:w-2/4 mb-base">
                 <vx-card>
                     <div>
                         <h4 class="text-center">Secondary Contact</h4>
@@ -73,7 +74,7 @@
                         </div>
                     </div>
                 </vx-card>
-            </div>
+            </div> -->
         </div>
         <div class="vx-row">
 
@@ -107,7 +108,7 @@
         <div>
             <vs-popup :active.sync="popup.profile" title="Edit Profile">
                 <keep-alive>
-                    <sponsorProfileUpdate></sponsorProfileUpdate>
+                    <sponsorProfileUpdate :data="this.sponsorEdit"></sponsorProfileUpdate>
                 </keep-alive>
             </vs-popup>
         

@@ -82,6 +82,7 @@ export default {
 			let total = cost * months;
 			this.visitCostSum = total;
             this.paymentDetails.visitCostSum = this.visitCostSum
+            this.paymentDetails.visit = visits
             console.log(this.service)
 		
 		},

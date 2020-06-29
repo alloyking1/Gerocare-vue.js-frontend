@@ -432,8 +432,23 @@ export default {
 
 		async fetchServices(){
 			const services = await this.$store.dispatch('fetchServices')
-			console.log(this.services = services)
+			return services
  		},
+
+		getService(e){
+			console.log(this.$store.getters.getServiceByType(e))
+			this.service = this.$store.getters.getServiceByType(e)
+		},
+
+		setPaymentDetails(paymentDetails){
+			console.log(paymentDetails)
+			this.patients.amount = paymentDetails.visitCostSum*100
+			this.patients.subscription = paymentDetails.no_of_visits
+			this.patients.service_id = paymentDetails.service_id
+			this.patients.service_id = paymentDetails.service_id
+			this.patients.visit_count = paymentDetails.visit
+			console.log(this.patients.visit_count)
+		},
 
 		async validateFirstStep(){
 
@@ -488,20 +503,6 @@ export default {
 			this.visitCostSum = total;
 		
 		},
-
-		getService(e){
-			console.log(this.$store.getters.getServiceByType(e))
-			this.service = this.$store.getters.getServiceByType(e)
-		},
-
-		setPaymentDetails(paymentDetails){
-			console.log(paymentDetails)
-			this.patients.amount = paymentDetails.visitCostSum*100
-			this.patients.subscription = paymentDetails.no_of_visits
-			this.patients.service_id = paymentDetails.service_id
-			// this.patients.service_id = paymentDetails.service_id
-			// this.patients.visit_count = paymentDetails.no_of_visits
-		}
 	},
 
 	components: {

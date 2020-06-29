@@ -64,11 +64,7 @@
                 classContent="popup-example"
                 title="Medical Request"
                 :active.sync="popupActive">
-                
-                <!-- <h1>{{eachVisit}}</h1> -->
                 <popUpInner :data='eachVisit'></popUpInner>
-                
-
             </vs-popup>
             </div>
     </div>
