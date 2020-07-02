@@ -162,6 +162,16 @@ const mutations = {
 
   UPDATE_SPONSOR_PROFILE(state, payload) {
     state.user.sponsor = payload;
+  },
+
+  UPDATE_ELDERLY_STATE(state, id){
+    const index = state.user.sponsor.patients.findIndex(patient => patient.id == id)
+    state.user.sponsor.patients.splice(index, 1);
+  },
+
+  UPDATE_EDITED_BENEFICIARY(state, id, payload){
+    const result = state.user.sponsor.patients.find(patient => patient.id == id)
+    result = payload
   }
 };
 

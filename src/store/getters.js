@@ -31,6 +31,12 @@ const getters = {
     return "testing";
   },
 
+  DeleteElderly: (state) => (id) => {
+    const elderly = state.user.sponsor.patient.find(patient => patient.id === id)
+    elderly.delete(elderly)
+    return "deleted" 
+  },
+
   getElderlyById: state => id => {
     return state.user.sponsor.patients.find(patient => patient.id === id);
   },
@@ -63,7 +69,8 @@ const getters = {
 
   getComplaintById: (state) => (id) => {
     return state.complaint.find(complaint => complaint.id === id)
-  }
+  },
+
 };
 
 export default getters;

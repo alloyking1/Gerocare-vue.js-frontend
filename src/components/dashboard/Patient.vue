@@ -36,10 +36,6 @@
           <div class="text-center">
               <h4>{{ patient.name || 'Null' }}</h4>
               <p class="text-grey">{{ visit_count }}</p>
-          </div>
-          <div class="flex justify-between flex-wrap">
-              <!-- <vs-button class="mt-4 mr-2 shadow-lg cutomBtn" type="gradient" color="#7367F0" gradient-color-secondary="#CE9FFC">Edit</vs-button>
-              <vs-button class="mt-4 cutomBtn" type="border" color="#b9b9b9">Delete</vs-button> -->
           </div> 
           <template slot="footer">
               <vs-divider />
@@ -51,7 +47,6 @@
                   <span class="flex items-center">
                       <feather-icon icon="AlertCircleIcon" svgClasses="h-5 w-5 text-primary stroke-current" />
                       <span class="ml-2">{{ patient.status || 'Null' }}</span>
-                      
                   </span>
               </div>
           </template>
@@ -183,6 +178,7 @@ import {
   deletePatient,
   createPatients
 } from "../../api/sponsor/patient.api";
+import { mapState } from 'vuex';
 export default {
     props:['patient'],
 
@@ -196,69 +192,66 @@ export default {
     },
 
     computed: {
-        visit_count(){
-            return this.patient.visit_count <= 1 ? this.patient.visit_count + " Visit left" : this.patient.visit_count + " Visits left"
-        },
+      visit_count(){
+        return this.patient.visit_count <= 1 ? this.patient.visit_count + " Visit left" : this.patient.visit_count + " Visits left"
+      },
+
+      ...mapState({
+        sponsor: state => state.user.sponsor
+      }),
     },
 
     methods: {
-        viewPatient(itemId) {
-            let result = this.$store.getters.getElderlyById(itemId);
-            this.singleElderly = result;
-            this.popupActive2 = true;
-        },
+      viewPatient(itemId) {
+        let result = this.$store.getters.getElderlyById(itemId);
+        this.singleElderly = {...result};
+        this.popupActive2 = true;
+      },
 
-        removePatient(itemId) {
+      async removePatient(itemId) {
+        const data = {}
+        data.id = this.sponsor.id
+        data.patientId = itemId
+        
+        this.$vs.loading();
+        if(this.$store.dispatch("deleteBeneficiary", data)){
+          this.popupActive2 = false
+        }
+        this.$vs.loading.close()
+      
+  
+      },
 
-      confirm();
+      async edit(patientId) {
+        // this.$vs.loading();
+        // editPatient(this.sponsor.id, patientId, this.singleElderly)
+        //   .then(res => {
+        //     this.$vs.loading.close();
+        //     this.$vs.notify({
+        //       title: "Edited",
+        //       text: "Patient edited successfully",
+        //       color: "warning",
+        //       position: "top-right"
+        //     });
+        //   })
+        //   .catch(err => {
+        //     this.$vs.loading.close();
+        //     this.$vs.notify({
+        //       title: "Error",
+        //       text: "something is wrong. Reload and try again",
+        //       color: "danger",
+        //       position: "top-right"
+        //     });
+        //   });
+        const data = {}
+        data.detail = this.singleElderly,
+        data.id = this.sponsor.id,
+        data.patientId = patientId
 
-      this.$vs.loading();
-      deletePatient(this.sponsorId, itemId)
-        .then(res => {
-          // this.popupActivo5 = true;
-          this.$vs.loading.close();
-          this.$vs.notify({
-            title: "Deleted",
-            text: "User deleted successfully",
-            color: "warning",
-            position: "top-right"
-          });
-        })
-        .catch(err => {
-          this.$vs.loading.close();
-          this.$vs.notify({
-            title: "Error",
-            text: "something is wrong. Reload and try again",
-            color: "danger",
-            position: "top-right"
-          });
-        });
-    },
+        console.log(await this.$store.dispatch("editElderly", data))
 
-
-
-    edit(patientId) {
-      this.$vs.loading();
-      editPatient(this.sponsorId, patientId, this.singleElderly)
-        .then(res => {
-          this.$vs.loading.close();
-          this.$vs.notify({
-            title: "Edited",
-            text: "Patient edited successfully",
-            color: "warning",
-            position: "top-right"
-          });
-        })
-        .catch(err => {
-          this.$vs.loading.close();
-          this.$vs.notify({
-            title: "Error",
-            text: "something is wrong. Reload and try again",
-            color: "danger",
-            position: "top-right"
-          });
-        });
-    }
+        // console.log(this.singleElderly, patientId)
+      }
     },
 }
 </script>

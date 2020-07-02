@@ -7,6 +7,7 @@
   Author URL: http://www.themeforest.net/user/pixinvent
 ==========================================================================================*/
 import PatientRepository from "../api/patients/PatientRepository";
+import { deletePatient, editPatient } from "../api/sponsor/patient.api";
 import SubscriptionRepository from "../api/patients/SubscriptionRepository";
 import complaint from "../api/sponsor/complaint.api";
 import auth from "../api/auth.api";
@@ -195,6 +196,25 @@ const actions = {
   /**change password */
   async updatePassword(ctx, data) {
     return await passwordReset(data);
+  },
+
+  /**Delete elderly */
+  async deleteBeneficiary({ commit }, { id, patientId }) {
+    const res = await deletePatient(id, patientId);
+    if (res) {
+      commit("UPDATE_ELDERLY_STATE", patientId);
+    }
+  },
+
+  /**Edit elderly */
+  async editElderly({ commit }, { id, patientId, detail }) {
+    try {
+      const res = await editPatient(id, patientId, detail);
+      commit("UPDATE_EDITED_BENEFICIARY", patientId, res);
+      return res;
+    } catch (e) {
+      return e;
+    }
   }
 };
 
