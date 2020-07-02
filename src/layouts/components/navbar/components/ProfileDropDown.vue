@@ -75,7 +75,7 @@ export default {
   methods: {
     logout() {
       if (this.$store.dispatch("LogOutIcon")) localStorage.removeItem("key");
-      // this.$store.replaceState({})
+      this.$store.replaceState({})
       //modulerized state
       // this.$store.replaceState({
       //   user: {}

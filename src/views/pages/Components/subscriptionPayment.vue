@@ -1,6 +1,7 @@
 <template>
     <div>
         <div class="vx-col w-full sm:w-3/3 md:w-3/3 mb-base">
+            
             <vx-card title="" class="p-2">
                 <div class="container pl-5 pr-5 pt-5">
                     <h3 class="p-1">New Subscription</h3>
@@ -28,9 +29,9 @@
                     <div class="container">
                         <div class="vx-row">
                             <div class="vx-col md:w-2/2 w-full mt-2">
-                                <vs-select class="w-full select-large" placeholder="Services" v-model="paymentDetails.service_id" @change="visitCost">
+                                <!-- <vs-select class="w-full select-large" placeholder="Services" v-model="paymentDetails.service_id" @change="visitCost">
                                     <vs-select-item :key="index" :value="item.id" :text="item.name" v-for="(item,index) in service" class="w-full" />
-                                </vs-select>
+                                </vs-select> -->
                             </div>
 
                             <div class="vx-col md:w-2/2 w-full mt-2">
@@ -72,9 +73,11 @@
 
 <script>
 export default {
+    props:['serviceProp'],
     data(){
         return {
-            paymentDetails:{},
+            paymentDetails:{
+            },
             visitCostSum:0,
             payment:'',
             elderly:'',
@@ -107,11 +110,10 @@ export default {
 			let visits = this.paymentDetails.no_of_visits || 0;
 			let months = this.paymentDetails.sub_duration || 0;
 			let amount = 0;
-
-            // console.log(this.paymentDetails.service_id)
-            const serviceCost = this.$store.getters.getServiceById(this.paymentDetails.service_id)
-            
-            amount = serviceCost.amount
+            const service = this.$store.getters.getServiceById(this.serviceProp)
+            console.log(service)
+            this.paymentDetails.service_id = service.id
+            amount = service.amount
 			let cost = visits * amount;
 			let total = cost * months;
 			this.visitCostSum = total;
@@ -158,9 +160,9 @@ export default {
             this.$store.dispatch('createSubscription', data)
         },
 
-        // async fetchSubscriptions(){
-        //     await this.$store.dispatch('fetchSubscriptions')
-        // }
+        async fetchSubscriptions(){
+            await this.$store.dispatch('fetchSubscriptions')
+        }
 
     },
 

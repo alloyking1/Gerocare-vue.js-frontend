@@ -7,6 +7,7 @@
                     <template slot="no-body">
                         <div class="p-8 clearfix">
                             <vs-table  pagination max-items="3" stripe search :data="subscriptions">
+                            <!-- <vs-table  pagination max-items="3" stripe search :data="subByName"> -->
                                 <template slot="header">
                                     <h3>
                                     Subscription
@@ -77,6 +78,7 @@
 
 import {  mapState } from 'vuex'
 export default {
+    props:['serviceList'],
     computed:{
         ...mapState(['subscriptions'])
     },
@@ -88,6 +90,17 @@ export default {
             if (status === 'canceled')  return 'danger'
             return 'warning'
         },
+
+        async filterTable(serviceName){
+            // const res = await this.$store.getters.getServiceByName(serviceName)
+            // this.subByName = res
+            console.log(serviceName)
+            
+        }
+    },
+
+    created(){
+        this.filterTable(this.serviceList)
     }
 }
 </script>

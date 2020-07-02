@@ -6,55 +6,34 @@
             <vx-card class="mt-2 mb-2">
                 <h3 style="font-size:15px" class="pb-5 ml-5">Category of Services</h3>
 
-                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer" @click="popupActivo=true" >
-                    <statistics-card-line
-                    hideChart
-                    class="mb-base p-3"
-                    icon="ArrowRightIcon" 
-                    icon-right
-                    statistic= "Home Visit"
-                    statisticTitle=""/>
-			    </div> 
-                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer">
-                    <statistics-card-line
-                    hideChart
-                    class="mb-base p-3"
-                    icon="ArrowRightIcon" 
-                    icon-right
-                    statistic= "Teleconsultation"
-                    statisticTitle="" />
-			    </div> 
-                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer">
-                    <statistics-card-line
-                    hideChart
-                    class="mb-base p-3"
-                    icon="ArrowRightIcon" 
-                    icon-right
-                    statistic= "On-demand Visit"
-                    statisticTitle="" />
-			    </div> 
-                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer">
-                    <statistics-card-line
-                    hideChart
-                    class="mb-base p-3"
-                    icon="ArrowRightIcon" 
-                    icon-right
-                    statistic= "Other Services"
-                    statisticTitle="" />
-			    </div> 
+                <div v-for="(item, i) in service" :key="i">
+
+                    <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer" @click="bindServiceId(item)" >
+                        <statistics-card-line
+                        hideChart
+                        class="mb-base p-3"
+                        icon="ArrowRightIcon" 
+                        icon-right
+                        :statistic= "item.name"
+                        statisticTitle=""/>
+
+                        
+                    </div>
+                </div>
+
             </vx-card>
             
         </div>
 
         <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
             <div class="container w-full">
-                <subscriptionHistory></subscriptionHistory>
+                <subscriptionHistory :subByName="serviceList"></subscriptionHistory>
             </div>
         </div>
 
         <div>
             <vs-popup :active.sync="popupActivo">
-                <subscriptionPayment></subscriptionPayment>
+                <subscriptionPayment :serviceProp="serviceId"></subscriptionPayment>
             </vs-popup>
         </div>
     </div>
@@ -68,21 +47,35 @@
     export default{
         data(){
             return{
-                popupActivo:false
+                popupActivo:false,
+                service:[],
+                serviceId:"",
+                serviceList:""
             }
+        },
+
+        methods:{
+            fetchService(){
+                let service = this.$store.state.services.data
+                this.service = service
+            },
+
+            bindServiceId(service){
+                this.popupActivo=true
+                this.serviceId = service.id
+            },   
+        },
+
+
+        created(){
+            this.fetchService()
         },
         
         components:{
             subscriptionHistory,
             subscriptionPayment,
             StatisticsCardLine,
-        },
-
-        // components:{
-        // VueApexCharts,
-		// StatisticsCardLine,
-        // recentVisits	
-	    // }
+        }
     }
 </script>
 
