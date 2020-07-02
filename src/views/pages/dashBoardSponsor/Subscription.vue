@@ -4,18 +4,44 @@
         <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
 
             <vx-card class="mt-2 mb-2">
-                <h3 style="font-size:10px" class="pb-2">SELECT A SERVICE TO SUBSCRIBE TO</h3>
-                <vs-divider></vs-divider>
-                <vs-button color="primary" type="filled" @click="popupActivo=true">Home Visits</vs-button>
-                <vs-button color="primary" type="filled" @click="popupActivo=true" class="ml-2">Book Now</vs-button>
+                <h3 style="font-size:15px" class="pb-5 ml-5">Category of Services</h3>
 
-                <vs-divider></vs-divider>
-                <p style="font-size:10px" class="pb-2">Tele-Consultation Service</p>
-                <vs-button color="success" type="filled" @click="popupActivo=true">SUBSCRIBE</vs-button>
-                <vs-divider></vs-divider>
-                
-                <p style="font-size:10px" class="pb-2">On-demand Visitation Service</p>
-                <vs-button color="warning" type="filled" @click="popupActivo=true">SUBSCRIBE</vs-button>
+                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer" @click="popupActivo=true" >
+                    <statistics-card-line
+                    hideChart
+                    class="mb-base p-3"
+                    icon="ArrowRightIcon" 
+                    icon-right
+                    statistic= "Home Visit"
+                    statisticTitle=""/>
+			    </div> 
+                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer">
+                    <statistics-card-line
+                    hideChart
+                    class="mb-base p-3"
+                    icon="ArrowRightIcon" 
+                    icon-right
+                    statistic= "Teleconsultation"
+                    statisticTitle="" />
+			    </div> 
+                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer">
+                    <statistics-card-line
+                    hideChart
+                    class="mb-base p-3"
+                    icon="ArrowRightIcon" 
+                    icon-right
+                    statistic= "On-demand Visit"
+                    statisticTitle="" />
+			    </div> 
+                <div class="vx-col w-full sm:w-2/2 md:w-2/2 lg:w-4/4 xl:w-4/4 mb-base pointer">
+                    <statistics-card-line
+                    hideChart
+                    class="mb-base p-3"
+                    icon="ArrowRightIcon" 
+                    icon-right
+                    statistic= "Other Services"
+                    statisticTitle="" />
+			    </div> 
             </vx-card>
             
         </div>
@@ -37,6 +63,7 @@
 <script>
     import subscriptionHistory from '../Components/subscriptionHistory'
     import subscriptionPayment from '../Components/subscriptionPayment'
+    import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue'
 
     export default{
         data(){
@@ -47,11 +74,20 @@
         
         components:{
             subscriptionHistory,
-            subscriptionPayment
-        }
+            subscriptionPayment,
+            StatisticsCardLine,
+        },
+
+        // components:{
+        // VueApexCharts,
+		// StatisticsCardLine,
+        // recentVisits	
+	    // }
     }
 </script>
 
 <style scoped>
-
+    .pointer{
+        cursor:pointer
+    }
 </style>

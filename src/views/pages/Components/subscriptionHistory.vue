@@ -50,8 +50,9 @@
                                         {{subscription.visit_count}}
                                     </vs-td>
 
-                                    <vs-td :data="subscription.status">
-                                        {{subscription.status}}
+                                    <vs-td :data="subscription.status" class="product-order-status">
+                                        <vs-chip :color="getOrderStatusColor(subscription.status)" class="product-order-status">{{ subscription.status || "Null" }}</vs-chip>
+                                        <!-- <vs-chip color="warning" class="product-order-status">{{subscription.status || "Null"}}</vs-chip> -->
                                     </vs-td>
 
                                     <vs-td :data="subscription.created_at">
@@ -79,6 +80,15 @@ export default {
     computed:{
         ...mapState(['subscriptions'])
     },
+
+    methods:{
+        getOrderStatusColor (status) {
+            if (status === 'on_hold')   return 'warning'
+            if (status === 'PATIENT') return 'success'
+            if (status === 'canceled')  return 'danger'
+            return 'warning'
+        },
+    }
 }
 </script>
 
