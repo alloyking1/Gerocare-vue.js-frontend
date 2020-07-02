@@ -51,7 +51,7 @@
 
                                 <p class="p-2">AMOUNT</p>
                                 <h3 class="text-5xl p-2">N {{this.visitCostSum}}</h3>
-                                <p class="p-2">1 visit every month for 3 months</p>
+                                <p class="p-2">{{visitCounts}} visit every month for {{monthsCounts}} months</p>
                             </div>
                             </div>
 
@@ -64,7 +64,7 @@
                     </div>
                 </div>
 
-                <vs-button icon-pack="feather" @click="subscribe"  class="shadow-md w-full cutomBtn">PAY NOW</vs-button>
+                <vs-button icon-pack="feather" @click="subscribe"  class="shadow-md w-full cutomBtn" id="button-with-loading">PAY NOW</vs-button>
                 
             </vx-card>
         </div>
@@ -82,6 +82,8 @@ export default {
             payment:'',
             elderly:'',
             showResult:false,
+            visitCounts:'',
+            monthsCounts:'',
 
             visit:[
 				{name: '1/Month', value:1},
@@ -107,15 +109,14 @@ export default {
     methods:{
         visitCost(){
             
-			let visits = this.paymentDetails.no_of_visits || 0;
-			let months = this.paymentDetails.sub_duration || 0;
+			this.visitCounts = this.paymentDetails.no_of_visits || 0;
+			this.monthsCounts = this.paymentDetails.sub_duration || 0;
 			let amount = 0;
             const service = this.$store.getters.getServiceById(this.serviceProp)
-            console.log(service)
-            this.paymentDetails.service_id = service.id
+            this.paymentDetails.service_id = service.id //assing service_id a value
             amount = service.amount
-			let cost = visits * amount;
-			let total = cost * months;
+			let cost = this.visitCounts * amount;
+			let total = cost * this.monthsCounts;
 			this.visitCostSum = total;
             
 		
@@ -157,7 +158,17 @@ export default {
             let data={}
             data.id = id
             data.data=form
+
             this.$store.dispatch('createSubscription', data)
+            this.$vs.loading({
+                background: this.backgroundLoading,
+                color: this.colorLoading,
+                container: "#button-with-loading",
+                scale: 0.45
+            })
+            setTimeout( ()=> {
+                this.$vs.loading.close("#button-with-loading > .con-vs-loading")
+            }, 7000);
         },
 
         async fetchSubscriptions(){
