@@ -28,10 +28,10 @@
 
                     <div class="container">
                         <div class="vx-row">
-                            <div class="vx-col md:w-2/2 w-full mt-2">
-                                <!-- <vs-select class="w-full select-large" placeholder="Services" v-model="paymentDetails.service_id" @change="visitCost">
+                            <div class="vx-col md:w-2/2 w-full mt-2" v-if="!this.serviceProp">
+                                <vs-select class="w-full select-large" placeholder="Services" v-model="paymentDetails.service_id" @change="visitCost">
                                     <vs-select-item :key="index" :value="item.id" :text="item.name" v-for="(item,index) in service" class="w-full" />
-                                </vs-select> -->
+                                </vs-select>
                             </div>
 
                             <div class="vx-col md:w-2/2 w-full mt-2">

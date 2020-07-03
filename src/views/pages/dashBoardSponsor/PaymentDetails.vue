@@ -33,7 +33,7 @@
                 </div>
                 <vx-card>
                     <div class="flex justify-between flex-wrap">
-                        <p class="billing-text">Subscriptions</p>
+                        <p class="billing-text">Billings</p>
                         <p class="billing-inner">N6,000</p>
                         <vs-divider />
                         <p class="billing-text">Drugs</p>
@@ -56,7 +56,7 @@
                             <vs-table  pagination max-items="3" stripe search :data="users">
                                 <template slot="header">
                                     <h3>
-                                    Subscription
+                                    Billings
                                     </h3>
                                 </template>
                                 <template slot="thead">

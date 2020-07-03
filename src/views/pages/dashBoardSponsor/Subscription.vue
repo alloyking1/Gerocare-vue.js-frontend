@@ -28,7 +28,7 @@
         <div class="row mb-5">
           <vs-button color="success" type="border" @click="popupActivo = true">Add Subscription</vs-button>
         </div>
-        <subscriptionHistory :serviceList="serviceComponent"></subscriptionHistory>
+        <subscriptionHistory :subscriptions="subscriptions"></subscriptionHistory>
       </div>
     </div>
 
@@ -45,13 +45,16 @@ import subscriptionHistory from "../Components/subscriptionHistory";
 import subscriptionPayment from "../Components/subscriptionPayment";
 import StatisticsCardLine from "../../../components/statistics-cards/StatisticsCardLine.vue";
 
+import { mapState } from "vuex";
+
 export default {
   data() {
     return {
       popupActivo: false,
       service: [],
       serviceId: "",
-      serviceComponent: ""
+      serviceComponent: "",
+      subscriptions: []
     };
   },
 
@@ -63,14 +66,14 @@ export default {
 
     async bindServiceId(service) {
       this.serviceId = service.id;
-      const result = await this.$store.getters.servicesFilter(service.code);
-      console.log(result);
+      this.subscriptions = await this.$store.getters.servicesFilter(
+        service.code
+      );
     }
   },
 
   created() {
     this.fetchService();
-    // this.bindServiceId()
   },
 
   components: {

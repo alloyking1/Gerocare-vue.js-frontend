@@ -5,9 +5,26 @@
                 <vx-card class="p-3">
                     <div class="flex justify-between text-center mt-4" slot="no-body-bottom"> 
                         <div class="w-1/2 p-20 pt-20 border border-solid d-theme-border-grey-light border-r-1 border-b-0 border-l-0 border-t-0">
-                            <img src="@/assets/images/pages/gerocareAvater.svg" alt="Loading..">
-                            <div class="text-center">
-                                <h3>{{this.sponsorEdit.name}}</h3>
+                            <div class="row">
+
+                                <div class="text-center">
+                                    <!-- <img :src="sponsorEdit.avatar" alt="@/assets/images/pages/gerocareAvater.svg"> -->
+                                </div>
+
+                                <div class="con-img ml-12 p-5">
+                                    <img
+                                    key="onlineImg"
+                                    :src="sponsorEdit.avatar"
+                                    alt="@/assets/images/pages/gerocareAvater.svg"
+                                    width="400"
+                                    height="400"
+                                    class="cursor-pointer block img-responsive"
+                                    />
+                                </div>
+
+                                <div class="text-center">
+                                    <h3>{{this.sponsorEdit.name}}</h3>
+                                </div>
                             </div>
                         </div>
                         <div class="w-2/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-l-0 border-t-0 p-3">

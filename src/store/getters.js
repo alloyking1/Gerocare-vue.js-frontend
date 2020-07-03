@@ -56,20 +56,7 @@ const getters = {
   },
 
   servicesFilter: (state) => (code) => {
-    const finalResult = []
-    const serviceList = state.services.data
-
-    for (code in serviceList){
-      // const result = serviceList.find(services => services[code].code === code)
-      if(serviceList[code].code === code){
-
-        finalResult.push[serviceList[code]]
-      }
-
-    }
-
-    return finalResult
-    
+    return state.subscriptions.filter((subscription) => subscription.service.code == code)
   },
 
   getMedRequestById: state => id => {

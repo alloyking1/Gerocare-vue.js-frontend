@@ -6,11 +6,10 @@
                 <vx-card style="padding:2.5rem">
                     <template slot="no-body">
                         <div class="p-8 clearfix">
-                            <vs-table  pagination max-items="3" stripe search :data="subscriptions">
-                            <!-- <vs-table  pagination max-items="3" stripe search :data="subByName"> -->
+                            <vs-table  pagination max-items="3" stripe search :data="subscriptionData">
                                 <template slot="header">
-                                    <h3>
-                                    Subscription
+                                    <h3 v-if="subscriptionData[0].description">
+                                        {{"My services" || subscription.description }}
                                     </h3>
                                 </template>
                                 <template slot="thead">
@@ -63,9 +62,6 @@
                                 </template>
 
                             </vs-table>
-                            
-                                <!-- {{this.serviceList}} -->
-                                <vs-button size="small" @click="filterTable(serviceList)">View</vs-button>
                         </div>
                                 
                     </template>
@@ -80,10 +76,18 @@
 
 import {  mapState } from 'vuex'
 export default {
-    props:['serviceList'],
+    props:['subscriptions'],
 
-    computed:{
-        ...mapState(['subscriptions'])
+    data(){
+        return {
+            subscriptionData: [],
+        }
+    },
+
+    watch:{
+        'subscriptions':function(old){
+            this.subscriptionData = old;
+        }
     },
 
     methods:{
@@ -93,16 +97,9 @@ export default {
             if (status === 'canceled')  return 'danger'
             return 'warning'
         },
-
-        async filterTable(service){
-            console.log(service)
-            await this.$store.getters.getServiceByName(service.name)
-        }
     },
-
-    mounted(){
-        // this.filterTable(this.serviceList)
-
+    created(){
+        this.subscriptionData = this.$store.state.subscriptions;
     }
 }
 </script>
