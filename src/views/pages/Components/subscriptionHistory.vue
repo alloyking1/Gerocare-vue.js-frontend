@@ -62,8 +62,10 @@
                                     </vs-tr>
                                 </template>
 
-
                             </vs-table>
+                            
+                                <!-- {{this.serviceList}} -->
+                                <vs-button size="small" @click="filterTable(serviceList)">View</vs-button>
                         </div>
                                 
                     </template>
@@ -79,6 +81,7 @@
 import {  mapState } from 'vuex'
 export default {
     props:['serviceList'],
+
     computed:{
         ...mapState(['subscriptions'])
     },
@@ -91,16 +94,15 @@ export default {
             return 'warning'
         },
 
-        async filterTable(serviceName){
-            // const res = await this.$store.getters.getServiceByName(serviceName)
-            // this.subByName = res
-            console.log(serviceName)
-            
+        async filterTable(service){
+            console.log(service)
+            await this.$store.getters.getServiceByName(service.name)
         }
     },
 
-    created(){
-        this.filterTable(this.serviceList)
+    mounted(){
+        // this.filterTable(this.serviceList)
+
     }
 }
 </script>

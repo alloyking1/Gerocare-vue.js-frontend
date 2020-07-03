@@ -27,10 +27,6 @@ const getters = {
     return state.is_touch_device ? "div" : "VuePerfectScrollbar";
   },
 
-  findElderly: state => {
-    return "testing";
-  },
-
   DeleteElderly: (state) => (id) => {
     const elderly = state.user.sponsor.patient.find(patient => patient.id === id)
     elderly.delete(elderly)
@@ -59,8 +55,21 @@ const getters = {
     
   },
 
-  getServiceByName: (state) => (name) => {
-    return state.services.data.find(service => service.name === name)
+  servicesFilter: (state) => (code) => {
+    const finalResult = []
+    const serviceList = state.services.data
+
+    for (code in serviceList){
+      // const result = serviceList.find(services => services[code].code === code)
+      if(serviceList[code].code === code){
+
+        finalResult.push[serviceList[code]]
+      }
+
+    }
+
+    return finalResult
+    
   },
 
   getMedRequestById: state => id => {
