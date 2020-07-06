@@ -8,9 +8,9 @@
                         <div class="p-8 clearfix">
                             <vs-table  pagination max-items="3" stripe search :data="subscriptionData">
                                 <template slot="header">
-                                    <h3 v-if="subscriptionData[0].description">
-                                        {{"My services" || subscription.description }}
-                                    </h3>
+                                    <h3>
+                                        {{ title }}
+                                    </h3> 
                                 </template>
                                 <template slot="thead">
                                     <vs-th sort-key="email">
@@ -81,12 +81,14 @@ export default {
     data(){
         return {
             subscriptionData: [],
+            title:"All Services"
         }
     },
 
     watch:{
         'subscriptions':function(old){
             this.subscriptionData = old;
+            this.title = this.subscriptionData[0].description
         }
     },
 

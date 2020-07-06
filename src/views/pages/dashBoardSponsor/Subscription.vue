@@ -12,7 +12,7 @@
           >
             <statistics-card-line
               hideChart
-              class="mb-base p-3"
+              class="mb-base p-1"
               icon="ArrowRightIcon"
               icon-right
               :statistic="item.name"
