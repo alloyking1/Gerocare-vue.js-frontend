@@ -40,3 +40,8 @@ export async function updateSponsor(id, sponsor) {
 export async function passwordReset(value) {
   return await httpsClient.post(`/password/reset`, value);
 }
+
+/**fetches all billing for a sponsor */
+export async function transactions(id){
+  return await httpsClient.get(`/sponsors/${id}/transactions`)
+}

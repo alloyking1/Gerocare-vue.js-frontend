@@ -149,6 +149,13 @@ export default {
             let data = {};
             data.id = this.$store.state.user.sponsor.id;
             await this.$store.dispatch("fetchMedRequest", data);
+        },
+
+        async fetchBilling(){
+            const id = this.$store.state.user.sponsor.id
+            const data ={}
+            data.id = id
+            await this.$store.dispatch("fetchTransactions", data)
         }
 
     },
@@ -160,6 +167,7 @@ export default {
         this.fetchAppointment();
         this.fetchSubscriptions();
         this.getPrescription();
+        this.fetchBilling()
     },
 
 	components:{

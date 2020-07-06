@@ -172,6 +172,10 @@ const mutations = {
   UPDATE_EDITED_BENEFICIARY(state, id, payload){
     const result = state.user.sponsor.patients.find(patient => patient.id == id)
     result = payload
+  },
+
+  UPDATE_TRANSACTION(state, payload){
+    state.transaction = payload
   }
 };
 

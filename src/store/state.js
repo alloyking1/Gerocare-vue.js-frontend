@@ -51,7 +51,7 @@ const is_touch_device = () => {
 
 const state = {
   user: {},
-  sponsor: {},
+  // sponsor: {},
   services: {},
   medical_requests: {},
   appointments: {},
@@ -62,6 +62,7 @@ const state = {
   teleconsultations: {},
   on_demands: {},
   complaint: {},
+  transaction:{},
   AppActiveUser: userDefaults,
   bodyOverlay: false,
   isVerticalNavMenuActive: true,

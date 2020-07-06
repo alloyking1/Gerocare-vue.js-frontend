@@ -53,45 +53,53 @@
                 <vx-card>
                     <template slot="no-body">
                         <div class="p-8 clearfix">
-                            <vs-table  pagination max-items="3" stripe search :data="users">
+                            <vs-table  pagination max-items="3" stripe search :data="transactions">
                                 <template slot="header">
                                     <h3>
                                     Billings
                                     </h3>
                                 </template>
                                 <template slot="thead">
-                                    <vs-th sort-key="email">
+                                    <vs-th sort-key="date">
                                     Date
                                     </vs-th>
-                                    <vs-th sort-key="username">
+                                    <vs-th sort-key="type">
                                     Type
                                     </vs-th>
-                                    <vs-th sort-key="id">
+                                    <vs-th sort-key="name">
                                     For
                                     </vs-th>
-                                    <vs-th sort-key="id">
+                                    <vs-th sort-key="amount">
                                     Amount
                                     </vs-th>
-                                    <vs-th sort-key="id">
+                                    <vs-th sort-key="status">
                                     Status
                                     </vs-th>
                                     <vs-th sort-key="id">
-                                    Due Date
+                                    More
                                     </vs-th>
                                 </template>
 
                                 <template slot-scope="{data}">
                                     <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
-                                    <vs-td :data="data[indextr].email">
-                                        {{data[indextr].email}}
+                                    <vs-td :data="data[indextr].date">
+                                        {{tr.created_at}}
                                     </vs-td>
 
-                                    <vs-td :data="data[indextr].username">
-                                        {{data[indextr].username}}
+                                    <vs-td :data="data[indextr].type">
+                                        {{tr.service.description || "Null"}}
                                     </vs-td>
 
-                                    <vs-td :data="data[indextr].id">
-                                        {{data[indextr].id}}
+                                    <vs-td :data="data[indextr].name">
+                                        {{tr.patient.name || "..."}}
+                                    </vs-td>
+
+                                    <vs-td :data="data[indextr].amount">
+                                        {{tr.pay_amount || "..."}}
+                                    </vs-td>
+
+                                    <vs-td :data="data[indextr].status">
+                                        {{tr.service.status || "..."}}
                                     </vs-td>
                                     </vs-tr>
                                 </template>
@@ -108,36 +116,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import { transactions } from '../../../api/sponsor/sponsor.api'
 
 export default {
-    data(){
-        return {
-            cityOptions: [
-            {text: "New York", value:"new-york"},
-            {text: "Chicago", value:"chicago"},
-            {text: "San Francisco", value:"san-francisco"},
-            {text: "Boston", value:"boston"},
-            ],
-            color:'#5a3cc4',
-            switch1:true,
-            switch2:true,
 
-            users:[
-                {
-                    "id": 1,
-                    "name": "Leanne Graham",
-                    "username": "Bret",
-                    "email": "Sincere@april.biz",
-                    "website": "hildegard.org",
-                },
-            ]
-        }
-    },
-
-    methods:{
-        seletedElderly(){
-            console.log('good')
-        }
+    computed:{
+        ...mapState({
+            transactions: state => state.transaction
+        })
     }
 }
 </script>

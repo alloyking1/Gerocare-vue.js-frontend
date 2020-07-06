@@ -15,7 +15,8 @@ import {
   getSponsorPrescription,
   getSponsorAppointment,
   updateSponsor,
-  passwordReset
+  passwordReset,
+  transactions
 } from "../api/sponsor/sponsor.api";
 
 const actions = {
@@ -214,6 +215,17 @@ const actions = {
       return res;
     } catch (e) {
       return e;
+    }
+  },
+
+  async fetchTransactions({commit}, {id}){
+    try{
+      const response = await transactions(id)
+      commit("UPDATE_TRANSACTION", response.data.data)
+      return response
+
+    }catch(e){
+      console.error(e)
     }
   }
 };
