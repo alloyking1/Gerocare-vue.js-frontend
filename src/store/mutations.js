@@ -169,9 +169,9 @@ const mutations = {
     state.user.sponsor.patients.splice(index, 1);
   },
 
-  UPDATE_EDITED_BENEFICIARY(state, id, payload){
-    const result = state.user.sponsor.patients.find(patient => patient.id == id)
-    result = payload
+  UPDATE_EDITED_BENEFICIARY(state, payload){
+    const index = state.user.sponsor.patients.findIndex(patient => patient.id == payload.id)
+    state.user.sponsor.patients.splice(index, 1, payload);
   },
 
   UPDATE_TRANSACTION(state, payload){

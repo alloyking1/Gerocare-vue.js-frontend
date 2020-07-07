@@ -211,8 +211,8 @@ const actions = {
   async editElderly({ commit }, { id, patientId, detail }) {
     try {
       const res = await editPatient(id, patientId, detail);
-      commit("UPDATE_EDITED_BENEFICIARY", patientId, res);
-      return res;
+      commit("UPDATE_EDITED_BENEFICIARY", res.data.data);
+      return res.data.data
     } catch (e) {
       return e;
     }

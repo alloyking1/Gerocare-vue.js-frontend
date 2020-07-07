@@ -53,9 +53,6 @@
       </vx-card>
     <!-- </div> -->
 
-
-
-
     <div class="view">
     <vs-popup
       classContent="popup-example"
@@ -172,12 +169,6 @@
 </template>
 
 <script>
-import {
-  findPatient,
-  editPatient,
-  deletePatient,
-  createPatients
-} from "../../api/sponsor/patient.api";
 import { mapState } from 'vuex';
 export default {
     props:['patient'],
@@ -209,48 +200,30 @@ export default {
       },
 
       async removePatient(itemId) {
-        const data = {}
-        data.id = this.sponsor.id
-        data.patientId = itemId
-        
-        this.$vs.loading();
-        if(this.$store.dispatch("deleteBeneficiary", data)){
+        if(confirm("Are you sure you want to delete this Beneficiary?")){
           this.popupActive2 = false
+          this.$vs.loading();
+          const data = {}
+          data.id = this.sponsor.id
+          data.patientId = itemId
+          
+          await this.$store.dispatch("deleteBeneficiary", data)
+          this.$vs.loading.close()
         }
-        this.$vs.loading.close()
-      
-  
+        
       },
 
       async edit(patientId) {
-        // this.$vs.loading();
-        // editPatient(this.sponsor.id, patientId, this.singleElderly)
-        //   .then(res => {
-        //     this.$vs.loading.close();
-        //     this.$vs.notify({
-        //       title: "Edited",
-        //       text: "Patient edited successfully",
-        //       color: "warning",
-        //       position: "top-right"
-        //     });
-        //   })
-        //   .catch(err => {
-        //     this.$vs.loading.close();
-        //     this.$vs.notify({
-        //       title: "Error",
-        //       text: "something is wrong. Reload and try again",
-        //       color: "danger",
-        //       position: "top-right"
-        //     });
-        //   });
+        this.popupActive2 = false
+        this.$vs.loading();
         const data = {}
         data.detail = this.singleElderly,
         data.id = this.sponsor.id,
         data.patientId = patientId
 
-        console.log(await this.$store.dispatch("editElderly", data))
-
-        // console.log(this.singleElderly, patientId)
+        await this.$store.dispatch("editElderly", data)
+        this.$vs.loading.close()
+        this.$vs.notify({title:'Edited', text:'Beneficiary Edited', color:'success',position:'top-right'})
       }
     },
 }
