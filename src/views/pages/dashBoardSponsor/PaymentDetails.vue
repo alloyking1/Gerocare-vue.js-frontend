@@ -83,7 +83,7 @@
                                 <template slot-scope="{data}">
                                     <vs-tr :key="indextr" v-for="(tr, indextr) in data" >
                                     <vs-td :data="data[indextr].date">
-                                        {{tr.created_at}}
+                                        {{moment(tr.created_at).format('MM-DD-YYYY')}}
                                     </vs-td>
 
                                     <vs-td :data="data[indextr].type">
@@ -123,7 +123,7 @@
                 classContent="popup-example"
                 title="Medical Request"
                 :active.sync="popupActive">
-                    <popupInnerReuse :data="paymentId"></popupInnerReuse>
+                    <popupInnerBilling :data="singleBilling"></popupInnerBilling>
                 </vs-popup>
             </div>
         </div>
@@ -132,13 +132,13 @@
 
 <script>
 import { mapState } from 'vuex'
-import popupInnerReuse from '../Components/popupInnderReuse'
+import popupInnerBilling from '../Components/popupInnderBilling'
 
 export default {
     data(){
         return{
             popupActive:false,
-            paymentId:''
+            singleBilling:''
         }
     },
     computed:{
@@ -149,14 +149,16 @@ export default {
 
     methods:{
         getPayment(id){
+            const billingDetail = this.$store.getters.getBillingById(id)
+            this.singleBilling = billingDetail
             this.popupActive = true
-            this.paymentId = id
         }
     },
 
     components:{
-        popupInnerReuse
+        popupInnerBilling    
     }
+
 }
 </script>
 
