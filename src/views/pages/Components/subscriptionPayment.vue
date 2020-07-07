@@ -112,9 +112,16 @@ export default {
 			this.visitCounts = this.paymentDetails.no_of_visits || 0;
 			this.monthsCounts = this.paymentDetails.sub_duration || 0;
 			let amount = 0;
-            const service = this.$store.getters.getServiceById(this.serviceProp)
-            this.paymentDetails.service_id = service.id //assing service_id a value
-            amount = service.amount
+
+            if(this.serviceProp){
+                const service = this.$store.getters.getServiceById(this.serviceProp)
+                this.paymentDetails.service_id = service.id //assing service_id a value
+                amount = service.amount
+            }else{
+                const service = this.$store.getters.getServiceById(this.paymentDetails.service_id)
+                amount = service.amount
+            }
+
 			let cost = this.visitCounts * amount;
 			let total = cost * this.monthsCounts;
 			this.visitCostSum = total;
