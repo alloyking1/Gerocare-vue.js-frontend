@@ -72,7 +72,10 @@ const getters = {
   getComplaintById: (state) => (id) => {
     return state.complaint.find(complaint => complaint.id === id)
   },
-
+  
+  getBillingById: (state) => (id) => {
+    return state.transaction.find(transaction => transaction.id === id)
+  }
 };
 
 export default getters;

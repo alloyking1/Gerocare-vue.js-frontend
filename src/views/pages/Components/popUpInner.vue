@@ -27,7 +27,6 @@
                         <vs-button
                             class="w-full mt-6 cutomBtn"
                             style="background: #E65252 !important; border-radius:55px;"
-                            @click=""
                             >Delete</vs-button
                         >
                         </div>
@@ -57,7 +56,6 @@
                             <vs-button
                                 class="w-full mt-6 cutomBtn"
                                 style="background: #E65252 !important; border-radius:55px;"
-                                @click=""
                                 >Delete</vs-button
                             >
                             </div>

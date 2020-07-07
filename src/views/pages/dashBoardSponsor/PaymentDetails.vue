@@ -101,7 +101,13 @@
                                     <vs-td :data="data[indextr].status">
                                         {{tr.service.status || "..."}}
                                     </vs-td>
+
+                                    <vs-td :data="data[indextr].status">
+                                        <vs-button size="small" @click="getPayment(tr.id)">View</vs-button>
+                                    </vs-td>
                                     </vs-tr>
+
+
                                 </template>
 
 
@@ -111,20 +117,45 @@
                     </template>
                 </vx-card>
             </div>
+
+            <div>
+                <vs-popup
+                classContent="popup-example"
+                title="Medical Request"
+                :active.sync="popupActive">
+                    <popupInnerReuse :data="paymentId"></popupInnerReuse>
+                </vs-popup>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { transactions } from '../../../api/sponsor/sponsor.api'
+import popupInnerReuse from '../Components/popupInnderReuse'
 
 export default {
-
+    data(){
+        return{
+            popupActive:false,
+            paymentId:''
+        }
+    },
     computed:{
         ...mapState({
             transactions: state => state.transaction
         })
+    },
+
+    methods:{
+        getPayment(id){
+            this.popupActive = true
+            this.paymentId = id
+        }
+    },
+
+    components:{
+        popupInnerReuse
     }
 }
 </script>
