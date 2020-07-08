@@ -66,12 +66,11 @@ const actions = {
   },
 
   /**Logout */
-  async LogOutIcon({ commit }) {
+  async Logout({ commit }) {
     await auth.logOut();
     localStorage.removeItem("key");
-    commit("LOGOUT");
-    this.$router.push("/login");
-    location.reload();
+    // commit("LOGOUT");
+    // return true
   },
 
   /**forgot password request */

@@ -28,7 +28,10 @@ const router = new Router({
             {
               path: '/',
               name: 'home',
-              component: () => import('./views/pages/dashBoardSponsor/Home.vue'), 
+              component: () => import('./views/pages/dashBoardSponsor/Home.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/elderly/add',
@@ -140,5 +143,18 @@ router.afterEach(() => {
         appLoading.style.display = "none";
     }
 })
+
+
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(route => route.meta.requiresAuth)) {
+    if (localStorage.getItem('key')) {
+      next();
+    } else {
+      next({ path: '/login' });
+    }
+  }
+  next();
+});
 
 export default router

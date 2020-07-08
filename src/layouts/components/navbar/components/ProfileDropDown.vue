@@ -74,11 +74,16 @@ export default {
 
   methods: {
     async logout() {
-      // await this.$store.dispatch("LogOutIcon")
-      if(await this.$store.dispatch("LogOutIcon")){
+      await this.$store.dispatch("Logout");
+      this.$store.replaceState({});
+      location.reload();
 
-        this.$vs.notify({title:'Logged out', text:'Logout successful', color:'success',position:'top-right'})
-      }
+      this.$vs.notify({
+        title: "Logged out",
+        text: "Logout successful",
+        color: "success",
+        position: "top-right"
+      });
     }
   }
 };
