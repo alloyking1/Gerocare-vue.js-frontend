@@ -178,6 +178,10 @@ export default {
                 data:form
             }
             await this.$store.dispatch('createSubscription', value)
+        },
+
+        async getCards(){
+            await this.$store.dispatch("fetchCards", this.data.sponsor.id)
         }
 
     },
@@ -190,6 +194,7 @@ export default {
         this.fetchSubscriptions();
         this.getPrescription();
         this.fetchBilling();
+        this.getCards();
     },
 
 	components:{

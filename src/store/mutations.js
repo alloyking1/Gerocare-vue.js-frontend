@@ -178,6 +178,10 @@ const mutations = {
     state.transaction = payload
   },
 
+  SAVE_SPONSOR_CARD(state, payload){
+    state.card = payload
+  },
+
   LOGOUT(state){
     state.replaceState({})
   }

@@ -35,7 +35,7 @@
           />
           <div class="text-center">
               <h4>{{ patient.name || 'Null' }}</h4>
-              <p class="text-grey">{{ visit_count }}</p>
+              <p class="text-grey">{{ visit_count || 0 }}</p>
           </div> 
           <template slot="footer">
               <vs-divider />

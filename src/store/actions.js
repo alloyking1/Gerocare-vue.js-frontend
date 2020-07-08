@@ -16,7 +16,8 @@ import {
   getSponsorAppointment,
   updateSponsor,
   passwordReset,
-  transactions
+  transactions,
+  allCards
 } from "../api/sponsor/sponsor.api";
 
 const actions = {
@@ -69,6 +70,8 @@ const actions = {
     await auth.logOut();
     localStorage.removeItem("key");
     commit("LOGOUT");
+    this.$router.push("/login");
+    location.reload();
   },
 
   /**forgot password request */
@@ -229,6 +232,13 @@ const actions = {
     }catch(e){
       console.error(e)
     }
+  },
+
+  async fetchCards({commit}, id){
+    const res = await allCards(id)
+    commit("SAVE_SPONSOR_CARD", res.data)
+
+    return res
   }
 };
 

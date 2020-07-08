@@ -45,3 +45,9 @@ export async function passwordReset(value) {
 export async function transactions(id){
   return await httpsClient.get(`/sponsors/${id}/transactions`)
 }
+
+/**fetch cards */
+
+export async function allCards(id){
+  return await httpsClient.get(`/sponsors/${id}/cards`)
+}

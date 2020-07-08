@@ -3,29 +3,7 @@
         <div class="vx-row">
 			
 			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-                <!-- <div class="mb-2">
-                    <h5>Payment Detials</h5>
-                </div> -->
-                <vx-card class="mb-2 bg-primary-gradient greet-user">
-                    <div class="flex justify-between flex-wrap p-1">
-                        <span class="card-span">Debit Card</span>
-                        <span class="card-span">Update</span>
-                    </div>
-
-                    <div class="flex justify-around p-2">
-                        <svg width="53" height="30" viewBox="0 0 53 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="15" cy="15" r="15" fill="#E65252"/>
-                            <circle cx="38" cy="15" r="15" fill="#E9BA15"/>
-                        </svg>
-                        <p>XXXX - XXXX - XXXX - 3456</p>
-                    </div>
-                    <div class="text-left card-span p-3 pl-5 ml-5">
-                        <p>MasterCard - Expires 05/21</p>
-                        <p>Billed on the first of every month</p>
-                        <p>Next billing due July 01,2019</p>
-                    </div>
-
-                </vx-card>
+                <creditCard v-for="(card, i) in creditCard.data" :card="card" :key="i"></creditCard>
 
 
                 <div class="mt-5 pb-3">
@@ -133,6 +111,7 @@
 <script>
 import { mapState } from 'vuex'
 import popupInnerBilling from '../Components/popupInnderBilling'
+import creditCard from '../Components/creditCard'
 
 export default {
     data(){
@@ -143,7 +122,8 @@ export default {
     },
     computed:{
         ...mapState({
-            transactions: state => state.transaction
+            transactions: state => state.transaction,
+            creditCard: state => state.card
         })
     },
 
@@ -156,7 +136,11 @@ export default {
     },
 
     components:{
-        popupInnerBilling    
+        popupInnerBilling,
+        creditCard    
+    },
+    created(){
+        console.log(this.creditCard);
     }
 
 }
