@@ -121,6 +121,7 @@ const actions = {
 
   /**create a new subscription */
   async createSubscription({ commit }, { id, data }) {
+    console.log(data)
     const res = await SubscriptionRepository.createSubscription(id, data);
     // commit('UPDATE_SUBSCRIPTION_INFO', data) //commti the changes
     if (Array.isArray(res)) {

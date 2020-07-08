@@ -18,7 +18,7 @@
                     </div>
                     <div class="w-1/2 border border-solid d-theme-border-grey-light border-r-0 border-b-0 border-t-0">
                         <p class="mb-4 text-2xl font-danger">{{data.most_due_subscription.patient.visit_count}}</p>
-                        <p class="mt-4 font-purple">Pay Now</p>
+                        <p class="mt-4 font-purple" @click="nextDueSubscription">Pay Now</p>
                     </div>
                 </div>
 
@@ -156,6 +156,28 @@ export default {
             const data ={}
             data.id = id
             await this.$store.dispatch("fetchTransactions", data)
+        },
+
+        async nextDueSubscription(){
+            const amount = 8000 * 100
+            const form = new FormData
+            form.append('amount', amount)
+            form.append('name', this.data.sponsor.name)
+            form.append('email', this.data.sponsor.email || "test@gmail.com")
+
+            form.append('patient_id', this.data.most_due_subscription.patient.id)
+            form.append('service_id', 1)
+            form.append('payer', "patient")
+            form.append('sub_duration', this.data.most_due_subscription.visit_count)
+            form.append('subscription', 1)
+            form.append('no_of_visits', this.data.most_due_subscription.visit_count)
+            form.append('sponsor_id', this.data.sponsor.id)
+
+            const value ={
+                id:this.data.sponsor.id,
+                data:form
+            }
+            await this.$store.dispatch('createSubscription', value)
         }
 
     },
@@ -187,6 +209,7 @@ export default {
     }
     .font-purple{
         color:#9F1AA2;
+        cursor:pointer
     }
     .font-white{
         color: white;

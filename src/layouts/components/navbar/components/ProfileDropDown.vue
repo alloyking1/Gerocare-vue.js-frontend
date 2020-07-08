@@ -73,13 +73,11 @@ export default {
   },
 
   methods: {
-    async logout() {
-      if(await this.$store.dispatch("LogOutIcon")){
+    logout() {
+      if(this.$store.dispatch("LogOutIcon")){
         this.$router.push("/login");
         location.reload();
       }
-      
-      
     }
   }
 };
