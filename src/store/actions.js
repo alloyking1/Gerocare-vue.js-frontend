@@ -124,7 +124,7 @@ const actions = {
 
   /**create a new subscription */
   async createSubscription({ commit }, { id, data }) {
-    console.log(data)
+    console.log(data);
     const res = await SubscriptionRepository.createSubscription(id, data);
     // commit('UPDATE_SUBSCRIPTION_INFO', data) //commti the changes
     if (Array.isArray(res)) {
@@ -149,7 +149,7 @@ const actions = {
 
   /** fetch sponsor's visit */
   async fetchSubscriptions({ commit, state }) {
-    const id = state.user.user.id;
+    const id = state.user.sponsor.id;
     const res = await SubscriptionRepository.fetchSubscriptions(id);
     const { data } = res.data;
     if (data) {
@@ -217,28 +217,27 @@ const actions = {
     try {
       const res = await editPatient(id, patientId, detail);
       commit("UPDATE_EDITED_BENEFICIARY", res.data.data);
-      return res.data.data
+      return res.data.data;
     } catch (e) {
       return e;
     }
   },
 
-  async fetchTransactions({commit}, {id}){
-    try{
-      const response = await transactions(id)
-      commit("UPDATE_TRANSACTION", response.data.data)
-      return response
-
-    }catch(e){
-      console.error(e)
+  async fetchTransactions({ commit }, { id }) {
+    try {
+      const response = await transactions(id);
+      commit("UPDATE_TRANSACTION", response.data.data);
+      return response;
+    } catch (e) {
+      console.error(e);
     }
   },
 
-  async fetchCards({commit}, id){
-    const res = await allCards(id)
-    commit("SAVE_SPONSOR_CARD", res.data)
+  async fetchCards({ commit }, id) {
+    const res = await allCards(id);
+    commit("SAVE_SPONSOR_CARD", res.data);
 
-    return res
+    return res;
   }
 };
 
