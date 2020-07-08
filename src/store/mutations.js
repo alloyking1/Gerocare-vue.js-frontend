@@ -176,6 +176,10 @@ const mutations = {
 
   UPDATE_TRANSACTION(state, payload){
     state.transaction = payload
+  },
+
+  LOGOUT(state){
+    state.replaceState({})
   }
 };
 

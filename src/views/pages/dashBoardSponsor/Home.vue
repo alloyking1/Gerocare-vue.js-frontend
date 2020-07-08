@@ -167,7 +167,7 @@ export default {
         this.fetchAppointment();
         this.fetchSubscriptions();
         this.getPrescription();
-        this.fetchBilling()
+        this.fetchBilling();
     },
 
 	components:{

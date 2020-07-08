@@ -73,25 +73,13 @@ export default {
   },
 
   methods: {
-    logout() {
-      if (this.$store.dispatch("LogOutIcon")) localStorage.removeItem("key");
-      this.$store.replaceState({})
-      //modulerized state
-      // this.$store.replaceState({
-      //   user: {}
-      //   sponsor: {},
-      //   services: {},
-      //   medical_requests: {},
-      //   appointments: {},
-      //   subscriptions: {},
-      //   upcomingAppointments: {},
-      //   previousAppointments: {},
-      //   bookingAppointments: {},
-      //   teleconsultations: {},
-      //   on_demands: {},
-      //   complaint: {},
-      // });
-      this.$router.push("/login");
+    async logout() {
+      if(await this.$store.dispatch("LogOutIcon")){
+        this.$router.push("/login");
+        location.reload();
+      }
+      
+      
     }
   }
 };

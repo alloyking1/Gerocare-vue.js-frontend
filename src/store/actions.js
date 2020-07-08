@@ -65,9 +65,10 @@ const actions = {
   },
 
   /**Logout */
-  async LogOutIcon() {
-    const res = await auth.logOut();
-    return res;
+  async LogOutIcon({ commit }) {
+    await auth.logOut();
+    localStorage.removeItem("key");
+    commit("LOGOUT");
   },
 
   /**forgot password request */
