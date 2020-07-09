@@ -315,7 +315,12 @@ import PaymentComponent from '../Components/paymentFunctionality'
 export default {
 	data(){
 		return {
-			patients:{},
+			patients:{
+				emergency_name:'',
+				emergency_phone:'',
+				emergency_fulladdress:'',
+				emergency_email:''
+			},
 			visitCostSum: 0,
 			payment:'',
 			service:{},
@@ -380,20 +385,16 @@ export default {
 
 		formDetailsUpdate() {
 			if(this.emergencyDetails === true){
-				this.patients = {
-					emergency_name:this.sponsor.name,
-					emergency_phone:this.sponsor.phone_number,
-					emergency_fulladdress:this.sponsor.address,
-					emergency_email:this.email,
-				}
-			}
-			else{
-				this.patients = {
-					emergency_name:"",
-					emergency_phone:"",
-					emergency_fulladdress:"",
-					emergency_email:"",
-				}
+				this.patients.emergency_name = this.sponsor.name;
+				this.patients.emergency_phone = this.sponsor.phone_number;
+				this.patients.emergency_fulladdress = this.sponsor.address;
+				this.patients.emergency_email = this.email;
+
+			}else{
+				this.patients.emergency_name = ""
+				this.patients.emergency_phone = ""
+				this.patients.emergency_fulladdress = ""
+				this.patients.emergency_email = ""
 			}
 			return true
 		},
@@ -411,7 +412,6 @@ export default {
 
 		createPatient(patients){
 			let id = this.sponsor.id;
-			console.log(id)
 			const data = {};
 			data.id = id;
 			data.data = patients
