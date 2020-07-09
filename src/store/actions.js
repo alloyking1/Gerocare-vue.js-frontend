@@ -183,10 +183,9 @@ const actions = {
   },
 
   /**fetch all complaints from db */
-  async fetchComplaint({ commit }, { id }) {
+  async fetchComplaint({ commit },  id ) {
     const res = await complaint.getComplaint(id);
-    //commit
-    commit("UPDATE_COMPLAINT_INFO", res.data.data);
+    commit("FETCH_COMPLAINT_UPDATE", res.data.data);
     return res;
   },
 

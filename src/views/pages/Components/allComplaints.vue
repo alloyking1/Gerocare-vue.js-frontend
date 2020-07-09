@@ -109,7 +109,6 @@ export default {
       const res = this.$store.getters.getComplaintById(id)
       this.complaintData = res
       this.popupActive = true
-      console.log(res)
     }
   },
 

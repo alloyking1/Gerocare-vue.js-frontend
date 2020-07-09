@@ -149,7 +149,11 @@ const mutations = {
   },
 
   UPDATE_COMPLAINT_INFO(state, payload) {
-    state.complaint = payload;
+    state.complaint.unshift(payload)
+  },
+
+  FETCH_COMPLAINT_UPDATE(state, payload){
+    state.complaint = payload
   },
 
   UPDATE_TELECONSULTATION(state, payload) {

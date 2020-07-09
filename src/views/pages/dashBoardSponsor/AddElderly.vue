@@ -219,7 +219,7 @@
 																class="mb-base"
 																icon="UsersIcon"
 																icon-right
-																statistic= Home Visit
+																statistic= "Home Visit"
 																statisticTitle="Elderly Home visit" />
 														</div>
 														<div class="w-full">
@@ -229,7 +229,7 @@
 												</vs-collapse>
 											</div>
 											
-											<div class="w-full pointer">
+											<div class="w-full pointer" @click="bindServiceId(1)">
 												<vs-collapse>
 													<vs-collapse-item icon-arrow="none">
 														<div slot="header">
@@ -238,8 +238,8 @@
 																class="mb-base"
 																icon="SmartphoneIcon"
 																icon-right
-																statistic= Phone Consultation
-																statisticTitle="Telephone Consultation" />
+																statistic= "Tele Consultation"
+																statisticTitle="Tele Consultation" />
 														</div>
 														<div class="w-full">
 															<PaymentComponent :service="service" :type="patients.type" v-on:payment-details="setPaymentDetails"></PaymentComponent>
@@ -248,7 +248,7 @@
 												</vs-collapse>
 											</div>
 
-											<div class="w-full pointer">
+											<div class="w-full pointer" @click="bindServiceId(2)">
 												<vs-collapse>
 													<vs-collapse-item icon-arrow="none">
 														<div slot="header">
@@ -257,8 +257,8 @@
 																class="mb-base"
 																icon="GitPullRequestIcon"
 																icon-right
-																statistic= On-demand
-																statisticTitle="On Demand Visit" />
+																statistic= "Phone Consultation"
+																statisticTitle="Phone Consultation" />
 														</div>
 														<div class="w-full">
 															<PaymentComponent :service="service" :type="patients.type" v-on:payment-details="setPaymentDetails"></PaymentComponent>
@@ -267,7 +267,7 @@
 												</vs-collapse>
 											</div>
 
-											<div class="w-full pointer">
+											<!-- <div class="w-full pointer" @click="bindServiceId(3)">
 												<vs-collapse>
 													<vs-collapse-item icon-arrow="none">
 														<div slot="header">
@@ -276,7 +276,7 @@
 																class="mb-base"
 																icon="MoreVerticalIcon"
 																icon-right
-																statistic= On-demand
+																statistic= "On-demand"
 																statisticTitle="On Demand Visit" />
 														</div>
 														<div class="w-full">
@@ -284,7 +284,7 @@
 														</div>
 													</vs-collapse-item>
 												</vs-collapse>
-											</div>
+											</div> -->
 
 										</div>
 									</div>
@@ -372,7 +372,8 @@ export default {
 	computed:{
 		...mapState({
 			sponsor: state => state.user.sponsor,
-			email: state => state.user.sponsor.email
+			email: state => state.user.sponsor.email,
+			allServices: state => state.services.data
 		})
 	},
 
@@ -419,7 +420,6 @@ export default {
 		},
 		getService(e){
 			this.service = this.$store.getters.getServiceByType(e)
-			// console.log(this.service)
 		},
 
 		setPaymentDetails(paymentDetails){
@@ -429,6 +429,16 @@ export default {
 			this.patients.service_id = paymentDetails.service_id
 			this.patients.service_id = paymentDetails.service_id
 			this.patients.pay_action = paymentDetails.pay_action
+		},
+
+		bindServiceId(val){
+			/**gets the service details and send them along with the payment */
+			if(val === 1){
+				this.service = this.allServices[2]
+			}
+			else if(val === 2){
+				this.service = this.allServices[3]
+			}
 		},
 
 		async validateFirstStep(){

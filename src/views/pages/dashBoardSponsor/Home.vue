@@ -141,6 +141,10 @@ export default {
 			await this.$store.dispatch('fetchServices')
  		},
 
+        async fetchComplaint(){
+            await this.$store.dispatch('fetchComplaint', this.data.sponsor.id)
+        },
+
         async fetchSubscriptions(){
             await this.$store.dispatch('fetchSubscriptions')
         },
@@ -195,6 +199,7 @@ export default {
         this.getPrescription();
         this.fetchBilling();
         this.getCards();
+        this.fetchComplaint();
     },
 
 	components:{

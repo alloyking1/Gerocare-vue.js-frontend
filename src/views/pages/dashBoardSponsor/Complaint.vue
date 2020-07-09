@@ -47,7 +47,9 @@ export default {
     data(){
         return{
             complaint:{
-                role:3 //role of sponsor
+                role:3, //role of sponsor
+                subject:'',
+                comment:''
             },
         }
     },
@@ -61,10 +63,15 @@ export default {
                     data:this.complaint,
                 }
                 try{
+                    this.$vs.loading();
                     await this.$store.dispatch('createComplaint', data)
-                    this.$vs.notify({title:'Complaint sent successful',text:'We will get back to you shortly',color:'warning',position:'top-right'})
+                    this.complaint.subject=""
+                    this.complaint.comment=""
+                    this.$vs.notify({title:'Complaint sent successful',text:'We will get back to you shortly',color:'success',position:'top-right'})
+                    this.$vs.loading.close()
                 }catch(e){
                     this.$vs.notify({title:'Error',text:'something is wrong. Reload and try again',color:'danger',position:'top-right'})
+                    this.$vs.loading.close()
                 }
             }else{
                 return false
