@@ -379,22 +379,22 @@ export default {
 		},
 
 		formDetailsUpdate() {
-			// if(this.emergencyDetails === true){
-			// 	this.patients = {
-			// 		emergency_name:this.sponsor.name,
-			// 		emergency_phone:this.sponsor.phone_number,
-			// 		emergency_fulladdress:this.sponsor.address,
-			// 		emergency_email:this.email,
-			// 	}
-			// }
-			// else{
-			// 	this.patients = {
-			// 		emergency_name:null,
-			// 		emergency_phone:null,
-			// 		emergency_fulladdress:null,
-			// 		emergency_email:null,
-			// 	}
-			// }
+			if(this.emergencyDetails === true){
+				this.patients = {
+					emergency_name:this.sponsor.name,
+					emergency_phone:this.sponsor.phone_number,
+					emergency_fulladdress:this.sponsor.address,
+					emergency_email:this.email,
+				}
+			}
+			else{
+				this.patients = {
+					emergency_name:"",
+					emergency_phone:"",
+					emergency_fulladdress:"",
+					emergency_email:"",
+				}
+			}
 			return true
 		},
 
@@ -411,19 +411,15 @@ export default {
 
 		createPatient(patients){
 			let id = this.sponsor.id;
-
+			console.log(id)
 			const data = {};
 			data.id = id;
 			data.data = patients
 			this.$store.dispatch('createNewPatient', data)
 		},
-		// async fetchServices(){
-		// 	const services = await this.$store.dispatch('fetchServices')
-		// 	return services
- 		// },
 		getService(e){
-			// console.log(this.$store.getters.getServiceByType(e))
 			this.service = this.$store.getters.getServiceByType(e)
+			// console.log(this.service)
 		},
 
 		setPaymentDetails(paymentDetails){
@@ -498,10 +494,6 @@ export default {
     	StatisticsCardLine,
 		PaymentComponent
   	},
-
-	// created(){
-	// 	this.fetchServices()
-	// }
 
 }
 </script>

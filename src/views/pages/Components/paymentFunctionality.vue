@@ -72,7 +72,7 @@ export default {
 
     methods:{
         visitCost(){
-
+            console.log(this.service)
             this.paymentDetails.service_id = this.service.id
 			let visits = parseInt(this.paymentDetails.no_of_visits) || 1;
 			let months = parseInt(this.paymentDetails.sub_duration) || 1;

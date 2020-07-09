@@ -36,58 +36,91 @@ const router = new Router({
             {
               path: '/elderly/add',
               name: 'page-2',
-              component: () => import('./views/pages/dashBoardSponsor/AddElderly.vue')
+              component: () => import('./views/pages/dashBoardSponsor/AddElderly.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/elderly/all',
               name: 'page-2',
-              component: () => import('./views/pages/dashBoardSponsor/AllElderly.vue')
+              component: () => import('./views/pages/dashBoardSponsor/AllElderly.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
 
             {
               path: '/appointment',
               name: 'appointment',
-              component: () => import('./views/pages/dashBoardSponsor/Appointment.vue')
+              component: () => import('./views/pages/dashBoardSponsor/Appointment.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/medical/request',
               name: 'appointment',
-              component: () => import('./views/pages/dashBoardSponsor/MedRequest.vue')
+              component: () => import('./views/pages/dashBoardSponsor/MedRequest.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/message',
               name: 'message',
-              component: () => import('./views/pages/dashBoardSponsor/Message.vue')
+              component: () => import('./views/pages/dashBoardSponsor/Message.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/subscription',
               name: 'message',
-              component: () => import('./views/pages/dashBoardSponsor/Subscription.vue')
+              component: () => import('./views/pages/dashBoardSponsor/Subscription.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/complaint',
               name: 'complaint',
-              component: () => import('./views/pages/dashBoardSponsor/Complaint.vue')
+              component: () => import('./views/pages/dashBoardSponsor/Complaint.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/specialoffer',
               name: 'special/offer',
-              component: () => import('./views/pages/dashBoardSponsor/SpecialOffer.vue')
+              component: () => import('./views/pages/dashBoardSponsor/SpecialOffer.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/billing',
               name: 'billing',
-              component: () => import('./views/pages/dashBoardSponsor/PaymentDetails.vue')
+              component: () => import('./views/pages/dashBoardSponsor/PaymentDetails.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/sponsor/profile',
               name: 'sponsor/profile',
-              component: () => import('./views/pages/dashBoardSponsor/SponsorProfile.vue')
+              component: () => import('./views/pages/dashBoardSponsor/SponsorProfile.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
             {
               path: '/teleconsultation',
               name: 'teleconsultation',
-              component: () => import('./views/pages/dashBoardSponsor/TeleConsultation.vue')
+              component: () => import('./views/pages/dashBoardSponsor/TeleConsultation.vue'),
+              meta: {
+                requiresAuth: true,
+              }, 
             },
           ],
         },

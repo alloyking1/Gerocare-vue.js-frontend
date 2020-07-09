@@ -23,8 +23,8 @@
 
               <vs-td :data="tr.description">{{tr.description}}</vs-td>
 
-              <vs-td :data="tr.doctor">{{tr.doctor.name || 'kapasky'}}</vs-td>
-              <vs-td :data="tr.patient">{{tr.patient.name}}</vs-td>
+              <vs-td :data="tr.doctor">{{tr.doctor.name || 'Doctor name'}}</vs-td>
+              <vs-td :data="tr.patient">{{tr.patient.name || "Patient Name"}}</vs-td>
               <vs-td :data="tr.status">{{tr.status}}</vs-td>
               <vs-td :data="tr.report">
                 <vs-button size="small" @click="fetchEachAppointment(tr.id)">View</vs-button>
@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 import popUpInner from "./popUpInner";
 export default {
   data() {
@@ -64,7 +64,7 @@ export default {
       this.eachVisit = res;
       this.popupActive = true;
 
-      cconsole.log(this.eachVisit);
+      console.log(this.eachVisit);
     }
   },
   components: {

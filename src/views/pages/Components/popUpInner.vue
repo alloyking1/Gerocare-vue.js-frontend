@@ -12,7 +12,7 @@
               <p>{{ data.description || ""}}</p>
               <vs-divider />
               <h6>DOCTOR :</h6>
-              <!-- <p>{{ data.doctor.name || "" }}</p> -->
+              <p>{{ data.doctor.name || "" }}</p>
               <vs-divider />
               <h6>PATIENT :</h6>
               <p>{{ data.patient.name || "" }}</p>
