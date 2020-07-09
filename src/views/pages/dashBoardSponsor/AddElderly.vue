@@ -367,7 +367,7 @@ export default {
 	computed:{
 		...mapState({
 			sponsor: state => state.user.sponsor,
-			email: state => state.user.sponsor.email || state.user.user.email
+			email: state => state.user.sponsor.email
 		})
 	},
 
