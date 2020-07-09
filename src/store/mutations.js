@@ -121,6 +121,11 @@ const mutations = {
     state.medical_requests = payload;
   },
 
+  UPDATE_MEDREQUEST(state, id){
+    const index = state.medical_requests.findIndex(medical_requests => medical_requests.id === id)
+    state.medical_requests.splice(index, 1)
+  },
+
   SUBSCRIPTIONS(state, payload) {
     state.subscriptions = payload;
   },

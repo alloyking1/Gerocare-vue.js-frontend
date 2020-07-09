@@ -91,7 +91,7 @@
                   <vs-button
                     class="w-full mt-6 cutomBtn"
                     style="background: #E65252 !important; border-radius:55px;"
-                    @click=""
+                    @click="deleteEach(singleRequest.id)"
                     >Delete</vs-button
                   >
                 </div>
@@ -125,6 +125,11 @@ export default {
         const res = await this.$store.getters.getMedRequestById(id);
         this.singleRequest = res;
         this.popupActive2 = true;
+    },
+
+    async deleteEach(id){
+      this.popupActive2 = false
+      await this.$store.dispatch("deleteMedRequest", id)
     },
 
     truncate(text, length, suffix) {

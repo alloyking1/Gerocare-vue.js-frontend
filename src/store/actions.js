@@ -88,8 +88,6 @@ const actions = {
   /**token refresh action */
   async refreshTokenAction({ commit }, data) {
     const res = await auth.TokenRefresh(data);
-    // localStorage.removeItem('key')
-    // this.replaceState({})
     if (res.data) {
       commit("UPDATE_USER_INFO", res.data);
       console.log(res.data);
@@ -137,6 +135,11 @@ const actions = {
     const res = await getSponsorPrescription(id);
     commit("UPDATE_MEDREQUEST_INFO", res.data.data);
     return res;
+  },
+
+  async deleteMedRequest({commit}, id){
+    commit ("UPDATE_MEDREQUEST", id)
+    return false
   },
 
   /** fetch sponsor's visit */
