@@ -161,6 +161,11 @@ const mutations = {
     state.complaint = payload
   },
 
+  DELETE_COMPLAINT(state, id){
+    const index = state.complaint.findIndex(complaint => complaint.id === id)
+    state.complaint.splice(index, 1)
+  },
+
   UPDATE_TELECONSULTATION(state, payload) {
     state.teleconsultations = payload;
   },

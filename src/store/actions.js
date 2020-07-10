@@ -138,7 +138,7 @@ const actions = {
   },
 
   async deleteMedRequest({commit}, id){
-    commit ("UPDATE_MEDREQUEST", id)
+    commit ("UPDATE_MEDREQUEST", id) // add endpoint later
     return false
   },
 
@@ -183,6 +183,12 @@ const actions = {
     const res = await complaint.createComplaint(id, data);
     commit("UPDATE_COMPLAINT_INFO", res.data.data);
     return res;
+  },
+
+  /**delete complaint */
+  async deleteComplaint({commit}, id){
+    commit("DELETE_COMPLAINT", id)
+    // console.log(id)
   },
 
   /**fetch all complaints from db */

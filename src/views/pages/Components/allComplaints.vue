@@ -75,7 +75,7 @@
         <vs-button
             class="w-full mt-6 cutomBtn"
             style="background: #E65252 !important; border-radius:55px;"
-            @click=""
+            @click="deleteComplaint(complaintData.id)"
             >Delete</vs-button
         >
         </div>
@@ -109,6 +109,10 @@ export default {
       const res = this.$store.getters.getComplaintById(id)
       this.complaintData = res
       this.popupActive = true
+    },
+
+    async deleteComplaint(id){
+      await this.$store.dispatch("deleteComplaint", id)
     }
   },
 
