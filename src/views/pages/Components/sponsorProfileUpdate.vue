@@ -17,17 +17,6 @@
             <span class="text-danger">{{ errors[0] }}</span>
           </ValidationProvider>
 
-          <!-- <ValidationProvider name="Email" rules="required" v-slot="{ errors }">
-            <vs-input
-              type="email"
-              name="Sponsor Email"
-              placeholder="Enter New Password"
-              v-model="sponsorData.email"
-              class="w-full mt-4"
-            />
-            <span class="text-danger">{{ errors[0] }}</span>
-          </ValidationProvider> -->
-
           <ValidationProvider
             name="Address"
             rules="required"
@@ -35,7 +24,7 @@
           >
             <vs-input
               name="Confirm New Password"
-              placeholder="Enter sponsor Address"
+              placeholder="update sponsor Address"
               v-model="sponsorData.address"
               class="w-full mt-4"
             />
@@ -44,7 +33,7 @@
           <ValidationProvider name="City" rules="required" v-slot="{ errors }">
             <vs-input
               name="Enter sponsor City"
-              placeholder="Enter sponsor City"
+              placeholder="update sponsor City"
               v-model="sponsorData.city"
               class="w-full mt-4"
             />
@@ -53,7 +42,7 @@
           <ValidationProvider name="State" rules="required" v-slot="{ errors }">
             <vs-input
               name="Sponsor state"
-              placeholder="Enter sponsor state"
+              placeholder="Update sponsor state"
               v-model="sponsorData.state"
               class="w-full mt-4"
             />
@@ -66,12 +55,39 @@
           >
             <vs-input
               name="Sponsor Country"
-              placeholder="Confirm New Password"
+              placeholder="update country"
               v-model="sponsorData.country"
               class="w-full mt-4"
             />
             <span class="text-danger">{{ errors[0] }}</span>
           </ValidationProvider>
+
+          <ValidationProvider
+            name="Country"
+            rules="required"
+            v-slot="{ errors }"
+          >
+            <vs-input
+              name="Sponsor Country"
+              placeholder="Update Phone number"
+              v-model="sponsorData.phone_number"
+              class="w-full mt-4"
+            />
+            <span class="text-danger">{{ errors[0] }}</span>
+          </ValidationProvider>
+
+          <div>
+           <vs-input
+              name="Sponsor Country"
+              placeholder="How did you hear about us"
+              v-model="sponsorData.medium"
+              class="w-full mt-4"
+            />
+          </div>
+
+          <div>
+            <!-- <vs-upload action="https://jsonplaceholder.typicode.com/posts/" /> -->
+          </div>
 
           <div class="p-5">
             <div class="p-5">
@@ -117,6 +133,7 @@ export default {
     },
 
     async postData() {
+      this.$emit('popup', true)
       const data = {
         id: this.sponsor.id,
         data: this.sponsorData
@@ -129,7 +146,7 @@ export default {
         this.$vs.notify({
           title: "Profile Updated",
           text: "Sponsor profile updated successfully",
-          color: "warning",
+          color: "success",
           position: "top-right"
         });
       } catch (e) {

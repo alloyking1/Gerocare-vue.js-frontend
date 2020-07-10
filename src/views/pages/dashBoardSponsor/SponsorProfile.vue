@@ -125,7 +125,7 @@
         <div>
             <vs-popup :active.sync="popup.profile" title="Edit Profile">
                 <keep-alive>
-                    <sponsorProfileUpdate :data="this.sponsorEdit"></sponsorProfileUpdate>
+                    <sponsorProfileUpdate :data="this.sponsorEdit" v-on:popup="popup.profile = false"></sponsorProfileUpdate>
                 </keep-alive>
             </vs-popup>
         
