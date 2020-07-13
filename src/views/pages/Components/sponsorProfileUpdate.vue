@@ -86,7 +86,7 @@
           </div>
 
           <div>
-            <!-- <vs-upload action="https://jsonplaceholder.typicode.com/posts/" /> -->
+            <vs-upload action="https://jsonplaceholder.typicode.com/posts/" v-model="sponsorData.avater"/>
           </div>
 
           <div class="p-5">

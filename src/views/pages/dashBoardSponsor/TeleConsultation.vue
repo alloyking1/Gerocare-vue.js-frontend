@@ -15,11 +15,31 @@
         </div>
 
         <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
-            <vx-card title="">
-                <div class="container w-full">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/Qzh4rL5u34k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-            </vx-card>
+            <div class="video-responsive">
+
+                <vx-card title="">
+                    <div class="container w-full">
+                        <iframe width="660" height="315" src="https://www.youtube.com/embed/Qzh4rL5u34k" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+                </vx-card>
+            </div>
         </div>
     </div>
 </template>
+
+<style scoped>
+    /* .video-responsive{
+        overflow:hidden;
+        padding-bottom:56.25%;
+        position:relative;
+        height:0;
+    } */
+
+    .video-responsive iframe{
+        left:0;
+        top:0;
+        height:500px;
+        width:100%;
+        position:absolute;
+    }
+</style>

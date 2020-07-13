@@ -142,7 +142,7 @@ export default {
  		},
 
         async fetchComplaint(){
-            await this.$store.dispatch('fetchComplaint', this.data.sponsor.id)
+            console.log(await this.$store.dispatch('fetchComplaint', this.data.sponsor.id))
         },
 
         async fetchSubscriptions(){
