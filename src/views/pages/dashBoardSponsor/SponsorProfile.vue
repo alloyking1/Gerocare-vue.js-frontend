@@ -106,11 +106,10 @@
             <div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
 				<vx-card class="invoice-card" style="background: #EDF5FC !important;border: 1px solid #047BF8 !important;border-radius: 5px !important;">
                     <h5 class="text-center p-3" style="font-weight: 500;font-size: 14px;line-height: 16px;color: #047BF8;">BACKUP/DOWNLOAD</h5>
-                    <vs-select class="w-full select-large mb-5">
-                        <vs-select-item text="All Invoices" class="w-full" />
+                    <vs-select class="w-full select-large mb-5" v-model="data.type">
                         <vs-select-item :key="index" :value="item.value" :text="item.text" v-for="(item,index) in transactionRecord" class="w-full" />
                     </vs-select>
-                   <vs-button  icon-pack="feather"  class="shadow-md w-full cutomBtn mb-3" style="background: #047BF8 !important;">DOWNLOAD BACKUP</vs-button>
+                   <vs-button  icon-pack="feather"  class="shadow-md w-full cutomBtn mb-3" style="background: #047BF8 !important;" @click="fetchBakcUps()">DOWNLOAD BACKUP</vs-button>
                 </vx-card>
 			</div>
             <div class="vx-col w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 mb-base">
@@ -131,7 +130,7 @@
         
             <vs-popup :active.sync="popup.password" title="Change password">
                 <keep-alive>
-                    <sponsorPasswordReset></sponsorPasswordReset>
+                    <sponsorPasswordReset v-on:popup="popup.password = false"></sponsorPasswordReset>
                 </keep-alive>
             </vs-popup>
         </div>
@@ -141,18 +140,25 @@
 
 <script>
     import { mapState } from 'vuex'
+    import axios from "axios";
+    import httpsClient from "../../../api/httpClient";
     import sponsorPasswordReset from "../Components/sponsorPasswordReset"
     import sponsorProfileUpdate from "../Components/sponsorProfileUpdate"
 
     export default {
         data(){
             return{
+                data:{},
                 popup:{
                     password:false,
                     profile:false,
                     preference:false
                 },
-                transactionRecord:[]
+                transactionRecord:[
+                    {text:'Download All', value:'all'},
+                    {text:'Invoices', value:'invoices'},
+				    {text:'Patients', value:'patients'},
+                ]
             }
         },
 
@@ -160,6 +166,33 @@
             ...mapState({
                 sponsorEdit:state=>state.user.sponsor
             })
+        },
+
+        methods:{
+            // async fetchBakcUps(){
+            //     // console.log(this.data)
+            //     // const details={
+            //     //     id:this.sponsorEdit.id,
+            //     //     data:this.data
+            //     // }
+            //     // console.log(await this.$store.dispatch("downloadSponsorData", details))
+                    
+                
+
+
+            // }
+
+
+
+
+
+            // downloadWithAxios(){
+           async fetchBakcUps(){
+                const data = {};
+                data.id = this.sponsorEdit.id
+                data.type = this.data.type
+                await this.$store.dispatch("downloadSponsorData", data)
+            }
         },
 
         components:{

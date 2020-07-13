@@ -5,5 +5,9 @@ export default {
     } else {
       return text;
     }
+  },
+
+  payment(){
+    
   }
 };

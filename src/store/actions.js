@@ -245,7 +245,21 @@ const actions = {
     commit("SAVE_SPONSOR_CARD", res.data);
 
     return res;
+  },
+
+
+  /**download action */
+  async downloadSponsorData(ctx, {id, type}){
+    await SubscriptionRepository.downloadDetails(id,type)
   }
+
+
+
+
+  /***re-useable action for post request */
+  // async postRequest({commit}, {id, data}){
+
+  // }
 };
 
 export default actions;

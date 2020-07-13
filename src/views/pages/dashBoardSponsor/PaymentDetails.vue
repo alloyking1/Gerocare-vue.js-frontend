@@ -12,17 +12,20 @@
                 <vx-card>
                     <div class="flex justify-between flex-wrap">
                         <p class="billing-text">Billings</p>
-                        <p class="billing-inner">N6,000</p>
+                        <p class="billing-inner">N {{data.billings.billings}}</p>
                         <vs-divider />
                         <p class="billing-text">Drugs</p>
-                        <p class="billing-inner">N6,000</p>
+                        <p class="billing-inner">N {{data.billings.drugs}}</p>
+                        <vs-divider />
+                        <p class="billing-text">Total</p>
+                        <p class="billing-inner">N {{data.billings.total}}</p>
                         <vs-divider />
                     </div>
                 </vx-card>
                 <div class="footer p-1">
                     <div class="flex justify-between flex-wrap p-1">
                         <vs-button class="cutomBtn" style="background-color: #FFFFFF !important; color:#3F9955;" type="filled">Fund Wallet</vs-button>
-                        <vs-button type="filled" class="cutomBtn" style="background-color: #9DCB47 !important; color:#FFFFFF">Pay Now</vs-button>
+                        <vs-button type="filled" class="cutomBtn" style="background-color: #9DCB47 !important; color:#FFFFFF" @click="payNow">Pay Now</vs-button>
                     </div>
                 </div>
 			</div>
@@ -123,7 +126,9 @@ export default {
     computed:{
         ...mapState({
             transactions: state => state.transaction,
-            creditCard: state => state.card
+            creditCard: state => state.card,
+            data: state => state.user,
+
         })
     },
 
@@ -132,6 +137,28 @@ export default {
             const billingDetail = this.$store.getters.getBillingById(id)
             this.singleBilling = billingDetail
             this.popupActive = true
+        },
+
+        async payNow(){
+            const amount = this.data.billings.total * 100
+            const form = new FormData
+            form.append('amount', amount)
+            form.append('name', this.data.sponsor.name)
+            form.append('email', this.data.sponsor.email || "test@gmail.com")
+
+            form.append('patient_id', this.data.most_due_subscription.patient.id)
+            form.append('service_id', 1)
+            form.append('payer', "patient")
+            form.append('sub_duration', this.data.most_due_subscription.visit_count)
+            form.append('subscription', 1)
+            form.append('no_of_visits', this.data.most_due_subscription.visit_count)
+            form.append('sponsor_id', this.data.sponsor.id)
+
+            const value ={
+                id:this.data.sponsor.id,
+                data:form
+            }
+            await this.$store.dispatch('createSubscription', value)
         }
     },
 

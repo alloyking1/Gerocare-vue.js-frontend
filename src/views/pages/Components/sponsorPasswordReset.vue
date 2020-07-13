@@ -49,8 +49,11 @@
 
         methods:{
             async validate(){
+                
                 if(this.data.password === this.data.password_confirmation){
+                    
                     if(await this.$refs.passwordReset.validate())
+                    this.$emit('popup', true)
                     try{
                         this.$vs.loading();
                         this.data.email = this.sponsor.user.email
