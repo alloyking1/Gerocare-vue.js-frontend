@@ -24,7 +24,7 @@
                 </vx-card>
                 <div class="footer p-1">
                     <div class="flex justify-between flex-wrap p-1">
-                        <vs-button class="cutomBtn" style="background-color: #FFFFFF !important; color:#3F9955;" type="filled">Fund Wallet</vs-button>
+                        <vs-button class="cutomBtn" style="background-color: #FFFFFF !important; color:#3F9955;" type="filled" @click="walletModal=true">Fund Wallet</vs-button>
                         <vs-button type="filled" class="cutomBtn" style="background-color: #9DCB47 !important; color:#FFFFFF" @click="payNow">Pay Now</vs-button>
                     </div>
                 </div>
@@ -107,6 +107,16 @@
                     <popupInnerBilling :data="singleBilling"></popupInnerBilling>
                 </vs-popup>
             </div>
+
+            <div>
+                <!-- fund wallet popup -->
+                <vs-popup
+                classContent="popup-example"
+                title="Medical Request"
+                :active.sync="walletModal">
+                    <fundWallet></fundWallet>
+                </vs-popup>
+            </div>
         </div>
     </div>
 </template>
@@ -115,11 +125,13 @@
 import { mapState } from 'vuex'
 import popupInnerBilling from '../Components/popupInnderBilling'
 import creditCard from '../Components/creditCard'
+import fundWallet from '../Components/fundWallet'
 
 export default {
     data(){
         return{
             popupActive:false,
+            walletModal:false,
             singleBilling:''
         }
     },
@@ -164,7 +176,8 @@ export default {
 
     components:{
         popupInnerBilling,
-        creditCard    
+        creditCard,
+        fundWallet    
     },
     created(){
         console.log(this.creditCard);

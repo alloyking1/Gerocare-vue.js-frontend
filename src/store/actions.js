@@ -257,13 +257,11 @@ const actions = {
   /**Set card to default */
   async setDefaultCard({commit}, data){
     return await setDefaultCard(data)
-  }
-
-
+  },
 
   /***re-useable action for post request */
-  // async postRequest({commit}, {id, data}){
-
+  // async postRequest({commit}, {id, data}, endpoint,){
+  //   return await endpoint(id, data)
   // }
 };
 
