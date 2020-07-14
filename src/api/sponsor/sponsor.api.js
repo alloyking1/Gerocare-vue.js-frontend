@@ -51,3 +51,10 @@ export async function transactions(id){
 export async function allCards(id){
   return await httpsClient.get(`/sponsors/${id}/cards`)
 }
+
+
+/**set card to default */
+export async function setDefaultCard({sponsor, cardId, payload}){
+  return await httpsClient.put(`/sponsors/${sponsor}/cards/${cardId}`, payload)
+
+}

@@ -17,14 +17,42 @@
                 <p>MasterCard - Expires {{ card.exp_month }}/{{ card.exp_year }}</p>
                 <p>Billed on the first of every month</p>
                 <p>Next billing due July 01,2019</p>
-            </div>
+
+                <div class="mt-4" @click="setDefaultCard(card.id)">
+
+                    <vs-switch color="dark" v-model="switch2" icon-pack="feather" vs-icon="icon-check" /> 
+                    <label class="mt-5" style="color:#75726e">Set Default</label>
+                </div>
+            </div>   
 
         </vx-card>
     </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
-    props:['card']
+    props:['card'],
+    data(){
+        return{
+            switch2:false,
+        }
+    },
+
+
+    methods:{
+        async setDefaultCard(id){
+            const payload = {};
+            payload.default = 1
+            const data = {
+                cardId: id,
+                sponsor: this.$store.state.user.sponsor.id,
+                payload
+            }
+            // console.log(this.$store.state.user.sponsor.id);
+            
+            console.log(await this.$store.dispatch("setDefaultCard", data))
+        }
+    }
 }
 </script>

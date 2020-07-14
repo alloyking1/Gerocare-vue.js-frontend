@@ -17,7 +17,8 @@ import {
   updateSponsor,
   passwordReset,
   transactions,
-  allCards
+  allCards,
+  setDefaultCard
 } from "../api/sponsor/sponsor.api";
 
 const actions = {
@@ -251,8 +252,12 @@ const actions = {
   /**download action */
   async downloadSponsorData(ctx, {id, type}){
     await SubscriptionRepository.downloadDetails(id,type)
-  }
+  },
 
+  /**Set card to default */
+  async setDefaultCard({commit}, data){
+    return await setDefaultCard(data)
+  }
 
 
 
