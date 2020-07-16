@@ -34,7 +34,7 @@ export default {
         async pay(){
             if(await this.$refs.fundWallet.validate())
             return false
-            await this.$store.dispatch("fundWallet", data)
+            // await this.$store.dispatch("fundWallet", data)
         }
     },
 

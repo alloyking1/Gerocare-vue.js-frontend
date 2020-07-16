@@ -114,6 +114,7 @@
                 classContent="popup-example"
                 title="Medical Request"
                 :active.sync="walletModal">
+                    <!-- <popupInnerBilling :data="singleBilling"></popupInnerBilling> -->
                     <fundWallet></fundWallet>
                 </vs-popup>
             </div>
