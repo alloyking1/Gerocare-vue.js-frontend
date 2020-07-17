@@ -24,9 +24,10 @@
         <p>Billed on the first of every month</p>
         <p>Next billing due July 01,2019</p>
 
-        <div class="mt-4" @click="setDefaultCard(card.id)">
-          <vs-switch color="dark" v-model="switch2" icon-pack="feather" vs-icon="icon-check" />
-          <label class="mt-5" style="color:#75726e">Set Default</label>
+        <div class="mt-4">
+          <vs-radio color="dark" v-model="radios2" vs-value="Dark"  @click="setDefaultCard(card.id)">
+            <span style="color:#e48346">Set Default</span>
+          </vs-radio>
         </div>
       </div>
     </vx-card>
@@ -39,7 +40,7 @@ export default {
   props: ["card"],
   data() {
     return {
-      switch2: false
+      radios2:'primary'
     };
   },
 
@@ -53,8 +54,17 @@ export default {
         payload
       };
 
-      if (console.log(await this.$store.dispatch("setDefaultCard", data)));
-      this.switch2 = false;
+      console.lo()
+
+      await console.log(data)
+      // if (this.switch2 === false) {
+      //   // this.disable = true;
+      //   if (console.log(await this.$store.dispatch("setDefaultCard", data)));
+      //   this.switch2 = false;
+      // } else {
+      //   console.log("this card is active already");
+      //   return false;
+      // }
     }
   }
 };
