@@ -18,7 +18,8 @@ import {
   passwordReset,
   transactions,
   allCards,
-  setDefaultCard
+  setDefaultCard,
+  sponsorBillings
 } from "../api/sponsor/sponsor.api";
 
 const actions = {
@@ -258,6 +259,10 @@ const actions = {
   async setDefaultCard({commit}, data){
     return await setDefaultCard(data)
   },
+
+  async billingsPayment({commit}, {id, data}){
+    return await sponsorBillings(id, data)
+  }
 
   /***re-useable action for post request */
   // async postRequest({commit}, {id, data}, endpoint,){

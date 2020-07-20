@@ -46,6 +46,11 @@ export async function transactions(id){
   return await httpsClient.get(`/sponsors/${id}/transactions`)
 }
 
+/**Bills payment for sponsors */
+export async function sponsorBillings(id){
+  return await httpsClient.post(`/sponsors/${id}/payments/`)
+}
+
 /**fetch cards */
 
 export async function allCards(id){

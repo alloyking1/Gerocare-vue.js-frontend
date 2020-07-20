@@ -127,22 +127,14 @@ export default {
       const amount = this.data.billings.total * 100;
       const form = new FormData();
       form.append("amount", amount);
-      form.append("name", this.data.sponsor.name);
-      form.append("email", this.data.sponsor.email || "test@gmail.com");
-
-      form.append("patient_id", this.data.most_due_subscription.patient.id);
-      form.append("service_id", 1);
-      form.append("payer", "patient");
-      form.append("sub_duration", this.data.most_due_subscription.visit_count);
-      form.append("subscription", 1);
-      form.append("no_of_visits", this.data.most_due_subscription.visit_count);
-      form.append("sponsor_id", this.data.sponsor.id);
+      form.append("email", this.data.sponsor.email);
+      form.append("payer", "billing");
 
       const value = {
         id: this.data.sponsor.id,
         data: form
       };
-      await this.$store.dispatch("createSubscription", value);
+      console.log(await this.$store.dispatch("billingsPayment", value));
     }
   },
 
