@@ -54,14 +54,16 @@ export default {
         payload
       };
 
-      if (this.switch2 === false) {
-        // this.disable = true;
-        if (console.log(await this.$store.dispatch("setDefaultCard", data)));
-        this.switch2 = false;
-      } else {
-        console.log("this card is active already");
-        return false;
-      }
+      // if (this.switch2 === false) {
+      //   // this.disable = true;
+      //   if (console.log(await this.$store.dispatch("setDefaultCard", data)));
+      //   this.switch2 = false;
+      // } else {
+      //   console.log("this card is active already");
+      //   return false;
+      // }
+      
+      console.log(await this.$store.dispatch("setDefaultCard", data))
     }
   }
 };

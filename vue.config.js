@@ -8,8 +8,9 @@ module.exports = {
       }
     }
   },
-  devServer:{
-    // proxy: process.env.VUE_APP_BASE_URL
-    proxy: 'http://api-dev.gerocare.org'
-  }
+  
+  // devServer:{
+  //   // proxy: process.env.VUE_APP_BASE_URL
+  //   proxy: 'http://api-dev.gerocare.org'
+  // }
 };
