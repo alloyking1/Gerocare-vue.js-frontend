@@ -86,18 +86,7 @@
           </div>
 
           <div>
-            <vs-upload action="https://jsonplaceholder.typicode.com/posts/" v-model="sponsorData.avater"/>
-          </div>
-
-          <div class="p-5">
-            <div class="p-5">
-              <input
-                class="float-right authBtnCustom pl-4 pr-4 p-3"
-                type="submit"
-                @click="postData"
-                value="Save"
-              />
-            </div>
+            <vs-upload action="https://jsonplaceholder.typicode.com/posts/" ref="img" v-on:change="sendAvatar"/>
           </div>
         </form>
       </ValidationObserver>
@@ -132,6 +121,15 @@ export default {
       if (await this.$refs.passwordReset.validate()) return;
     },
 
+    // successUpload(e){
+    // // console.log(e)
+    // },
+    sendAvatar(e){
+      console.log(this.$refs.img)
+      console.log(e)
+      // this.sponsorData.avatar = e
+    }
+,
     async postData() {
       this.$emit('popup', true)
       const data = {

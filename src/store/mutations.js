@@ -198,6 +198,10 @@ const mutations = {
 
   LOGOUT(state){
     state.replaceState({})
+  },
+
+  UPDATE_WALLET(state, payload){
+    state.user.sponsor.wallet_balance = payload
   }
 };
 

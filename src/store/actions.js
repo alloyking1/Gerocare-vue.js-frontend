@@ -19,7 +19,8 @@ import {
   transactions,
   allCards,
   setDefaultCard,
-  sponsorBillings
+  sponsorBillings,
+  fundWallet
 } from "../api/sponsor/sponsor.api";
 
 const actions = {
@@ -262,6 +263,18 @@ const actions = {
 
   async billingsPayment({commit}, {id, data}){
     return await sponsorBillings(id, data)
+  },
+
+  async fundWallet({commit}, {id,data}){
+    data.amount = parseInt( data.amount * 100)
+    const res = await fundWallet(id, data)
+
+    if(res.data.status === true){
+      window.open(res.data.data.authorization_url)
+    }else{
+      commit("UPDATE_WALLET", res.data.wallet_balance)
+    }
+      return res
   }
 
   /***re-useable action for post request */

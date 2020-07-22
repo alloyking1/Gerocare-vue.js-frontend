@@ -32,7 +32,7 @@
                                 <p class="text-center pb-3">Wallet Balance:</p>
                                 <h1>
                                   <sup class="text-lg font-white">N</sup>
-                                  <span class="font-white text-5xl">{{data.insights.balance || 'N 0'}}</span>
+                                  <span class="font-white text-5xl">{{formatWalletAmount(data.sponsor.wallet_balance) || 'N 0'}}</span>
                                 </h1>
                                 <br>
                                 <small>
@@ -117,6 +117,7 @@
 import StatisticsCardLine from '../../../components/statistics-cards/StatisticsCardLine.vue' 
 import VueApexCharts from 'vue-apexcharts'
 import recentVisits from '../Components/recentVisits'
+import helper from '../../../helpers/helper'
 
 export default {
     data(){
@@ -128,6 +129,11 @@ export default {
     },
 
     methods:{
+
+        formatWalletAmount(amount){
+            return helper.numberFormat(amount)
+        },
+
         fetchSponsor(){
             this.data = this.$store.state.user;
         },

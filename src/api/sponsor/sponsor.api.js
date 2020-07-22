@@ -64,4 +64,7 @@ export async function setDefaultCard({sponsor, cardId, payload}){
 
 }
 
-/**make  */
+/**fund wallet  */
+export async function fundWallet(id, payload){
+  return await httpsClient.post(`/sponsors/${id}/deposit`, payload)
+}

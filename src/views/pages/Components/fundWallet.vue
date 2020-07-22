@@ -10,7 +10,7 @@
                     
                     <div class="p-5">
                         <div class="p-5">
-                            <input class="float-right authBtnCustom pl-4 pr-4 p-3" type="submit" value="Save" />
+                            <input class="float-right authBtnCustom pl-4 pr-4 p-3" type="submit" value="Fund" />
                         </div>
                     </div>
 
@@ -26,15 +26,22 @@ import { ValidationProvider, ValidationObserver } from 'vee-validate'
 export default {
     data(){
         return {
-            data:{}
+            data:{
+                email:this.$store.state.user.sponsor.email,
+                payer:'wallet'
+            }
         }
     },
 
     methods:{
         async pay(){
-            if(await this.$refs.fundWallet.validate())
-            return false
-            // await this.$store.dispatch("fundWallet", data)
+            if(await this.$refs.fundWallet.validate()){
+
+                const payloadData = {}
+                payloadData.id = this.$store.state.user.sponsor.id
+                payloadData.data = this.data
+                console.log(await this.$store.dispatch("fundWallet", payloadData))
+            }
         }
     },
 
