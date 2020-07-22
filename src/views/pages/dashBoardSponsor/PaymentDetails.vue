@@ -87,7 +87,7 @@
       <div>
         <!-- fund wallet popup -->
         <vs-popup classContent="popup-example" title="Medical Request" :active.sync="walletModal">
-          <fundWallet></fundWallet>
+          <fundWallet v-on:close="walletModal = false"></fundWallet>
         </vs-popup>
       </div>
     </div>
@@ -124,17 +124,31 @@ export default {
     },
 
     async payNow() {
+      // this.$vs.loading();
+
       const amount = this.data.billings.total * 100;
       const form = new FormData();
       form.append("amount", amount);
       form.append("email", this.data.sponsor.email);
       form.append("payer", "billing");
 
-      const value = {
+      const payload = {
         id: this.data.sponsor.id,
         data: form
       };
-      console.log(await this.$store.dispatch("billingsPayment", value));
+      if(form.amount > 0){
+
+        this.$vs.loading();
+        await this.$store.dispatch("billingsPayment", payload)
+        this.$vs.loading.close()
+        this.$vs.notify({title:'Success', text:'Bills paid successfully', color:'success',position:'top-right'})
+      }else{
+        this.$vs.notify({title:'Error', text:'You do not have any bills to pay', color:'danger',position:'top-right'})
+        this.$vs.loading.close()
+      }
+      this.$vs.loading.close()
+
+      
     }
   },
 

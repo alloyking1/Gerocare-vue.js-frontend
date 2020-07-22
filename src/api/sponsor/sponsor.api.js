@@ -47,8 +47,8 @@ export async function transactions(id){
 }
 
 /**Bills payment for sponsors */
-export async function sponsorBillings(id){
-  return await httpsClient.post(`/sponsors/${id}/payments/`)
+export async function sponsorBillings(id, data){
+  return await httpsClient.post(`/sponsors/${id}/payments`, data)
 }
 
 /**fetch cards */
@@ -66,5 +66,6 @@ export async function setDefaultCard({sponsor, cardId, payload}){
 
 /**fund wallet  */
 export async function fundWallet(id, payload){
+  payload.amount = parseInt(payload.amount * 100)
   return await httpsClient.post(`/sponsors/${id}/deposit`, payload)
 }

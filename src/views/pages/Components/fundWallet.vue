@@ -37,10 +37,16 @@ export default {
         async pay(){
             if(await this.$refs.fundWallet.validate()){
 
+                this.$vs.loading();
+
                 const payloadData = {}
                 payloadData.id = this.$store.state.user.sponsor.id
                 payloadData.data = this.data
                 console.log(await this.$store.dispatch("fundWallet", payloadData))
+                this.data.amount = ""
+                this.$emit('close', true)
+                this.$vs.loading.close()
+                this.$vs.notify({title:'Success', text:'Wallet funded successfully', color:'success',position:'top-right'})
             }
         }
     },

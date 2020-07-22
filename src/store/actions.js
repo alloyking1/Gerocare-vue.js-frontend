@@ -124,7 +124,6 @@ const actions = {
 
   /**create a new subscription */
   async createSubscription({ commit }, { id, data }) {
-    console.log(data);
     const res = await SubscriptionRepository.createSubscription(id, data);
     // commit('UPDATE_SUBSCRIPTION_INFO', data) //commti the changes
     if (Array.isArray(res)) {
@@ -191,7 +190,6 @@ const actions = {
   /**delete complaint */
   async deleteComplaint({commit}, id){
     commit("DELETE_COMPLAINT", id)
-    // console.log(id)
   },
 
   /**fetch all complaints from db */
@@ -262,19 +260,33 @@ const actions = {
   },
 
   async billingsPayment({commit}, {id, data}){
-    return await sponsorBillings(id, data)
+    try{
+      const res =  await sponsorBillings(id, data)
+      commit('UPDATE_BILLING', res.data)
+      return res
+    }catch(err){
+      this._vm.$vs.notify({title:'Network Error', text:'Make sure you have an action internet connection', color:'danger',position:'top-right'})
+      // return err
+    }
   },
 
   async fundWallet({commit}, {id,data}){
-    data.amount = parseInt( data.amount * 100)
-    const res = await fundWallet(id, data)
+    try{
+      const res = await fundWallet(id, data)
 
-    if(res.data.status === true){
-      window.open(res.data.data.authorization_url)
-    }else{
-      commit("UPDATE_WALLET", res.data.wallet_balance)
-    }
+      if(res.data.status === true){
+        window.open(res.data.data.authorization_url)
+      }else{
+        commit("UPDATE_WALLET", res.data.wallet_balance)
+      }
+
       return res
+
+    }catch{
+      this._vm.$vs.notify({title:'Error', text:'Make sure you have an action internet connection', color:'danger',position:'top-right'})
+      return false
+    }
+    
   }
 
   /***re-useable action for post request */

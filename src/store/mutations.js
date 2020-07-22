@@ -202,6 +202,12 @@ const mutations = {
 
   UPDATE_WALLET(state, payload){
     state.user.sponsor.wallet_balance = payload
+  },
+
+  UPDATE_BILLING(state){
+    state.user.billings.billings = 0
+    state.user.billings.drugs = 0
+    state.user.billings.total = 0
   }
 };
 
