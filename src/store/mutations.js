@@ -208,6 +208,11 @@ const mutations = {
     state.user.billings.billings = 0
     state.user.billings.drugs = 0
     state.user.billings.total = 0
+  },
+
+  UPDATE_DEFAULT_CARD(state, payload){
+    const index = state.card.findIndex(card => card.payload.id == card.payload.id)
+    state.card.splice(index, 1, payload);
   }
 };
 

@@ -25,7 +25,7 @@
         <p>Next billing due July 01,2019</p>
 
         <div class="mt-4" @click="setDefaultCard(card.id)">
-          <vs-radio color="dark" v-model="radios2" vs-value="Dark"  >
+          <vs-radio color="dark" v-model="radios2" :vs-value="setDefault">
             <span style="color:#e48346">Set Default</span>
           </vs-radio>
         </div>
@@ -40,11 +40,22 @@ export default {
   props: ["card"],
   data() {
     return {
-      radios2:'primary'
+      radios2: "primary"
     };
   },
 
+  computed: {
+    setDefault() {
+      const color = this.card.default ? "Dark" : "primary";
+      this.changeColor(color);
+      return color;
+    }
+  },
+
   methods: {
+    changeColor(color) {
+      this.radio2 = color;
+    },
     async setDefaultCard(id) {
       const payload = {};
       payload.default = 1;
@@ -54,16 +65,7 @@ export default {
         payload
       };
 
-      // if (this.switch2 === false) {
-      //   // this.disable = true;
-      //   if (console.log(await this.$store.dispatch("setDefaultCard", data)));
-      //   this.switch2 = false;
-      // } else {
-      //   console.log("this card is active already");
-      //   return false;
-      // }
-      
-      console.log(await this.$store.dispatch("setDefaultCard", data))
+      await this.$store.dispatch("setDefaultCard", data);
     }
   }
 };

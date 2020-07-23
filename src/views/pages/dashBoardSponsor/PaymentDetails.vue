@@ -114,6 +114,7 @@ export default {
       creditCard: state => state.card,
       data: state => state.user
     })
+
   },
 
   methods: {
@@ -149,7 +150,7 @@ export default {
       this.$vs.loading.close()
 
       
-    }
+    },
   },
 
   components: {
@@ -157,9 +158,9 @@ export default {
     creditCard,
     fundWallet
   },
-  created() {
-    console.log(this.creditCard);
-  }
+  // created() {
+  //   console.log(this.creditCard);
+  // }
 };
 </script>
 

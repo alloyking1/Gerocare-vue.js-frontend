@@ -256,7 +256,10 @@ const actions = {
 
   /**Set card to default */
   async setDefaultCard({commit}, data){
-    return await setDefaultCard(data)
+    const res =  await setDefaultCard(data)
+    // commit('UPDATE_DEFAULT_CARD', res.data)
+    console.log(res.data)
+    return res
   },
 
   async billingsPayment({commit}, {id, data}){
