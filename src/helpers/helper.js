@@ -8,6 +8,6 @@ export default {
   },
 
   numberFormat(amount){
-    return new Intl.NumberFormat('en-IN', { maximumSignificantDigits: 3 }).format(amount)
+    return new Intl.NumberFormat().format(amount);
   }
 };
