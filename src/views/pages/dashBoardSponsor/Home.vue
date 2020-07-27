@@ -62,63 +62,74 @@
       </div>
     </div>
 
-    <!-- <div class="vx-row">
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<statistics-card-line
-                  hideChart
-                  class="mb-base"
-                  icon="UsersIcon"
-                  icon-right
-                  :statistic= data.insights.patients
-                  statisticTitle="Number of Elderly" />
-			</div>
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<statistics-card-line
-                  hideChart
-                  class="mb-base"
-                  icon="GiftIcon"
-                  icon-right
-                  :statistic= data.insights.visits
-                  statisticTitle="Number of Visits" />
-			</div>
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<statistics-card-line
-                  hideChart
-                  class="mb-base"
-                  icon="UserCheckIcon"
-                  icon-right
-                  :statistic= data.insights.subscriptions
-                  statisticTitle="Active Subscriptions" />
-			</div>
-			<div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-				<statistics-card-line
-                  hideChart
-                  class="mb-base"
-                  icon="MailIcon"
-                  icon-right
-                  :statistic= data.insights.message
-                  statisticTitle="Messages" />
-			</div>
-    </div>-->
+    <div class="vx-row">
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="UsersIcon"
+          icon-right
+          :statistic="data.insights.patients"
+          statisticTitle="Number of Elderly"
+        />
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="GiftIcon"
+          icon-right
+          :statistic="data.insights.visits"
+          statisticTitle="Number of Visits"
+        />
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="UserCheckIcon"
+          icon-right
+          :statistic="data.insights.subscriptions"
+          statisticTitle="Active Subscriptions"
+        />
+      </div>
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <statistics-card-line
+          hideChart
+          class="mb-base"
+          icon="MailIcon"
+          icon-right
+          :statistic="data.insights.message"
+          statisticTitle="Messages"
+        />
+      </div>
+    </div>
 
     <!-- final row -->
     <div class="vx-row">
-      <!-- <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
-                <div class="mb-2">
-                    <h5>Subscriptions</h5>
-                </div>
-                <vx-card class="mb-2" v-for="(subscription, i) in data.subscriptions" :key="i">
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-1/4 xl:w-1/4 mb-base">
+        <div class="mb-2">
+          <h5>Subscriptions</h5>
+        </div>
+        <div v-if="data.subscriptions.length != 0">
+          <vx-card class="mb-2" v-for="(subscription, i) in data.subscriptions" :key="i">
+            <p
+              class="mb-4 text-2xl"
+            >{{subscription ? subscription.patient.name : "No recent subscription" }}</p>
+            <p class="mt-4 font-lemon">{{subscription.patient.visit_count}} visits remaining</p>
+          </vx-card>
+        </div>
+        <div v-else>
+          <vx-card class="mb-2">
+            <p class="mb-4 text-2xl">No recent subscription</p>
+            <p class="mt-4 font-lemon">No visit counts Yet</p>
+          </vx-card>
+        </div>
+      </div>
 
-                    <p class="mb-4 text-2xl">
-                        {{subscription.patient.name}}
-                    </p>
-                    <p class="mt-4 font-lemon">{{subscription.patient.visit_count}} visits remaining</p>
-                </vx-card>
-			</div>
-
-            <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
-                <recentVisits></recentVisits>
-      </div>-->
+      <div class="vx-col w-full sm:w-1/2 md:w-1/2 lg:w-3/4 xl:w-3/4 mb-base">
+        <recentVisits></recentVisits>
+      </div>
     </div>
   </div>
 </template>
