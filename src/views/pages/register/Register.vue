@@ -112,17 +112,10 @@ export default {
 
     async request(data){
       if(this.check === true){
-        try{
-          this.$vs.loading()
-          await this.$store.dispatch('registerSponsor', data)
-          this.$vs.loading.close()
-          this.$router.push({name:'page-login'})
-          this.$vs.notify({title:'Registration Successful',text:'Check your email to verify email address',color:'success',position:'top-right'})
-          
-        }catch(e){
-            this.$vs.loading.close()
-            this.$vs.notify({title:'Something is wrong', text:'You have entered an invalid email', color:'danger',position:'top-right'})
-        }
+        this.$vs.loading()
+        await this.$store.dispatch('registerSponsor', data)
+        this.$vs.loading.close()
+        this.$vs.notify({title:'Registration Successful',text:'Check your email to verify email address',color:'success',position:'top-right'})
       }else{
         this.$vs.notify({title:'Terms and condition', text:'You have to accept our terms and condition to use gerocare', color:'danger',position:'top-right'})
       }

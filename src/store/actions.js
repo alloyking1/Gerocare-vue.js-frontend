@@ -22,6 +22,7 @@ import {
   sponsorBillings,
   fundWallet
 } from "../api/sponsor/sponsor.api";
+import router from "../router";
 
 const actions = {
   // Vertical NavMenu
@@ -57,23 +58,34 @@ const actions = {
   // User/Account
   // /////////////////////////////////////////////
 
-  async updateUserInfo({ commit }, payload) {
+  async LoginSponsor({ commit }, payload) {
     const res = await auth.login(payload);
     commit("UPDATE_USER_INFO", res.data);
     return res;
   },
 
-  async registerSponsor(ctx, payload) {
-    const res = await auth.register(payload);
-    return res;
+  async registerSponsor({dispatch}, payload) {
+    try{
+      await auth.register(payload);
+      const loginPayload = {}
+      loginPayload.email = payload.email
+      loginPayload.password = payload.password
+      try{
+        await dispatch("LoginSponsor", loginPayload) //log user in 
+        router.push('/elderly/add')
+        this._vm.$vs.notify({title:'Hey! Welcome', text:'Account created successfull. You can add an elderly now.', color:'success', position:'top-right'})
+      }catch(e){
+        this._vm.$vs.notify({title:'Network Error', text:'Hey! network error. Account created but login. Make sure you have an active internet connection', color:'danger', position:'top-right'})
+      }
+    }catch(e){
+      this._vm.$vs.notify({title:'Network Error', text:"Hey! something went wrong and your registration could not be completed. Make sure you are connect to the internet", color:'warning',position:'top-right'})
+    }
   },
 
   /**Logout */
   async Logout({ commit }) {
     await auth.logOut();
     localStorage.removeItem("key");
-    // commit("LOGOUT");
-    // return true
   },
 
   /**forgot password request */

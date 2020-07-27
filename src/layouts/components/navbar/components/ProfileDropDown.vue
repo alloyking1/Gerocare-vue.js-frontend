@@ -74,8 +74,10 @@ export default {
 
   methods: {
     async logout() {
+      this.$vs.loading()
       await this.$store.dispatch("Logout");
       this.$store.replaceState({});
+      this.$vs.loading.close()
       location.reload();
 
       this.$vs.notify({

@@ -85,7 +85,7 @@ export default {
     async logIn(data) {
       try{
         this.$vs.loading();
-        await this.$store.dispatch("updateUserInfo", data)
+        await this.$store.dispatch("LoginSponsor", data)
         this.$router.push({ name: 'home'})
         this.$vs.loading.close()
       }catch(e){
