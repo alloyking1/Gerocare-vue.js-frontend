@@ -117,7 +117,7 @@ export default {
           await this.$store.dispatch('registerSponsor', data)
           this.$vs.loading.close()
           this.$router.push({name:'page-login'})
-          this.$vs.notify({title:'Registration Successful',text:'Check your email to verify email address',color:'warning',position:'top-right'})
+          this.$vs.notify({title:'Registration Successful',text:'Check your email to verify email address',color:'success',position:'top-right'})
           
         }catch(e){
             this.$vs.loading.close()
