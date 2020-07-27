@@ -82,7 +82,7 @@ export default [
   },
   {
     url: "/complaint",
-    name: "Complaint/Feedback",
+    name: "Help/Support",
     slug: "Complaint",
     icon: "BookIcon",
   },
