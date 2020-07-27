@@ -15,6 +15,7 @@
             <vs-th sort-key="report">REPORT</vs-th>
           </template>
 
+          <!-- <template slot-scope="{data}" v-if="data.length != 0"> -->
           <template slot-scope="{data}">
             <vs-tr :key="indextr" v-for="(tr, indextr) in data">
               <vs-td

@@ -1,12 +1,22 @@
 <template>
   <div>
-    <div class="row mb-5">
-      <router-link to="/elderly/add">
+    <div v-if="patients.length != 0">
+      <div class="row mb-5">
+        <router-link to="/elderly/add">
+          <vs-button color="success" type="border">Add Beneficiary</vs-button>
+        </router-link>
+      </div>
+      <div class="vx-row">
+        <patient v-for="(patient, i) in patients" :key="i" :patient="patient"/>
+      </div>
+    </div>
+    <div v-else class="text-center customPosition">
+      <h1 class="pt-2 p-3">No Beneficiary Added</h1>
+      <p class="pt-2 pb-5 p-3">Click the Button below to get started adding a beneficiary</p>
+      <router-link to="/elderly/add" class="pt-2">
         <vs-button color="success" type="border">Add Beneficiary</vs-button>
       </router-link>
-    </div>
-    <div class="vx-row">
-      <patient v-for="(patient, i) in patients" :key="i" :patient="patient"/>
+      
     </div>
   </div>
 </template>
@@ -35,5 +45,9 @@ export default {
 .cutomBtn {
   border-radius: 55px;
   padding: 1rem !important;
+}
+
+.customPosition{
+  padding-top:22rem;
 }
 </style>

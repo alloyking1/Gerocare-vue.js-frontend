@@ -227,7 +227,7 @@ const actions = {
       commit("UPDATE_EDITED_BENEFICIARY", res.data.data);
       return res.data.data;
     } catch (e) {
-      return e;
+      this._vm.$vs.notify({title:'Edit Elderly Network Error', text:e, color:'warning',position:'top-right'})
     }
   },
 
@@ -237,7 +237,8 @@ const actions = {
       commit("UPDATE_TRANSACTION", response.data.data);
       return response;
     } catch (e) {
-      console.error(e);
+      this._vm.$vs.notify({title:'Transactions Network Error', text:e, color:'warning',position:'top-right'})
+      // return err
     }
   },
 
