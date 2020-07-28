@@ -59,9 +59,24 @@ const actions = {
   // /////////////////////////////////////////////
 
   async LoginSponsor({ commit }, payload) {
-    const res = await auth.login(payload);
-    commit("UPDATE_USER_INFO", res.data);
-    return res;
+    try{
+      const res = await auth.login(payload);
+      commit("UPDATE_USER_INFO", res.data);
+      return res;
+    }catch(e){
+      console.log(e.message)
+      if(e.message != "Request failed with status code 401" ){
+        this._vm.$vs.notify({title:"Network Error",
+        text:"You have a network error. make sure you are connected to the internet", 
+        color:"danger", position:"top-right"})
+        return false
+      }else{
+        this._vm.$vs.notify({title:"Invalid Details",
+        text:"Your email and password does not match.", 
+        color:"danger", position:"top-right"})
+        return
+      }
+    }
   },
 
   async registerSponsor({dispatch}, payload) {
@@ -83,7 +98,7 @@ const actions = {
   },
 
   /**Logout */
-  async Logout({ commit }) {
+  async Logout() {
     await auth.logOut();
     localStorage.removeItem("key");
   },
