@@ -141,6 +141,55 @@
                         class="w-full mt-2"
                       />
                     </div>
+                    <div class="vx-col md:w-2/2 w-full">
+                      <vs-input
+                        v-model="singleElderly.blood_group"
+                        placeholder="patient blodd group"
+                        class="w-full mt-2"
+                      />
+                    </div>
+                    <div class="vx-col md:w-2/2 w-full">
+                      <vs-input
+                        v-model="singleElderly.emergency_email"
+                        placeholder="emergency email"
+                        class="w-full mt-2"
+                      />
+                    </div>
+                    <div class="vx-col md:w-2/2 w-full">
+                      <vs-input
+                        v-model="singleElderly.emergency_fulladdress"
+                        placeholder="emergency address"
+                        class="w-full mt-2"
+                      />
+                    </div>
+                    <div class="vx-col md:w-2/2 w-full">
+                      <vs-input
+                        v-model="singleElderly.emergency_name"
+                        placeholder="emergency name"
+                        class="w-full mt-2"
+                      />
+                    </div>
+                    <div class="vx-col md:w-2/2 w-full">
+                      <vs-input
+                        v-model="singleElderly.emergency_phone"
+                        placeholder="emergency phone number"
+                        class="w-full mt-2"
+                      />
+                    </div>
+                    <div class="vx-col md:w-2/2 w-full">
+                      <vs-input
+                        v-model="singleElderly.family_history"
+                        placeholder="family history"
+                        class="w-full mt-2"
+                      />
+                    </div>
+                    <div class="vx-col md:w-2/2 w-full">
+                      <vs-input
+                        v-model="singleElderly.known_conditions"
+                        placeholder="any know conditions ?"
+                        class="w-full mt-2"
+                      />
+                    </div>
                   </div>
                   <vs-button class="w-full mt-6 cutomBtn" @click="edit(singleElderly.id)">Save</vs-button>
                 </form>
@@ -163,7 +212,7 @@ export default {
       singleElderly: {},
       colorx: "#4a5153",
       popupActivo5: false,
-      popupActive2: false
+      popupActive2: false,
     };
   },
 
@@ -175,8 +224,8 @@ export default {
     },
 
     ...mapState({
-      sponsor: state => state.user.sponsor
-    })
+      sponsor: (state) => state.user.sponsor,
+    }),
   },
 
   methods: {
@@ -213,9 +262,9 @@ export default {
         title: "Edited",
         text: "Beneficiary Edited",
         color: "success",
-        position: "top-right"
+        position: "top-right",
       });
-    }
-  }
+    },
+  },
 };
 </script>
